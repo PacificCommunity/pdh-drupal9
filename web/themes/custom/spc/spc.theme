@@ -1,0 +1,50 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
+use Drupal\taxonomy\Entity\Term;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implementation of hook_preprocess_views_view_field().
+ */
+function spc_preprocess_views_view_field(&$variables){
+
+}
+
+/**
+ * Implementation of hook_preprocess_views_view().
+ */
+function spc_preprocess_views_view(&$variables){
+
+}
+
+/**
+ * Implements theme_preprocess_breadcrumb().
+ */
+function spc_preprocess_breadcrumb(&$variables){
+
+}
+
+/**
+ * Implements theme_preprocess_user().
+ */
+function spc_preprocess_user(&$variables){
+
+}
+
+/**
+ * Implements theme_preprocess_node().
+ */
+function spc_preprocess_node(&$variables){
+
+}
+
+/**
+ * Implements theme_preprocess_node().
+ */
+function spc_preprocess_taxonomy_term(&$variables){
+  
+}

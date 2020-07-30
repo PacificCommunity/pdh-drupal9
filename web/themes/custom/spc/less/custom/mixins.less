@@ -1,0 +1,17 @@
+// Sprites mixin
+.sprite (@path, @w, @h, @x, @y) {
+    background-image: url(@path);
+    background-position: @x @y;
+    background-repeat: no-repeat;
+    width: @w;
+    height: @h;
+    display: inline-block;
+}
+
+.res-sprite (@offset, @y) {
+	background-image: url('../img/sprite/sprite_res.png');
+	background-repeat: no-repeat;
+	background-position: (-29.88px * @offset) @y;
+	height: 34px;
+	width: 30px;
+}

@@ -1,0 +1,19 @@
+name: SPC Pbank
+type: theme
+core: 8.x
+description: Theme based on SPC design
+package: SPC
+
+base theme: stable
+
+libraries:
+  - spc/social-share
+  - spc/d3    
+  - spc/ma5
+  - spc/global
+  
+regions:
+  header: Header
+  subheader: Subheader
+  content: Content
+  footer: Footer

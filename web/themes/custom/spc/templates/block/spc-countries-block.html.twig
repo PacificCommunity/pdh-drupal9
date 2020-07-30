@@ -1,0 +1,20 @@
+<div class="spc-countries">
+    <h3 class="block-label">{{ 'Countries'|t }}</h3>
+    <div class="countries-list">
+    {% for country in data.countries %}
+        {% if country.datasetsCount > 0 %}
+        <a href="{{ country.url }}" class="country-item" title="{{ country.name }}">
+            <div class="data-number">
+                {{ country.datasetsCount }}
+            </div>
+            
+            {% if country.flag %}
+                <img src="{{ country.flag }}" alt="{{ country.name }}">
+            {% endif %}
+            
+            <p class="name">{{ country.name }}</p>
+        </a>
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>

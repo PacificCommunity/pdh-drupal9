@@ -1,0 +1,30 @@
+<div class="spc-categories">
+    <h3 class="block-label">{{ 'Categories & Subcategories'|t }}</h3>
+    <div class="categories-list">
+    <ul>    
+    {% for category in data.categories %}
+        {% if category.level == 'top' %}
+        <li class="category-item">
+            <label class="category-label" id="term-{{ category.id}}">
+                {% if category.icon %}
+                    <img class="cat-icon" src="{{ category.icon }}" alt="{{ category.name }}">
+                {% endif %}
+                <a href="{{ category.url }}" title="{{ category.name }}">{{ category.name }}</a>
+                <div class="toggle down"></div>
+            </label>
+            
+            <ul class="subcategory-list">
+            {% for subcategory in data.categories %}
+                {% if category.id ==  subcategory.parent %}
+                    <li class="subcategory-item">
+                        <a href="{{ subcategory.url }}" title="{{ subcategory.name }}">{{ subcategory.name }}</a>
+                    </li>
+                {% endif %}    
+            {% endfor %}
+            </ul>
+        </li>  
+        {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+</div>

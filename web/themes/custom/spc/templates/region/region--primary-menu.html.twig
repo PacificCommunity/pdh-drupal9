@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region div.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+{# ORIGINAL: core/themes/stable/templates/layout/region.html.twig #}
+{% if content %}
+  <div{{ attributes.addClass('ui two column stackable compact grid homepage--top-banner--left') }}>
+    <div class="column">
+      {# <h1 class="ui huge header">Data you can trust</h1> #}
+      <h2 class="ui big header">{{ 'Creating a Citizen Science network that connects people, projects and data.'|t }}</h2>
+      <div class="ui hidden divider"></div>
+
+      <form class="ui form" action="/project/search">
+        <div class="ui field">
+          <label class="label" for="search">{{ 'Search for projects'|t }}</label>
+
+          <div class="ui left icon input">
+            <i class="search icon"></i>
+            <input name="title" type="text" value="" id="search" placeholder="Search by project name, type or task..."/>
+          </div>
+
+        </div>
+        <p class="content"> 
+          <strong>{{ 'Suggested searches:'|t }}</strong>
+          <span>{{ 'Soil datasets in 2016'|t }}</span>
+        </p> 
+      </form>
+    </div>
+    <div class="column">
+      {{ content }}
+    </div>
+  </div>
+{% endif %}

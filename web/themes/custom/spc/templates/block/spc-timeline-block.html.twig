@@ -1,0 +1,11 @@
+{% if data.chart %}
+    <h3 class="block-label">{{ 'Programmatic Planning'|t }}</h3>
+    <div class="timeline-block">
+        <div id="timeline-svg"></div>
+        {% if data.chart|length > 9 %}
+        <a href="#" class="show-full" title="show all plans">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </a>
+        {% endif %}
+    </div>
+{% endif %}

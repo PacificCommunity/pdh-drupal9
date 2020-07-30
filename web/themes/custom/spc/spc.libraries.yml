@@ -1,0 +1,36 @@
+global:
+  version: 1.00
+  css:
+    theme:
+      css/spc.css: {}
+  js:
+    js/scripts.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+ma5:
+  version: 1.x
+  css:
+    base:
+      css/ma5-mobile-menu.css: {}
+  js:
+    js/ma5-mobile-menu.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+d3:
+  version: 3.x
+  css:
+    base:
+      css/timeline-chart.css: {}
+  js:
+    js/d3/d3.js: {}
+    js/d3/timeline-chart.js: {}
+social-share:
+  version: 1.00
+  css:
+    theme:
+      css/social-share.css: {}
+  js:
+    js/social-share.js: {}

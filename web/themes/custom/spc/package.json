@@ -1,0 +1,35 @@
+{
+  "name": "spc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "dev": "NODE_ENV=development gulp watch",
+    "build": "gulp build",
+    "format": "prettier --write gulpfile.js js/**/*.js",
+    "theme-dev": "cd semantic; gulp watch",
+    "theme-build": "cd semantic; gulp build"
+  },
+  "lint-staged": {
+    "less/*.less": [
+      "prettier-stylelint --write",
+      "git add"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fomantic-ui": "^2.7.4",
+    "gulp": "^4.0.2",
+    "gulp-if": "^2.0.2",
+    "gulp-less": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "jquery-address": "^1.6.0",
+    "lint-staged": "^9.2.5",
+    "moment": "^2.24.0",
+    "prettier-stylelint": "^0.4.2"
+  },
+  "devDependencies": {
+    "prettier": "^1.17.0"
+  }
+}
