@@ -1,0 +1,5 @@
+services:
+  spc_main.spcDataImport:
+    class: Drupal\spc_main\spcDataImport
+  spc_main.spcPublicationImport:
+    class: Drupal\spc_main\spcPublicationImport
