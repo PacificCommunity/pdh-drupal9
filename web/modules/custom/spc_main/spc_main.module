@@ -1,0 +1,81 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\user\Entity\User;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Impelements hook_theme().
+ */
+function spc_main_theme($existing, $type, $theme, $path){
+  return [
+    'main_banner_block' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
+    'spc_main_menu' => [
+      'variables' => [
+        'menu' => null
+      ]
+    ],     
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function spc_main_preprocess_html(&$variables) {
+  
+  $current_path = \Drupal::service('path.current')->getPath();
+  
+  if ($current_path == '/education'){
+    $variables['head_title']['title'] = 'Education Policy Bank';
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function spc_main_cron() {
+  
+    //Get latest cached header.
+    $cached_header = \Drupal::config('spc_data_import.settings')->get('header_markup');
+    $spc_base_url = \Drupal::config('spc_data_import.settings')->get('spc_base_url');
+    //Update header from API.
+    \Drupal::configFactory()->getEditable('spc_data_import.settings')
+      ->set('header_markup_revision', $cached_header)
+      ->save();
+  
+    $spcDataImport = \Drupal::service('spc_main.spcDataImport');
+    
+    $header = $spcDataImport->getHeaderMenu();
+    if (is_object($header)){
+      $main = $header->main[0];
+      $mobile = $header->mobile[0];
+      $header_markup = $main . $mobile;
+      
+      \Drupal::configFactory()->getEditable('spc_data_import.settings')
+        ->set('header_markup', str_replace('href="/', 'href="' . $spc_base_url , $header_markup))
+        ->save();
+    }
+    
+    //Get latest cached header.
+    $cached_footer = \Drupal::config('spc_data_import.settings')->get('footer_markup');
+    //Update header from API.
+    \Drupal::configFactory()->getEditable('spc_data_import.settings')
+      ->set('footer_markup_revision', $cached_footer)
+      ->save();
+    
+    $footer = $spcDataImport->getFooterMenu();
+    if (is_object($footer)){
+      $footer_markup = $footer->main[0];
+      
+      \Drupal::configFactory()->getEditable('spc_data_import.settings')
+        ->set('footer_markup', $footer_markup)
+        ->save();
+    }
+
+}

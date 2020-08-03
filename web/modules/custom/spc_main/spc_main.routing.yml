@@ -1,0 +1,14 @@
+spc_main.spc_html_import:
+  path: '/admin/config/spc-import-settings'
+  defaults:
+    _title: 'SPC Data Import Settings'
+    _form: '\Drupal\spc_main\Form\SpcImportSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
+spc_main.spc_publication_import:
+  path: '/admin/config/spc-publication-settings'
+  defaults:
+    _title: 'SPC Publication Import Settings'
+    _form: '\Drupal\spc_main\Form\SpcPublicationImportSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'    
