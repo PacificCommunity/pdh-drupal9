@@ -1,0 +1,22 @@
+uuid: 5db4112e-cf2b-42bb-a873-ade3b2c0ae23
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - spc
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: spc_messages
+theme: spc
+region: content
+weight: -4
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

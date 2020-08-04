@@ -1,0 +1,22 @@
+uuid: d8fe6458-4d45-4d73-b2ce-d003804f7254
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - spc
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: spc_content
+theme: spc
+region: content
+weight: 2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }
