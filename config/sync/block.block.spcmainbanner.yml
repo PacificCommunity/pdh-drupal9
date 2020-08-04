@@ -1,0 +1,20 @@
+uuid: 5569a143-fefd-4a07-9db7-22b17fc1de53
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+  theme:
+    - spc
+id: spcmainbanner
+theme: spc
+region: subheader
+weight: 0
+provider: null
+plugin: sps_main_banner
+settings:
+  id: sps_main_banner
+  label: 'SPC Main Banner'
+  provider: spc_main
+  label_display: '0'
+visibility: {  }

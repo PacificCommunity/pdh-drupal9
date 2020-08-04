@@ -1,0 +1,34 @@
+uuid: 71e2bc92-6570-4ebf-abfb-35b31b06664b
+langcode: en
+status: true
+dependencies: {  }
+id: content_editor
+label: 'Content Editor'
+weight: 4
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access files overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer image styles'
+  - 'administer meta tags'
+  - 'administer taxonomy'
+  - 'create article content'
+  - 'create page content'
+  - 'create terms in tags'
+  - 'delete any article content'
+  - 'delete any page content'
+  - 'delete own article content'
+  - 'delete own page content'
+  - 'delete terms in tags'
+  - 'edit any article content'
+  - 'edit any page content'
+  - 'edit own article content'
+  - 'edit own page content'
+  - 'edit terms in tags'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'view own unpublished content'
+  - 'view the administration theme'

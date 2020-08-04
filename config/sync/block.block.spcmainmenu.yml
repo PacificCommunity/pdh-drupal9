@@ -1,0 +1,20 @@
+uuid: 4de440e8-cf03-45ac-ac29-ef72ce3d49bc
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+  theme:
+    - spc
+id: spcmainmenu
+theme: spc
+region: header
+weight: 0
+provider: null
+plugin: spc_main_menu
+settings:
+  id: spc_main_menu
+  label: 'SPC Main Menu'
+  provider: spc_main
+  label_display: '0'
+visibility: {  }
