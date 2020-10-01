@@ -1,0 +1,5 @@
+name: SPC data import
+description: SPC import settings (dummy module for now)
+type: module
+core: 8.x
+package: SPC

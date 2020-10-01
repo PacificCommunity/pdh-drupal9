@@ -40,9 +40,14 @@ module:
   path_alias: 0
   quickedit: 0
   rdf: 0
+  responsive_image: 0
   search: 0
   shortcut: 0
+  spc_data_import: 0
   spc_main: 0
+  spc_publication_import: 0
+  svg_image: 0
+  svg_image_responsive: 0
   system: 0
   taxonomy: 0
   text: 0
