@@ -9,7 +9,7 @@ dependencies:
 id: spcmainmenu
 theme: spc
 region: header
-weight: 0
+weight: -3
 provider: null
 plugin: spc_main_menu
 settings:
