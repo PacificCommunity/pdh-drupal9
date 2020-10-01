@@ -43,7 +43,9 @@ module:
   responsive_image: 0
   search: 0
   shortcut: 0
+  spc_data_import: 0
   spc_main: 0
+  spc_publication_import: 0
   svg_image: 0
   svg_image_responsive: 0
   system: 0
