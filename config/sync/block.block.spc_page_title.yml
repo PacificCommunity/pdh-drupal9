@@ -2,6 +2,8 @@ uuid: f336ec70-57d8-4042-8d2a-8e6460d59935
 langcode: en
 status: true
 dependencies:
+  module:
+    - ctools
   theme:
     - spc
 _core:
@@ -9,7 +11,7 @@ _core:
 id: spc_page_title
 theme: spc
 region: content
-weight: -4
+weight: -5
 provider: null
 plugin: page_title_block
 settings:
@@ -17,4 +19,11 @@ settings:
   label: 'Page title'
   provider: core
   label_display: '0'
-visibility: {  }
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      dsp: dsp
+    negate: true
+    context_mapping:
+      node: '@node.node_route_context:node'

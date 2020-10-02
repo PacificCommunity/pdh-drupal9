@@ -1,0 +1,22 @@
+uuid: 48830b64-ad61-478e-9692-a06ba90cf337
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dsp_color
+    - node.type.dsp
+  module:
+    - color_field
+id: node.dsp.field_dsp_color
+field_name: field_dsp_color
+entity_type: node
+bundle: dsp
+label: Color
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 0
+field_type: color_field_type

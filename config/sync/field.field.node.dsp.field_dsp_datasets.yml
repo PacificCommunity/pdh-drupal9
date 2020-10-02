@@ -1,0 +1,19 @@
+uuid: 947168a9-a23e-4da1-b75c-b1cfe8d9388a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dsp_datasets
+    - node.type.dsp
+id: node.dsp.field_dsp_datasets
+field_name: field_dsp_datasets
+entity_type: node
+bundle: dsp
+label: Datasets
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

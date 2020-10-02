@@ -1,0 +1,20 @@
+uuid: 042cbcbd-231f-4451-b1e8-61c4515958f3
+langcode: en
+status: true
+dependencies:
+  module:
+    - color_field
+    - node
+id: node.field_dsp_color
+field_name: field_dsp_color
+entity_type: node
+type: color_field_type
+settings:
+  format: '#HEXHEX'
+module: color_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

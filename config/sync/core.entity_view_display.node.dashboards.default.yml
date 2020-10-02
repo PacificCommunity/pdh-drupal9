@@ -1,0 +1,30 @@
+uuid: 5834c8bf-7d97-4d44-bb19-b411c3e8ea15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.dashboards.body
+    - field.field.node.dashboards.field_dsp_title_markup
+    - node.type.dashboards
+  module:
+    - text
+    - user
+id: node.dashboards.default
+targetEntityType: node
+bundle: dashboards
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_dsp_title_markup: true

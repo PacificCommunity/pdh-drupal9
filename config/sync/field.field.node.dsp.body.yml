@@ -1,0 +1,23 @@
+uuid: 41400b39-b842-4f6d-b2b1-77281c9fecc1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.dsp
+  module:
+    - text
+id: node.dsp.body
+field_name: body
+entity_type: node
+bundle: dsp
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

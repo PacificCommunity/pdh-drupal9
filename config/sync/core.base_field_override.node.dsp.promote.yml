@@ -1,0 +1,22 @@
+uuid: 45e60cbb-8edf-4ae7-8417-f51f4084a90d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.dsp
+id: node.dsp.promote
+field_name: promote
+entity_type: node
+bundle: dsp
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

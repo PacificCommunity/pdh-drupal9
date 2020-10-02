@@ -1,0 +1,31 @@
+uuid: ec7d292b-2d78-473a-a805-141310cba035
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dsp_targets
+    - node.type.dsp
+    - paragraphs.paragraphs_type.field_dsp_targets
+  module:
+    - entity_reference_revisions
+id: node.dsp.field_dsp_targets
+field_name: field_dsp_targets
+entity_type: node
+bundle: dsp
+label: Targets
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      field_dsp_targets: field_dsp_targets
+    target_bundles_drag_drop:
+      field_dsp_targets:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

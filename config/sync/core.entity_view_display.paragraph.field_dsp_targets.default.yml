@@ -1,0 +1,46 @@
+uuid: 9115d960-86e4-42a0-8eeb-a0581b957e2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.field_dsp_targets.field_body
+    - field.field.paragraph.field_dsp_targets.field_definition
+    - field.field.paragraph.field_dsp_targets.field_title
+    - paragraphs.paragraphs_type.field_dsp_targets
+  module:
+    - field_formatter_class
+    - text
+id: paragraph.field_dsp_targets.default
+targetEntityType: paragraph
+bundle: field_dsp_targets
+mode: default
+content:
+  field_body:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: target-body
+    type: text_default
+    region: content
+  field_definition:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: target-definition
+    type: text_default
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      field_formatter_class:
+        class: target-title
+    type: string
+    region: content
+hidden: {  }

@@ -1,0 +1,43 @@
+uuid: 7ce0a233-5e1a-4f77-8820-2a39e9f9138f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.field_dsp_targets.field_body
+    - field.field.paragraph.field_dsp_targets.field_definition
+    - field.field.paragraph.field_dsp_targets.field_title
+    - paragraphs.paragraphs_type.field_dsp_targets
+  module:
+    - text
+id: paragraph.field_dsp_targets.default
+targetEntityType: paragraph
+bundle: field_dsp_targets
+mode: default
+content:
+  field_body:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_definition:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
