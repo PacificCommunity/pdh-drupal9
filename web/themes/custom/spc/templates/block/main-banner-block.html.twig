@@ -65,3 +65,20 @@
         </div>
     </div>
 </div>
+
+{% if data.dsps %}
+<div class="panel-pane pane-views pane-dashboard-for-sdp">
+    <div class="goals-navigation">
+        <div class="dropdown">
+            <div class="button">
+                <img class="goals-logo" src="https://pacificdata.org/sites/default/files/SDGs%20in%20the%20Pacific%20230x230.png">
+            </div>
+            <ul class="dropdown-menu hidden" aria-labelledby="goals-navigation">
+                {% for dsp in data.dsps %}
+                    <li><a href="{{ dsp.url }}">{{ dsp.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
