@@ -83,15 +83,20 @@
   {{ title_suffix }}
 
   {% if display_submitted %}
-      <div class="author">{{ author_name }}</div>
-      <div class="post-date">{{ date }}</div>
-      <div class="insights-topic">
-        <div class="view-mode-group_with_icon">
-          <div class="group-with-icon">
-            {{ content.field_topic }}
+      <div class="author">{{ node.getOwner.label }}</div>
+      <div class="post-date">{{ node.getCreatedTime|date('F d, Y') }}</div>
+
+
+          <div class="insights-topic"><div class="view-mode-group_with_icon">
+                  <div class="group-with-icon">
+                      <a class="thematic-fa-link" href="{{ node.field_topic.0.entity.field_pathificdata_topic_page.0.url }}" aria-label="">
+                          <i class="{{ node.field_topic.0.entity.field_fa_icon.value }} fa-2x" aria-hidden="true"></i>
+                          <span class="linktext">{{  node.field_topic.0.entity.getTitle()  }}</span>
+                      </a>
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
+
   {% endif %}
 
     <div class="preview">

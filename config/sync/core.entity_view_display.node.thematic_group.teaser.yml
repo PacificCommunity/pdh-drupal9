@@ -5,6 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.thematic_group.body
+    - field.field.node.thematic_group.field_fa_icon
+    - field.field.node.thematic_group.field_pathificdata_topic_page
     - node.type.thematic_group
   module:
     - text
@@ -27,4 +29,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  field_fa_icon: true
+  field_pathificdata_topic_page: true
