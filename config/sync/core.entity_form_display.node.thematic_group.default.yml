@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.node.thematic_group.body
+    - field.field.node.thematic_group.field_fa_icon
+    - field.field.node.thematic_group.field_pathificdata_topic_page
     - node.type.thematic_group
   module:
+    - link
     - path
     - text
 id: node.thematic_group.default
@@ -29,6 +32,22 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_fa_icon:
+    weight: 122
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_pathificdata_topic_page:
+    weight: 123
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
   path:
     type: path
     weight: 30

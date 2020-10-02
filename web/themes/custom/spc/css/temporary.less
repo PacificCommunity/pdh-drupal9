@@ -4,6 +4,7 @@
   float: left;
   width: 100%;
   margin-bottom: 20px;
+  z-index: 9999;
 }
 
 #block-spc-local-tasks > ul {
@@ -37,8 +38,14 @@ body.data_insights main {
   position: relative;
 
   .breadcrumbs {
-    align-self: flex-start;
-    margin: 0px 20px 10px;
+    margin: 0px auto;
+    width: 100%;
+    display: block;
+    max-width: 1200px;
+    position: relative;
+    @media (max-width: 1024px) {
+      padding-left: 5%;
+    }
   }
 
 
@@ -48,6 +55,7 @@ body.data_insights main {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
+    font-size: 12px;
 
     @media (max-width: 900px) {
       margin-bottom: 0;
@@ -60,7 +68,7 @@ body.data_insights main {
 
     & > div {
       float: left;
-      margin: 0px 5px;
+      margin: 0px 3px;
     }
 
     .delimiter {
@@ -68,6 +76,7 @@ body.data_insights main {
       @media (max-width: 1000px) {
         margin: 0;
       }
+      font-size: 10px;
     }
 
     .dropdown {
@@ -157,7 +166,7 @@ body.data_insights main {
       font-family: 'Roboto';
       font-style: normal;
       font-weight: normal;
-      font-size: 15px;
+      font-size: 12px;
       line-height: 30px;
       color: #FFFFFF;
 
@@ -284,7 +293,6 @@ body.data_insights main {
 
   .breadcrumbs.bread {
     margin-top: -70px;
-    margin-left: 250px;
   }
 }
 
@@ -456,4 +464,16 @@ body.data_insights .preview {
 
 body.data_insights .banner-title {
   display: none;
+}
+
+.linktext {
+  font-size: 13px;
+  padding-left: 3px;
+}
+
+body.data_insights #block-spc-page-title {
+
+  float: left;
+  width: 100%;
+  margin: -20px 0px 0px;
 }
