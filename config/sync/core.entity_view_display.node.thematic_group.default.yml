@@ -1,0 +1,28 @@
+uuid: e8b33683-00e7-45ce-9868-3b5b5eeac469
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.thematic_group.body
+    - node.type.thematic_group
+  module:
+    - text
+    - user
+id: node.thematic_group.default
+targetEntityType: node
+bundle: thematic_group
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

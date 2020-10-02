@@ -1,0 +1,29 @@
+uuid: e2207a01-1640-41eb-948c-6e47cf02c20c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.data_insights.body
+    - field.field.node.data_insights.field_data_insights_preview
+    - field.field.node.data_insights.field_topic
+    - node.type.data_insights
+  module:
+    - text
+    - user
+id: node.data_insights.teaser
+targetEntityType: node
+bundle: data_insights
+mode: teaser
+content:
+  field_data_insights_preview:
+    type: text_default
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_topic: true
+  links: true

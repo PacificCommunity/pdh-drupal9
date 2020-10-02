@@ -1,0 +1,30 @@
+uuid: b1589328-469b-454d-a997-404e3d0fb194
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.thematic_group.body
+    - node.type.thematic_group
+  module:
+    - text
+    - user
+id: node.thematic_group.teaser
+targetEntityType: node
+bundle: thematic_group
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

@@ -1,0 +1,27 @@
+uuid: b0f4166a-777c-4010-a708-a3e1d8663c22
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+    - system
+  theme:
+    - spc
+id: spcbanner
+theme: spc
+region: subheader
+weight: -5
+provider: null
+plugin: spc_banner
+settings:
+  id: spc_banner
+  label: 'SPC Banner'
+  provider: spc_main
+  label_display: '0'
+  spc_banner_title: '<strong>Data</strong> Insights'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/data-insights\r\n/data-insights/*\r\n"
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,29 @@
+uuid: 4084aa4f-e199-43ff-9a9d-bba790d2eb2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_topic
+    - node.type.data_insights
+    - node.type.thematic_group
+id: node.data_insights.field_topic
+field_name: field_topic
+entity_type: node
+bundle: data_insights
+label: Topic
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      thematic_group: thematic_group
+    sort:
+      field: title
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

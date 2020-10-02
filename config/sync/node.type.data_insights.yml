@@ -1,0 +1,18 @@
+uuid: caf0671c-7472-4ba5-a1cb-6c854a6d7c53
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:menu_link_content:c7a3c51f-6269-4e7d-b421-08fbcbacb566'
+name: 'Data Insights'
+type: data_insights
+description: ''
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

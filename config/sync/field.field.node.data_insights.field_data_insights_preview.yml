@@ -1,0 +1,23 @@
+uuid: b02536d6-2134-491d-b837-f7326220143d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_data_insights_preview
+    - node.type.data_insights
+  module:
+    - text
+id: node.data_insights.field_data_insights_preview
+field_name: field_data_insights_preview
+entity_type: node
+bundle: data_insights
+label: Preview
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

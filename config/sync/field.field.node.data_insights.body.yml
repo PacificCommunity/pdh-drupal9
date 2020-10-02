@@ -1,0 +1,23 @@
+uuid: ead255b3-0cc3-4239-b024-d8dc16c44ce2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.data_insights
+  module:
+    - text
+id: node.data_insights.body
+field_name: body
+entity_type: node
+bundle: data_insights
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

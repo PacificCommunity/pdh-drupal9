@@ -1,0 +1,45 @@
+uuid: 9d827814-1ec6-4269-81fc-788c33281be1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.data_insights.body
+    - field.field.node.data_insights.field_data_insights_preview
+    - field.field.node.data_insights.field_topic
+    - node.type.data_insights
+  module:
+    - text
+    - user
+id: node.data_insights.default
+targetEntityType: node
+bundle: data_insights
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_data_insights_preview:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_topic:
+    weight: 1
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
