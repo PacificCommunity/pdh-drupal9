@@ -1,0 +1,22 @@
+uuid: 20b4cdd1-f4a4-4b2a-976c-10984a5af874
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: dsp
+label: DSP
+type: 'canonical_entities:node'
+pattern: 'dashboard/[node:title]'
+selection_criteria:
+  9ebb9597-a6af-4186-b031-2645dd18fc0c:
+    id: node_type
+    bundles:
+      dsp: dsp
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 9ebb9597-a6af-4186-b031-2645dd18fc0c
+selection_logic: and
+weight: -7
+relationships: {  }

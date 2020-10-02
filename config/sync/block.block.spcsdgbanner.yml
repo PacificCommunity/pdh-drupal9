@@ -1,0 +1,39 @@
+uuid: 3c1d1090-35e6-4d6b-9a25-3d908a970aca
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - node
+    - spc_main
+  theme:
+    - spc
+id: spcsdgbanner
+theme: spc
+region: subheader
+weight: 0
+provider: null
+plugin: spc_sdg_banner
+settings:
+  id: spc_sdg_banner
+  label: 'SPC SDG Banner'
+  provider: spc_main
+  label_display: '0'
+  spc_sdg_banner_title: ''
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      dashboards: dashboards
+      dsp: dsp
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
+    bundles:
+      dashboards: dashboards
+      dsp: dsp
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

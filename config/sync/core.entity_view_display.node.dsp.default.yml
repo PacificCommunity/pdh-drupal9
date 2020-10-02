@@ -1,0 +1,75 @@
+uuid: 5577bfd0-0f9a-4008-bb82-8327310f8899
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.dsp.body
+    - field.field.node.dsp.field_dsp_color
+    - field.field.node.dsp.field_dsp_datasets
+    - field.field.node.dsp.field_dsp_icon
+    - field.field.node.dsp.field_dsp_small_icon
+    - field.field.node.dsp.field_dsp_targets
+    - field.field.node.dsp.field_dsp_title_markup
+    - image.style.256x256
+    - node.type.dsp
+  module:
+    - color_field
+    - entity_reference_revisions
+    - field_formatter_class
+    - svg_image
+    - text
+    - user
+id: node.dsp.default
+targetEntityType: node
+bundle: dsp
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_dsp_color:
+    weight: 3
+    label: hidden
+    settings:
+      format: hex
+      opacity: true
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+  field_dsp_icon:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: 256x256
+      image_link: ''
+      svg_render_as_image: true
+      svg_attributes:
+        width: 256
+        height: 256
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_dsp_targets:
+    type: entity_reference_revisions_entity_view
+    weight: 4
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: sdp-targets
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_dsp_datasets: true
+  field_dsp_small_icon: true
+  field_dsp_title_markup: true

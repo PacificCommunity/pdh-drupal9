@@ -1,0 +1,10 @@
+uuid: 6e7eba92-e538-42c5-ac53-755f98f84bf6
+langcode: en
+status: true
+dependencies: {  }
+id: field_dsp_targets
+label: 'SDG Paragraphs'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

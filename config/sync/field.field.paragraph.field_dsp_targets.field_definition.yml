@@ -1,0 +1,21 @@
+uuid: 05aba1b3-b0dc-4822-88d8-4e46e67e19c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_definition
+    - paragraphs.paragraphs_type.field_dsp_targets
+  module:
+    - text
+id: paragraph.field_dsp_targets.field_definition
+field_name: field_definition
+entity_type: paragraph
+bundle: field_dsp_targets
+label: Definition
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
