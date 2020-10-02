@@ -3,13 +3,16 @@ langcode: en
 status: true
 dependencies:
   module:
+    - ctools
+    - node
     - spc_main
+    - system
   theme:
     - spc
 id: spcmainbanner
 theme: spc
 region: subheader
-weight: 0
+weight: -6
 provider: null
 plugin: sps_main_banner
 settings:
@@ -17,4 +20,25 @@ settings:
   label: 'SPC Main Banner'
   provider: spc_main
   label_display: '0'
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/data-insights\r\n/data-insights/*"
+    negate: true
+    context_mapping: {  }
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      data_insights: data_insights
+    negate: true
+    context_mapping:
+      node: '@node.node_route_context:node'
+  node_type:
+    id: node_type
+    bundles:
+      article: article
+      page: page
+      thematic_group: thematic_group
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
