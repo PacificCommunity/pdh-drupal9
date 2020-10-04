@@ -8,12 +8,16 @@
         "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
         "chat": "https://www.drupal.org/node/314178"
     },
-    "repositories": [
-        {
+    "repositories": {
+        "0": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "spc_dot_stat_data": {
+            "type": "vcs",
+            "url": "git@gitlab.com:pacific-community/drupal-modules/spc_dot_stat_data.git"
         }
-    ],
+    },
     "require": {
         "composer/installers": "^1.2",
         "drupal/admin_toolbar": " ^2.0",
@@ -33,7 +37,8 @@
         "drupal/svg_image": " ^1.9",
         "drupal/ultimate_cron": " ^2.0",
         "drupal/views_infinite_scroll": "^1.7",
-        "drush/drush": " ^10.2"
+        "drush/drush": " ^10.2",
+        "pacific_community/spc_dot_stat_data": "^1.0"
     },
     "conflict": {
         "drupal/drupal": "*"

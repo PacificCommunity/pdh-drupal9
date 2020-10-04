@@ -1,0 +1,26 @@
+uuid: 377a4b58-6722-4017-908e-2bc2169f2443
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_dot_stat_chart
+  theme:
+    - spc
+id: pdh.statchart
+theme: spc
+region: blocks
+weight: -6
+provider: null
+plugin: dot_stat_chart
+settings:
+  id: dot_stat_chart
+  label: 'PDH.stat Chart'
+  provider: spc_dot_stat_chart
+  label_display: '0'
+  dot_stat_chart_node: '1'
+  dot_stat_chart_title: 'SDG 1.2.1'
+  dot_stat_chart_subtitle: 'Population Below the National Poverty Line'
+  dot_stat_chart_link: ''
+  dot_stat_chart_template: columns
+  dot_stat_chart_conf: "{\r\n              yAxisLabel: '%',\r\n\r\ntooltip: {\r\nheaderFormat: '',\r\npointFormat: '<em>{point.label}</em><br />Percentage of population\r\n({point.year}): <b>{point.y}%</b>' },\r\n              showTable: false\r\n            }"
+visibility: {  }

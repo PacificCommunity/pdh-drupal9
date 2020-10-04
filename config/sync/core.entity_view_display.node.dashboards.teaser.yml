@@ -5,6 +5,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.dashboards.body
+    - field.field.node.dashboards.field_dashboard_block_references
+    - field.field.node.dashboards.field_dashboard_bottom_text
+    - field.field.node.dashboards.field_dashboard_notes
     - field.field.node.dashboards.field_dsp_title_markup
     - node.type.dashboards
   module:
@@ -29,4 +32,7 @@ content:
     third_party_settings: {  }
     region: content
 hidden:
+  field_dashboard_block_references: true
+  field_dashboard_bottom_text: true
+  field_dashboard_notes: true
   field_dsp_title_markup: true

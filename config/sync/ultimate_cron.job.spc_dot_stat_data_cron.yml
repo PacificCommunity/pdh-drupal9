@@ -1,0 +1,17 @@
+uuid: e9a575cd-8086-4c77-bc05-77cadf2a1f35
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_dot_stat_data
+title: 'Default cron handler'
+id: spc_dot_stat_data_cron
+weight: 0
+module: spc_dot_stat_data
+callback: spc_dot_stat_data_cron
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

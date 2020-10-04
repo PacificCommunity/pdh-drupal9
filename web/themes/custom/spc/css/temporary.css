@@ -703,3 +703,65 @@ body.dsp .dsp-datasets .dataset-preview .dataset-formats a span {
   font-weight: 500;
   color: black;
 }
+body.dashboards p {
+  font-size: 12px;
+  font-family: 'Roboto';
+  line-height: 20px;
+}
+body.dashboards #block-spc-page-title {
+  display: none;
+}
+.dashboard-body {
+  float: left;
+  width: 60%;
+  padding-right: 30px;
+}
+@media (max-width: 700px) {
+  .dashboard-body {
+    width: 100%;
+  }
+}
+.dashboard-notes {
+  border-left: 1px dashed #acacac;
+  float: left;
+  width: 39%;
+  padding-left: 30px;
+  margin-top: 35px;
+}
+@media (max-width: 700px) {
+  .dashboard-notes {
+    display: none;
+  }
+}
+.dashboard-notes ol li:before {
+  content: "\2726";
+  color: #ff7439;
+  margin-left: -14px;
+  margin-right: 7px;
+}
+.dashboard-notes ol li {
+  margin-bottom: 6px;
+  font-style: italic;
+  font-size: 12px;
+  font-family: 'Roboto';
+  list-style: none;
+}
+.dashboard-notes .label-above {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+}
+.block-reference-block {
+  clear: both;
+  margin: 20px 0px;
+}
+.block-reference-block {
+  clear: both;
+  margin: 30px 0px;
+  display: block;
+  float: left;
+  width: 100%;
+}
+.dashboard-bottom {
+  clear: both;
+}
