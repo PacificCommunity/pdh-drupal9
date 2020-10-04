@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.field_dsp_targets.field_block_paragraph
     - field.field.paragraph.field_dsp_targets.field_body
     - field.field.paragraph.field_dsp_targets.field_definition
     - field.field.paragraph.field_dsp_targets.field_title
@@ -14,6 +15,16 @@ targetEntityType: paragraph
 bundle: field_dsp_targets
 mode: default
 content:
+  field_block_paragraph:
+    weight: 3
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_body:
     weight: 2
     settings:

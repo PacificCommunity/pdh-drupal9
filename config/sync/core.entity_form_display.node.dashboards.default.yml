@@ -4,9 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.node.dashboards.body
+    - field.field.node.dashboards.field_dashboard_block_references
+    - field.field.node.dashboards.field_dashboard_bottom_text
+    - field.field.node.dashboards.field_dashboard_notes
     - field.field.node.dashboards.field_dsp_title_markup
     - node.type.dashboards
   module:
+    - paragraphs
     - path
     - text
 id: node.dashboards.default
@@ -30,6 +34,34 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_dashboard_block_references:
+    type: entity_reference_paragraphs
+    weight: 126
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_dashboard_bottom_text:
+    weight: 125
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_dashboard_notes:
+    weight: 123
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
   field_dsp_title_markup:
     weight: 122
     settings:

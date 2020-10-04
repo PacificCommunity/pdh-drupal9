@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a89bbc3a9730e1bbf541a2876341bd24",
+    "content-hash": "88a5ab084542742d77431ab40cde8a96",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4173,6 +4173,39 @@
                 "php"
             ],
             "time": "2020-07-25T13:18:53+00:00"
+        },
+        {
+            "name": "pacific_community/spc_dot_stat_data",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data.git",
+                "reference": "916ed465381118178471da6bba49b80694eccb43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=916ed465381118178471da6bba49b80694eccb43",
+                "reference": "916ed465381118178471da6bba49b80694eccb43",
+                "shasum": ""
+            },
+            "type": "drupal-module",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Stanislas Ozier (stanislaso)",
+                    "homepage": "https://sdd.spc.int",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "PDH.Stat data harvester and custom blocks",
+            "homepage": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data",
+            "support": {
+                "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data/-/issues",
+                "source": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data"
+            },
+            "time": "2020-09-29T14:58:02+11:00"
         },
         {
             "name": "paragonie/random_compat",

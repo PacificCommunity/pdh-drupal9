@@ -1,0 +1,19 @@
+uuid: 17b54b31-6948-48f3-a737-271fdde6655e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_dashboard_notes
+field_name: field_dashboard_notes
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
