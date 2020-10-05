@@ -1,0 +1,28 @@
+uuid: aa664935-e7cc-4531-bd54-7bdb34e3cf10
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_block_reference
+    - paragraphs.paragraphs_type.field_dsp_targets
+  module:
+    - block_field
+id: paragraph.field_dsp_targets.field_block_reference
+field_name: field_block_reference
+entity_type: paragraph
+bundle: field_dsp_targets
+label: 'Block reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  selection: blocks
+  selection_settings:
+    plugin_ids:
+      dot_stat_chart: dot_stat_chart
+      dot_stat_chart_drilldown: dot_stat_chart_drilldown
+      dot_stat_data_table: dot_stat_data_table
+      dot_stat_key_stat: dot_stat_key_stat
+field_type: block_field

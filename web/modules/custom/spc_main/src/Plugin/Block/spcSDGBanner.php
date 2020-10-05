@@ -31,17 +31,36 @@ class spcSDGBanner extends BlockBase {
     $node = \Drupal::routeMatch()->getParameter('node');
     if ($node instanceof \Drupal\node\NodeInterface) {
       $title = $node->get('field_dsp_title_markup')->getString();
+      if (strlen($title) < 1) {
+        $title = $node->getTitle();
+      }
     }
     $data['title'] = (isset($config['spc_sdg_banner_title']) && !empty($config['spc_sdg_banner_title'])) ? $config['spc_sdg_banner_title'] : $title;
+
+    $data['isdsp'] = "isdsp";
     $nids = \Drupal::entityQuery('node')->condition('type','dsp')->execute();
     $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
-    foreach ($nodes as $node) {
-      $url_alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $node->id());
+    foreach ($nodes as $goal) {
+      $url_alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $goal->id());
       $data['dsps'][] = [
-        'url' => $url_alias, //$node->toUrl()->toString(),
-        'title' => $node->getTitle()
+        'url' => $url_alias,
+        'title' => $goal->getTitle()
       ];
     }
+    usort($data['dsps'], function($a, $b) {
+      return strcmp($a['title'], $b['title']);
+    });
+
+    if ($node->getType() == 'dsp') {
+      dump($node->getTitle());
+      $dashboard = [
+        'url' => '/dashboard/17-goals-transform-pacific',
+        'title' => $this->t('Back to dashboard'),
+      ];
+      array_unshift($data['dsps'], $dashboard);
+    }
+
+
     return array(
       '#theme' => 'main_banner_block',
       '#cache' => ['max-age'=> 0],

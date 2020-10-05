@@ -10,7 +10,7 @@ field_name: field_dsp_title_markup
 entity_type: node
 bundle: dsp
 label: 'Title markup'
-description: '<strong>Yellow text</strong>White text'
+description: 'You can format the title output to highlight some part of the text with yellow color: <strong>Yellow text</strong>White text'
 required: false
 translatable: false
 default_value: {  }
