@@ -1,0 +1,20 @@
+uuid: f0ae92f4-bf44-48ed-9644-c8b300732f14
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+  theme:
+    - spc
+id: spcdashboardtransformchart
+theme: spc
+region: blocks
+weight: 0
+provider: null
+plugin: spc_dashboard_transform_chart_block
+settings:
+  id: spc_dashboard_transform_chart_block
+  label: 'SPC dashboard transform chart'
+  provider: spc_main
+  label_display: '0'
+visibility: {  }
