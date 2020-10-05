@@ -38,8 +38,6 @@ class spcBanner extends BlockBase {
       $data['breads'][] = ['name' => $node->getTitle()];
     }
 
-
-    
     return array(
       '#theme' => 'main_banner_block',
       '#cache' => ['max-age'=> 0],

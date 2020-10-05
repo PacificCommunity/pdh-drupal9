@@ -1,0 +1,21 @@
+uuid: 7b1a3c05-55a2-414f-8ad8-9abbf6f5ba32
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_bottom_text
+    - paragraphs.paragraphs_type.field_dsp_targets
+  module:
+    - text
+id: paragraph.field_dsp_targets.field_bottom_text
+field_name: field_bottom_text
+entity_type: paragraph
+bundle: field_dsp_targets
+label: 'Bottom text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

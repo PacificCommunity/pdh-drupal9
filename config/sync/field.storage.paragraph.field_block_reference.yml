@@ -1,17 +1,16 @@
-uuid: 537b6364-2a8b-4149-9e40-96740d87352e
+uuid: 8950daa7-3b81-4810-a913-cd867d901ff4
 langcode: en
 status: true
 dependencies:
   module:
-    - block
+    - block_field
     - paragraphs
-id: paragraph.field_block_paragraph
-field_name: field_block_paragraph
+id: paragraph.field_block_reference
+field_name: field_block_reference
 entity_type: paragraph
-type: entity_reference
-settings:
-  target_type: block
-module: core
+type: block_field
+settings: {  }
+module: block_field
 locked: false
 cardinality: 1
 translatable: true

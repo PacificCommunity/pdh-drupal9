@@ -60,14 +60,24 @@
                             </form>          
                         </div>
                     </div>
-                {% endif %}    
+                {% else %}
+                    <div class="search">
+                        <div id="spc-home-banner-search">
+                            <form action="/" method="post" id="ckan-search-form" class="global-search-form" accept-charset="UTF-8" _lpchecked="1">
+                                <div role="application">
+                                    <input placeholder="Search" type="text" id="ckan-search" size="30" maxlength="128">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
 {% if data.dsps %}
-<div class="panel-pane pane-views pane-dashboard-for-sdp">
+<div class="panel-pane pane-views pane-dashboard-for-sdp {{ data.isdsp }}">
     <div class="goals-navigation">
         <div class="dropdown">
             <div class="button">
