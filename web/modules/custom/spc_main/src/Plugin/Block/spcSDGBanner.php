@@ -52,7 +52,6 @@ class spcSDGBanner extends BlockBase {
     });
 
     if ($node->getType() == 'dsp') {
-      dump($node->getTitle());
       $dashboard = [
         'url' => '/dashboard/17-goals-transform-pacific',
         'title' => $this->t('Back to dashboard'),

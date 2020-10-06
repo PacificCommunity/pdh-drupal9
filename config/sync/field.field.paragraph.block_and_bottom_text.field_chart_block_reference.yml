@@ -1,17 +1,17 @@
-uuid: aa664935-e7cc-4531-bd54-7bdb34e3cf10
+uuid: abeeed70-ca33-4367-9a46-69f6ea24500d
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_block_reference
-    - paragraphs.paragraphs_type.field_dsp_targets
+    - field.storage.paragraph.field_chart_block_reference
+    - paragraphs.paragraphs_type.block_and_bottom_text
   module:
     - block_field
-id: paragraph.field_dsp_targets.field_block_reference
-field_name: field_block_reference
+id: paragraph.block_and_bottom_text.field_chart_block_reference
+field_name: field_chart_block_reference
 entity_type: paragraph
-bundle: field_dsp_targets
-label: 'Block reference'
+bundle: block_and_bottom_text
+label: 'Chart block reference'
 description: ''
 required: false
 translatable: false
@@ -25,4 +25,5 @@ settings:
       dot_stat_chart_drilldown: dot_stat_chart_drilldown
       dot_stat_data_table: dot_stat_data_table
       dot_stat_key_stat: dot_stat_key_stat
+      dot_stat_links: dot_stat_links
 field_type: block_field

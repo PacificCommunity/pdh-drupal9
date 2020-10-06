@@ -1,12 +1,12 @@
-uuid: 0059f3ec-82ba-46dd-9adf-b36b7a876aed
+uuid: 20eff7ab-2599-451b-acf3-1c3c3a11086e
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
     - text
-id: paragraph.field_bottom_text
-field_name: field_bottom_text
+id: paragraph.field_chart_block_bottom_text
+field_name: field_chart_block_bottom_text
 entity_type: paragraph
 type: text_long
 settings: {  }

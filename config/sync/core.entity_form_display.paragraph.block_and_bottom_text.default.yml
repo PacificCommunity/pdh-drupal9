@@ -1,0 +1,36 @@
+uuid: efbc9125-4e00-40d7-bdd1-68fa1cd46b2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.block_and_bottom_text.field_chart_block_bottom_text
+    - field.field.paragraph.block_and_bottom_text.field_chart_block_reference
+    - paragraphs.paragraphs_type.block_and_bottom_text
+  module:
+    - block_field
+    - text
+id: paragraph.block_and_bottom_text.default
+targetEntityType: paragraph
+bundle: block_and_bottom_text
+mode: default
+content:
+  field_chart_block_bottom_text:
+    weight: 1
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_chart_block_reference:
+    weight: 0
+    settings:
+      plugin_id: ''
+      settings: {  }
+      configuration_form: full
+    third_party_settings: {  }
+    type: block_field_default
+    region: content
+hidden:
+  created: true
+  status: true

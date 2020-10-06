@@ -1,12 +1,12 @@
-uuid: 8950daa7-3b81-4810-a913-cd867d901ff4
+uuid: ef238f9f-35a3-4a14-beaf-0187cee8bfe7
 langcode: en
 status: true
 dependencies:
   module:
     - block_field
     - paragraphs
-id: paragraph.field_block_reference
-field_name: field_block_reference
+id: paragraph.field_chart_block_reference
+field_name: field_chart_block_reference
 entity_type: paragraph
 type: block_field
 settings: {  }

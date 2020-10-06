@@ -3,29 +3,19 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.field_dsp_targets.field_block_reference
     - field.field.paragraph.field_dsp_targets.field_body
-    - field.field.paragraph.field_dsp_targets.field_bottom_text
+    - field.field.paragraph.field_dsp_targets.field_chart_block_and_text
     - field.field.paragraph.field_dsp_targets.field_definition
     - field.field.paragraph.field_dsp_targets.field_title
     - paragraphs.paragraphs_type.field_dsp_targets
   module:
-    - block_field
+    - paragraphs
     - text
 id: paragraph.field_dsp_targets.default
 targetEntityType: paragraph
 bundle: field_dsp_targets
 mode: default
 content:
-  field_block_reference:
-    weight: 4
-    settings:
-      plugin_id: ''
-      settings: {  }
-      configuration_form: full
-    third_party_settings: {  }
-    type: block_field_default
-    region: content
   field_body:
     weight: 2
     settings:
@@ -34,13 +24,17 @@ content:
     third_party_settings: {  }
     type: text_textarea
     region: content
-  field_bottom_text:
-    weight: 5
+  field_chart_block_and_text:
+    type: entity_reference_paragraphs
+    weight: 6
     settings:
-      rows: 5
-      placeholder: ''
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: block_and_bottom_text
     third_party_settings: {  }
-    type: text_textarea
     region: content
   field_definition:
     weight: 1
