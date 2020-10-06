@@ -23,20 +23,35 @@ class spcDashboardTransformChart extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-      
-     # Add library
-  $variables['#attached']['library'][] =  'library_ex/library_ex';   
+    # Add library
+    $variables['#attached']['library'][] =  'library_ex/library_ex';   
     
     $data['title'] = 'SDGs Progress Wheels';
-    
-    return array(
+    $countries = $this->get_countries_data('countries');
+
+    return [
       '#theme' => 'spc_dashboard_transform_chart_block',
       '#cache' => ['max-age'=> 0],
       '#data' => $data,
-      '#attached' => array(
-        'library' => array('spc/d3'),
-       ),        
-    );
+      '#attached' => [
+        'library' => ['spc/d3'],
+        'drupalSettings' => [
+            'spcMainCountriesData' => $countries,
+            'spcMainModulePath' => drupal_get_path('module', 'spc_main'),
+        ]  
+       ],        
+    ];
+  }
+
+  private function get_countries_data($default_file) {
+
+    $data = [];
+
+    if ($spc_countries = file_get_contents(drupal_get_path('module', 'spc_main') . '/data/' . $default_file . '.json')) {
+      $data = json_decode($spc_countries, TRUE)[0];
+    }
+
+    return $data;
   }
   
 }
