@@ -261,3 +261,182 @@ main {
     float: none;
     display: table;
 }
+
+.dashboards {
+    main {
+        max-width: 100%;
+        padding: 20px 0;
+        
+        article {
+            float: none !important;
+        }
+        
+        div[data-drupal-messages] {
+            max-width: 1366px;
+            margin: 0 auto;         
+            float: none;
+            clear: both;
+            
+            @media(max-width: 1386px){
+                margin: 10px;
+            }
+        }
+        #block-spc-local-tasks,
+        #block-spc-page-title, {
+            max-width: 1366px;
+            margin: 0 auto;
+            margin-bottom: 20px;          
+            float: none;
+            clear: both;
+            display: table;
+            
+            @media(max-width: 1386px){
+                padding: 10px;
+            }            
+
+        }
+        .body-notes,
+        .dashboard-bottom,
+        .block-reference-block>div:first-of-type{
+            max-width: 1366px;
+            margin: 0 auto;
+            display: block;
+            float: none;
+            clear: both;
+            
+            @media(max-width: 1386px){
+                padding: 10px;
+            }            
+        }        
+    }
+}
+
+#sdgChart svg {
+  font-family: sans-serif;
+}
+
+#sdgChart .domain-text {
+  text-transform: uppercase;
+  letter-spacing: 2px; 
+}
+
+#sdgChart .bar-label {
+  font-size: 8px;
+}
+
+.tooltip.chart-tooltip {
+  position: absolute;
+  height: auto;
+  width: 400px;
+  font-size: 12px;
+  color: #393f45;
+  padding: 5px 7px;
+  background: #dbedfb;
+  border-radius: 6px;
+  pointer-events: none; 
+}
+.tooltip.chart-tooltip.goals-t {
+  width: auto;
+  color: #fff;
+  background: #393f45;
+}
+.chart-help-text {
+    max-width: 790px;
+    margin: 0 auto;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: justify;
+    padding: 0 15px;
+    padding-bottom: 45px;
+    font-family: inherit;
+}
+.select2-dropdown--below {
+    margin-top: 5px;
+    border-radius: 18px;
+    padding: 10px;
+    border-top: 1px solid #b5b5b5 !important;
+    border-top-left-radius: 18px !important;
+    border-top-right-radius: 18px !important;
+}
+.select2-dropdown--above {
+    top: -5px;
+    border-radius: 18px;
+    padding: 10px;
+    border-bottom: 1px solid #b5b5b5;
+}
+
+.chart-container{
+    background: url(../img/insights_hp_bg.png) no-repeat 50% 50%, linear-gradient(3deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    padding-top: 65px;
+    padding-bottom: 45px;
+    
+    &:before {
+        content: ' ';
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        background-color: #FFC72E;
+        border-top: 4px solid #FFC72E;
+        border-right: 5px solid #F9F9F9;
+        border-left: 5px solid #F9F9F9;
+    }
+
+    .chart-select {
+        max-width: 304px;
+        margin: 0 auto 56px auto;
+
+        .select2-selection--single {
+            max-width: 304px;
+            height: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            border: 1px solid #b5b5b5;
+            background-color: #ffffff;
+            font-size: 13px;
+            font-weight: 400;
+            padding: 8px 16px;
+        }
+        
+        .select2-container .select2-selection {
+            max-width: 304px;
+            height: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            border: 1px solid #b5b5b5;
+            background-color: #ffffff;
+            font-size: 13px;
+            font-weight: 400;
+            padding: 13px 21px;
+        }        
+        .select2-container .select2-selection:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            border: solid #000;
+            border-width: 0 1px 1px 0;
+            padding: 4px;
+            transform: rotate(45deg);
+        }
+        .select2-container .select2-selection .select2-selection__rendered {
+            line-height: 16px;
+            padding: 0px;
+            text-align: left;
+        }
+        .select2-container .select2-selection .select2-selection__arrow {
+            display: none;
+        }        
+        .select2-container.select2-container--open .select2-selection:after {
+          top: 20px;
+          transform: rotate(-135deg);
+        }        
+    }
+}
+
