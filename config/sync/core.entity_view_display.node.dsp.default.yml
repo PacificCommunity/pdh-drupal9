@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.dsp.field_dsp_small_icon
     - field.field.node.dsp.field_dsp_targets
     - field.field.node.dsp.field_dsp_title_markup
+    - field.field.node.dsp.field_dsp_view_weight
     - image.style.256x256
     - node.type.dsp
   module:
@@ -73,3 +74,4 @@ hidden:
   field_dsp_datasets: true
   field_dsp_small_icon: true
   field_dsp_title_markup: true
+  field_dsp_view_weight: true

@@ -1,0 +1,25 @@
+uuid: ed779a1d-96d8-4ecc-b724-41e908442738
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dsp_view_weight
+    - node.type.dsp
+id: node.dsp.field_dsp_view_weight
+field_name: field_dsp_view_weight
+entity_type: node
+bundle: dsp
+label: 'DSP View Priority'
+description: 'You can set the priority from 100 to 0. Pages with bigger priority will be shown first.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: 100
+  prefix: ''
+  suffix: ''
+field_type: integer

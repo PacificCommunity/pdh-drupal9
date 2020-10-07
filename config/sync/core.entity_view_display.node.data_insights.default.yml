@@ -4,10 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.node.data_insights.body
+    - field.field.node.data_insights.field_chart_block_and_text
     - field.field.node.data_insights.field_data_insights_preview
     - field.field.node.data_insights.field_topic
     - node.type.data_insights
   module:
+    - entity_reference_revisions
+    - field_formatter_class
     - text
     - user
 id: node.data_insights.default
@@ -21,6 +24,17 @@ content:
     weight: 3
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_chart_block_and_text:
+    type: entity_reference_revisions_entity_view
+    weight: 4
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: chart-block-and-bottom-text-sdp
     region: content
   field_data_insights_preview:
     weight: 2

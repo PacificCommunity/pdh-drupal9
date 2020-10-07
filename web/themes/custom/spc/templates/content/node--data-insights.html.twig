@@ -105,5 +105,8 @@
     <div class="body-text">
         {{ content.body }}
     </div>
+    <div class="other-fields">
+        {{ content | without('body', 'field_data_insights_preview') }}
+    </div>
 
 </article>

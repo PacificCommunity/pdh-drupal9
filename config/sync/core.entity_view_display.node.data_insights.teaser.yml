@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.data_insights.body
+    - field.field.node.data_insights.field_chart_block_and_text
     - field.field.node.data_insights.field_data_insights_preview
     - field.field.node.data_insights.field_topic
     - node.type.data_insights
@@ -25,5 +26,6 @@ content:
     third_party_settings: {  }
 hidden:
   body: true
+  field_chart_block_and_text: true
   field_topic: true
   links: true

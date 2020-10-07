@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.data_insights.body
+    - field.field.node.data_insights.field_chart_block_and_text
     - field.field.node.data_insights.field_data_insights_preview
     - field.field.node.data_insights.field_topic
     - node.type.data_insights
   module:
+    - paragraphs
     - path
     - text
 id: node.data_insights.default
@@ -31,6 +33,18 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_chart_block_and_text:
+    type: entity_reference_paragraphs
+    weight: 26
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
   field_data_insights_preview:
     weight: 3
     settings:
