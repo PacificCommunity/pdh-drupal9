@@ -106,7 +106,7 @@
         {{ content.body }}
     </div>
     <div class="other-fields">
-        {{ content | without('body', 'field_data_insights_preview') }}
+        {{ content | without('body', 'field_data_insights_preview', 'field_topic') }}
     </div>
 
 </article>
