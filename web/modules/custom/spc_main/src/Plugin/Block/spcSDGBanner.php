@@ -42,13 +42,15 @@ class spcSDGBanner extends BlockBase {
     $nodes =  \Drupal\node\Entity\Node::loadMultiple($nids);
     foreach ($nodes as $goal) {
       $url_alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $goal->id());
+      $priority = $goal->field_dsp_view_weight->value ?: 0 ;
       $data['dsps'][] = [
         'url' => $url_alias,
-        'title' => $goal->getTitle()
+        'title' => $goal->getTitle(),
+        'priority' => $priority
       ];
     }
     usort($data['dsps'], function($a, $b) {
-      return strcmp($a['title'], $b['title']);
+      return $a['priority'] < $b['priority'];
     });
 
     if ($node->getType() == 'dsp') {
