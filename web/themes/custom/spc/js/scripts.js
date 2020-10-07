@@ -68,8 +68,9 @@
                     .attr("viewBox", "-225 0 1220 800")
                     .append("g")
                     .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
-
-                d3.json(modulePath + "/data/domains.json", function(data) {
+             
+                var domainsDataPath = drupalSettings.spcMainDomainsDataPath;
+                d3.json(domainsDataPath, function(data) {
 
                   var path = svg.selectAll("path.domain")
                       .data(pie(data))
@@ -95,8 +96,8 @@
                       .style("fill", "#fff");
                 });
 
-
-                d3.json(modulePath + "/data/goals.json", function(data) {
+                var goalsDataPath = drupalSettings.spcMainGoalsDataPath;
+                d3.json(goalsDataPath, function(data) {
 
                   var select = d3.select("#sdgChartCountries");
 
