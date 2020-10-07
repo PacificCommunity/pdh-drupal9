@@ -12,3 +12,10 @@ spc_main.spc_publication_import:
     _form: '\Drupal\spc_main\Form\SpcPublicationImportSettingsForm'
   requirements:
     _permission: 'administer site configuration'    
+spc_main.sdg_chart_settings:
+  path: '/admin/config/sdg_chart_settings'
+  defaults:
+    _title: 'SPC Dashboard sdg chart settings'
+    _form: '\Drupal\spc_main\Form\SdgChartSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
