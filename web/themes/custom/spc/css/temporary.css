@@ -736,8 +736,9 @@ body.dashboards #block-spc-page-title {
 }
 .dashboard-body {
   float: left;
-  width: 60%;
+  width: 59%;
   padding-right: 30px;
+  margin-right: 7px;
 }
 @media (max-width: 700px) {
   .dashboard-body {
@@ -750,11 +751,21 @@ body.dashboards #block-spc-page-title {
   width: 39%;
   padding-left: 30px;
   margin-top: 35px;
+  line-height: 20px;
 }
 @media (max-width: 700px) {
   .dashboard-notes {
     display: none;
   }
+}
+.dashboard-notes ol {
+  padding-left: 12px;
+}
+.dsp-block-view {
+  padding-top: 45px;
+  padding-bottom: 150px;
+  padding-left: 47px;
+  padding-right: 23px;
 }
 .dashboard-notes ol li:before {
   content: "\2726";
@@ -780,17 +791,27 @@ main .chart-block-bottom p {
 }
 .block-reference-block {
   clear: both;
-  margin: 20px 0px;
-}
-.block-reference-block {
-  clear: both;
-  margin: 30px 0px;
+  margin: 30px 0px 20px 0px;
   display: block;
   float: left;
   width: 100%;
 }
 .dashboard-bottom {
   clear: both;
+}
+.dashboards main .dashboard-bottom {
+  max-width: 790px;
+  margin-bottom: 30px;
+  padding: 0px 15px;
+}
+.dashboards main .body-notes {
+  margin-top: 51px;
+  padding-left: 16px;
+}
+.dashboards main .dashboard-bottom p {
+  font-size: 13px;
+  line-height: 23px;
+  text-align: justify;
 }
 body.dashboards #block-spcsdgbanner h1 {
   font-size: 38px;
@@ -812,4 +833,10 @@ body.dashboards #block-spcsdgbanner .search {
   height: 30px;
   display: inline-block;
   background-size: 310%;
+}
+#block-spcdashboardtransformchart h2 {
+  font-size: 38px;
+  font-weight: 500;
+  font-family: 'Roboto';
+  margin-top: 0px;
 }
