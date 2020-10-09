@@ -1,0 +1,51 @@
+uuid: e8b33683-00e7-45ce-9868-3b5b5eeac469
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.thematic_group.body
+    - field.field.node.thematic_group.field_fa_icon
+    - field.field.node.thematic_group.field_pathificdata_topic_page
+    - node.type.thematic_group
+  module:
+    - link
+    - text
+    - user
+id: node.thematic_group.default
+targetEntityType: node
+bundle: thematic_group
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_fa_icon:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_pathificdata_topic_page:
+    weight: 103
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

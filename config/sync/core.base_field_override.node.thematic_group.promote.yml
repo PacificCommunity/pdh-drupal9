@@ -1,0 +1,22 @@
+uuid: 9632f8ab-bd4d-44f8-a43b-aee8e3498860
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.thematic_group
+id: node.thematic_group.promote
+field_name: promote
+entity_type: node
+bundle: thematic_group
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

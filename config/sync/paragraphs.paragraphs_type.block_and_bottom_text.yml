@@ -1,0 +1,10 @@
+uuid: df5faf19-7d24-478f-b94e-5d1c72480a80
+langcode: en
+status: true
+dependencies: {  }
+id: block_and_bottom_text
+label: 'Block and bottom text'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

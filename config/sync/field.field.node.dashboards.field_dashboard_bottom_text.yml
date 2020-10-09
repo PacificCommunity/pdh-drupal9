@@ -1,0 +1,21 @@
+uuid: bfb43260-b8fe-421d-a3b9-a5a86ad8c26e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dashboard_bottom_text
+    - node.type.dashboards
+  module:
+    - text
+id: node.dashboards.field_dashboard_bottom_text
+field_name: field_dashboard_bottom_text
+entity_type: node
+bundle: dashboards
+label: 'Bottom text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

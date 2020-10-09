@@ -10,6 +10,7 @@ libraries:
   - spc/social-share
   - spc/d3    
   - spc/ma5
+  - spc/select2
   - spc/global
   
 regions:
@@ -17,3 +18,4 @@ regions:
   subheader: Subheader
   content: Content
   footer: Footer
+  blocks: Referenced Blocks

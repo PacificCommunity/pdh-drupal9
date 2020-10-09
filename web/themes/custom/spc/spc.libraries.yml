@@ -3,6 +3,7 @@ global:
   css:
     theme:
       css/spc.css: {}
+      css/temporary.css: {}
   js:
     js/scripts.js: {}
   dependencies:
@@ -25,7 +26,7 @@ d3:
     base:
       css/timeline-chart.css: {}
   js:
-    js/d3/d3.js: {}
+    js/d3/d3.v4.js: {}
     js/d3/timeline-chart.js: {}
 social-share:
   version: 1.00
@@ -34,3 +35,10 @@ social-share:
       css/social-share.css: {}
   js:
     js/social-share.js: {}
+select2:
+  version: 4.x
+  css:
+    theme:
+      css/select2.min.css: {}  
+  js:
+    js/select2.min.js: {}   

@@ -1,0 +1,19 @@
+uuid: 20eff7ab-2599-451b-acf3-1c3c3a11086e
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_chart_block_bottom_text
+field_name: field_chart_block_bottom_text
+entity_type: paragraph
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

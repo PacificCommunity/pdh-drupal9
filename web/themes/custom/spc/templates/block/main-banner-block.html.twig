@@ -20,6 +20,25 @@
                 </div>
             </div>
         {% endif %}
+        {% if data.breads %}
+            <div class="breadcrumbs bread">
+                <div class="breadcrumb">
+                    <div class="inline first">
+                        <a href="/" title="{{ 'Home'|t }}">{{ 'Home'|t }}</a>
+                    </div>
+                    {% for breadcrumb in data.breads %}
+                        <div class="delimiter">&gt;</div>
+                        <div class="inline last">
+                            {% if breadcrumb.url %}
+                                <a href="{{ breadcrumb.url }}" title="{{ breadcrumb.name }}">{{ breadcrumb.name }}</a>
+                            {% else %}
+                                <span>{{ breadcrumb.name }}</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
         <div class="spc-home-banner-block">
             <div class="banner-title">
                 <div class="field field-type-text-long">
@@ -41,8 +60,35 @@
                             </form>          
                         </div>
                     </div>
-                {% endif %}    
+                {% else %}
+                    <div class="search">
+                        <div id="spc-home-banner-search">
+                            <form action="/" method="post" id="ckan-search-form" class="global-search-form" accept-charset="UTF-8" _lpchecked="1">
+                                <div role="application">
+                                    <input placeholder="Search" type="text" id="ckan-search" size="30" maxlength="128">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+
+{% if data.dsps %}
+<div class="panel-pane pane-views pane-dashboard-for-sdp {{ data.isdsp }}">
+    <div class="goals-navigation">
+        <div class="dropdown">
+            <div class="button">
+                <img class="goals-logo" src="https://pacificdata.org/sites/default/files/SDGs%20in%20the%20Pacific%20230x230.png">
+            </div>
+            <ul class="dropdown-menu hidden" aria-labelledby="goals-navigation">
+                {% for dsp in data.dsps %}
+                    <li><a href="{{ dsp.url }}">{{ dsp.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

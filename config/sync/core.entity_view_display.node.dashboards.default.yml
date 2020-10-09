@@ -1,0 +1,66 @@
+uuid: 5834c8bf-7d97-4d44-bb19-b411c3e8ea15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.dashboards.body
+    - field.field.node.dashboards.field_dashboard_block_references
+    - field.field.node.dashboards.field_dashboard_bottom_text
+    - field.field.node.dashboards.field_dashboard_notes
+    - field.field.node.dashboards.field_dsp_title_markup
+    - node.type.dashboards
+  module:
+    - entity_reference_revisions
+    - field_formatter_class
+    - text
+    - user
+id: node.dashboards.default
+targetEntityType: node
+bundle: dashboards
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: dashboard-body
+    region: content
+  field_dashboard_block_references:
+    type: entity_reference_revisions_entity_view
+    weight: 4
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: block-reference-block
+    region: content
+  field_dashboard_bottom_text:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: dashboard-bottom
+    type: text_default
+    region: content
+  field_dashboard_notes:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: dashboard-notes
+    type: text_default
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_dsp_title_markup: true

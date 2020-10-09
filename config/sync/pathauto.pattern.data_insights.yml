@@ -1,0 +1,22 @@
+uuid: 22ce8858-fd85-427e-a742-4fcd8c450fef
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: data_insights
+label: 'Data Insights'
+type: 'canonical_entities:node'
+pattern: 'data-insights/[node:title]'
+selection_criteria:
+  f5e02a4c-6e8b-4ff7-88da-ed0f532c323f:
+    id: node_type
+    bundles:
+      data_insights: data_insights
+    negate: false
+    context_mapping:
+      node: node
+    uuid: f5e02a4c-6e8b-4ff7-88da-ed0f532c323f
+selection_logic: and
+weight: -9
+relationships: {  }

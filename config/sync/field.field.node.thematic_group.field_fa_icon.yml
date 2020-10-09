@@ -1,0 +1,19 @@
+uuid: 5382b6f3-d731-4469-9068-9e75c8972ff1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fa_icon
+    - node.type.thematic_group
+id: node.thematic_group.field_fa_icon
+field_name: field_fa_icon
+entity_type: node
+bundle: thematic_group
+label: 'FA Icon'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

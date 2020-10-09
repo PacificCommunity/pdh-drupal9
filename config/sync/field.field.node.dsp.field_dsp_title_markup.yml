@@ -1,0 +1,19 @@
+uuid: 6ae27547-e92d-48fe-8bc2-6fc60a4acdf8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dsp_title_markup
+    - node.type.dsp
+id: node.dsp.field_dsp_title_markup
+field_name: field_dsp_title_markup
+entity_type: node
+bundle: dsp
+label: 'Title markup'
+description: 'You can format the title output to highlight some part of the text with yellow color: <strong>Yellow text</strong>White text'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

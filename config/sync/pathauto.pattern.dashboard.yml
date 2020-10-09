@@ -1,0 +1,22 @@
+uuid: 23251fd6-4cd7-4c0f-92de-58fca8d307b9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: dashboard
+label: Dashboard
+type: 'canonical_entities:node'
+pattern: 'dashboard/[node:title]'
+selection_criteria:
+  6194cc48-f3b3-439e-9cff-a6a2430d9a7b:
+    id: node_type
+    bundles:
+      dashboards: dashboards
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 6194cc48-f3b3-439e-9cff-a6a2430d9a7b
+selection_logic: and
+weight: -8
+relationships: {  }

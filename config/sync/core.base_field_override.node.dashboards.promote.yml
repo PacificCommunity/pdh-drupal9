@@ -1,0 +1,22 @@
+uuid: a99d290e-822b-4382-95f3-aeeafd1a91ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.dashboards
+id: node.dashboards.promote
+field_name: promote
+entity_type: node
+bundle: dashboards
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

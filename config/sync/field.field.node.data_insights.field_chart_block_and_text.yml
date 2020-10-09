@@ -1,0 +1,37 @@
+uuid: 4dafc641-5e22-4b15-88e5-a284b0e2c8b3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_chart_block_and_text
+    - node.type.data_insights
+    - paragraphs.paragraphs_type.block_and_bottom_text
+  module:
+    - entity_reference_revisions
+id: node.data_insights.field_chart_block_and_text
+field_name: field_chart_block_and_text
+entity_type: node
+bundle: data_insights
+label: 'Chart Block and text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      block_and_bottom_text: block_and_bottom_text
+    target_bundles_drag_drop:
+      block_and_bottom_text:
+        enabled: true
+        weight: 4
+      block_reference:
+        weight: 5
+        enabled: false
+      field_dsp_targets:
+        weight: 6
+        enabled: false
+field_type: entity_reference_revisions

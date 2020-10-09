@@ -1,0 +1,24 @@
+uuid: 8fc66362-63fb-436d-97e1-731cc07f7503
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.dashboard_secondary_pages
+  module:
+    - views
+  theme:
+    - spc
+id: views_block__dashboard_secondary_pages_block_1
+theme: spc
+region: blocks
+weight: -7
+provider: null
+plugin: 'views_block:dashboard_secondary_pages-block_1'
+settings:
+  id: 'views_block:dashboard_secondary_pages-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility: {  }
