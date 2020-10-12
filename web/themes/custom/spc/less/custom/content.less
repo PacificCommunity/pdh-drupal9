@@ -307,8 +307,30 @@ main {
             @media(max-width: 1300px){
                 padding: 10px;
             }            
+        }
+        .block-reference-block>div:nth-of-type(2n) {
+            max-width: 1270px;
+            margin: 0 auto;
+            display: block;
+            float: none;
+            clear: both;
+            
+            @media(max-width: 1300px){
+                padding: 10px;
+            }            
+        }
+        .block-reference-block>div:last-of-type {
+            max-width: 100%;            
         }        
     }
+}
+
+.highcharts-root .highcharts-data-labels {
+    opacity: 0.1;
+    transition: opacity 250ms;
+}
+.highcharts-root:hover .highcharts-data-labels {
+    opacity: 0.9;
 }
 
 #sdgChart svg {
