@@ -1,6 +1,5 @@
 #block-spc-local-tasks {
-  display: block;
-  float: left;
+  display: table;
   width: 100%;
   margin-bottom: 20px;
 }
