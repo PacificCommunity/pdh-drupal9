@@ -1,7 +1,5 @@
 ignored_config_entities:
   - system.site
   - spc_dot_stat.settings
-  - spc_dot_stat_data.settings
-  - spc_dot_stat_chart.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
