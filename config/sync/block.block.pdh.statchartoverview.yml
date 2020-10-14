@@ -1,0 +1,25 @@
+uuid: 394af707-d19a-4f71-9e40-7ae43107c70c
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_dot_stat_chart
+  theme:
+    - spc
+id: pdh.statchartoverview
+theme: spc
+region: blocks
+weight: 0
+provider: null
+plugin: dot_stat_chart_overview
+settings:
+  id: dot_stat_chart_overview
+  label: 'SDG indicator summary by country'
+  provider: spc_dot_stat_chart
+  label_display: visible
+  dot_stat_chart_title: 'Indicators completed per country (out of XXX) - Source: PDH.stat'
+  dot_stat_chart_subtitle: ''
+  dot_stat_chart_node_filter: SDG%
+  dot_stat_chart_template: null
+  dot_stat_chart_conf: "{\r\n  chart: {\r\n    type: 'lollipop'\r\n  },\r\n  plotOptions: {\r\n    series: {\r\n      color: 'rgb(65, 132, 190)',\r\n      connectorWidth: 3,\r\n      marker: {\r\n        radius: 9\r\n      }\r\n    }\r\n  },\r\n  tooltip: {\r\n    headerFormat: '',\r\n    pointFormat: '<span style=\"font-size:120%\"><b>{point.label}</b></span><br /><em>{point.y}% completed<br />({point.total} indicators out of XXX)</em><br /><span style=\"color:#999\">●</span> Completed after 2015:<b>{point.post2015}</b><br /><span style=\"color:#999\">●</span> Completed before 2015:<b>{point.pre2015}</b>'\r\n  },\r\n yAxis: {\r\n  max: 100\r\n }\r\n}"
+visibility: {  }
