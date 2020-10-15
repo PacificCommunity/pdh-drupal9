@@ -6000,11 +6000,7 @@
                     "type": "tidelift"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2020-05-31T05:14:17+00:00"
-=======
             "time": "2020-08-31T05:53:42+00:00"
->>>>>>> SPCXCFZB-800
         },
         {
             "name": "symfony/polyfill-ctype",
