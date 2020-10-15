@@ -1,5 +1,5 @@
 language: en
-account: ''
+account: '1051527'
 attachment_mode: build
 snippet_version: 6
 snippet_path: 'public://hotjar/hotjar.script.js'
