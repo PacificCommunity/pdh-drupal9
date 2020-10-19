@@ -4,5 +4,7 @@ ignored_config_entities:
   - spc_dot_stat_data.settings
   - spc_dot_stat_chart.settings
   - block.block.pdh.statchartoverview
+  - system.performance
+  - spc_main.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
