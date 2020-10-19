@@ -4360,16 +4360,16 @@
         },
         {
             "name": "pacific_community/spc_dot_stat_data",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data.git",
-                "reference": "20c152679b40f4373df3f65204f5c16373da35c2"
+                "reference": "495f706a2675dcaa9dabb384067d0bb751e74122"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=20c152679b40f4373df3f65204f5c16373da35c2",
-                "reference": "20c152679b40f4373df3f65204f5c16373da35c2",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=495f706a2675dcaa9dabb384067d0bb751e74122",
+                "reference": "495f706a2675dcaa9dabb384067d0bb751e74122",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -4389,7 +4389,7 @@
                 "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data/-/issues",
                 "source": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data"
             },
-            "time": "2020-10-16T12:53:52+11:00"
+            "time": "2020-10-19T11:39:58+11:00"
         },
         {
             "name": "paragonie/random_compat",
