@@ -2,7 +2,7 @@ ignored_config_entities:
   - system.site
   - spc_dot_stat_data.settings
   - spc_dot_stat_chart.settings
-  - spc_dot_stat.settings
+  - block.block.pdh.statchartoverview
   - system.performance
   - spc_main.settings
 _core:
