@@ -334,17 +334,33 @@ main {
     opacity: 0.9;
 }
 
-#sdgChart svg {
-  font-family: sans-serif;
-}
-
-#sdgChart .domain-text {
-  text-transform: uppercase;
-  letter-spacing: 2px; 
-}
-
-#sdgChart .bar-label {
-  font-size: 8px;
+#sdgChart {
+    position: relative;
+    width: 100%;
+    margin: 10px auto 0;
+    overflow: hidden;
+    
+    svg {
+        font-family: sans-serif;
+    }
+    .center-image {
+        position: absolute;
+        top: 38%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 13%;
+        height: 20%;
+        background-size: cover;
+        border: 5px solid #fff;
+        border-radius: 50%;
+    }
+    .domain-text {
+      text-transform: uppercase;
+      letter-spacing: 2px; 
+    }
+    .bar-label {
+      font-size: 8px;
+    }
 }
 
 .tooltip.chart-tooltip {
