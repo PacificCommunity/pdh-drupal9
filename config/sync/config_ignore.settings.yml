@@ -6,5 +6,6 @@ ignored_config_entities:
   - block.block.pdh.statchartoverview
   - system.performance
   - spc_main.settings
+  - spc_data_import.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
