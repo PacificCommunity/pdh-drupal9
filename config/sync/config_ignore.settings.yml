@@ -3,6 +3,7 @@ ignored_config_entities:
   - spc_dot_stat_data.settings
   - spc_dot_stat_chart.settings
   - block.block.pdh.statchartoverview
+  - block.block.sdgchartsummary
   - system.performance
   - spc_main.settings
   - spc_data_import.settings
