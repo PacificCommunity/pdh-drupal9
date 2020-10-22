@@ -16,6 +16,10 @@
         "spc_dot_stat_data": {
             "type": "vcs",
             "url": "git@gitlab.com:pacific-community/drupal-modules/spc_dot_stat_data.git"
+        },
+        "spc_sdg_summary": {
+            "type": "vcs",
+            "url": "git@gitlab.com:pacific-community/drupal-modules/spc_sdg_summary.git"
         }
     },
     "require": {
@@ -45,7 +49,8 @@
         "drupal/ultimate_cron": " ^2.0",
         "drupal/views_infinite_scroll": "^1.7",
         "drush/drush": " ^10.2",
-        "pacific_community/spc_dot_stat_data": "^1.0"
+        "pacific_community/spc_dot_stat_data": "^1.0",
+        "pacific_community/spc_sdg_summary": "^1.0"
     },
     "conflict": {
         "drupal/drupal": "*"
