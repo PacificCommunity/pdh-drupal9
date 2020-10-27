@@ -70,3 +70,18 @@ function spc_preprocess_node(&$variables){
 function spc_preprocess_taxonomy_term(&$variables){
   
 }
+
+/**
+ * Implements theme_preprocess_node().
+ */
+function spc_preprocess_paragraph(&$variables){
+  $paragraph = $variables['paragraph'];
+  $parentBundle = $paragraph->getParentEntity()->bundle();
+  
+  if ($parentBundle == 'dsp'){
+    $title = $paragraph->get('field_title')->value;
+  }
+  
+  $variables['title_ancor'] = strtolower(str_replace('.', '', str_replace(' ', '-', $title)));
+  
+}
