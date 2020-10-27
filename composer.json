@@ -24,6 +24,7 @@
     },
     "require": {
         "composer/installers": "^1.2",
+        "defuse/php-encryption": "^2.2",
         "drupal/admin_toolbar": " ^2.0",
         "drupal/backup_migrate": " ^4.1",
         "drupal/block_field": "^1.0",
