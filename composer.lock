@@ -4702,16 +4702,16 @@
         },
         {
             "name": "pacific_community/spc_dot_stat_data",
-            "version": "1.1.7",
+            "version": "1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data.git",
-                "reference": "62b3df4c44fd8db7b89e6a7a72f58682bda2adc6"
+                "reference": "096f9c35843f7de7cf38038e691a03b146dfdfad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=62b3df4c44fd8db7b89e6a7a72f58682bda2adc6",
-                "reference": "62b3df4c44fd8db7b89e6a7a72f58682bda2adc6",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=096f9c35843f7de7cf38038e691a03b146dfdfad",
+                "reference": "096f9c35843f7de7cf38038e691a03b146dfdfad",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -4731,7 +4731,7 @@
                 "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data/-/issues",
                 "source": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data"
             },
-            "time": "2020-10-26T08:36:49+11:00"
+            "time": "2020-10-27T16:38:44+11:00"
         },
         {
             "name": "pacific_community/spc_sdg_summary",
