@@ -142,7 +142,7 @@
                       .enter()
                     .append("a")
                       .attr("xlink:href", function(d) {return d.data.link;})
-                      .attr("target", "_blank")
+                      .attr("target", "_self")
                       .attr("aria-label", function(d) { return "Go to " + d.data.title })
                       .on("mouseover", function(d) {		
                         goalTooltip.transition()		
@@ -229,7 +229,7 @@
                       .enter()
                     .append("a")
                       .attr("xlink:href", function(d) {return d.link;})
-                      .attr("target", "_blank")
+                      .attr("target", "_self")
                       .attr("aria-label", function(d) { return d.description });
 
                     segments.append("path")
@@ -265,7 +265,7 @@
                       segments.enter()
                         .append("a")
                           .attr("xlink:href", function(d) {return d.link;})
-                          .attr("target", "_blank")
+                          .attr("target", "_self")
                           .attr("aria-label", function(d) { return d.description });
 
                       segments.enter()
