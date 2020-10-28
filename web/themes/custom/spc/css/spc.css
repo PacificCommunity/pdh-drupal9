@@ -201,7 +201,7 @@ header #main-menu ul li.dropdown:hover .dropdown-menu {
   margin-top: -1px;
   box-shadow: 0 1px 1px silver;
 }
-header #main-menu ul > li:last-child {
+header #main-menu > ul > li:last-child {
   display: none;
 }
 header #main-menu .dropdown-menu {
