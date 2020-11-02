@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7f3fcc8f0dea4cc62a26239e2e5dfb5",
+    "content-hash": "df322a58ab9c9f1de952c716075761bc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1055,6 +1055,69 @@
             "homepage": "https://github.com/container-interop/container-interop",
             "abandoned": "psr/container",
             "time": "2017-02-14T19:40:03+00:00"
+        },
+        {
+            "name": "defuse/php-encryption",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/defuse/php-encryption.git",
+                "reference": "0f407c43b953d571421e0020ba92082ed5fb7620"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/0f407c43b953d571421e0020ba92082ed5fb7620",
+                "reference": "0f407c43b953d571421e0020ba92082ed5fb7620",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "paragonie/random_compat": ">= 2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "nikic/php-parser": "^2.0|^3.0|^4.0",
+                "phpunit/phpunit": "^4|^5"
+            },
+            "bin": [
+                "bin/generate-defuse-key"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Defuse\\Crypto\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Hornby",
+                    "email": "taylor@defuse.ca",
+                    "homepage": "https://defuse.ca/"
+                },
+                {
+                    "name": "Scott Arciszewski",
+                    "email": "info@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "Secure PHP Encryption Library",
+            "keywords": [
+                "aes",
+                "authenticated encryption",
+                "cipher",
+                "crypto",
+                "cryptography",
+                "encrypt",
+                "encryption",
+                "openssl",
+                "security",
+                "symmetric key cryptography"
+            ],
+            "time": "2018-07-24T23:27:56+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -4639,16 +4702,16 @@
         },
         {
             "name": "pacific_community/spc_dot_stat_data",
-            "version": "1.1.6",
+            "version": "1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data.git",
-                "reference": "8e67e9929ee1ba09eacce599ff81aa4a06d60d24"
+                "reference": "096f9c35843f7de7cf38038e691a03b146dfdfad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=8e67e9929ee1ba09eacce599ff81aa4a06d60d24",
-                "reference": "8e67e9929ee1ba09eacce599ff81aa4a06d60d24",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=096f9c35843f7de7cf38038e691a03b146dfdfad",
+                "reference": "096f9c35843f7de7cf38038e691a03b146dfdfad",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -4668,20 +4731,20 @@
                 "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data/-/issues",
                 "source": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data"
             },
-            "time": "2020-10-22T12:15:28+11:00"
+            "time": "2020-10-27T16:38:44+11:00"
         },
         {
             "name": "pacific_community/spc_sdg_summary",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary.git",
-                "reference": "bcd24e8817fe778a13b82a10d486275c6fdc6753"
+                "reference": "862ee8c8fddc9b42a730017b2afc0a5597318ebb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_sdg_summary/repository/archive.zip?sha=bcd24e8817fe778a13b82a10d486275c6fdc6753",
-                "reference": "bcd24e8817fe778a13b82a10d486275c6fdc6753",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_sdg_summary/repository/archive.zip?sha=862ee8c8fddc9b42a730017b2afc0a5597318ebb",
+                "reference": "862ee8c8fddc9b42a730017b2afc0a5597318ebb",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -4701,7 +4764,7 @@
                 "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary/-/issues",
                 "source": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary"
             },
-            "time": "2020-10-22T17:25:31+11:00"
+            "time": "2020-10-28T15:48:49+11:00"
         },
         {
             "name": "paragonie/random_compat",

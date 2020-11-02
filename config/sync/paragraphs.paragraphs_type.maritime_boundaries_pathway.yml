@@ -1,0 +1,10 @@
+uuid: 40032514-4824-417e-a860-839655f205ec
+langcode: en
+status: true
+dependencies: {  }
+id: maritime_boundaries_pathway
+label: 'Maritime Boundaries Pathway Step'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

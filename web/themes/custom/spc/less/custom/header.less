@@ -5,7 +5,7 @@ body {
     color: #000;
 }
 
-header {
+header[role="banner"] {
     position: absolute;
     width: 100%;
     background: transparent;
@@ -19,7 +19,7 @@ header {
         z-index: 1;        
         
         img {
-            height: 46px;
+            height: 52px;
         }
     }
     
@@ -79,7 +79,7 @@ header {
                 }
             }
         }
-        ul > li:last-child {
+        & > ul > li:last-child {
             display: none;
         }
         .dropdown-menu {
@@ -384,4 +384,7 @@ button.header-menu-btn {
             width: 100%;
         }
     }
+}
+#block-spcbanner .breadcrumb {
+  background: transparent;
 }

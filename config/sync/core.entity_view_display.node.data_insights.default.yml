@@ -21,13 +21,13 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 3
+    weight: 2
     settings: {  }
     third_party_settings: {  }
     region: content
   field_chart_block_and_text:
     type: entity_reference_revisions_entity_view
-    weight: 4
+    weight: 3
     label: hidden
     settings:
       view_mode: default
@@ -35,13 +35,6 @@ content:
     third_party_settings:
       field_formatter_class:
         class: chart-block-and-bottom-text-sdp
-    region: content
-  field_data_insights_preview:
-    weight: 2
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
     region: content
   field_topic:
     weight: 1
@@ -56,4 +49,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_data_insights_preview: true

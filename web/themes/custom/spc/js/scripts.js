@@ -142,7 +142,7 @@
                       .enter()
                     .append("a")
                       .attr("xlink:href", function(d) {return d.data.link;})
-                      .attr("target", "_blank")
+                      .attr("target", "_self")
                       .attr("aria-label", function(d) { return "Go to " + d.data.title })
                       .on("mouseover", function(d) {		
                         goalTooltip.transition()		
@@ -229,7 +229,7 @@
                       .enter()
                     .append("a")
                       .attr("xlink:href", function(d) {return d.link;})
-                      .attr("target", "_blank")
+                      .attr("target", "_self")
                       .attr("aria-label", function(d) { return d.description });
 
                     segments.append("path")
@@ -265,7 +265,7 @@
                       segments.enter()
                         .append("a")
                           .attr("xlink:href", function(d) {return d.link;})
-                          .attr("target", "_blank")
+                          .attr("target", "_self")
                           .attr("aria-label", function(d) { return d.description });
 
                       segments.enter()
@@ -291,7 +291,7 @@
                           var i = d3.interpolate(d.outerRadius, barScale(d.value === 0 || d.value === 1 || d.value === 2 ? 7 : d.value));
                           return function(t) { d.outerRadius = i(t); return arc(d,index); };
                         })
-                        .style('fill', function (d) { return d.value === 1 ? "#b4b5b4" : (d.value === 0 ? "transparent" : (d.value === 2 ? "#fff" : d.color)); })
+                        .style('fill', function (d) { return d.value === 1 ? "#e3e3e3" : (d.value === 0 ? "transparent" : (d.value === 2 ? "#fff" : d.color)); })
                         .style("stroke", function (d) {return d.value === 0 ? "#b4b5b4" : ""; })
                         .style("stroke-width", function (d) {return d.value === 0 ? "2px" : ""; })
                         .style("stroke-dasharray", function (d) {return d.value === 0 ? "2,2" : ""; });

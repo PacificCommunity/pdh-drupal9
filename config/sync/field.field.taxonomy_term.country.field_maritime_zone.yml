@@ -1,0 +1,40 @@
+uuid: 135670d6-64f7-4a5e-a8d7-4e6bf6f56b8f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_maritime_zone
+    - paragraphs.paragraphs_type.maritime_zone_pathway
+    - taxonomy.vocabulary.country
+  module:
+    - entity_reference_revisions
+id: taxonomy_term.country.field_maritime_zone
+field_name: field_maritime_zone
+entity_type: taxonomy_term
+bundle: country
+label: 'Pathway to maritime zones'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      maritime_zone_pathway: maritime_zone_pathway
+    target_bundles_drag_drop:
+      block_and_bottom_text:
+        weight: 5
+        enabled: false
+      block_reference:
+        weight: 6
+        enabled: false
+      field_dsp_targets:
+        weight: 7
+        enabled: false
+      maritime_zone_pathway:
+        enabled: true
+        weight: 8
+field_type: entity_reference_revisions

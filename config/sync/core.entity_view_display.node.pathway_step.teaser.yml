@@ -1,0 +1,40 @@
+uuid: 09723488-7dfc-4286-8eba-654264162b9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pathway_step.body
+    - field.field.node.pathway_step.field_boundaries_country
+    - field.field.node.pathway_step.field_boundaries_treaty_file
+    - field.field.node.pathway_step.field_main_country
+    - field.field.node.pathway_step.field_maritime_boundaries
+    - field.field.node.pathway_step.field_treaty_state
+    - node.type.pathway_step
+  module:
+    - text
+    - user
+id: node.pathway_step.teaser
+targetEntityType: node
+bundle: pathway_step
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_boundaries_country: true
+  field_boundaries_treaty_file: true
+  field_main_country: true
+  field_maritime_boundaries: true
+  field_treaty_state: true
