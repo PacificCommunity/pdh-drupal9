@@ -1,0 +1,8 @@
+uuid: 5c219436-1a96-4da3-a77e-b2d5247233b7
+langcode: en
+status: true
+dependencies: {  }
+name: 'Continental Shelf'
+vid: continental_shelf
+description: ''
+weight: -7

@@ -1,0 +1,128 @@
+uuid: 105e04d4-7b0d-4b32-a5a5-10c3278a1512
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.country.field_boundary_countries
+    - field.field.taxonomy_term.country.field_continental_shelf_file
+    - field.field.taxonomy_term.country.field_country_code
+    - field.field.taxonomy_term.country.field_eez_plygon
+    - field.field.taxonomy_term.country.field_extended_continental_shelf
+    - field.field.taxonomy_term.country.field_image
+    - field.field.taxonomy_term.country.field_maritime_zone
+    - field.field.taxonomy_term.country.field_maritime_zones_file
+    - image.style.thumbnail
+    - taxonomy.vocabulary.country
+  module:
+    - file
+    - paragraphs
+    - path
+    - svg_image
+    - text
+id: taxonomy_term.country.default
+targetEntityType: taxonomy_term
+bundle: country
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_boundary_countries:
+    weight: 7
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_continental_shelf_file:
+    weight: 9
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_country_code:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: 'Country eez code'
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_eez_plygon:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_extended_continental_shelf:
+    type: entity_reference_paragraphs
+    weight: 8
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: extended_continental_shelf
+    third_party_settings: {  }
+    region: content
+  field_image:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_maritime_zone:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_maritime_zones_file:
+    weight: 6
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: 'Country name'
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 11
+    region: content
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,23 @@
+uuid: b8cbed98-46d9-4f07-a8f4-33fd18c63669
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_progress_type
+    - paragraphs.paragraphs_type.maritime_boundaries_pathway
+  module:
+    - options
+id: paragraph.maritime_boundaries_pathway.field_progress_type
+field_name: field_progress_type
+entity_type: paragraph
+bundle: maritime_boundaries_pathway
+label: 'Step state'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: na
+default_value_callback: ''
+settings: {  }
+field_type: list_string

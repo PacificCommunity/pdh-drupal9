@@ -1,0 +1,23 @@
+uuid: a226b1f1-2c72-42db-9086-e6c194150164
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_treaty_state
+    - node.type.pathway_step
+  module:
+    - options
+id: node.pathway_step.field_treaty_state
+field_name: field_treaty_state
+entity_type: node
+bundle: pathway_step
+label: 'Treaty state'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: na
+default_value_callback: ''
+settings: {  }
+field_type: list_string

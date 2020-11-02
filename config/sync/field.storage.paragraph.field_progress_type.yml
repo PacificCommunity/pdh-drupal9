@@ -1,0 +1,33 @@
+uuid: 6356cceb-2754-4d63-8cc5-603c4c7b6c03
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_progress_type
+field_name: field_progress_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: na
+      label: NA
+    -
+      value: not_started
+      label: 'Not Started'
+    -
+      value: in_progress
+      label: 'Work in Progress'
+    -
+      value: completed
+      label: Completed
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

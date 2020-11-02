@@ -1,0 +1,19 @@
+uuid: 5f585c8e-5b75-4bf2-8838-31163d05b7d3
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.field_eez_plygon
+field_name: field_eez_plygon
+entity_type: taxonomy_term
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

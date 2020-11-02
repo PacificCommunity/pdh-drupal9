@@ -1,0 +1,23 @@
+uuid: dba867a2-7f20-4652-8d96-8d4e6ba82031
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - taxonomy
+id: taxonomy_term.field_continental_shelf_file
+field_name: field_continental_shelf_file
+entity_type: taxonomy_term
+type: file
+settings:
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  target_type: file
+module: file
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

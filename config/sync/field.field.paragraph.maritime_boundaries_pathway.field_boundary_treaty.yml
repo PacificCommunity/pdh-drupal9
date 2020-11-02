@@ -1,0 +1,29 @@
+uuid: b041d0be-4e3b-4fda-aedd-b007e57985d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_boundary_treaty
+    - paragraphs.paragraphs_type.maritime_boundaries_pathway
+    - taxonomy.vocabulary.boundary_treaty
+id: paragraph.maritime_boundaries_pathway.field_boundary_treaty
+field_name: field_boundary_treaty
+entity_type: paragraph
+bundle: maritime_boundaries_pathway
+label: 'Boundary Treaty'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      boundary_treaty: boundary_treaty
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

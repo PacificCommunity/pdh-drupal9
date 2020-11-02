@@ -1,0 +1,23 @@
+uuid: 715f3e10-580f-4c83-817d-e03e9d6e3631
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pathway_step
+  module:
+    - text
+id: node.pathway_step.body
+field_name: body
+entity_type: node
+bundle: pathway_step
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

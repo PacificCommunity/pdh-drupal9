@@ -1,0 +1,10 @@
+uuid: 71c45fb0-f1a8-4c5f-b786-ca4ddc453965
+langcode: en
+status: true
+dependencies: {  }
+id: maritime_zone_pathway
+label: 'Maritime Zone Pathway'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
