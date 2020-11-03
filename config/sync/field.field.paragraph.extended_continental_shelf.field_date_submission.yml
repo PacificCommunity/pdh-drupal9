@@ -1,0 +1,21 @@
+uuid: be051f0b-3c80-4b18-8780-f98696665b81
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_date_submission
+    - paragraphs.paragraphs_type.extended_continental_shelf
+  module:
+    - datetime
+id: paragraph.extended_continental_shelf.field_date_submission
+field_name: field_date_submission
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: 'Date of Preliminary submission'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

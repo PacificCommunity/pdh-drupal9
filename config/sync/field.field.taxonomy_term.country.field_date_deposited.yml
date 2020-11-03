@@ -1,0 +1,21 @@
+uuid: 74fd64ac-7b22-4532-a8fa-23813838f149
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_date_deposited
+    - taxonomy.vocabulary.country
+  module:
+    - datetime
+id: taxonomy_term.country.field_date_deposited
+field_name: field_date_deposited
+entity_type: taxonomy_term
+bundle: country
+label: 'Date Deposited'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

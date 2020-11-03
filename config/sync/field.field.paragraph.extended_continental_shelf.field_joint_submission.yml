@@ -1,0 +1,23 @@
+uuid: a3d955fa-b684-41d7-bcf7-538ee9132e6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_joint_submission
+    - paragraphs.paragraphs_type.extended_continental_shelf
+id: paragraph.extended_continental_shelf.field_joint_submission
+field_name: field_joint_submission
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: 'Joint submission'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -1,0 +1,23 @@
+uuid: d122f62b-72d1-4af0-8e41-0c8b2bfd4ea2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.continental_shelf
+  module:
+    - text
+id: node.continental_shelf.body
+field_name: body
+entity_type: node
+bundle: continental_shelf
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

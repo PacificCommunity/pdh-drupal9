@@ -1,0 +1,52 @@
+uuid: 65b46cef-b3ec-45f7-bb81-610022aa2aec
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.boundary_treaty.body
+    - field.field.node.boundary_treaty.field_boundaries_treaty_file
+    - field.field.node.boundary_treaty.field_boundaries_treaty_steps
+    - field.field.node.boundary_treaty.field_boundary_country_one
+    - field.field.node.boundary_treaty.field_boundary_country_two
+    - field.field.node.boundary_treaty.field_date
+    - field.field.node.boundary_treaty.field_into_force
+    - field.field.node.boundary_treaty.field_related_datasets
+    - field.field.node.boundary_treaty.field_signed
+    - field.field.node.boundary_treaty.field_treaty_state
+    - field.field.node.boundary_treaty.field_url
+    - field.field.node.boundary_treaty.field_year_only
+    - node.type.boundary_treaty
+  module:
+    - text
+    - user
+id: node.boundary_treaty.teaser
+targetEntityType: node
+bundle: boundary_treaty
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_boundaries_treaty_file: true
+  field_boundaries_treaty_steps: true
+  field_boundary_country_one: true
+  field_boundary_country_two: true
+  field_date: true
+  field_into_force: true
+  field_related_datasets: true
+  field_signed: true
+  field_treaty_state: true
+  field_url: true
+  field_year_only: true

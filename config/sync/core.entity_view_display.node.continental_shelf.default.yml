@@ -1,0 +1,117 @@
+uuid: 2fcdf2e2-474a-4d50-ba0e-11572abcdfc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.continental_shelf.body
+    - field.field.node.continental_shelf.field_date
+    - field.field.node.continental_shelf.field_defence_year
+    - field.field.node.continental_shelf.field_established_year
+    - field.field.node.continental_shelf.field_full_submission_complied
+    - field.field.node.continental_shelf.field_joint_submission
+    - field.field.node.continental_shelf.field_recommendation
+    - field.field.node.continental_shelf.field_related_datasets
+    - field.field.node.continental_shelf.field_shelf_steps
+    - field.field.node.continental_shelf.field_submission_done
+    - node.type.continental_shelf
+  module:
+    - datetime
+    - entity_reference_revisions
+    - text
+    - user
+    - yearonly
+id: node.continental_shelf.default
+targetEntityType: node
+bundle: continental_shelf
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_date:
+    weight: 106
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_defence_year:
+    weight: 110
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  field_established_year:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  field_full_submission_complied:
+    weight: 104
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_joint_submission:
+    weight: 102
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_recommendation:
+    weight: 108
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_related_datasets:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_shelf_steps:
+    type: entity_reference_revisions_entity_view
+    weight: 107
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_submission_done:
+    weight: 103
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

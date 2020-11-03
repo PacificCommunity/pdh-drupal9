@@ -1,0 +1,136 @@
+uuid: 1c339a8b-5d81-4ed1-80f1-5a7719d19da7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.boundary_treaty.body
+    - field.field.node.boundary_treaty.field_boundaries_treaty_file
+    - field.field.node.boundary_treaty.field_boundaries_treaty_steps
+    - field.field.node.boundary_treaty.field_boundary_country_one
+    - field.field.node.boundary_treaty.field_boundary_country_two
+    - field.field.node.boundary_treaty.field_date
+    - field.field.node.boundary_treaty.field_into_force
+    - field.field.node.boundary_treaty.field_related_datasets
+    - field.field.node.boundary_treaty.field_signed
+    - field.field.node.boundary_treaty.field_treaty_state
+    - field.field.node.boundary_treaty.field_url
+    - field.field.node.boundary_treaty.field_year_only
+    - node.type.boundary_treaty
+  module:
+    - datetime
+    - entity_reference_revisions
+    - file
+    - options
+    - text
+    - user
+    - yearonly
+id: node.boundary_treaty.default
+targetEntityType: node
+bundle: boundary_treaty
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_boundaries_treaty_file:
+    weight: 106
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_boundaries_treaty_steps:
+    type: entity_reference_revisions_entity_view
+    weight: 105
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_boundary_country_one:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_boundary_country_two:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_date:
+    weight: 110
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_into_force:
+    weight: 109
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_related_datasets:
+    weight: 112
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_signed:
+    weight: 108
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_treaty_state:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_url:
+    weight: 111
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_year_only:
+    weight: 113
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

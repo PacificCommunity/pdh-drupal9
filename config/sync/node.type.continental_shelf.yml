@@ -1,0 +1,18 @@
+uuid: 02663ffe-a747-48f8-8a30-7b7bd6b7c772
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Extended Continental Shelf'
+type: continental_shelf
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

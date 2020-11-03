@@ -1,0 +1,19 @@
+uuid: 0339f379-032a-492d-bde3-02815fca2247
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_datasets
+    - paragraphs.paragraphs_type.extended_continental_shelf
+id: paragraph.extended_continental_shelf.field_datasets
+field_name: field_datasets
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: Datasets
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

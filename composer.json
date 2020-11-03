@@ -49,6 +49,7 @@
         "drupal/svg_image": " ^1.9",
         "drupal/ultimate_cron": " ^2.0",
         "drupal/views_infinite_scroll": "^1.7",
+        "drupal/yearonly": "^1.3",
         "drush/drush": " ^10.2",
         "pacific_community/spc_dot_stat_data": "^1.0",
         "pacific_community/spc_sdg_summary": "^1.0"

@@ -1,0 +1,23 @@
+uuid: e6beb620-3917-428e-81c2-3c462538513a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_full_submission_complied
+    - paragraphs.paragraphs_type.extended_continental_shelf
+id: paragraph.extended_continental_shelf.field_full_submission_complied
+field_name: field_full_submission_complied
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: 'Full submission complied and lodged'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -1,0 +1,23 @@
+uuid: c96344b1-632c-4ac2-8b2a-786ed1b77f09
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_into_force
+    - node.type.boundary_treaty
+id: node.boundary_treaty.field_into_force
+field_name: field_into_force
+entity_type: node
+bundle: boundary_treaty
+label: 'Enter into Force (EIF)'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean
