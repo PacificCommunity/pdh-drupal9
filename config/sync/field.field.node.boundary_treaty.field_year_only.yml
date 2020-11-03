@@ -1,0 +1,23 @@
+uuid: 5d6de4f4-829b-4460-a046-658b6051ec28
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_year_only
+    - node.type.boundary_treaty
+  module:
+    - yearonly
+id: node.boundary_treaty.field_year_only
+field_name: field_year_only
+entity_type: node
+bundle: boundary_treaty
+label: 'Year Signed'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  yearonly_from: '1900'
+  yearonly_to: now
+field_type: yearonly

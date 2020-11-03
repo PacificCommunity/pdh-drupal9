@@ -1,0 +1,77 @@
+uuid: a3313831-82f5-4571-a88c-b5b6ad3a712d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.high_seas_limit.body
+    - field.field.node.high_seas_limit.field_date_deposited
+    - field.field.node.high_seas_limit.field_deposited
+    - field.field.node.high_seas_limit.field_limit_countries
+    - field.field.node.high_seas_limit.field_related_datasets
+    - field.field.node.high_seas_limit.field_url
+    - node.type.high_seas_limit
+  module:
+    - datetime
+    - text
+    - user
+id: node.high_seas_limit.default
+targetEntityType: node
+bundle: high_seas_limit
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_date_deposited:
+    weight: 104
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_deposited:
+    weight: 103
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_limit_countries:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_related_datasets:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_url:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

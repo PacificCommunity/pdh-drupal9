@@ -1,0 +1,49 @@
+uuid: cf9197dc-7e89-40ca-b236-afca4012e57d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shelf_steps
+    - node.type.continental_shelf
+    - paragraphs.paragraphs_type.extended_continental_shelf_step
+  module:
+    - entity_reference_revisions
+id: node.continental_shelf.field_shelf_steps
+field_name: field_shelf_steps
+entity_type: node
+bundle: continental_shelf
+label: 'Extended Continental Shelf Pathway Steps'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      extended_continental_shelf_step: extended_continental_shelf_step
+    target_bundles_drag_drop:
+      block_and_bottom_text:
+        weight: 8
+        enabled: false
+      block_reference:
+        weight: 9
+        enabled: false
+      extended_continental_shelf:
+        weight: 10
+        enabled: false
+      extended_continental_shelf_step:
+        enabled: true
+        weight: 11
+      field_dsp_targets:
+        weight: 12
+        enabled: false
+      maritime_boundaries_pathway:
+        weight: 13
+        enabled: false
+      maritime_zone_pathway:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

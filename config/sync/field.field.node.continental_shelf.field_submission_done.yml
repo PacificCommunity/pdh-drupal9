@@ -1,0 +1,23 @@
+uuid: 6c432c80-1ca8-4d67-a7d7-f79bab6ca741
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_submission_done
+    - node.type.continental_shelf
+id: node.continental_shelf.field_submission_done
+field_name: field_submission_done
+entity_type: node
+bundle: continental_shelf
+label: 'Preliminary submission done'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

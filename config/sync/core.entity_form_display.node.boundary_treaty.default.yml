@@ -1,0 +1,164 @@
+uuid: 4756aceb-c960-4ea9-af43-9eb7d7dbb987
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.boundary_treaty.body
+    - field.field.node.boundary_treaty.field_boundaries_treaty_file
+    - field.field.node.boundary_treaty.field_boundaries_treaty_steps
+    - field.field.node.boundary_treaty.field_boundary_country_one
+    - field.field.node.boundary_treaty.field_boundary_country_two
+    - field.field.node.boundary_treaty.field_date
+    - field.field.node.boundary_treaty.field_into_force
+    - field.field.node.boundary_treaty.field_related_datasets
+    - field.field.node.boundary_treaty.field_signed
+    - field.field.node.boundary_treaty.field_treaty_state
+    - field.field.node.boundary_treaty.field_url
+    - field.field.node.boundary_treaty.field_year_only
+    - node.type.boundary_treaty
+  module:
+    - datetime
+    - file
+    - paragraphs
+    - path
+    - yearonly
+id: node.boundary_treaty.default
+targetEntityType: node
+bundle: boundary_treaty
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_boundaries_treaty_file:
+    weight: 8
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_boundaries_treaty_steps:
+    type: entity_reference_paragraphs
+    weight: 10
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_boundary_country_one:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_boundary_country_two:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_date:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_into_force:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_related_datasets:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_signed:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_treaty_state:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_url:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_year_only:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  path:
+    type: path
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 14
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 18
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 12
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true

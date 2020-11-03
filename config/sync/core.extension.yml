@@ -74,6 +74,7 @@ module:
   toolbar: 0
   tour: 0
   ultimate_cron: 0
+  yearonly: 0
   update: 0
   user: 0
   views_infinite_scroll: 0

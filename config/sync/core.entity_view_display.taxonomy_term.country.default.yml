@@ -99,4 +99,9 @@ content:
     third_party_settings: {  }
     type: file_default
     region: content
-hidden: {  }
+hidden:
+    field_date_deposited: true		
+    field_eez_area: true		
+    field_eez_deposited: true		
+    ield_related_datasets: true		
+    field_url: true

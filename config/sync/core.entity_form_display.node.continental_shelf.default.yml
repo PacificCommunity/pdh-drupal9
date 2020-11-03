@@ -1,0 +1,161 @@
+uuid: faa4416f-1ccf-482c-9193-a7e2156b8d66
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.continental_shelf.body
+    - field.field.node.continental_shelf.field_date
+    - field.field.node.continental_shelf.field_defence_year
+    - field.field.node.continental_shelf.field_established_year
+    - field.field.node.continental_shelf.field_full_submission_complied
+    - field.field.node.continental_shelf.field_joint_submission
+    - field.field.node.continental_shelf.field_recommendation
+    - field.field.node.continental_shelf.field_related_datasets
+    - field.field.node.continental_shelf.field_shelf_steps
+    - field.field.node.continental_shelf.field_submission_done
+    - node.type.continental_shelf
+  module:
+    - datetime
+    - paragraphs
+    - path
+    - text
+    - yearonly
+id: node.continental_shelf.default
+targetEntityType: node
+bundle: continental_shelf
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 121
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_date:
+    weight: 126
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_defence_year:
+    weight: 130
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  field_established_year:
+    weight: 129
+    settings: {  }
+    third_party_settings: {  }
+    type: yearonly_default
+    region: content
+  field_full_submission_complied:
+    weight: 124
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_joint_submission:
+    weight: 122
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_recommendation:
+    weight: 128
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_related_datasets:
+    weight: 125
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_shelf_steps:
+    type: entity_reference_paragraphs
+    weight: 127
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_submission_done:
+    weight: 123
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 15
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 120
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 16
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

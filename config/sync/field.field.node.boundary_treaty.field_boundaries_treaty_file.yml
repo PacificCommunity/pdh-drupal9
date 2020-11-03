@@ -1,0 +1,27 @@
+uuid: 0970d925-0e0a-4d9a-888e-95d708218cf4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_boundaries_treaty_file
+    - node.type.boundary_treaty
+  module:
+    - file
+id: node.boundary_treaty.field_boundaries_treaty_file
+field_name: field_boundaries_treaty_file
+entity_type: node
+bundle: boundary_treaty
+label: 'Boundaries Treaty file'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf doc'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

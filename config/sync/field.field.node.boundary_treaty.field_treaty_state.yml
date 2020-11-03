@@ -1,0 +1,23 @@
+uuid: c3721ae5-5388-41c0-a6a3-1a4a1bdf7933
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_treaty_state
+    - node.type.boundary_treaty
+  module:
+    - options
+id: node.boundary_treaty.field_treaty_state
+field_name: field_treaty_state
+entity_type: node
+bundle: boundary_treaty
+label: 'Treaty state'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: na
+default_value_callback: ''
+settings: {  }
+field_type: list_string

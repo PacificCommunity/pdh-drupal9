@@ -1,0 +1,48 @@
+uuid: bcc9fde8-c065-444a-a4cc-7fb8290e34a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.continental_shelf.body
+    - field.field.node.continental_shelf.field_date
+    - field.field.node.continental_shelf.field_defence_year
+    - field.field.node.continental_shelf.field_established_year
+    - field.field.node.continental_shelf.field_full_submission_complied
+    - field.field.node.continental_shelf.field_joint_submission
+    - field.field.node.continental_shelf.field_recommendation
+    - field.field.node.continental_shelf.field_related_datasets
+    - field.field.node.continental_shelf.field_shelf_steps
+    - field.field.node.continental_shelf.field_submission_done
+    - node.type.continental_shelf
+  module:
+    - text
+    - user
+id: node.continental_shelf.teaser
+targetEntityType: node
+bundle: continental_shelf
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_date: true
+  field_defence_year: true
+  field_established_year: true
+  field_full_submission_complied: true
+  field_joint_submission: true
+  field_recommendation: true
+  field_related_datasets: true
+  field_shelf_steps: true
+  field_submission_done: true

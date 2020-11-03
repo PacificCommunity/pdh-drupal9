@@ -1,0 +1,19 @@
+uuid: eaf2cd7b-4320-4a80-a514-342cb68cbfda
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_datasets
+    - node.type.boundary_treaty
+id: node.boundary_treaty.field_related_datasets
+field_name: field_related_datasets
+entity_type: node
+bundle: boundary_treaty
+label: Datasets
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

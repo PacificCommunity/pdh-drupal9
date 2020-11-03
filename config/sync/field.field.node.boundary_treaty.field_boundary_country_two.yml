@@ -1,0 +1,29 @@
+uuid: bc42259d-d395-44d6-9cff-819192f38711
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_boundary_country_two
+    - node.type.boundary_treaty
+    - taxonomy.vocabulary.country
+id: node.boundary_treaty.field_boundary_country_two
+field_name: field_boundary_country_two
+entity_type: node
+bundle: boundary_treaty
+label: 'Boundary country two'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      country: country
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
