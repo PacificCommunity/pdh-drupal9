@@ -3,7 +3,6 @@ global:
   css:
     theme:
       css/spc.css: {}
-      css/temporary.css: {}
   js:
     js/scripts.js: {}
   dependencies:

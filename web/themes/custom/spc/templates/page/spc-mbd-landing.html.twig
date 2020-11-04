@@ -1,0 +1,24 @@
+<div id="mbd-landing">
+    <h3 class="block-title">{{ data.title }}</h3>
+    
+    {% if  data.description %}
+        <div class="block-description">
+            {{ data.description }}
+        </div>
+    {% endif %}
+    
+    {% if  data.countries %}
+        <div id="countries-list">
+            <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>
+            {% for country in data.countries %}
+                <a class="one-country {{ country.name }}" href="{{ country.url }}" title="{{ country.name }}">
+                    <p class="img">
+                        <img src="{{ country.flag }}" alt="{{ country.name }}">
+                    </p>
+                    <span>{{ country.name }}</span>
+                </a>            
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+</div>

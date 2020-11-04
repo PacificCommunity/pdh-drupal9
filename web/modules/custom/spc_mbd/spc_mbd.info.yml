@@ -1,0 +1,5 @@
+name: SPC MBD
+description: MBD module for SPC Pacific Data Hub
+type: module
+core: 8.x
+package: SPC
