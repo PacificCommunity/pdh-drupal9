@@ -1,8 +1,8 @@
 main {
-    max-width: 1270px;
-    padding: 30px;
+    max-width: 1366px;
+    padding: 15px;
     margin: 0 auto;
-    font-family: 'Roboto';
+    font-family: 'Montserrat',sans-serif;
     font-style: normal;
     
     @media(max-width: 767px){
@@ -31,8 +31,27 @@ main {
         }
     }
 }
+
+#block-spcmbdbanner,
 #block-spcmainbanner {
     position: relative;
+    
+    .left-label {
+        background: #fff;
+        font-family: 'Montserrat',sans-serif;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 29px;
+        color: #000;
+        height: auto;
+        padding: 11px 40px 11px 30px;
+        border-radius: 0 30px 30px 0;
+        width: 295px;
+        align-self: flex-start;
+        position: absolute;
+        left: 0px;
+        top: 100px;
+    }
 
     .breadcrumbs {
       align-self: flex-start;
@@ -139,7 +158,7 @@ main {
         }
       }
       a {
-        font-family: 'Roboto';
+        font-family: 'Montserrat',sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 15px;
@@ -224,7 +243,7 @@ main {
         }
     }
     .spc-home-banner-block {
-        font-family: 'Roboto';
+        font-family: 'Montserrat',sans-serif;
         width: 100%;
         padding: 0 15px;
         margin-top: 40px;
@@ -253,6 +272,29 @@ main {
             }
 
         }
+    }
+}
+
+#block-spcmbdbanner{
+    
+    .left-label {
+        top: 90px;
+    }
+    .breadcrumbs {
+        margin-top: 90px;
+    }
+    h1{
+        font-size: 36px;
+        font-weight: 100;
+        line-height: 44px;        
+        text-transform: none;
+    }
+    .banner-image {
+        height: 358px;
+    }
+    
+    .spc-home-banner-block {
+        margin-top: 30px;
     }
 }
 
