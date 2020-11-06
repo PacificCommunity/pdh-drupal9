@@ -3,13 +3,13 @@
     
     {% if  data.description %}
         <div class="block-description">
-            {{ data.description }}
+            {{ data.description|raw }}
         </div>
     {% endif %}
     
     {% if  data.countries %}
-        <div id="countries-list">
-            <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>
+        <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>
+        <div id="countries-list" class="clearfix">
             {% for country in data.countries %}
                 <a class="one-country {{ country.name }}" href="{{ country.url }}" title="{{ country.name }}">
                     <p class="img">
