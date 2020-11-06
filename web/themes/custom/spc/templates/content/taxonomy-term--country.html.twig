@@ -1,0 +1,101 @@
+{#
+/**
+ * @file
+ * Theme override to display a taxonomy term.
+ *
+ * Available variables:
+ * - url: URL of the current term.
+ * - name: (optional) Name of the current term.
+ * - content: Items for the content of the term (fields and description).
+ *   Use 'content' to print them all, or print a subset such as
+ *   'content.description'. Use the following code to exclude the
+ *   printing of a given child element:
+ *   @code
+ *   {{ content|without('description') }}
+ *   @endcode
+ * - attributes: HTML attributes for the wrapper.
+ * - page: Flag for the full page state.
+ * - term: The taxonomy term entity, including:
+ *   - id: The ID of the taxonomy term.
+ *   - bundle: Machine name of the current vocabulary.
+ * - view_mode: View mode, e.g. 'full', 'teaser', etc.
+ *
+ * @see template_preprocess_taxonomy_term()
+ */
+#}
+
+<div{{ attributes.addClass('spc-country-data clearfix') }}>
+    <h2>{{ name }}</h2>
+    <div class="box-shadow">
+        {% if content.field_image %}
+            <div class="head-image">
+                {{ content.field_image }}
+            </div>
+        {% endif %}
+
+        {% if content.description %}
+            <div class="description">
+                <div class="read">{{ description.read|raw }}</div>
+                <div class="read-more hidden">{{ description.read_more|raw }}</div>
+                <a href="#" id="read-more-btn" alt="read more">{{ 'Read more' }}</a>
+            </div>
+        {% endif %}
+    </div>
+    
+    <h3>{{ 'Related Datasets'|t }}</h3>
+    <div class="related-datasets">
+        {% if datasets.count > 0 %}
+            {% set count = 0 %}
+            {% for key, dataset in datasets.list %}
+                {% set count = key %}    
+                <div data-key="{{ key }}" class="dataset {% if key > 5 %} hidden {% endif %}">
+                    <div class="dataset-title">
+                        <a class="title" href="{{ dataset.url }}" target="_blank" title="{{ dataset.title }}">{{ dataset.title }}</a>
+                    </div>            
+                    <div class="dataset-org">
+                        <span>{{ 'Organization'|t }}:</span>
+                        <div class="tooltip">{{ dataset.organization.title }}</div>
+                        <a href="{{ dataset.organization.spc_base_url }}" target="_blank" title="{{ dataset.organization.title }}">
+                            <img src="{{ dataset.organization.image_url }}" alt="{{ dataset.organization.title }}">
+                        </a>
+                    </div>
+                    <div class="metadata clearfix">
+                        <div class="dataset-date left">
+                            <a class="view-dataset-btn" href="{{ dataset.url }}" target="_blank" aria-label="{{ dataset.title }}" title="{{ dataset.title }}">{{ 'View dataset'|t }}</a>
+                        </div>
+                        <div class="dataset-formats right">
+                            {% if dataset.resources %}
+                                {% for resource in dataset.resources %}
+                                    <a href="{{ dataset.url }}" target="_blank" aria-label="{{ resource.format|lower  }}" title="{{ dataset.title }}">
+                                        <div class="res-formats res-format-{{ resource.format|lower  }}"></div>
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <p class="empty-search hidden">{{ 'There are no policies available for your selection. Please try later.'|t }}</p>
+        {% else %}
+            <p>{{ 'There are no policies available for your selection. Please try later.'|t }}</p>
+        {% endif %}
+    </div>
+    
+    {% if countries.list > 0 %}
+        <div class="country-footer">
+            <a id="prev" href="{{ countries.prev.url }}" alt="Previous country {{ countries.prev.name }}">{{ 'Previous'|t }}</a>
+            <div id="list">
+                <div class="list-wrapp">
+                    <a href="{{ countries.prev.url }}" class="item" alt="{{ country.prev.name }}">{{  countries.prev.name  }}</a>
+                    {# for country in countries.list #}
+                    <a href="{{ countries.current.url }}" class="{{ countries.current.class }}" alt="{{ countries.current.url }}">{{ countries.current.name }}</a>
+                    {# endfor #}
+                    <a href="{{ countries.next.url }}" class="item" alt="{{ countries.next.name }}">{{ countries.next.name }}</a>
+                </div>    
+            </div>
+            <a id="next" href="{{ countries.next.url }}" alt="Next country {{ countries.next.name }}">{{ 'Next'|t }}</a>
+        </div> 
+    {% endif %}
+</div>
+  
+    
