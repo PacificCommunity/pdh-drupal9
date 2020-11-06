@@ -44,8 +44,9 @@ class SpcMbdSettingsForm extends ConfigFormBase {
     ];
     
     $form['field_mbd_landing_description'] = [
-      '#type' => 'textarea',
-      '#title' => $this->t('landing title'),
+      '#type' => 'text_format',
+      '#format' => 'full_html',
+      '#title' => $this->t('landing description'),
       '#default_value' => $config->get('mbd_landing_description'),
       '#required' => false
     ];    
@@ -64,7 +65,7 @@ class SpcMbdSettingsForm extends ConfigFormBase {
     $mbd_landing_title = $form_state->getValue('field_mbd_landing_title');
     $config->set('mbd_landing_title', $mbd_landing_title);
     
-    $mbd_landing_description = $form_state->getValue('field_mbd_landing_description');
+    $mbd_landing_description = $form_state->getValue('field_mbd_landing_description')['value'];
     $config->set('mbd_landing_description', $mbd_landing_description);
     
     $config->save(); 
