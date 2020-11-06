@@ -29,11 +29,9 @@ class SpcMbdController extends ControllerBase {
     }
     
     public function get_countries(){
-        
         $countries = [];
         
         $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
-        
         $theme = \Drupal::theme()->getActiveTheme();
         $theme_path = $theme->getPath();
 

@@ -68,7 +68,31 @@ function spc_preprocess_node(&$variables){
  * Implements theme_preprocess_node().
  */
 function spc_preprocess_taxonomy_term(&$variables){
-  
+    $vocabulary = $variables['elements']['#taxonomy_term']->getVocabularyId();
+    $term = $variables['term'];
+
+    if ($variables['view_mode'] == 'full' && $vocabulary == 'country'){
+        $country_detales = _get_country_related_datasets($variables);
+        
+        $variables['datasets']['count'] = $country_detales['datasetsCount'];
+        $variables['datasets']['list'] = $country_detales['datasets']; 
+        
+        $countries_list = _get_countries_list($term);
+        $variables['countries']['list'] = $countries_list['list'];
+        $variables['countries']['prev'] = $countries_list['prev'];
+        $variables['countries']['next'] = $countries_list['next'];
+        $variables['countries']['current'] = $countries_list['current'];
+        
+        $description = strip_tags($term->get('description')->getValue()[0]['value'], '<a><b><h2><h3><h4><h5><h6><br>');
+        
+        if (strlen($description) > 600){
+            $variables['description']['read'] = substr($description, 0, 600);
+            $variables['description']['read_more'] = substr($description, 600, strlen($description)-1);
+        } else {
+            $variables['description']['read'] = $description;
+        }
+        //dump($description);
+    }
 }
 
 /**
@@ -84,4 +108,125 @@ function spc_preprocess_paragraph(&$variables){
   
   $variables['title_ancor'] = strtolower(str_replace('.', '', str_replace(' ', '-', $title)));
   
+}
+
+function _get_country_related_datasets($variables){
+    $country = $variables['elements']['#taxonomy_term'];
+    $c_code = $country->get('field_country_code')->getValue()[0]['value'];
+    $dataset_ids = $country->get('field_related_datasets')->getValue();
+
+
+    $country_detales = [];
+    $country_detales['datasetsCount'] = 0;
+
+    if (!empty($dataset_ids)){
+        foreach ($dataset_ids as $dataset_id){
+            $id = $dataset_id['value'];
+            $api = 'https://pacificdata.org/data/api/3/action/package_show';
+            $responce = json_decode(file_get_contents($api . '?id=' . $id));
+            $publication = $responce->result;
+
+            if (is_object($publication)){
+                $country_detales['datasetsCount'] += 1;
+
+                $dataset = [];
+                $dataset['name'] = $publication->name;
+                $dataset['title'] = $publication->title;
+                $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
+
+                //creation date.
+                $originalDate = $publication->metadata_created;
+                $dataset['date'] = date("M, d, Y", strtotime($originalDate));
+
+                //Organisation data.
+                $dataset['organization']['image_url'] = 'https://pacificdata.org/data/uploads/group/' . $publication->organization->image_url;
+                $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
+                $dataset['organization']['title'] = $publication->organization->title;
+
+                //Category mapper.
+                $tags = $publication->tags;
+                $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
+
+                foreach ($categories as $category_term) {
+                  $category = Term::load($category_term->tid);
+                  $term_code = $category->get('field_c_code')->getValue()[0]['value'];
+
+                  foreach ($tags as $tag){
+                    $tag_name = $tag->name;
+
+                    if ($term_code == $tag_name){
+                      $aliasManager = \Drupal::service('path.alias_manager');
+                      $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
+
+                      $dataset['tags'][] = [
+                        'url' => $url,
+                        'name' => $category->getName(),
+                      ];
+                    }
+
+                  }
+                }
+
+                //Resources data.
+                if ($resources = $publication->resources){
+                    foreach ($resources as $resource){
+                        $data_resource['url'] = $resource->url;
+                        $data_resource['format'] = $resource->format;
+                        $dataset['resources'][$resource->format] = $data_resource;
+                    }
+                }
+
+                $country_detales['datasets'][] =  $dataset;
+            }
+        }
+    }
+
+    return $country_detales;
+}
+
+function _get_countries_list($current_country){
+    $countries = [];
+    
+    $current_code = $current_country->get('field_country_code')->getValue()[0]['value'];
+
+    $countries_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+    $theme = \Drupal::theme()->getActiveTheme();
+    $theme_path = $theme->getPath();
+
+    $active_key = 0;
+    foreach($countries_terms as $key => $country_term){
+        $country = Term::load($country_term->tid);
+
+        $name = $country->getName();
+        $country_code = $country->get('field_country_code')->getValue()[0]['value'];
+
+        $aliasManager = \Drupal::service('path.alias_manager');
+        $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
+        
+        $class_name = '';
+        if ($current_code == $country_code){
+            $class_name = 'active';
+            $active_key = $key;
+        }
+
+        $countries['list'][] = [
+          'url' => $url,
+          'name' => $name,
+          'class' => $class_name,  
+        ];
+      }
+      
+      $countries['current'] = $countries['list'][$active_key];
+      if ($active_key == count($countries_terms) -1){
+          $countries['prev'] = $countries['list'][count($countries_terms) -2];
+          $countries['next'] = $countries['list'][0];
+      } else if ($active_key == 0){
+          $countries['prev'] = $countries['list'][count($countries_terms) -1];
+          $countries['next'] = $countries['list'][1];
+      } else {
+          $countries['prev'] = $countries['list'][$active_key -1];
+          $countries['next'] = $countries['list'][$active_key +1];
+      }
+
+    return $countries;
 }

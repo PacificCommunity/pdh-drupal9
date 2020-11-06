@@ -17,10 +17,20 @@
 
             //Search input box onEnter event
             $('.global-search-form #ckan-search').unbind().on('keypress',function(e) {
-                console.log(e.which);
                 if(e.which == 13 || e.which == 124) {
                     e.preventDefault();
                     window.location.href = "https://pacificdata.org/data/dataset?extras_thematic_area_string&q="+ $(this).val();
+                }
+            });
+            
+            $('#read-more-btn', context).on('click', function(e){
+               e.preventDefault();
+               if ($(this).siblings('.read-more').hasClass('hidden')){
+                    $(this).siblings('.read-more').removeClass('hidden');
+                    $(this).addClass('open').text('Read less');
+                } else {
+                    $(this).siblings('.read-more').addClass('hidden');
+                    $(this).removeClass('open').text('Read more');
                 }
             });
 
