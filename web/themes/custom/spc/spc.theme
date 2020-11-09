@@ -5,6 +5,7 @@ use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -94,8 +95,31 @@ function spc_preprocess_taxonomy_term(&$variables){
         } else {
             $variables['description']['read'] = $description;
         }
-        //dump($description);
     }
+    
+    if ($variables['view_mode'] == 'step' && $vocabulary == 'maritime_zone'){
+        $zone = $variables['term'];
+        $zone_name = $term->label();
+        
+        if (\Drupal::routeMatch()->getRouteName() == 'entity.taxonomy_term.canonical') {
+            $term_id = \Drupal::routeMatch()->getRawParameter('taxonomy_term');
+            $country = Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+            $maritime_zone_steps = $country->get('field_maritime_zone')->getValue();
+            
+            foreach ($maritime_zone_steps as $step){
+                $paragraph_step = Paragraph::load($step['target_id']);
+                $state = $paragraph_step->field_progress_type->value;
+                $step_term_id = $paragraph_step->field_maritime_zone->getValue()[0]['target_id'];
+                $paragraph_zone = Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($step_term_id);
+                $step_zone_name = $paragraph_zone->label();
+
+                if ($zone_name == $step_zone_name){
+                    $variables['state'] = $state;
+                }
+            }
+        }
+    }
+    
 }
 
 /**
@@ -107,10 +131,8 @@ function spc_preprocess_paragraph(&$variables){
   
   if ($parentBundle == 'dsp'){
     $title = $paragraph->get('field_title')->value;
+    $variables['title_ancor'] = strtolower(str_replace('.', '', str_replace(' ', '-', $title)));
   }
-  
-  $variables['title_ancor'] = strtolower(str_replace('.', '', str_replace(' ', '-', $title)));
-  
 }
 
 function _get_country_related_datasets($variables){
@@ -118,6 +140,7 @@ function _get_country_related_datasets($variables){
     $c_code = $country->get('field_country_code')->getValue()[0]['value'];
     $dataset_ids = $country->get('field_related_datasets')->getValue();
 
+    $spc_base_url = 'https://pacificdata.org/data/';
 
     $country_detales = [];
     $country_detales['datasetsCount'] = 0;
@@ -125,61 +148,63 @@ function _get_country_related_datasets($variables){
     if (!empty($dataset_ids)){
         foreach ($dataset_ids as $dataset_id){
             $id = $dataset_id['value'];
-            $api = 'https://pacificdata.org/data/api/3/action/package_show';
-            $responce = json_decode(file_get_contents($api . '?id=' . $id));
-            $publication = $responce->result;
+            $api = $spc_base_url . 'api/3/action/package_show';
+            
+            if ($responce = json_decode(file_get_contents($api . '?id=' . $id))){
+                $publication = $responce->result;
 
-            if (is_object($publication)){
-                $country_detales['datasetsCount'] += 1;
+                if (is_object($publication)){
+                    $country_detales['datasetsCount'] += 1;
 
-                $dataset = [];
-                $dataset['name'] = $publication->name;
-                $dataset['title'] = $publication->title;
-                $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
+                    $dataset = [];
+                    $dataset['name'] = $publication->name;
+                    $dataset['title'] = $publication->title;
+                    $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
 
-                //creation date.
-                $originalDate = $publication->metadata_created;
-                $dataset['date'] = date("M, d, Y", strtotime($originalDate));
+                    //creation date.
+                    $originalDate = $publication->metadata_created;
+                    $dataset['date'] = date("M, d, Y", strtotime($originalDate));
 
-                //Organisation data.
-                $dataset['organization']['image_url'] = 'https://pacificdata.org/data/uploads/group/' . $publication->organization->image_url;
-                $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
-                $dataset['organization']['title'] = $publication->organization->title;
+                    //Organisation data.
+                    $dataset['organization']['image_url'] = 'https://pacificdata.org/data/uploads/group/' . $publication->organization->image_url;
+                    $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
+                    $dataset['organization']['title'] = $publication->organization->title;
 
-                //Category mapper.
-                $tags = $publication->tags;
-                $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
+                    //Category mapper.
+                    $tags = $publication->tags;
+                    $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
 
-                foreach ($categories as $category_term) {
-                  $category = Term::load($category_term->tid);
-                  $term_code = $category->get('field_c_code')->getValue()[0]['value'];
+                    foreach ($categories as $category_term) {
+                      $category = Term::load($category_term->tid);
+                      $term_code = $category->get('field_c_code')->getValue()[0]['value'];
 
-                  foreach ($tags as $tag){
-                    $tag_name = $tag->name;
+                      foreach ($tags as $tag){
+                        $tag_name = $tag->name;
 
-                    if ($term_code == $tag_name){
-                      $aliasManager = \Drupal::service('path.alias_manager');
-                      $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
+                        if ($term_code == $tag_name){
+                          $aliasManager = \Drupal::service('path.alias_manager');
+                          $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
 
-                      $dataset['tags'][] = [
-                        'url' => $url,
-                        'name' => $category->getName(),
-                      ];
+                          $dataset['tags'][] = [
+                            'url' => $url,
+                            'name' => $category->getName(),
+                          ];
+                        }
+
+                      }
                     }
 
-                  }
-                }
-
-                //Resources data.
-                if ($resources = $publication->resources){
-                    foreach ($resources as $resource){
-                        $data_resource['url'] = $resource->url;
-                        $data_resource['format'] = $resource->format;
-                        $dataset['resources'][$resource->format] = $data_resource;
+                    //Resources data.
+                    if ($resources = $publication->resources){
+                        foreach ($resources as $resource){
+                            $data_resource['url'] = $resource->url;
+                            $data_resource['format'] = $resource->format;
+                            $dataset['resources'][$resource->format] = $data_resource;
+                        }
                     }
-                }
 
-                $country_detales['datasets'][] =  $dataset;
+                    $country_detales['datasets'][] =  $dataset;
+                }
             }
         }
     }
