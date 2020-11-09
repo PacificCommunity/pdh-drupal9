@@ -42,6 +42,11 @@
         {% endif %}
     </div>
     
+    <h3>1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
+    <div class="maritime-zones">
+        {{ content.field_maritime_zone }}
+    </div>
+    
     <h3>{{ 'Related Datasets'|t }}</h3>
     <div class="related-datasets">
         {% if datasets.count > 0 %}

@@ -7,6 +7,21 @@
         </div>
     {% endif %}
     
+    <h3>1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
+    <div class="maritime-zones">
+        {% for zone_step in data.maritime_zones %}
+            <div class="step">
+                <div class="step-icon">
+                    <img src="{{ zone_step.icon }}">
+                </div>
+                <div class="step-state ">
+                    <p class="state {{ zone_step.state }}"></p>
+                </div>
+                <div class="step-name">{{ zone_step.name }}</div>
+            </div>
+        {% endfor %}    
+    </div>    
+    
     {% if  data.countries %}
         <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>
         <div id="countries-list" class="clearfix">

@@ -18,9 +18,10 @@ class SpcMbdController extends ControllerBase {
         $data['title'] =  $config->get('mbd_landing_title');
         $data['description'] = $config->get('mbd_landing_description');
         
-        $data['countries'] = $this->get_countries();
+        $data['maritime_zones'] = @$this->get_maritime_zones();
+        //dump($data['maritime_zones']); die;
         
-        //dump($data);die;
+        $data['countries'] = @$this->get_countries();
         
         return [
             '#theme' => 'spc_mbd_landing',
@@ -41,7 +42,7 @@ class SpcMbdController extends ControllerBase {
             $name = $country->getName();
             $country_code = $country->get('field_country_code')->getValue()[0]['value'];
 
-            $fid = $country->get('field_flag')->getValue()[0]['target_id'];
+            $fid = @$country->get('field_flag')->getValue()[0]['target_id'];
             $file = File::load($fid);
             
             if (is_object($file)){
@@ -62,6 +63,38 @@ class SpcMbdController extends ControllerBase {
           }
         
         return $countries;
+    }
+    
+    public function get_maritime_zones(){
+        $zones = [];
+        
+        $zone_steps_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('maritime_zone');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();
+
+        foreach($zone_steps_tax as $zone_step_term){
+            $zone_step = Term::load($zone_step_term->tid);
+            
+            $name = $zone_step->getName();
+            
+            $fid = $zone_step->get('field_image')->getValue()[0]['target_id'];
+            $file = File::load($fid);
+                        
+            $icon = '';
+            if (is_object($file)){
+              $icon = $file->url();
+            }     
+
+            $state = '';
+
+            $zones[] = [
+              'icon' => $icon,  
+              'name' => $name,
+              'state' => $state, 
+            ];
+          }        
+        
+        return $zones;
     }
     
 }
