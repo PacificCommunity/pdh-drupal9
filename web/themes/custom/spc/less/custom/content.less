@@ -46,11 +46,17 @@ main {
         height: auto;
         padding: 11px 40px 11px 30px;
         border-radius: 0 30px 30px 0;
-        width: 295px;
+        width: max-content;
         align-self: flex-start;
         position: absolute;
         left: 0px;
         top: 100px;
+        
+        @media(max-width: 500px){
+            font-size: 18px;
+            line-height: 20px;
+            padding: 8px 40px 8px 30px;
+        }
     }
 
     .breadcrumbs {
@@ -287,6 +293,10 @@ main {
         font-weight: 100;
         line-height: 44px;        
         text-transform: none;
+        @media(max-width: 500px){
+            font-size: 26px;
+            line-height: 30px;
+        }
     }
     .banner-image {
         height: 358px;
@@ -732,6 +742,10 @@ form {
         height: 300px;
         overflow: hidden;
         border-radius: 15px 15px 5px 5px;
+        
+        @media(max-width: 500px){
+            height: 200px;
+        }
         
         img {
             width: 100%;
