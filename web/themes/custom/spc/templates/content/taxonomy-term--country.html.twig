@@ -65,9 +65,6 @@
                         </a>
                     </div>
                     <div class="metadata clearfix">
-                        <div class="dataset-date left">
-                            <a class="view-dataset-btn" href="{{ dataset.url }}" target="_blank" aria-label="{{ dataset.title }}" title="{{ dataset.title }}">{{ 'View dataset'|t }}</a>
-                        </div>
                         <div class="dataset-formats right">
                             {% if dataset.resources %}
                                 {% for resource in dataset.resources %}
@@ -75,8 +72,13 @@
                                         <div class="res-formats res-format-{{ resource.format|lower  }}"></div>
                                     </a>
                                 {% endfor %}
+                            {% else %}
+                                <p class="grey">{{ 'No resources' }}</p>
                             {% endif %}
                         </div>
+                        <div class="dataset-date left">
+                            <a class="view-dataset-btn" href="{{ dataset.url }}" target="_blank" aria-label="{{ dataset.title }}" title="{{ dataset.title }}">{{ 'View dataset'|t }}</a>
+                        </div>                        
                     </div>
                 </div>
             {% endfor %}
