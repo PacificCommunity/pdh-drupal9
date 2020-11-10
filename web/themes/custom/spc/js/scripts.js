@@ -33,6 +33,13 @@
                     $(this).removeClass('open').text('Read more');
                 }
             });
+            
+            $('.step-state .level').on('mouseover', function(e){
+                $(this).find('.tooltip').show();
+            });
+            $('.step-state .level').on('mouseout', function(e){
+                $(this).find('.tooltip').hide();
+            });
 
             //Dashboard Transform Chart script.
             if ($("#sdgChart").length && $("#sdgChart svg").length == 0){

@@ -9,15 +9,45 @@
     
     <h3>1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
     <div class="maritime-zones">
-        {% for zone_step in data.maritime_zones %}
+        {% for key, zone_step in data.maritime_zones %}
             <div class="step">
-                <div class="step-icon">
+                <div class="step-icon {% if key == 5 %} step-six {% endif %}">
                     <img src="{{ zone_step.icon }}">
+                    {% if key == 5 %}
+                        <div class="tooltip-icon">
+                            {{ 'i' }}  
+                            <div class="tooltip">
+                                <p><b>{{ 'Tooltip title' }}</b></p>
+                                <p>{{ 'Tooltip text' }}</p>
+                            </div>
+                        </div>
+                    {% endif %}  
                 </div>
                 <div class="step-state ">
-                    <p class="state {{ zone_step.state }}"></p>
+                    <div class="state">
+                        {% if zone_step.state.completed.percent %}
+                            <div style="width: {{ zone_step.state.completed.percent }}%" class="level completed">
+                                <div class="tooltip">{{ 'Completed' }} <b>{{ zone_step.state.completed.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}
+                        {% if zone_step.state.in_progress.percent %}
+                            <div style="width: {{ zone_step.state.in_progress.percent }}%" class="level in_progress">
+                                <div class="tooltip">{{ 'In progress' }} <b>{{ zone_step.state.in_progress.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}
+                        {% if zone_step.state.not_started.percent %}
+                            <div style="width: {{ zone_step.state.not_started.percent }}%" class="level not_started">
+                                <div class="tooltip">{{ 'Not started' }} <b>{{ zone_step.state.not_started.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}
+                        {% if zone_step.state.na.percent %}
+                            <div style="width: {{ zone_step.state.na.percent }}%" class="level na">
+                                <div class="tooltip">{{ 'NA' }} <b>{{ zone_step.state.na.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}                        
+                    </div>
                 </div>
-                <div class="step-name">{{ zone_step.name }}</div>
+                <div class="step-name">{{ zone_step.name|raw }}</div>
             </div>
         {% endfor %}    
     </div>    
