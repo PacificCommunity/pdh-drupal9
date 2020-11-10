@@ -45,7 +45,27 @@
 {% if label_hidden %}
   {% if multiple %}
     <div{{ attributes.addClass('pathway-steps') }}>
-      {% for item in items %}
+      {% for key, item in items %}
+          {% if key == 5 %}
+            <div{{ item.attributes.addClass('step') }}>
+                <div>
+                  <div class="step-icon step-six">
+                      <img src="{{ boundary_refer.icon }}" alt="icon">
+                      <div class="tooltip-icon">
+                        {{ 'i' }}  
+                        <div class="tooltip">
+                          <p><b>{{ 'Tooltip title' }}</b></p>
+                          <p>{{ 'Tooltip text' }}</p>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="step-state ">
+                      <p class="state {{ boundary_refer.state }}"></p>
+                  </div>
+                  <div class="step-name">{{ boundary_refer.name|raw }}</div>
+                </div>
+            </div>
+          {% endif %}    
         <div{{ item.attributes.addClass('step') }}>{{ item.content }}</div>
       {% endfor %}
     </div>
@@ -61,7 +81,7 @@
       <div class="pathway-steps">
     {% endif %}
     {% for item in items %}
-      <div{{ item.attributes }}>{{ item.content }}</div>
+      <div{{ item.attributes.addClass('step') }}>{{ item.content }}</div>
     {% endfor %}
     {% if multiple %}
       </div>

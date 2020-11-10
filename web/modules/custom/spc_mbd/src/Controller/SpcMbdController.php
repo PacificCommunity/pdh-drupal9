@@ -5,9 +5,10 @@ namespace Drupal\spc_mbd\Controller;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
 use Drupal\node\Entity\Node;
-use Drupal\taxonomy\Entity\Term;
-use Drupal\Core\Controller\ControllerBase;
 use Drupal\file\Entity\File;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Core\Controller\ControllerBase;
 
 class SpcMbdController extends ControllerBase {
     
@@ -19,7 +20,6 @@ class SpcMbdController extends ControllerBase {
         $data['description'] = $config->get('mbd_landing_description');
         
         $data['maritime_zones'] = @$this->get_maritime_zones();
-        //dump($data['maritime_zones']); die;
         
         $data['countries'] = @$this->get_countries();
         
@@ -84,17 +84,60 @@ class SpcMbdController extends ControllerBase {
             if (is_object($file)){
               $icon = $file->url();
             }     
-
-            $state = '';
+            
+            $state = $this->get_combine_maritime_zones($name);
 
             $zones[] = [
               'icon' => $icon,  
               'name' => $name,
               'state' => $state, 
             ];
-          }        
-        
+          }
+
+        array_splice( $zones, 5, 0, '6' );
+        $zones[5] = [
+            'icon' => '/' . $theme_path . '/img/zone_steps/6.svg',  
+            'name' => '6. Shared Boundary? Refer to <a href="#">Treaty Pathway</a>',
+            'state' => 'na', 
+        ];
+
         return $zones;
+    }
+    
+    public function get_combine_maritime_zones($zone_name) {
+        $combine_states = [];
+        
+        $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+
+        foreach($countries_tax as $country_term){
+            $country = Term::load($country_term->tid);
+            $maritime_zone_steps = $country->get('field_maritime_zone')->getValue();
+            
+            foreach ($maritime_zone_steps as $step){
+                $paragraph_step = Paragraph::load($step['target_id']);
+                $state = $paragraph_step->field_progress_type->value;
+
+                $step_term_id = $paragraph_step->field_maritime_zone->getValue()[0]['target_id'];
+                $paragraph_zone = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($step_term_id);
+                $step_zone_name = $paragraph_zone->label();
+
+                if ($zone_name == $step_zone_name){
+                    $combine_states[$state]['count'] += 1;
+                    $combine_states['total'] += 1;
+                } else {
+                    $combine_states[$state]['count'] += 0;
+                    $combine_states[$state]['percent'] += 0;
+                }
+            }
+        }
+        
+        foreach ($combine_states as $key => $value){
+            if (!empty($value['count'])){
+                $combine_states[$key]['percent'] = (100/$combine_states['total'])*$value['count'];                
+            }
+        }
+
+        return $combine_states;
     }
     
 }

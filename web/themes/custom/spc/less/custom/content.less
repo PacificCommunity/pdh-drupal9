@@ -46,7 +46,6 @@ main {
         height: auto;
         padding: 11px 40px 11px 30px;
         border-radius: 0 30px 30px 0;
-        width: max-content;
         align-self: flex-start;
         position: absolute;
         left: 0px;
@@ -1026,10 +1025,68 @@ form {
     }
 }
 
+.pathway-maritime-zones {
+    position: relative;
+    
+    .maritime-zones-file {
+        position: absolute;
+        right: 0;
+        top: -30px;
+        
+        a {
+            display: block;
+            position: relative;
+            width: 150px;
+            font-size: 0;
+            
+            &:before {
+                content: '';
+                width: 26px;
+                height: 26px;
+                background-color: #fff;
+                box-shadow: 0px 0px 15px rgba(0, 5, 160, 0.102);
+                border-radius: 4px;
+                background: url(../img/download.svg);
+                background-position: center;
+                display: inline-block;
+                background-repeat: no-repeat;
+                padding: 10px;
+                margin-right: 10px;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            
+            &:after {
+                content: 'Download PDF file';
+                vertical-align: text-top;
+                width: max-content;
+                height: 20px;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 15px;
+                position: absolute;
+                right: 0;
+                top: 5px;
+                color: #001E73;
+                
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
 .maritime-zones,
 .pathway-steps {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    
+    @media(max-width: 1366px){
+        justify-content: left;
+    }
 
     .step {
         background: #FFFFFF;
@@ -1037,6 +1094,11 @@ form {
         border-radius: 20px;
         width: 112px;
         padding: 10px;
+        
+        @media(max-width: 1366px){
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }        
 
         .step-name {
             font-size: 10px;
@@ -1046,15 +1108,53 @@ form {
         }
 
         .step-icon {
+            position: relative;
             background: #FFFFFF;
             border: 1px solid #C8C8C8;
             box-sizing: border-box;
             border-radius: 15px;
             text-align: center;
             padding: 14px;
+            height: 60px;
+            
+            &.step-six {
+                .tooltip-icon{
+                    display: block;
+                    width: 15px;
+                    height: 15px;
+                    border: 1px solid #001E73;
+                    border-radius: 50%;
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+                    font-size: 11px; 
+
+                    &:hover {
+                        .tooltip {
+                            display: block;
+                        }
+                    }
+
+                    .tooltip {
+                        position: absolute;
+                        display: none;
+                        background: #fff;
+                        border: 1px solid #ccc;
+                        border-radius: 10px;
+                        padding: 20px;
+                        text-align: left;
+                        z-index: 10;
+                        width: 300px;
+                        height: 200px;
+                        bottom: 120%;
+                        left: 120%;
+                    } 
+                }
+            }           
         }
 
         .step-state {
+            position: relative;
             margin-top: 10px;
 
             .state {
@@ -1071,22 +1171,39 @@ form {
                     float: left;
                     padding: 0;
                     margin: 0;
+                    
+                    .tooltip {
+                        display: none;
+                        position: absolute;
+                        background: #fff;
+                        border: 1px solid #C4C4C4;
+                        border-radius: 5px;
+                        padding: 5px;
+                        position: absolute;
+                        bottom: 15px;
+                        width: max-content;
+                        font-size: 12px;
+                        z-index: 11;
+                    }                    
                 }
             }    
 
             .completed {
-                    background: rgba(144, 203, 70, 0.5);
-                    border: 1px solid #90CB46;
-                }
+                background: rgba(144, 203, 70, 0.5);
+                border: 1px solid #90CB46;
+            }
             .in_progress {
-                    background: rgba(251, 186, 18, 0.5);
-                    border: 1px solid #FBBA12;
-                }
+                background: rgba(251, 186, 18, 0.5);
+                border: 1px solid #FBBA12;
+            }
             .not_started {
-                    background: rgba(242, 1, 22, 0.5);
-                    border: 1px solid #F20116;
-                }                    
-            
+                background: rgba(242, 1, 22, 0.5);
+                border: 1px solid #F20116;
+            }    
+            .na {
+                background: rgba(229, 229, 229, 0.5);
+                border: 1px solid #E6E6E6;
+            }                
         }    
     }        
 }

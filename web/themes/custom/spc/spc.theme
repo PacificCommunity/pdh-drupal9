@@ -69,6 +69,26 @@ function spc_preprocess_node(&$variables){
 }
 
 /**
+ * Implements theme_preprocess_field().
+ */
+function spc_preprocess_field(&$variables){
+
+    $element = $variables['element'];
+    if (isset($element['#field_name'])) {
+
+      if ($element['#field_name'] == 'field_maritime_zone') {
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();          
+          $variables['boundary_refer'] = [
+            'icon' => '/' . $theme_path . '/img/zone_steps/6.svg',  
+            'name' => '6. Shared Boundary? Refer to <a href="#">Treaty Pathway</a>',
+            'state' => 'na', 
+        ];
+      }
+    }
+}
+
+/**
  * Implements theme_preprocess_node().
  */
 function spc_preprocess_taxonomy_term(&$variables){
