@@ -56,6 +56,7 @@ main {
             font-size: 18px;
             line-height: 20px;
             padding: 8px 40px 8px 30px;
+            width: 200px;
         }
     }
 
@@ -1064,20 +1065,28 @@ form {
                 border: 1px solid #E6E6E6;
                 box-sizing: border-box;
                 border-radius: 3px;
+                
+                .level {
+                    height: 100%;
+                    float: left;
+                    padding: 0;
+                    margin: 0;
+                }
+            }    
 
-                &.completed {
+            .completed {
                     background: rgba(144, 203, 70, 0.5);
                     border: 1px solid #90CB46;
                 }
-                &.in_progress {
+            .in_progress {
                     background: rgba(251, 186, 18, 0.5);
                     border: 1px solid #FBBA12;
                 }
-                &.not_started {
+            .not_started {
                     background: rgba(242, 1, 22, 0.5);
                     border: 1px solid #F20116;
                 }                    
-            }
+            
         }    
     }        
 }
