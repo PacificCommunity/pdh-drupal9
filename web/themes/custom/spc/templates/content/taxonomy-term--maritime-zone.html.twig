@@ -27,7 +27,11 @@
   <div class="step-icon">{{ content.field_image }}</div>
   
   <div class="step-state ">
-      <p class="state {{ state }}"></p>
+      <div class="state {{ state }}">
+        <div class="level" style="width: 100%;">
+            <div class="tooltip">{{ state_name }}</div>
+        </div>
+      </div>
   </div>
   
   {{ title_prefix }}

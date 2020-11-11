@@ -34,10 +34,11 @@
                 }
             });
             
-            $('.step-state .level').on('mouseover', function(e){
+            $('.step-state .level', context).on('mouseover', function(e){
+                console.log('mouseover');
                 $(this).find('.tooltip').show();
             });
-            $('.step-state .level').on('mouseout', function(e){
+            $('.step-state .level', context).on('mouseout', function(e){
                 $(this).find('.tooltip').hide();
             });
 
