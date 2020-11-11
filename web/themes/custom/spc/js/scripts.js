@@ -35,7 +35,6 @@
             });
             
             $('.step-state .level', context).on('mouseover', function(e){
-                console.log('mouseover');
                 $(this).find('.tooltip').show();
             });
             $('.step-state .level', context).on('mouseout', function(e){

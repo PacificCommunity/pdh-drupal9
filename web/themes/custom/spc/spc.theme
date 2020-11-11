@@ -135,7 +135,7 @@ function spc_preprocess_taxonomy_term(&$variables){
 
                 if ($zone_name == $step_zone_name){
                     $variables['state'] = $state;
-                    $variables['state_name'] = str_replace('_', ' ', $state);
+                    $variables['state_name'] = ucfirst(str_replace('_', ' ', $state));
                 }
             }
         }
