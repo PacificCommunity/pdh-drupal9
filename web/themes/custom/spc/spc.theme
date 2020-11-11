@@ -99,7 +99,7 @@ function spc_preprocess_taxonomy_term(&$variables){
         $country_detales = _get_country_related_datasets($variables);
         
         $variables['datasets']['count'] = $country_detales['datasetsCount'];
-        $variables['datasets']['list'] = $country_detales['datasets']; 
+        $variables['datasets']['list'] = @$country_detales['datasets']; 
         
         $countries_list = _get_countries_list($term);
         $variables['countries']['list'] = $countries_list['list'];
@@ -107,7 +107,7 @@ function spc_preprocess_taxonomy_term(&$variables){
         $variables['countries']['next'] = $countries_list['next'];
         $variables['countries']['current'] = $countries_list['current'];
         
-        $description = strip_tags($term->get('description')->getValue()[0]['value'], '<a><b><h2><h3><h4><h5><h6><br>');
+        $description = @strip_tags($term->get('description')->getValue()[0]['value'], '<a><b><h2><h3><h4><h5><h6><br>');
         
         if (strlen($description) > 600){
             $variables['description']['read'] = substr($description, 0, 600);
@@ -135,6 +135,7 @@ function spc_preprocess_taxonomy_term(&$variables){
 
                 if ($zone_name == $step_zone_name){
                     $variables['state'] = $state;
+                    $variables['state_name'] = str_replace('_', ' ', $state);
                 }
             }
         }
