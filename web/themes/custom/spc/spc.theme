@@ -96,18 +96,22 @@ function spc_preprocess_taxonomy_term(&$variables){
     $term = $variables['term'];
 
     if ($variables['view_mode'] == 'full' && $vocabulary == 'country'){
-        $country_detales = _get_country_related_datasets($variables);
+        
+        @$country_treaty = _get_country_treaty($term);
+        $variables['treaty'] = $country_treaty;
+        
+        @$country_detales = _get_country_related_datasets($variables);
         
         $variables['datasets']['count'] = $country_detales['datasetsCount'];
-        $variables['datasets']['list'] = $country_detales['datasets']; 
+        $variables['datasets']['list'] = @$country_detales['datasets']; 
         
-        $countries_list = _get_countries_list($term);
+        @$countries_list = _get_countries_list($term);
         $variables['countries']['list'] = $countries_list['list'];
         $variables['countries']['prev'] = $countries_list['prev'];
         $variables['countries']['next'] = $countries_list['next'];
         $variables['countries']['current'] = $countries_list['current'];
         
-        $description = strip_tags($term->get('description')->getValue()[0]['value'], '<a><b><h2><h3><h4><h5><h6><br>');
+        @$description = strip_tags($term->get('description')->getValue()[0]['value'], '<a><b><h2><h3><h4><h5><h6><br>');
         
         if (strlen($description) > 600){
             $variables['description']['read'] = substr($description, 0, 600);
@@ -135,6 +139,7 @@ function spc_preprocess_taxonomy_term(&$variables){
 
                 if ($zone_name == $step_zone_name){
                     $variables['state'] = $state;
+                    $variables['state_name'] = ucfirst(str_replace('_', ' ', $state));
                 }
             }
         }
@@ -277,4 +282,112 @@ function _get_countries_list($current_country){
       }
 
     return $countries;
+}
+
+function _get_country_treaty($term){
+
+    $output = [
+        'completed' => [],
+        'in_progress' => [],
+        'not_started' => [],
+        'na' => []
+    ];
+    
+    $country_id = intval($term->id());
+    $condition_or = new \Drupal\Core\Database\Query\Condition('OR');
+    $condition_or->condition('bco.field_boundary_country_one_target_id', $country_id);
+    $condition_or->condition('bct.field_boundary_country_two_target_id', $country_id);
+    
+    $q = db_select('node','n')
+        ->fields('n', ['nid'])
+        ->condition('n.type', 'boundary_treaty')
+        ->condition($condition_or);
+    
+    $q->join('node__field_boundary_country_one', 'bco',  'bco.entity_id = n.nid');
+    $q->join('node__field_boundary_country_two', 'bct',  'bct.entity_id = n.nid');
+    
+    $results = $q->execute()->fetchAll();
+    //dump($results);
+    
+    $theme = \Drupal::theme()->getActiveTheme();
+    $theme_path = $theme->getPath();
+    
+    if (!empty($results)){
+        foreach($results as $key => $value){
+            $treaty = Node::load($value->nid);
+            
+            $treaty_state = $treaty->get('field_treaty_state')->getValue()[0]['value'];
+            $output[$treaty_state][$key]['state'] = $treaty_state;
+
+            $country_one_id = $treaty->get('field_boundary_country_one')->getValue()[0]['target_id'];
+            $country_one = Term::load($country_one_id);
+            $output[$treaty_state][$key]['country_one'] = $country_one->getName();
+            $country_one_url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $country_one_id);
+            $output[$treaty_state][$key]['country_one_url'] = $country_one_url;
+
+            $country_one_file = File::load($country_one->get('field_flag')->getValue()[0]['target_id']);
+            if (is_object($country_one_file)){
+              $output[$treaty_state][$key]['country_one_flag'] = $country_one_file->url();
+            } else {
+                $country_one_flag = '/' . $theme_path . '/img/flags/' . $country_one->get('field_country_code')->getValue()[0]['value'] . '.svg';
+                $output[$treaty_state][$key]['country_one_flag'] = $country_one_flag;
+            }
+            
+            $country_two_id = $treaty->get('field_boundary_country_two')->getValue()[0]['target_id'];
+            $country_two = Term::load($country_two_id);
+            $output[$treaty_state][$key]['country_two'] = $country_two->getName();
+            $country_two_url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $country_two_id);
+            $output[$treaty_state][$key]['country_two_url'] = $country_two_url;            
+            
+            $country_two_file = File::load($country_two->get('field_flag')->getValue()[0]['target_id']);
+            if (is_object($country_two_file)){
+                $output[$treaty_state][$key]['country_two_flag'] = $country_two_file->url();
+            } else {
+                $country_two_flag = '/' . $theme_path . '/img/flags/' . $country_two->get('field_country_code')->getValue()[0]['value'] . '.svg';
+                $output[$treaty_state][$key]['country_two_flag'] = $country_two_flag;
+            }
+
+            $download = File::load($treaty->get('field_boundaries_treaty_file')->getValue()[0]['target_id']);
+            if (is_object($download)){
+              $output[$treaty_state][$key]['download'] = $download->url();
+            }
+            
+            switch ($treaty_state) {
+                case 'completed': 
+                    $completed_date = $treaty->get('field_year_only')->getValue()[0]['value'];
+                    $output[$treaty_state][$key]['completed_date'] = $completed_date;
+                    
+                    break;
+                case 'in_progress': 
+                    $steps = $treaty->get('field_boundaries_treaty_steps')->getValue();
+                    $treaty_steps = [];
+                    foreach($steps as $step){
+                        $paragraph_step = Paragraph::load($step['target_id']);
+                        $state = $paragraph_step->field_progress_type->value;
+
+                        $step_term_id = $paragraph_step->field_boundary_treaty->getValue()[0]['target_id'];
+                        $paragraph_treaty = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($step_term_id);
+                        $name = $paragraph_treaty->label();
+                        
+                        $icon = '';
+                        $file = File::load($paragraph_treaty->get('field_image')->getValue()[0]['target_id']);
+                        if (is_object($file)){
+                          $icon = $file->url();
+                        }
+
+                        $treaty_steps[] = [
+                            'state' => $state,
+                            'name' => $name,
+                            'icon' => $icon,
+                            'tooltip' => ucfirst(str_replace('_', ' ', $state)),
+                        ];
+                    }
+                    
+                    $output[$treaty_state][$key]['treaty_steps'] = $treaty_steps;
+                    break;                
+            }
+        }
+    }
+    
+    return $output;
 }
