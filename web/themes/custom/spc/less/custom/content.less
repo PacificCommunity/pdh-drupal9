@@ -1077,7 +1077,7 @@ form {
         }
     }
 }
-
+.treaty-steps,
 .maritime-zones,
 .pathway-steps {
     display: flex;
@@ -1206,5 +1206,186 @@ form {
             }                
         }    
     }        
+}
+
+.treaty-completed,
+.treaty-not-started {
+    display: flex;
+    justify-content: left;
+    margin: 20px 0 40px 0;
+    
+    .treaty-item {
+        flex: 0 24%;
+        margin-right: 1%;
+        max-width: 311px;        
+        background: #FFFFFF;
+        box-shadow: 0px 2px 20px rgba(0, 5, 160, 0.102);
+        border-radius: 20px;
+        padding: 20px;
+        
+        .flags {
+            a{
+                display: inline-block;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 30px;
+                color: #000000;
+                
+                .img {
+                    display: inline-block;
+                    width: 30px;
+                    height: 15px;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    vertical-align: middle;
+                    img {
+                        width: 105%;
+                        margin-top: -15px;
+                    }                
+                }
+            }
+            .union {
+                display: inline-block;
+            }
+        }
+        
+        .state {
+            display: inline-block;
+            vertical-align: middle;
+            
+            &.completed {
+                background: rgba(144,203,70,0.5);
+                border: 1px solid #90CB46;
+                border-radius: 3px;
+                width: 30px;
+                height: 15px;
+            }
+        }
+        .date {
+            display: inline-block;
+            line-height: 30px;
+            padding: 10px;
+            font-size: 16px;            
+        }
+        
+        .download {
+            text-align: center;
+            margin-top: 10px;
+            
+            a {
+                position: relative;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 15px;
+                color: #001E73;
+                
+                &:hover {
+                    text-decoration: none;
+                }
+                
+                &:before {
+                    content: '';
+                    width: 26px;
+                    height: 26px;
+                    background-color: #fff;
+                    box-shadow: 0px 0px 15px rgba(0, 5, 160, 0.102);
+                    border-radius: 4px;
+                    background: url(../img/download.svg);
+                    background-position: center;
+                    display: inline-block;
+                    background-repeat: no-repeat;
+                    padding: 10px;
+                    margin-right: 10px;
+                    position: absolute;
+                    left: -35px;
+                    bottom: -5px;
+                }                
+            }
+
+        }
+    }    
+}
+.treaty-in-progress {
+    margin: 20px 0 40px 0;
+    
+    .treaty-item {
+        position: relative;
+        margin: 20px 0;
+        
+        .flags {
+            margin: 10px 0;
+            a{
+                display: inline-block;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 30px;
+                color: #000000;
+                
+                .img {
+                    display: inline-block;
+                    width: 30px;
+                    height: 15px;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    vertical-align: middle;
+                    img {
+                        width: 105%;
+                        margin-top: -15px;
+                    }                
+                }
+            }
+            .union {
+                display: inline-block;
+            }
+        }
+        
+        .treaty-steps {
+            .step {
+                .step-state {
+                    .level {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .download {
+            text-align: center;
+            margin-top: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            
+            a {
+                position: relative;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 15px;
+                color: #001E73;
+                
+                &:hover {
+                    text-decoration: none;
+                }
+                
+                &:before {
+                    content: '';
+                    width: 26px;
+                    height: 26px;
+                    background-color: #fff;
+                    box-shadow: 0px 0px 15px rgba(0, 5, 160, 0.102);
+                    border-radius: 4px;
+                    background: url(../img/download.svg);
+                    background-position: center;
+                    display: inline-block;
+                    background-repeat: no-repeat;
+                    padding: 10px;
+                    margin-right: 10px;
+                    position: absolute;
+                    left: -35px;
+                    bottom: -5px;
+                }                
+            }
+
+        }        
+    }    
 }
 

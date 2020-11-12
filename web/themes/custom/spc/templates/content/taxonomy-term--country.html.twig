@@ -50,6 +50,112 @@
         {{ content.field_maritime_zone }}
     </div>
     
+    <h3>2.&nbsp{{ 'Pathway to Maritime Boundaries Treaty'|t }}</h3>
+    <div class="boundaries-treaty">
+        <h4>2.1&nbsp{{ 'Completed' }}</h4>
+        <div class="treaty-completed">
+            {% if treaty.completed %}
+                {% for item in treaty.completed %}
+                <div class="treaty-item">
+                    <div class="flags">
+                        <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                            <div class="img">
+                                <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                            </div>
+                            <span>{{ item.country_one }}</span>
+                        </a>
+                        <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                        <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                            <div class="img">
+                                <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                            </div>    
+                            <span>{{ item.country_two }}</span>
+                        </a>
+                    </div>
+                    <div class="state {{ item.state }}"></div>
+                    <div class="date">{{ 'Published' }}&nbsp{{ item.completed_date }}</div>
+                    
+                    {% if item.download %}
+                        <div class="download">
+                            <a href="{{ item.download }}">{{ 'Download PDF file' }}</a>
+                        </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% endif %}    
+        </div>
+        <h4>2.2&nbsp{{ 'In progress' }}</h4>
+        <div class="treaty-in-progress">
+            {% if treaty.in_progress %}
+                {% for item in treaty.in_progress %}
+                    <div class="treaty-item">
+                        <div class="flags">
+                            <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                                <div class="img">
+                                    <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                                </div>
+                                <span>{{ item.country_one }}</span>
+                            </a>
+                            <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                            <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                                <div class="img">
+                                    <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                                </div>    
+                                <span>{{ item.country_two }}</span>
+                            </a>
+                        </div>
+                        <div class="treaty-steps">
+                            {% for step in item.treaty_steps %}
+                                <div class="step">
+                                    <div class="step-icon">
+                                        <img src="{{ step.icon }}"> 
+                                    </div>
+                                    <div class="step-state ">
+                                        <div class="state">
+                                            <div class="level {{ step.state}}">
+                                                <div class="tooltip">{{ step.tooltip }}</div>
+                                            </div>                       
+                                        </div>
+                                    </div>
+                                    <div class="step-name">{{ step.name }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if item.download %}
+                            <div class="download">
+                                <a href="{{ item.download }}">{{ 'Download PDF file' }}</a>
+                            </div>
+                        {% endif %}
+                    </div>    
+                {% endfor %}
+            {% endif %}
+        </div>
+        <h4>2.3&nbsp{{ 'Not started' }}</h4>
+        <div class="treaty-not-started">
+            {% if treaty.not_started %}
+                {% for item in treaty.not_started %}
+                <div class="treaty-item">
+                    <div class="flags">
+                        <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                            <div class="img">
+                                <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                            </div>
+                            <span>{{ item.country_one }}</span>
+                        </a>
+                        <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                        <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                            <div class="img">
+                                <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                            </div>    
+                            <span>{{ item.country_two }}</span>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>        
+    </div>
+
     <h3>{{ 'Related Datasets'|t }}</h3>
     <div class="related-datasets">
         {% if datasets.count > 0 %}
