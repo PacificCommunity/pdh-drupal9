@@ -40,6 +40,13 @@
             $('.step-state .level', context).on('mouseout', function(e){
                 $(this).find('.tooltip').hide();
             });
+            
+            $('.collapsed', context).on('click', function(e){
+                e.preventDefault();
+                $(this).toggleClass('close')
+                let collapsedId = $(this).data('id');
+                $('#' + collapsedId).toggle();
+            });
 
             //Dashboard Transform Chart script.
             if ($("#sdgChart").length && $("#sdgChart svg").length == 0){

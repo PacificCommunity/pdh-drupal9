@@ -307,7 +307,6 @@ function _get_country_treaty($term){
     $q->join('node__field_boundary_country_two', 'bct',  'bct.entity_id = n.nid');
     
     $results = $q->execute()->fetchAll();
-    //dump($results);
     
     $theme = \Drupal::theme()->getActiveTheme();
     $theme_path = $theme->getPath();

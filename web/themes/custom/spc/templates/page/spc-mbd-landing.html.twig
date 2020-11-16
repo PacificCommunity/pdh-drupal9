@@ -1,14 +1,12 @@
 <div id="mbd-landing">
     <h3 class="block-title">{{ data.title }}</h3>
-    
     {% if  data.description %}
         <div class="block-description">
             {{ data.description|raw }}
         </div>
     {% endif %}
-    
-    <h3>1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
-    <div class="maritime-zones">
+    <h3 class="collapsed" data-id="maritime-zones">1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
+    <div id="maritime-zones" class="maritime-zones">
         {% for key, zone_step in data.maritime_zones %}
             <div class="step">
                 <div class="step-icon {% if key == 5 %} step-six {% endif %}">
@@ -50,7 +48,73 @@
                 <div class="step-name">{{ zone_step.name|raw }}</div>
             </div>
         {% endfor %}    
-    </div>    
+    </div> 
+    
+    <h3 class="collapsed" data-id="boundaries-treaty" >2.&nbsp{{ 'Pathway to Maritime Boundary Treaty'|t }}</h3>
+    <div id="boundaries-treaty" class="boundaries-treaty maritime-zones">
+        {% for key, treaty_step in data.boundaries_treaty %}
+            <div class="step">
+                <div class="step-icon {% if key == 5 %} step-six {% endif %}">
+                    <img src="{{ treaty_step.icon }}">
+                    {% if key == 5 %}
+                        <div class="tooltip-icon">
+                            {{ 'i' }}  
+                            <div class="tooltip">
+                                <p><b>{{ 'Tooltip title' }}</b></p>
+                                <p>{{ 'Tooltip text' }}</p>
+                            </div>
+                        </div>
+                    {% endif %}  
+                </div>
+                <div class="step-state ">
+                    <div class="state">
+                        {% if treaty_step.state.completed.percent %}
+                            <div style="width: {{ treaty_step.state.completed.percent }}%" class="level completed">
+                                <div class="tooltip">{{ 'Completed' }} <b>{{ treaty_step.state.completed.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}
+                        {% if treaty_step.state.in_progress.percent %}
+                            <div style="width: {{ treaty_step.state.in_progress.percent }}%" class="level in_progress">
+                                <div class="tooltip">{{ 'In progress' }} <b>{{ treaty_step.state.in_progress.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}
+                        {% if treaty_step.state.not_started.percent %}
+                            <div style="width: {{ treaty_step.state.not_started.percent }}%" class="level not_started">
+                                <div class="tooltip">{{ 'Not started' }} <b>{{ treaty_step.state.not_started.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}
+                        {% if treaty_step.state.na.percent %}
+                            <div style="width: {{ treaty_step.state.na.percent }}%" class="level na">
+                                <div class="tooltip">{{ 'NA' }} <b>{{ treaty_step.state.na.count }}</b> {{ 'countries' }}</div>
+                            </div>
+                        {% endif %}                        
+                    </div>
+                </div>
+                <div class="step-name">{{ treaty_step.name|raw }}</div>
+            </div>
+        {% endfor %}
+        <div class="legend">
+            <div class="level ">
+                <div class="state completed"></div>
+                <div class="tooltip">{{ 'Completed' }}</div>
+            </div>
+
+            <div class="level">
+                <div class="state in_progress"></div>
+                <div class="tooltip">{{ 'In progress' }}</div>
+            </div>
+
+            <div class="level">
+                <div class="state not_started"></div>
+                <div class="tooltip">{{ 'Not started' }}</div>
+            </div>
+
+            <div class="level">
+                <div class="state na"></div>
+                <div class="tooltip">{{ 'NA' }}</div>
+            </div>
+        </div>        
+    </div>
     
     {% if  data.countries %}
         <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>
