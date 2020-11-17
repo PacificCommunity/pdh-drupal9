@@ -97,8 +97,9 @@ function spc_preprocess_taxonomy_term(&$variables){
 
     if ($variables['view_mode'] == 'full' && $vocabulary == 'country'){
         
-        @$country_treaty = _get_country_treaty($term);
-        $variables['treaty'] = $country_treaty;
+        @$variables['treaty'] = _get_country_treaty($term);
+        
+        @$variables['shelf_treaty'] = _get_shelf_treaty($term);
         
         @$country_detales = _get_country_related_datasets($variables);
         
@@ -285,7 +286,6 @@ function _get_countries_list($current_country){
 }
 
 function _get_country_treaty($term){
-
     $output = [
         'completed' => [],
         'in_progress' => [],
@@ -302,10 +302,8 @@ function _get_country_treaty($term){
         ->fields('n', ['nid'])
         ->condition('n.type', 'boundary_treaty')
         ->condition($condition_or);
-    
     $q->join('node__field_boundary_country_one', 'bco',  'bco.entity_id = n.nid');
     $q->join('node__field_boundary_country_two', 'bct',  'bct.entity_id = n.nid');
-    
     $results = $q->execute()->fetchAll();
     
     $theme = \Drupal::theme()->getActiveTheme();
@@ -388,5 +386,58 @@ function _get_country_treaty($term){
         }
     }
     
+    return $output;
+}
+
+function _get_shelf_treaty($term){
+    $output = [];
+    
+    $country_id = intval($term->id());
+    $q = db_select('node','n')
+        ->fields('n', ['nid'])
+        ->condition('n.type', 'continental_shelf')
+        ->condition('lc.field_limit_countries_target_id', $country_id);
+    $q->join('node__field_limit_countries', 'lc',  'lc.entity_id = n.nid');
+    $results = $q->execute()->fetchAll();
+    
+    $theme = \Drupal::theme()->getActiveTheme();
+    $theme_path = $theme->getPath(); 
+    
+    if (!empty($results)){
+        foreach($results as $key => $value){
+            $shelf = [];
+            
+            $shelf_node = Node::load($value->nid);             
+            $shelf['name'] = $shelf_node->get('title')->getValue()[0]['value'];
+            
+            $steps = $shelf_node->get('field_shelf_steps')->getValue();
+            $treaty_steps = [];
+            foreach($steps as $step){
+                $paragraph_step = Paragraph::load($step['target_id']);
+                $state = $paragraph_step->field_progress_type->value;
+
+                $step_term_id = $paragraph_step->field_shelf_step_term->getValue()[0]['target_id'];
+                $paragraph_treaty = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($step_term_id);
+                $name = $paragraph_treaty->label();
+
+                $icon = '';
+                $file = File::load($paragraph_treaty->get('field_image')->getValue()[0]['target_id']);
+                if (is_object($file)){
+                  $icon = $file->url();
+                }
+
+                $treaty_steps[] = [
+                    'state' => $state,
+                    'name' => $name,
+                    'icon' => $icon,
+                    'tooltip' => ucfirst(str_replace('_', ' ', $state)),
+                ];
+            }
+            $shelf['steps'] = $treaty_steps;
+            
+            $output[] = $shelf;
+        }
+    }            
+    //dump($output); die;
     return $output;
 }
