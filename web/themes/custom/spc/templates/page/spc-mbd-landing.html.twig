@@ -7,6 +7,12 @@
     {% endif %}
     <h3 class="collapsed" data-id="maritime-zones">1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
     <div id="maritime-zones" class="maritime-zones">
+        {% if data.maritime_zones_file %}
+            <div class="download">
+                <a href="{{ data.maritime_zones_file }}">{{ 'Download PDF file' }}</a>
+            </div>
+        {% endif %}
+        <div class="pathway-steps">
         {% for key, zone_step in data.maritime_zones %}
             <div class="step">
                 <div class="step-icon {% if key == 5 %} step-six {% endif %}">
@@ -47,11 +53,18 @@
                 </div>
                 <div class="step-name">{{ zone_step.name|raw }}</div>
             </div>
-        {% endfor %}    
+        {% endfor %}
+        </div>
     </div> 
     
     <h3 class="collapsed" data-id="boundaries-treaty" >2.&nbsp{{ 'Pathway to Maritime Boundary Treaty'|t }}</h3>
     <div id="boundaries-treaty" class="boundaries-treaty maritime-zones">
+        {% if data.boundary_treaty_file %}
+            <div class="download">
+                <a href="{{ data.boundary_treaty_file }}">{{ 'Download PDF file' }}</a>
+            </div>
+        {% endif %}
+        <div class="pathway-steps">
         {% for key, treaty_step in data.boundaries_treaty %}
             <div class="step">
                 <div class="step-icon {% if key == 5 %} step-six {% endif %}">
@@ -93,6 +106,7 @@
                 <div class="step-name">{{ treaty_step.name|raw }}</div>
             </div>
         {% endfor %}
+        </div>
         <div class="legend">
             <div class="level ">
                 <div class="state completed"></div>
