@@ -19,9 +19,18 @@ class SpcMbdController extends ControllerBase {
         $data['title'] =  $config->get('mbd_landing_title');
         $data['description'] = $config->get('mbd_landing_description');
         
-        $data['maritime_zones'] = @$this->get_maritime_zones();
         
+        $data['maritime_zones'] = @$this->get_maritime_zones();
+        if ($mbd_zones_fid = $config->get('mbd_zones_fid')){
+            $mbd_zones_file = File::load($mbd_zones_fid);
+            $data['maritime_zones_file'] =  file_create_url($mbd_zones_file->uri->value);           
+        }
+
         $data['boundaries_treaty'] = @$this->get_boundaries_treaty();
+        if ($mbd_boundary_treaty_fid = $config->get('mbd_boundary_treaty_fid')){
+            $mbd_boundary_treaty_file = File::load($mbd_boundary_treaty_fid);
+            $data['boundary_treaty_file'] =  file_create_url($mbd_boundary_treaty_file->uri->value);           
+        }        
         
         $data['countries'] = @$this->get_countries();
         

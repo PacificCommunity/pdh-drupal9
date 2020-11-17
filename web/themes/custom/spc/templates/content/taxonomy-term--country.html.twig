@@ -45,7 +45,7 @@
     <h3 class="collapsed" data-id="maritime-zones">1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
     <div id="maritime-zones" class="pathway-maritime-zones">
         <div class="maritime-zones-file">
-        {{ content.field_maritime_zones_file }}
+            {{ content.field_maritime_zones_file }}
         </div>
         {{ content.field_maritime_zone }}
     </div>
@@ -84,11 +84,16 @@
                 {% endfor %}
             {% endif %}    
         </div>
-        <h4>2.2&nbsp{{ 'In progress' }}</h4>
+        <h4>2.2&nbsp{{ 'Work in progress' }}</h4>
         <div class="treaty-in-progress">
             {% if treaty.in_progress %}
-                {% for item in treaty.in_progress %}
+                {% for item in treaty.in_progress %}                    
                     <div class="treaty-item">
+                        {% if item.download %}
+                            <div class="download">
+                                <a href="{{ item.download }}">{{ 'Download PDF file' }}</a>
+                            </div>
+                        {% endif %}                        
                         <div class="flags">
                             <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
                                 <div class="img">
@@ -121,11 +126,6 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        {% if item.download %}
-                            <div class="download">
-                                <a href="{{ item.download }}">{{ 'Download PDF file' }}</a>
-                            </div>
-                        {% endif %}
                     </div>    
                 {% endfor %}
             {% endif %}
