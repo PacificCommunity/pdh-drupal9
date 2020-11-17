@@ -1087,14 +1087,15 @@ form {
 
 .maritime-zones,
 .pathway-maritime-zones,
-.boundaries-treaty {
+.boundaries-treaty,
+.continental-shelf {
     position: relative;
     
     .pathway-steps,
     .treaty-steps{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         position: relative;
         margin: 0 auto;
 
@@ -1112,6 +1113,8 @@ form {
             border-radius: 20px;
             width: 112px;
             padding: 10px;
+            margin-right: 1.6%;
+            margin-bottom: 1.6%;
 
             @media(max-width: 1366px){
                 margin-right: 10px;
@@ -1414,6 +1417,7 @@ form {
         }
     }    
 }
+.continental-shelf,
 .treaty-in-progress {
     margin: 20px 0 40px 0;
     

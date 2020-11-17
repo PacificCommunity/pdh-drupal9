@@ -155,6 +155,34 @@
             {% endif %}
         </div>        
     </div>
+        
+    <h3 class="collapsed" data-id="continental-shelf">3.&nbsp{{ 'Extended Continental Shelf Pathway'|t }}</h3>
+    <div id="continental-shelf" class="continental-shelf">
+        {% if shelf_treaty %}
+            {% for shelf in shelf_treaty %}
+                <div class="treaty-item">
+                    <h4>{{ shelf.name }}</h4>
+                    <div class="treaty-steps">
+                        {% for step in shelf.steps %}
+                            <div class="step">
+                                <div class="step-icon">
+                                    <img src="{{ step.icon }}"> 
+                                </div>
+                                <div class="step-state ">
+                                    <div class="state">
+                                        <div class="level {{ step.state}}">
+                                            <div class="tooltip">{{ step.tooltip }}</div>
+                                        </div>                       
+                                    </div>
+                                </div>
+                                <div class="step-name">{{ step.name }}</div>
+                            </div>
+                        {% endfor %}    
+                    </div>
+                </div>    
+            {% endfor %}
+        {% endif %}    
+    </div>    
 
     <h3>{{ 'Related Datasets'|t }}</h3>
     <div class="related-datasets">
