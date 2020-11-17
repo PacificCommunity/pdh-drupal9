@@ -1254,22 +1254,29 @@ form {
         }
     }
     .download {
+        text-align: center;
+        margin-top: 10px;
         position: absolute;
+        top: -50px;
         right: 0;
-        top: -45px;
 
         @media(max-width: 767px){
             position: static;
             text-align: left;
-            width: 100%;
+            margin-left: 30px;
             height: 50px;
-        }        
+        }
 
         a {
-            display: block;
             position: relative;
-            width: 150px;
-            font-size: 0;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            color: #001E73;
+
+            &:hover {
+                text-decoration: none;
+            }
 
             &:before {
                 content: '';
@@ -1285,28 +1292,11 @@ form {
                 padding: 10px;
                 margin-right: 10px;
                 position: absolute;
-                left: 0;
-                top: 0;
-            }
+                left: -35px;
+                bottom: -5px;
+            }                
+        }
 
-            &:after {
-                content: 'Download PDF file';
-                vertical-align: text-top;
-                width: max-content;
-                height: 20px;
-                font-weight: 600;
-                font-size: 12px;
-                line-height: 15px;
-                position: absolute;
-                right: 0;
-                top: 5px;
-                color: #001E73;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }        
     }    
 }
 
@@ -1315,6 +1305,7 @@ form {
     display: flex;
     justify-content: left;
     margin: 20px 0 40px 0;
+    
     @media(max-width: 680px){
        display: block;
     }    
@@ -1327,6 +1318,7 @@ form {
         box-shadow: 0px 2px 20px rgba(0, 5, 160, 0.102);
         border-radius: 20px;
         padding: 20px;
+        position: relative;
         @media(max-width: 1080px){
            flex: 0 31%;
         }        
@@ -1385,18 +1377,21 @@ form {
         .download {
             text-align: center;
             margin-top: 10px;
-            
+            position: relative;
+            top: auto;
+            width: 100%;
+
             a {
                 position: relative;
                 font-weight: 600;
                 font-size: 12px;
                 line-height: 15px;
                 color: #001E73;
-                
+
                 &:hover {
                     text-decoration: none;
                 }
-                
+
                 &:before {
                     content: '';
                     width: 26px;
@@ -1412,7 +1407,7 @@ form {
                     margin-right: 10px;
                     position: absolute;
                     left: -35px;
-                    bottom: -5px;
+                    top: -5px;
                 }                
             }
 
