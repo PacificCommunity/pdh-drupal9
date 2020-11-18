@@ -82,6 +82,8 @@
                     {% endif %}
                 </div>
                 {% endfor %}
+            {% else %}
+                <p class="empty">{{ 'N/A' }}</p>                
             {% endif %}    
         </div>
         <h4>2.2&nbsp{{ 'Work in progress' }}</h4>
@@ -128,6 +130,8 @@
                         </div>
                     </div>    
                 {% endfor %}
+            {% else %}
+                <p class="empty">{{ 'N/A' }}</p>
             {% endif %}
         </div>
         <h4>2.3&nbsp{{ 'Not started' }}</h4>
@@ -152,6 +156,8 @@
                     </div>
                 </div>
                 {% endfor %}
+            {% else %}
+                <p class="empty">{{ 'N/A' }}</p>                
             {% endif %}
         </div>        
     </div>
