@@ -21,12 +21,8 @@ ma5:
     - core/jquery.once
 d3:
   version: 3.x
-  css:
-    base:
-      css/timeline-chart.css: {}
   js:
     js/d3/d3.v4.js: {}
-    js/d3/timeline-chart.js: {}
 social-share:
   version: 1.00
   css:
