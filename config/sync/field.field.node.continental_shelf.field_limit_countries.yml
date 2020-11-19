@@ -1,0 +1,29 @@
+uuid: 31de1f32-d3eb-403b-b5c3-f22254eb69ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_limit_countries
+    - node.type.continental_shelf
+    - taxonomy.vocabulary.country
+id: node.continental_shelf.field_limit_countries
+field_name: field_limit_countries
+entity_type: node
+bundle: continental_shelf
+label: 'Limit Countries'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      country: country
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
