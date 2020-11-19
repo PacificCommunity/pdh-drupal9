@@ -10,7 +10,7 @@ id: paragraph.maritime_zone_pathway.field_maritime_zone
 field_name: field_maritime_zone
 entity_type: paragraph
 bundle: maritime_zone_pathway
-label: 'Maritime Zone'
+label: 'Step Name'
 description: ''
 required: true
 translatable: false

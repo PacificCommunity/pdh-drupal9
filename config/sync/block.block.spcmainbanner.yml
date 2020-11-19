@@ -12,7 +12,7 @@ dependencies:
 id: spcmainbanner
 theme: spc
 region: subheader
-weight: -6
+weight: -10
 provider: null
 plugin: sps_main_banner
 settings:

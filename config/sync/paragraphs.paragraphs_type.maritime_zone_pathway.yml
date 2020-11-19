@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: maritime_zone_pathway
-label: 'Maritime Zone Pathway'
+label: 'Maritime Zone Pathway Step'
 icon_uuid: null
 icon_default: null
 description: ''
