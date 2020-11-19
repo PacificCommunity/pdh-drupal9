@@ -63,6 +63,7 @@ module:
   spc_dot_stat_data: 0
   spc_dot_stat_links: 0
   spc_main: 0
+  spc_mbd: 0
   spc_publication_import: 0
   spc_sdg_summary: 0
   svg_image: 0
@@ -74,11 +75,11 @@ module:
   toolbar: 0
   tour: 0
   ultimate_cron: 0
-  yearonly: 0
   update: 0
   user: 0
   views_infinite_scroll: 0
   views_ui: 0
+  yearonly: 0
   pathauto: 1
   views: 10
   paragraphs: 11

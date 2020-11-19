@@ -10,7 +10,7 @@ id: paragraph.extended_continental_shelf_step.field_shelf_step_term
 field_name: field_shelf_step_term
 entity_type: paragraph
 bundle: extended_continental_shelf_step
-label: 'Shelf step type'
+label: 'Step Name'
 description: ''
 required: false
 translatable: false

@@ -6,14 +6,21 @@ dependencies:
     - field.field.taxonomy_term.country.field_boundary_countries
     - field.field.taxonomy_term.country.field_continental_shelf_file
     - field.field.taxonomy_term.country.field_country_code
+    - field.field.taxonomy_term.country.field_date_deposited
+    - field.field.taxonomy_term.country.field_eez_area
+    - field.field.taxonomy_term.country.field_eez_deposited
     - field.field.taxonomy_term.country.field_eez_plygon
     - field.field.taxonomy_term.country.field_extended_continental_shelf
+    - field.field.taxonomy_term.country.field_flag
     - field.field.taxonomy_term.country.field_image
     - field.field.taxonomy_term.country.field_maritime_zone
     - field.field.taxonomy_term.country.field_maritime_zones_file
+    - field.field.taxonomy_term.country.field_related_datasets
+    - field.field.taxonomy_term.country.field_url
     - image.style.thumbnail
     - taxonomy.vocabulary.country
   module:
+    - datetime
     - file
     - paragraphs
     - path
@@ -26,14 +33,14 @@ mode: default
 content:
   description:
     type: text_textarea
-    weight: 4
+    weight: 7
     region: content
     settings:
       placeholder: ''
       rows: 5
     third_party_settings: {  }
   field_boundary_countries:
-    weight: 7
+    weight: 11
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -43,7 +50,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_continental_shelf_file:
-    weight: 9
+    weight: 13
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
@@ -57,6 +64,26 @@ content:
     third_party_settings: {  }
     type: string_textfield
     region: content
+  field_date_deposited:
+    type: datetime_default
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_eez_area:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_eez_deposited:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_eez_plygon:
     weight: 2
     settings:
@@ -67,7 +94,7 @@ content:
     region: content
   field_extended_continental_shelf:
     type: entity_reference_paragraphs
-    weight: 8
+    weight: 12
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -77,8 +104,16 @@ content:
       default_paragraph_type: extended_continental_shelf
     third_party_settings: {  }
     region: content
+  field_flag:
+    weight: 17
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   field_image:
-    weight: 3
+    weight: 6
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -87,7 +122,7 @@ content:
     region: content
   field_maritime_zone:
     type: entity_reference_paragraphs
-    weight: 5
+    weight: 9
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -98,12 +133,28 @@ content:
     third_party_settings: {  }
     region: content
   field_maritime_zones_file:
-    weight: 6
+    weight: 10
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
     type: file_generic
     region: content
+  field_related_datasets:
+    type: string_textfield
+    weight: 14
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_url:
+    type: string_textfield
+    weight: 8
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   name:
     type: string_textfield
     weight: 0
@@ -114,7 +165,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 10
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -122,7 +173,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 11
+    weight: 16
     region: content
     third_party_settings: {  }
 hidden: {  }

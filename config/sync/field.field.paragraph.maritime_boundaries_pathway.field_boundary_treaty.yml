@@ -10,7 +10,7 @@ id: paragraph.maritime_boundaries_pathway.field_boundary_treaty
 field_name: field_boundary_treaty
 entity_type: paragraph
 bundle: maritime_boundaries_pathway
-label: 'Boundary Treaty'
+label: 'Step Name'
 description: ''
 required: false
 translatable: false
