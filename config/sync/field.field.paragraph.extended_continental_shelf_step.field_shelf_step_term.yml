@@ -12,7 +12,7 @@ entity_type: paragraph
 bundle: extended_continental_shelf_step
 label: 'Step Name'
 description: ''
-required: false
+required: true
 translatable: false
 default_value: {  }
 default_value_callback: ''

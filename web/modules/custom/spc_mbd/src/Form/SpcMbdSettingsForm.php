@@ -71,6 +71,17 @@ class SpcMbdSettingsForm extends ConfigFormBase {
       ],
       '#default_value' => [$config->get('mbd_boundary_treaty_fid')], 
       '#required' => false
+    ];
+    
+    $form['field_mbd_shelf_treaty'] = [
+      '#type' => 'managed_file',
+      '#title' => $this->t('Pathway to Extended Continental Shelf Treaty PDF'),
+      '#upload_location' => 'public://mbd/',
+      '#upload_validators' => [
+        'file_validate_extensions' => ['pdf'],
+      ],
+      '#default_value' => [$config->get('mbd_shelf_treaty_fid')], 
+      '#required' => false
     ];    
 
     return parent::buildForm($form, $form_state);
@@ -111,6 +122,17 @@ class SpcMbdSettingsForm extends ConfigFormBase {
     } else {
         $config->set('mbd_boundary_treaty_fid', '');
     }
+    
+    $mbd_shelf_treaty_file = $form_state->getValue('field_mbd_shelf_treaty', 0);
+    if (isset($mbd_shelf_treaty_file[0]) && !empty($mbd_shelf_treaty_file[0])) {
+      $shelf_treaty_file = File::load($mbd_shelf_treaty_file[0]);
+      $shelf_treaty_file->setPermanent();
+      $shelf_treaty_file->save();
+
+      $config->set('mbd_shelf_treaty_fid', $shelf_treaty_file->id());
+    } else {
+        $config->set('mbd_shelf_treaty_fid', '');
+    }    
     
     $config->save(); 
   }
