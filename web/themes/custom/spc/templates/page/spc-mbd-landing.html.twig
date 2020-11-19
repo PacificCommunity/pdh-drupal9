@@ -129,6 +129,51 @@
             </div>
         </div>        
     </div>
+            
+    <h3 class="collapsed" data-id="continental-shelf">3.&nbsp{{ 'Extended Continental Shelf Pathway'|t }}</h3>
+    <div id="continental-shelf" class="continental-shelf">
+        {% if data.shelf_treaty_file %}
+            <div class="download">
+                <a href="{{ data.shelf_treaty_file }}">{{ 'Download PDF file' }}</a>
+            </div>
+        {% endif %}
+        {% if data.shelf_treaty %}
+            <div class="treaty-steps">
+                {% for step in data.shelf_treaty %}
+                    <div class="step">
+                        <div class="step-icon">
+                            <img src="{{ step.icon }}"> 
+                        </div>
+                        <div class="step-state ">
+                            <div class="state">
+                                {% if step.state.completed.percent %}
+                                    <div style="width: {{ step.state.completed.percent }}%" class="level completed">
+                                        <div class="tooltip">{{ 'Completed' }} <b>{{ step.state.completed.count }}</b> {{ 'countries' }}</div>
+                                    </div>
+                                {% endif %}
+                                {% if step.state.in_progress.percent %}
+                                    <div style="width: {{ step.state.in_progress.percent }}%" class="level in_progress">
+                                        <div class="tooltip">{{ 'In progress' }} <b>{{ step.state.in_progress.count }}</b> {{ 'countries' }}</div>
+                                    </div>
+                                {% endif %}
+                                {% if step.state.not_started.percent %}
+                                    <div style="width: {{ step.state.not_started.percent }}%" class="level not_started">
+                                        <div class="tooltip">{{ 'Not started' }} <b>{{ step.state.not_started.count }}</b> {{ 'countries' }}</div>
+                                    </div>
+                                {% endif %}
+                                {% if step.state.na.percent %}
+                                    <div style="width: {{ step.state.na.percent }}%" class="level na">
+                                        <div class="tooltip">{{ 'NA' }} <b>{{ step.state.na.count }}</b> {{ 'countries' }}</div>
+                                    </div>
+                                {% endif %}                       
+                            </div>
+                        </div>
+                        <div class="step-name">{{ step.name }}</div>
+                    </div>
+                {% endfor %}    
+            </div>
+        {% endif %}    
+    </div>            
     
     {% if  data.countries %}
         <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>

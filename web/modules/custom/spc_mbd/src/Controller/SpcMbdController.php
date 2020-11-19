@@ -32,6 +32,12 @@ class SpcMbdController extends ControllerBase {
             $data['boundary_treaty_file'] =  file_create_url($mbd_boundary_treaty_file->uri->value);           
         }        
         
+        $data['shelf_treaty'] = @$this->get_shelf_treaty();
+        if ($mbd_shelf_treaty_fid = $config->get('mbd_shelf_treaty_fid')){
+            $mbd_shelf_treat_file = File::load($mbd_shelf_treaty_fid);
+            $data['shelf_treaty_file'] =  file_create_url($mbd_shelf_treat_file->uri->value);           
+        }
+        
         $data['countries'] = @$this->get_countries();
         
         return [
@@ -228,6 +234,86 @@ class SpcMbdController extends ControllerBase {
 
         return $combine_states;
     }
+    
+    public function get_shelf_treaty(){
+        $treaty = [];
+        
+        $treaty_steps_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('continental_shelf');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();
+        
+        foreach($treaty_steps_tax as $treaty_step_term){
+            $treaty_step = Term::load($treaty_step_term->tid);
+            
+            $name = $treaty_step->getName();
+            
+            $fid = $treaty_step->get('field_image')->getValue()[0]['target_id'];
+            $file = File::load($fid);
+                        
+            $icon = '';
+            if (is_object($file)){
+              $icon = $file->url();
+            }     
+            
+            $state = '';
+            $state = $this->get_combine_boundaries_treaty_states($name);
+            
+
+            $treaty[] = [
+              'icon' => $icon,  
+              'name' => $name,
+              'state' => $state, 
+            ];
+        }
+
+        return $treaty;
+    }
+    
+    public function get_combine_boundaries_treaty_states($treaty_name){
+        $combine_states = [];
+
+        $q = db_select('node','n')
+            ->fields('n', ['nid'])
+            ->condition('n.type', 'continental_shelf');
+        
+        $results = $q->execute()->fetchAll();
+
+        if (!empty($results)){
+            foreach($results as $key => $value){
+                $treaty = Node::load($value->nid);
+                $steps = $treaty->get('field_shelf_steps')->getValue();
+
+                foreach($steps as $step){
+                    if (!empty($step['target_id'])){
+                        $paragraph_step = Paragraph::load($step['target_id']);
+                        $state = $paragraph_step->field_progress_type->value;
+
+                        $step_term_id = $paragraph_step->field_shelf_step_term->getValue()[0]['target_id'];
+                        if ($step_term_id){
+                            $paragraph_treaty = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($step_term_id);
+                            $treaty_step_name = $paragraph_treaty->label();
+
+                            if ($treaty_name == $treaty_step_name){
+                                $combine_states[$state]['count'] +=1;
+                                $combine_states['total'] +=1;
+                            } else {
+                                $combine_states[$state]['count'] +=0;
+                                $combine_states['total'] +=0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach ($combine_states as $key => $value){
+            if (!empty($value['count'])){
+                $combine_states[$key]['percent'] = (100/$combine_states['total'])*$value['count'];                
+            }
+        }        
+
+        return $combine_states;
+    }    
     
     
 }
