@@ -33,7 +33,7 @@ mode: default
 content:
   description:
     type: text_textarea
-    weight: 7
+    weight: 4
     region: content
     settings:
       placeholder: ''
@@ -49,13 +49,6 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_continental_shelf_file:
-    weight: 13
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-    type: file_generic
-    region: content
   field_country_code:
     weight: 1
     settings:
@@ -66,46 +59,34 @@ content:
     region: content
   field_date_deposited:
     type: datetime_default
-    weight: 5
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_eez_area:
     type: number
-    weight: 3
+    weight: 6
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_eez_deposited:
     type: boolean_checkbox
-    weight: 4
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_eez_plygon:
-    weight: 2
+    weight: 5
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
     region: content
-  field_extended_continental_shelf:
-    type: entity_reference_paragraphs
-    weight: 12
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: extended_continental_shelf
-    third_party_settings: {  }
-    region: content
   field_flag:
-    weight: 17
+    weight: 2
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -113,7 +94,7 @@ content:
     type: image_image
     region: content
   field_image:
-    weight: 6
+    weight: 3
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -141,7 +122,7 @@ content:
     region: content
   field_related_datasets:
     type: string_textfield
-    weight: 14
+    weight: 12
     region: content
     settings:
       size: 60
@@ -149,7 +130,7 @@ content:
     third_party_settings: {  }
   field_url:
     type: string_textfield
-    weight: 8
+    weight: 13
     region: content
     settings:
       size: 60
@@ -165,7 +146,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 15
+    weight: 14
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -173,7 +154,9 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 16
+    weight: 15
     region: content
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_continental_shelf_file: true
+  field_extended_continental_shelf: true
