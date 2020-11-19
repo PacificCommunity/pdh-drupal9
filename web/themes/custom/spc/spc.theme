@@ -120,6 +120,11 @@ function spc_preprocess_taxonomy_term(&$variables){
         } else {
             $variables['description']['read'] = $description;
         }
+        
+        $variables['empty_zone'] = false;
+        if (!$term->get('field_maritime_zone')->getValue()){
+            $variables['empty_zone'] = true;
+        }
     }
     
     if ($variables['view_mode'] == 'step' && $vocabulary == 'maritime_zone'){

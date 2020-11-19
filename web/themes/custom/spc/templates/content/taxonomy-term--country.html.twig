@@ -47,7 +47,11 @@
         <div class="maritime-zones-file">
             {{ content.field_maritime_zones_file }}
         </div>
-        {{ content.field_maritime_zone }}
+        {% if empty_zone == false %}
+            {{ content.field_maritime_zone }}
+        {% else %}
+            <p>{{ 'N/A' }}</p>
+        {% endif %}    
     </div>
     
     <h3 class="collapsed" data-id="boundaries-treaty">2.&nbsp{{ 'Pathway to Maritime Boundaries Treaty'|t }}</h3>
@@ -187,6 +191,8 @@
                     </div>
                 </div>    
             {% endfor %}
+        {% else %}
+            <p>{{ 'N/A' }}</p>
         {% endif %}    
     </div>    
 

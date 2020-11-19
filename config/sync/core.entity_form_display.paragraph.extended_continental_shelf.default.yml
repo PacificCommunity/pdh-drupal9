@@ -35,4 +35,12 @@ content:
     region: content
 hidden:
   created: true
+  field_datasets: true
+  field_date_submission: true
+  field_defence_year: true
+  field_established_year: true
+  field_full_submission_complied: true
+  field_joint_submission: true
+  field_recommendation: true
+  field_submission_done: true
   status: true
