@@ -38,6 +38,8 @@ class SpcMbdController extends ControllerBase {
             $data['shelf_treaty_file'] =  file_create_url($mbd_shelf_treat_file->uri->value);           
         }
         
+        $data['partners'] = @$this->get_mbd_partners();
+        
         $data['countries'] = @$this->get_countries();
         
         return [
@@ -313,6 +315,38 @@ class SpcMbdController extends ControllerBase {
         }        
 
         return $combine_states;
+    }
+
+    public function get_mbd_partners() {
+        $output = [];
+        
+        $partners_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('partners');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();
+        
+        foreach($partners_tax as $partner_term){
+            $partner = Term::load($partner_term->tid);
+            
+            $name = $partner->getName();
+            
+            $url = $partner->get('field_url')->getValue()[0]['value'];
+            
+            $fid = $partner->get('field_image')->getValue()[0]['target_id'];
+            $file = File::load($fid);
+                        
+            $icon = '';
+            if (is_object($file)){
+              $icon = $file->url();
+            }     
+
+            $output[] = [
+              'icon' => $icon,  
+              'name' => $name,
+              'url' => $url, 
+            ];
+        }
+
+        return $output;
     }    
     
     
