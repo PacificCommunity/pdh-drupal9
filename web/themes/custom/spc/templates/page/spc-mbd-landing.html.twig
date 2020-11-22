@@ -189,4 +189,18 @@
         </div>
     {% endif %}
     
+    {% if data.partners %}
+        <h3 class="block-title">{{ 'Partners'|t }}</h3>
+        <div id="partners-list" class="block-shadow clearfix">
+            {% for partner in data.partners %}
+                <a class="partner-item" href="{{ partner.url }}" title="{{ partner.name }}">
+                    <p class="img">
+                        <img src="{{ partner.icon }}" alt="{{ partner.name }}">
+                    </p>
+                    <div class="tooltip">{{ partner.name }}</div>
+                </a>            
+            {% endfor %}
+        </div>
+    {% endif %}    
+    
 </div>
