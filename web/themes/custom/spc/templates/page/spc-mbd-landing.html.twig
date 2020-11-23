@@ -28,7 +28,7 @@
                     {% endif %}  
                 </div>
                 <div class="step-state ">
-                    <div class="state">
+                    <div class="state group">
                         {% if zone_step.state.completed.percent %}
                             <div style="width: {{ zone_step.state.completed.percent }}%" class="level completed">
                                 <div class="tooltip">{{ 'Completed' }} <b>{{ zone_step.state.completed.count }}</b> {{ 'countries' }}</div>
@@ -80,7 +80,7 @@
                     {% endif %}  
                 </div>
                 <div class="step-state ">
-                    <div class="state">
+                    <div class="state group">
                         {% if treaty_step.state.completed.percent %}
                             <div style="width: {{ treaty_step.state.completed.percent }}%" class="level completed">
                                 <div class="tooltip">{{ 'Completed' }} <b>{{ treaty_step.state.completed.count }}</b> {{ 'countries' }}</div>
@@ -145,7 +145,7 @@
                             <img src="{{ step.icon }}"> 
                         </div>
                         <div class="step-state ">
-                            <div class="state">
+                            <div class="state group">
                                 {% if step.state.completed.percent %}
                                     <div style="width: {{ step.state.completed.percent }}%" class="level completed">
                                         <div class="tooltip">{{ 'Completed' }} <b>{{ step.state.completed.count }}</b> {{ 'countries' }}</div>
