@@ -1212,6 +1212,8 @@ form {
                             font-size: 12px;
                             z-index: 11;
                             white-space: nowrap;
+                            min-width: 90px;
+                            text-align: center;
 
                             &:before {
                                 content: '';
@@ -1624,7 +1626,11 @@ form {
         @media(min-width: 820px) and (max-width: 1320px){ flex: 0 15%; }
         @media(min-width: 620px) and (max-width: 820px){ flex: 0 25%; }   
         @media(min-width: 420px) and (max-width: 620px){ flex: 0 50%; }
-        @media(min-width: 320px) and (max-width: 420px){ flex: 0 100%; }        
+        @media(min-width: 320px) and (max-width: 420px){ flex: 0 100%; } 
+        
+        .img {
+            line-height: 50px;
+        }
         
         .tooltip {
             display: none;
