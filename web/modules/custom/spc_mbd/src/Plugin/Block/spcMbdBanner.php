@@ -25,7 +25,7 @@ class spcMbdBanner extends BlockBase {
    */
   public function build() {
     
-    $title = 'Pacific <strong>Maritime Boundaries</strong> Dashabord';
+    $title = 'Pacific <strong>Maritime Boundaries</strong> Dashboard';
     $subtitle = '';
       
     $data = [];
