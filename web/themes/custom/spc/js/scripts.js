@@ -54,8 +54,8 @@
                 var modulePath = "/" + drupalSettings.spcMainModulePath;
 
                 var valuesDescription = [
+                  "UNUSED",
                   "None, or insufficient country data",
-                  "Tier 3 indicator. No established methodology",
                   "No achievement against the goal",
                   "Minimal achievement",
                   "Some achievement",
