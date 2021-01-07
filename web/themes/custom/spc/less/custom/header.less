@@ -75,7 +75,31 @@ header[role="banner"] {
                 .dropdown-menu {
                     display: block;
                     margin-top: -1px;
-                    box-shadow: 0 1px 1px silver;
+                    box-shadow: none;
+
+                    
+
+                    li.dropdown {
+                      .dropdown-menu {
+                        display: none;
+                      }
+                    }
+
+                    li.dropdown:hover {
+                      a{
+                        color: #ffbc00; 
+                        .fa-caret-down:before {
+                            color: #ffbc00;
+                        }
+                      }
+
+                      .dropdown-menu {
+                        display: block;
+                        a {
+                          color: #7B7B7B; 
+                        }
+                      }
+                    }
                 }
             }
         }
@@ -109,6 +133,10 @@ header[role="banner"] {
                     color: #000 !important;
                     background-color: #f5f5f5;
                     border-left: 3px solid #000000;
+
+                    .fa-caret-down:before {
+                        color: #000 !important;
+                    }                     
                 }
             }
             .fa:before, .fp:before, .with-icon .fa, .with-icon .fp {
@@ -126,6 +154,12 @@ header[role="banner"] {
             .fa:hover:before, .fp:hover:before, .with-icon:hover .fa:before {
                 color: #000;
             }
+            .fa-caret-down:before {
+              right: auto;
+              left: auto;
+              font-size: 13px;
+              top: 15px;
+            }            
         }
     }
 
