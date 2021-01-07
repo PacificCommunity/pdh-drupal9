@@ -71,7 +71,7 @@ class SpcMbdController extends ControllerBase {
             }
 
 
-            $aliasManager = \Drupal::service('path.alias_manager');
+            $aliasManager = \Drupal::service('path_alias.manager');
             $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
 
             $countries[] = [
@@ -101,7 +101,7 @@ class SpcMbdController extends ControllerBase {
                         
             $icon = '';
             if (is_object($file)){
-              $icon = $file->url();
+              $icon = file_create_url($file->getFileUri());
             }     
             
             $state = $this->get_combine_maritime_zones($name);
@@ -176,7 +176,7 @@ class SpcMbdController extends ControllerBase {
                         
             $icon = '';
             if (is_object($file)){
-              $icon = $file->url();
+              $icon = file_create_url($file->getFileUri());
             }     
             
             $state = $this->get_combine_boundaries_treaty($name);
@@ -194,7 +194,7 @@ class SpcMbdController extends ControllerBase {
     public function get_combine_boundaries_treaty($treaty_name){
         $combine_states = [];
 
-        $q = db_select('node','n')
+        $q = \Drupal::database()->select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'boundary_treaty');
         
@@ -254,7 +254,7 @@ class SpcMbdController extends ControllerBase {
                         
             $icon = '';
             if (is_object($file)){
-              $icon = $file->url();
+              $icon = file_create_url($file->getFileUri());
             }     
             
             $state = '';
@@ -274,7 +274,7 @@ class SpcMbdController extends ControllerBase {
     public function get_combine_boundaries_treaty_states($treaty_name){
         $combine_states = [];
 
-        $q = db_select('node','n')
+        $q = \Drupal::database()->select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'continental_shelf');
         
@@ -336,7 +336,7 @@ class SpcMbdController extends ControllerBase {
                         
             $icon = '';
             if (is_object($file)){
-              $icon = $file->url();
+              $icon = file_create_url($file->getFileUri());
             }     
 
             $output[] = [

@@ -52,7 +52,7 @@ class spcMbdBanner extends BlockBase {
           //Breadcrumbs.
           $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($data['vocabulary']);
           foreach ($terms as $term) {
-            $aliasManager = \Drupal::service('path.alias_manager');
+            $aliasManager = \Drupal::service('path_alias.manager');
             $url = $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->tid);
             
             $term_data[] = array(

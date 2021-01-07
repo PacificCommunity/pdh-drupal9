@@ -92,7 +92,7 @@ function spc_preprocess_field(&$variables){
  * Implements theme_preprocess_node().
  */
 function spc_preprocess_taxonomy_term(&$variables){
-    $vocabulary = $variables['elements']['#taxonomy_term']->getVocabularyId();
+    $vocabulary = $variables['elements']['#taxonomy_term']->bundle();
     $term = $variables['term'];
 
     if ($variables['view_mode'] == 'full' && $vocabulary == 'country'){
@@ -213,7 +213,7 @@ function _get_country_related_datasets($variables){
                         $tag_name = $tag->name;
 
                         if ($term_code == $tag_name){
-                          $aliasManager = \Drupal::service('path.alias_manager');
+                          $aliasManager = \Drupal::service('path_alias.manager');
                           $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
 
                           $dataset['tags'][] = [
@@ -259,7 +259,7 @@ function _get_countries_list($current_country){
         $name = $country->getName();
         $country_code = $country->get('field_country_code')->getValue()[0]['value'];
 
-        $aliasManager = \Drupal::service('path.alias_manager');
+        $aliasManager = \Drupal::service('path_alias.manager');
         $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
         
         $class_name = '';
@@ -303,7 +303,7 @@ function _get_country_treaty($term){
     $condition_or->condition('bco.field_boundary_country_one_target_id', $country_id);
     $condition_or->condition('bct.field_boundary_country_two_target_id', $country_id);
     
-    $q = db_select('node','n')
+    $q = \Drupal::database()->select('node','n')
         ->fields('n', ['nid'])
         ->condition('n.type', 'boundary_treaty')
         ->condition($condition_or);
@@ -324,12 +324,12 @@ function _get_country_treaty($term){
             $country_one_id = $treaty->get('field_boundary_country_one')->getValue()[0]['target_id'];
             $country_one = Term::load($country_one_id);
             $output[$treaty_state][$key]['country_one'] = $country_one->getName();
-            $country_one_url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $country_one_id);
+            $country_one_url = \Drupal::service('path_alias.manager')->getAliasByPath('/taxonomy/term/' . $country_one_id);
             $output[$treaty_state][$key]['country_one_url'] = $country_one_url;
 
             $country_one_file = File::load($country_one->get('field_flag')->getValue()[0]['target_id']);
             if (is_object($country_one_file)){
-              $output[$treaty_state][$key]['country_one_flag'] = $country_one_file->url();
+              $output[$treaty_state][$key]['country_one_flag'] = file_create_url($country_one_file->getFileUri());
             } else {
                 $country_one_flag = '/' . $theme_path . '/img/flags/' . $country_one->get('field_country_code')->getValue()[0]['value'] . '.svg';
                 $output[$treaty_state][$key]['country_one_flag'] = $country_one_flag;
@@ -338,12 +338,12 @@ function _get_country_treaty($term){
             $country_two_id = $treaty->get('field_boundary_country_two')->getValue()[0]['target_id'];
             $country_two = Term::load($country_two_id);
             $output[$treaty_state][$key]['country_two'] = $country_two->getName();
-            $country_two_url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $country_two_id);
+            $country_two_url = \Drupal::service('path_alias.manager')->getAliasByPath('/taxonomy/term/' . $country_two_id);
             $output[$treaty_state][$key]['country_two_url'] = $country_two_url;            
             
             $country_two_file = File::load($country_two->get('field_flag')->getValue()[0]['target_id']);
             if (is_object($country_two_file)){
-                $output[$treaty_state][$key]['country_two_flag'] = $country_two_file->url();
+                $output[$treaty_state][$key]['country_two_flag'] = file_create_url($country_two_file->getFileUri());
             } else {
                 $country_two_flag = '/' . $theme_path . '/img/flags/' . $country_two->get('field_country_code')->getValue()[0]['value'] . '.svg';
                 $output[$treaty_state][$key]['country_two_flag'] = $country_two_flag;
@@ -351,7 +351,7 @@ function _get_country_treaty($term){
 
             $download = File::load($treaty->get('field_boundaries_treaty_file')->getValue()[0]['target_id']);
             if (is_object($download)){
-              $output[$treaty_state][$key]['download'] = $download->url();
+              $output[$treaty_state][$key]['download'] = file_create_url($download->getFileUri());
             }
             
             switch ($treaty_state) {
@@ -374,7 +374,7 @@ function _get_country_treaty($term){
                         $icon = '';
                         $file = File::load($paragraph_treaty->get('field_image')->getValue()[0]['target_id']);
                         if (is_object($file)){
-                          $icon = $file->url();
+                          $icon = file_create_url($file->getFileUri());
                         }
 
                         $treaty_steps[] = [
@@ -398,7 +398,7 @@ function _get_shelf_treaty($term){
     $output = [];
     
     $country_id = intval($term->id());
-    $q = db_select('node','n')
+    $q = \Drupal::database()->select('node','n')
         ->fields('n', ['nid'])
         ->condition('n.type', 'continental_shelf')
         ->condition('lc.field_limit_countries_target_id', $country_id);
@@ -428,7 +428,7 @@ function _get_shelf_treaty($term){
                 $icon = '';
                 $file = File::load($paragraph_treaty->get('field_image')->getValue()[0]['target_id']);
                 if (is_object($file)){
-                  $icon = $file->url();
+                  $icon = file_create_url($file->getFileUri());
                 }
 
                 $treaty_steps[] = [
