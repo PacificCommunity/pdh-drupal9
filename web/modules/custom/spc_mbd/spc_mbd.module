@@ -23,3 +23,26 @@ function spc_mbd_theme($existing, $type, $theme, $path){
     ],      
   ];
 }
+
+/**
+ * Implements hook_form__alter().
+ */
+function spc_mbd_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'node_high_seas_limit_form':
+    case 'node_high_seas_limit_edit_form':
+      $form['#validate'][] = '_spc_mbd_form_high_seas_limit_validate';
+      break;  
+  }
+}
+
+/**
+ * Implements _form_ID_validate().
+ */
+function _spc_mbd_form_high_seas_limit_validate(&$form, FormStateInterface $form_state){
+  $geo_json = $form_state->getValue('field_geojscon_coordinates')[0]['value'];
+  $result = json_decode($geo_json);
+  if (json_last_error() !== 0) {
+       $form_state->setErrorByName('field_geojscon_coordinates', t('Invalid JSON data.'));
+  }
+}
