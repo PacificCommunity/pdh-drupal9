@@ -65,7 +65,7 @@ class SpcMbdController extends ControllerBase {
             $file = File::load($fid);
             
             if (is_object($file)){
-              $flag = $file->url();
+              $flag = file_create_url($file->getFileUri());
             } else {
                 $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
             }
