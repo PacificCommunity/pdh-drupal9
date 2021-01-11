@@ -1,0 +1,27 @@
+uuid: 846e4987-5d01-496a-a405-0107406f9274
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_dot_stat_data
+  theme:
+    - spc
+id: pdh.statkeystatistic
+theme: spc
+region: blocks
+weight: 0
+provider: null
+plugin: dot_stat_key_stat
+settings:
+  id: dot_stat_key_stat
+  label: 'PDH.stat Key Statistic'
+  provider: spc_dot_stat_data
+  label_display: visible
+  dot_stat_key_node: '5'
+  dot_stat_key_format: '0'
+  dot_stat_key_function: '0'
+  dot_stat_key_link: null
+  dot_stat_key_icon: ''
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }

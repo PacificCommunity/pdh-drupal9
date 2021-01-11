@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.high_seas_limit.body
     - field.field.node.high_seas_limit.field_date_deposited
     - field.field.node.high_seas_limit.field_deposited
+    - field.field.node.high_seas_limit.field_geojscon_coordinates
     - field.field.node.high_seas_limit.field_limit_countries
     - field.field.node.high_seas_limit.field_related_datasets
     - field.field.node.high_seas_limit.field_url
@@ -20,12 +21,12 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   field_date_deposited:
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
@@ -35,6 +36,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: options_buttons
+    region: content
+  field_geojscon_coordinates:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
     region: content
   field_limit_countries:
     weight: 1
@@ -47,7 +56,7 @@ content:
     type: entity_reference_autocomplete
     region: content
   field_related_datasets:
-    weight: 5
+    weight: 6
     settings:
       size: 60
       placeholder: ''
@@ -55,7 +64,7 @@ content:
     type: string_textfield
     region: content
   field_url:
-    weight: 4
+    weight: 5
     settings:
       size: 60
       placeholder: ''
@@ -64,7 +73,7 @@ content:
     region: content
   path:
     type: path
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -72,21 +81,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 9
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 12
+    weight: 13
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 10
     region: content
     third_party_settings: {  }
   title:
@@ -99,7 +108,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
+    weight: 7
     settings:
       match_operator: CONTAINS
       size: 60
@@ -108,7 +117,7 @@ content:
     region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.high_seas_limit.body
     - field.field.node.high_seas_limit.field_date_deposited
     - field.field.node.high_seas_limit.field_deposited
+    - field.field.node.high_seas_limit.field_geojscon_coordinates
     - field.field.node.high_seas_limit.field_limit_countries
     - field.field.node.high_seas_limit.field_related_datasets
     - field.field.node.high_seas_limit.field_url
@@ -35,6 +36,7 @@ content:
 hidden:
   field_date_deposited: true
   field_deposited: true
+  field_geojscon_coordinates: true
   field_limit_countries: true
   field_related_datasets: true
   field_url: true
