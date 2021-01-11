@@ -4,7 +4,7 @@ features:
   comment_user_verification: 1
   favicon: 1
 logo:
-  use_default: 1
-  path: ''
+  use_default: 0
+  path: 'public://spc_data_hub_logo_2.png'
 favicon:
   use_default: 1
