@@ -1,6 +1,6 @@
 uuid: 4de440e8-cf03-45ac-ac29-ef72ce3d49bc
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - spc_main
