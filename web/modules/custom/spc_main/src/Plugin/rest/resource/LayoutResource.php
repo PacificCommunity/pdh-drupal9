@@ -103,7 +103,7 @@ class LayoutResource extends ResourceBase {
     $footer_menu = $this->menu_renderable('footer-menu')['#markup'];
     $markup = $footer_partners . $footer_menu;
 
-    return ['#markup' => $markup];
+  return ['main' => [$markup]];
   }
   
   /**
@@ -129,7 +129,7 @@ class LayoutResource extends ResourceBase {
     $block_content = \Drupal::EntityTypeManager()->getViewBuilder('block')->view($block);
     $markup = \Drupal::service('renderer')->renderRoot($block_content);
 
-    return ['#markup' => $markup];
+    return ['main' => [$markup]];
   } 
   
 }

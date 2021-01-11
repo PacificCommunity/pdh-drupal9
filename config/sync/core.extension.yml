@@ -37,6 +37,7 @@ module:
   hotjar: 0
   image: 0
   link: 0
+  menu_link_attributes: 0
   menu_link_content: 0
   menu_ui: 0
   metatag: 0
@@ -54,8 +55,11 @@ module:
   redirect_404: 0
   redirect_domain: 0
   responsive_image: 0
+  rest: 0
+  restui: 0
   robotstxt: 0
   search: 0
+  serialization: 0
   shortcut: 0
   spc_data_import: 0
   spc_dot_stat_chart: 0
