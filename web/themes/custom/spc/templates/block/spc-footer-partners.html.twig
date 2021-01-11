@@ -1,1 +1,19 @@
-{{ menu|raw }}
+{% if partners %}
+  <div class="container">
+    <div id="two-50-top-wrapper">
+      <div  class="region two-50-top region-conditional-stack">
+        <div class="region-inner clearfix">
+          <div class="field-items">
+          {% for partner in partners %}
+            <div class="field-item">
+              <a class="partner-item" href="{{ partner.url }}" target="_blank" title="{{ partner.name }}">
+                <img src="{{ partner.icon }}" alt="{{ partner.name }}">
+              </a>
+            </div>  
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>      
+{% endif %}
