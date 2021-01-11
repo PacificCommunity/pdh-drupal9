@@ -326,24 +326,27 @@ class SpcMbdController extends ControllerBase {
         
         foreach($partners_tax as $partner_term){
             $partner = Term::load($partner_term->tid);
-            
-            $name = $partner->getName();
-            
-            $url = $partner->get('field_url')->getValue()[0]['value'];
-            
-            $fid = $partner->get('field_image')->getValue()[0]['target_id'];
-            $file = File::load($fid);
-                        
-            $icon = '';
-            if (is_object($file)){
-              $icon = file_create_url($file->getFileUri());
-            }     
+            $display_in = @$partner->get('field_display_in')->getValue();
+            if (array_search('mbd', array_column($display_in, 'value')) !== false){
+              $name = $partner->getName();
 
-            $output[] = [
-              'icon' => $icon,  
-              'name' => $name,
-              'url' => $url, 
-            ];
+              $url = $partner->get('field_url')->getValue()[0]['value'];
+
+              $fid = $partner->get('field_image')->getValue()[0]['target_id'];
+              $file = File::load($fid);
+
+              $icon = '';
+              if (is_object($file)){
+                $icon = file_create_url($file->getFileUri());
+              }     
+
+              $output[] = [
+                'icon' => $icon,  
+                'name' => $name,
+                'url' => $url, 
+              ];              
+            }
+
         }
 
         return $output;

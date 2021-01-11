@@ -32,40 +32,20 @@ function spc_preprocess_html(&$variables) {
     $variables['attributes']['class'][] = 'mbd-landing';
   }
 }
-        
-/**
- * Implementation of hook_preprocess_views_view_field().
- */
-function spc_preprocess_views_view_field(&$variables){
-
-}
 
 /**
- * Implementation of hook_preprocess_views_view().
+ * Implements hook_preprocess_HOOK().
  */
-function spc_preprocess_views_view(&$variables){
+function spc_preprocess_block(&$variables) {
+  if ($variables['derivative_plugin_id'] == 'main-menu'){
+    
+    $menu_tree = \Drupal::menuTree();
+    $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
+    $tree = $menu_tree->load('main-menu', $parameters);
+    $menu = $menu_tree->build($tree);
 
-}
-
-/**
- * Implements theme_preprocess_breadcrumb().
- */
-function spc_preprocess_breadcrumb(&$variables){
-
-}
-
-/**
- * Implements theme_preprocess_user().
- */
-function spc_preprocess_user(&$variables){
-
-}
-
-/**
- * Implements theme_preprocess_node().
- */
-function spc_preprocess_node(&$variables){
-
+    $variables['menu_mobile'] = $menu['#items'];
+  }
 }
 
 /**
@@ -443,6 +423,5 @@ function _get_shelf_treaty($term){
             $output[] = $shelf;
         }
     }            
-    //dump($output); die;
     return $output;
 }

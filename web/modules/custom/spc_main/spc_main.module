@@ -25,7 +25,12 @@ function spc_main_theme($existing, $type, $theme, $path){
       'variables' => [
         'menu' => null
       ]
-    ],     
+    ],
+    'spc_footer_partners' => [
+      'variables' => [
+        'partners' => null
+      ]
+    ],      
   ];
 }
 
