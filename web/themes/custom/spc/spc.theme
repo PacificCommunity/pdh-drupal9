@@ -38,7 +38,13 @@ function spc_preprocess_html(&$variables) {
  */
 function spc_preprocess_block(&$variables) {
   if ($variables['derivative_plugin_id'] == 'main-menu'){
-    $variables['menu_mobile'] = 'menu_mobile';
+    
+    $menu_tree = \Drupal::menuTree();
+    $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
+    $tree = $menu_tree->load('main-menu', $parameters);
+    $menu = $menu_tree->build($tree);
+
+    $variables['menu_mobile'] = $menu['#items'];
   }
 }
 

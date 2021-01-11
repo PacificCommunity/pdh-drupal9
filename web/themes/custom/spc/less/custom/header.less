@@ -47,6 +47,7 @@ header[role="banner"] {
             li {
                 display: inline-block;
                 list-style: none;
+                position: relative;
                 a {
                     font-family: 'Roboto';
                     display: inline-block;
@@ -67,12 +68,24 @@ header[role="banner"] {
                 a:hover {
                   text-decoration: none;
                   color: #ffbc00!important;
+                  &+i {
+                    color: #ffbc00!important;
+                  }
+                }
+                &>i {
+                  color: #fff;
+                  position: absolute;
+                  right: 10px;
+                  top: 28px;
                 }
             }
             li.dropdown:hover {
                 background: #fff;
                 >a {
+                  color: #000;
+                  &+i {
                     color: #000;
+                  }
                 }
                 .dropdown-menu {
                     display: block;
@@ -229,6 +242,8 @@ button.header-menu-btn {
     border: none;
     height: 25px;
     width: 65px;
+    z-index: 1000;
+    
     span {
         display: block;
         width: 30px;
@@ -323,7 +338,8 @@ button.header-menu-btn {
 }
 
 @media (max-width: 991px) {
-    #main-menu {
+    #main-menu,
+    #block-mainmenu {
         display: none;
     }
     #mobile-menu {

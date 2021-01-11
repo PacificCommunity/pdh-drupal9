@@ -37,12 +37,12 @@ class spcFooterPartners extends BlockBase {
 
     foreach($partners_tax as $partner_term){
       $partner = Term::load($partner_term->tid);
-      
-      if (@$partner->get('field_display_in_footer')->getValue()[0]['value']){
+      $display_in = @$partner->get('field_display_in')->getValue();
+      if (array_search('footer', array_column($display_in, 'value')) !== false){
         $name = $partner->getName();
         $url = $partner->get('field_url')->getValue()[0]['value'];
 
-        $fid = $partner->get('field_image')->getValue()[0]['target_id'];
+        $fid = @$partner->get('field_footer_image')->getValue()[0]['target_id'];
         $file = File::load($fid);
 
         $icon = '';

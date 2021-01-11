@@ -36,11 +36,10 @@
     {% endif %}
     {% for item in items %}
       <li {% if item.below %}{{ item.attributes.addClass('dropdown') }}{% else %}{{ item.attributes }}{% endif %}>
-        <a href="{{ item.url }}">{{ item.title }}
-          {% if item.below %}
-            <i class="fa fa-caret-down"></i>
-          {% endif %}  
-        </a>
+        {{ link(item.title, item.url) }}
+        {% if item.below %}
+          <i class="fa fa-caret-down"></i>
+        {% endif %} 
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}

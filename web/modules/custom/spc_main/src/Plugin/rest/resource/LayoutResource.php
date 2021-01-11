@@ -64,7 +64,7 @@ class LayoutResource extends ResourceBase {
     
     switch ($name) {
       case 'menu_export':
-        $response = $this->menu_renderable('main-menu');
+        $response = $this->block_renderable('mainmenu');
         $code = 200;
         break;
       case 'footer_export':
@@ -126,7 +126,8 @@ class LayoutResource extends ResourceBase {
   public function block_renderable($block_name) {
     
     $block = \Drupal\block\Entity\Block::load($block_name);
-    $markup = \Drupal::entityManager()->getViewBuilder('block')->view($block);
+    $block_content = \Drupal::EntityTypeManager()->getViewBuilder('block')->view($block);
+    $markup = \Drupal::service('renderer')->renderRoot($block_content);
 
     return ['#markup' => $markup];
   } 

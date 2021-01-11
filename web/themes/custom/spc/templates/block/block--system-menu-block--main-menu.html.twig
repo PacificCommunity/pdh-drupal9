@@ -46,13 +46,40 @@
     {{ content }}
   {% endblock %}
 </nav>
+{% if menu_mobile %}
 <div id="mobile-menu" class="pull-right">
   <button class="header-menu-btn ma5-toggle-menu" type="button" aria-label="Open menu">
     <span></span>
     <span></span>
     <span></span>
   </button>
-  <nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes|without('role', 'aria-labelledby') }}>
-    {{ menu_mobile }}
+  <nav class="ma5-menu-mobile">
+    <ul class="ma5-ul">
+    {% for key, item in menu_mobile %}
+      {% set key = loop.index %}
+      <li class="ma5-li-{{ key }}">
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.below %}
+          <span class="ma5-btn-enter">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+          </span>
+          <ul class="ma5-ul-{{ key }}">
+            <li class="ma5-leave-bar">
+              <span class="ma5-btn-leave">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              </span>
+              {{ item.title }}
+            </li>
+          {% for subitem in item.below %}
+            <li class="ma5-li-{{ key }}{{ '-' }}{{ loop.index }}">
+              <a href="{{ subitem.url }}">{{ subitem.title }}</a>
+            </li>
+          {% endfor %}  
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}  
+    </ul>
   </nav>
 </div>
+{% endif %}    
