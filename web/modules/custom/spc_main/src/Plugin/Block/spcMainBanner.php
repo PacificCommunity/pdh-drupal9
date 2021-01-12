@@ -20,6 +20,8 @@ use Drupal\Core\Url;
  */
 class spcMainBanner extends BlockBase {
   
+  const DATA_BASE_URL = 'https://pacificdata.org';
+  
   /**
    * {@inheritdoc}
    */
@@ -43,7 +45,7 @@ class spcMainBanner extends BlockBase {
     
     $data['search_form'] = \Drupal::formBuilder()->getForm('Drupal\spc_main\Form\AdvancedSearchForm');
     
-    $spc_home_banner['dataBaseUrl'] = DATA_BASE_URL;
+    $spc_home_banner['dataBaseUrl'] = self::DATA_BASE_URL;
     
     $module_path = drupal_get_path('module', 'spc_main');
     $mapping_config = json_decode(file_get_contents($module_path . '/data/mapping.json'), true);    

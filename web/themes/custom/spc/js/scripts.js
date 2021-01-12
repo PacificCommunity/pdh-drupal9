@@ -421,7 +421,7 @@
                 
                 const selected = [];
                 $('form#ckan-search-form select').each(function(){
-                    if ($(this).val()){
+                    if ($(this).val().length > 0){
                         selected[$(this).attr('data-name')] = $(this).val();
                     }
                 });
@@ -432,7 +432,7 @@
                 for (let select in selected){
                     request_params += '+' + select + ':' + selected[select].join(',');
                 }
-                
+
                 const countriesMapping = drupalSettings.spc_home_banner.mappingConfig.mapping.member_countries;
                 
                 $.ajax({
