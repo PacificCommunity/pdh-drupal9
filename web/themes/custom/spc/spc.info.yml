@@ -12,6 +12,7 @@ libraries:
   - spc/d3    
   - spc/ma5
   - spc/select2
+  - spc/tokenize2
   - spc/global
   
 regions:
