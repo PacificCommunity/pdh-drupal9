@@ -9,20 +9,28 @@ namespace Drupal\spc_main\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
 
 class AdvancedSearchForm extends FormBase {
+  
+  const DATA_BASE_URL = 'https://pacificdata.org';
+
+  const FACETS_CATEGORIES = '"tags","organization","res_format","license_id","topic","type","member_countries"';
+
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return 'ckan_search_form';
   }
+  
   /**
    * {@inheritdoc}
    * Form
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-
+  public function buildForm(array $form, FormStateInterface $form_state) {    
+    
     # Text field
     $form['term'] = [
       '#type' => 'textfield',
@@ -31,18 +39,18 @@ class AdvancedSearchForm extends FormBase {
         'placeholder' => 'Search'
       ]
     ];
-    
-    $search_facets = [];
-    if (!$search_facets){
-      
-      define('DATA_BASE_URL', 'https://pacificdata.org');
-      define('FACETS_CATEGORIES', '"tags","organization","res_format","license_id","topic","type","member_countries"');
 
-      $url = DATA_BASE_URL . '/data/api/action/package_search?facet.field=[' . FACETS_CATEGORIES . ']';
+    $config = \Drupal::configFactory()->getEditable('spc_main.settings');    
+    $search_facets = $config->get('search_facets');
+    
+    if (!$search_facets){
+      $url = self::DATA_BASE_URL . '/data/api/action/package_search?facet.field=[' . self::FACETS_CATEGORIES . ']';
       $responce = json_decode(file_get_contents($url), true);
 
       if ($responce['success']){
         $search_facets = $responce['result']['search_facets'];
+        $config->set('search_facets', $search_facets);
+        $config->save();
       }    
     }
     
@@ -85,7 +93,7 @@ class AdvancedSearchForm extends FormBase {
         . '<div class="inner">'
           . '<span class="fieldset-legend">'
               . '<a class="fieldset-title" href="#">'
-                  . 'Advanced search'
+                  . $this->t('Advanced search')
               . '</a>'
           . '</span>'
         . '</div>';
@@ -128,56 +136,52 @@ class AdvancedSearchForm extends FormBase {
 
     return $form;
   }
+  
   /**
    * {@inheritdoc}
    * Submit
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    
+    $term = $tags = $organization = $res_format = $license_id = $topic = $type = $member_countries = NULL;
 
-//    $term = $search_type = $thematic_area = $ckan_tags = NULL;
-//    $tags = $organization = $res_format = $license_id = $topic = $type = $member_countries = NULL;
-//    extract($form_state['values'], EXTR_IF_EXISTS);
-//    switch ($search_type) {
-//      case 'article':
-//        $redirect_info = [sprintf('/search/articles/%s/%s', $term, $thematic_area)];
-//        break;
-//
-//      case 'dataset':
-//      default:
-//        $tag_query = '';
-//        if ($tags && $tags != 'none') {
-//          $tag_query .= '&tags=' . implode('&tags=', $tags);
-//        }
-//        if ($organization && $organization != 'none') {
-//          $tag_query .= '&organization=' . implode('&organization=', $organization);
-//        }
-//        if ($res_format && $res_format != 'none') {
-//          $tag_query .= '&res_format=' . implode('&res_format=', $res_format);
-//        }
-//        if ($license_id && $license_id != 'none') {
-//          $tag_query .= '&license_id=' . implode('&license_id=', $license_id);
-//        }
-//        if ($topic && $topic != 'none') {
-//          $tag_query .= '&topic=' . implode('&topic=', $topic);
-//        }
-//        if ($type && $type != 'none') {
-//          $tag_query .= '&type=' . implode('&type=', $type);
-//        }
-//        if ($member_countries && $member_countries != 'none') {
-//          $tag_query .= '&member_countries=' . implode('&member_countries=', $member_countries);
-//        }       
-//        $redirect_info = [
-//          rtrim(variable_get('data_base_url', DATA_BASE_URL))
-//          . '/data/dataset?'
-//          . drupal_http_build_query([
-//            CKAN_SEARCH_NAME_THEMATIC_AREA => $thematic_area,
-//            'q' => $term,
-//          ]) . $tag_query
-//        ];
-//        break;
-//    }
-//
-//    $form_state['redirect'] = $redirect_info;
+    $term = $form_state->getValue('term');
+    $tags = $form_state->getValue('tags');
+    $topic = $form_state->getValue('topic');
+    $type = $form_state->getValue('type');    
+    $organization = $form_state->getValue('organization');
+    $res_format = $form_state->getValue('res_format');
+    $license_id = $form_state->getValue('license_id');
 
+    $member_countries = $form_state->getValue('member_countries');
+    
+    $tag_query = '';
+    if ($tags && $tags != 'none') {
+      $tag_query .= '&tags=' . implode('&tags=', $tags);
+    }
+    if ($organization && $organization != 'none') {
+      $tag_query .= '&organization=' . implode('&organization=', $organization);
+    }
+    if ($res_format && $res_format != 'none') {
+      $tag_query .= '&res_format=' . implode('&res_format=', $res_format);
+    }
+    if ($license_id && $license_id != 'none') {
+      $tag_query .= '&license_id=' . implode('&license_id=', $license_id);
+    }
+    if ($topic && $topic != 'none') {
+      $tag_query .= '&topic=' . implode('&topic=', $topic);
+    }
+    if ($type && $type != 'none') {
+      $tag_query .= '&type=' . implode('&type=', $type);
+    }
+    if ($member_countries && $member_countries != 'none') {
+      $tag_query .= '&member_countries=' . implode('&member_countries=', $member_countries);
+    }
+
+    $redirect_url = rtrim( self::DATA_BASE_URL) . '/data/dataset?q=' . $term . $tag_query;
+
+    $response = new TrustedRedirectResponse(Url::fromUri($redirect_url)->toString());
+    $form_state->setResponse($response);
   }
+  
 }
