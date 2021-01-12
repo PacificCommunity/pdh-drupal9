@@ -356,7 +356,165 @@
                 });
             }
         }
-        
-        
     };
+    
+    Drupal.behaviors.advancedSearchForm = {
+      attach: function (context, settings) {
+        if ($('form#ckan-search-form').length){
+
+            const Form = $('form#ckan-search-form');
+            
+            Form.find('select').each(function(){
+                $(this).tokenize2({
+                    placeholder: 'Select ' + $(this).attr('data-title'),
+                    dropdownMaxItems: 100,
+                    displayNoResultsMessage: true,
+                    noResultsMessageText: 'No matching options.',
+                });
+            });
+
+            Form.find('.fieldset-legend').on('click', function(e){
+              e.preventDefault();
+              Form.find('.fieldset-wrapper').toggle();
+            });
+
+            Form.find('select').on('tokenize:select', function(container){
+                if ($(this).attr('disabled') != 'disabled') {
+                    $(this).tokenize2().trigger('tokenize:search', [$(this).tokenize2().input.val()]);
+                }
+            });
+            
+            Form.find('select').on('tokenize:dropdown:show', function(e){
+                Form.find('.fieldset-wrapper').addClass('blured');
+                $(this).closest('.filter-wrapp').append('<li class="angledown"></li>');
+            });
+            
+            Form.find('select').on('tokenize:dropdown:hide', function(e){
+                Form.find('.fieldset-wrapper').removeClass('blured');
+                Form.find('.tokenize').removeClass('focus');
+                $(this).closest('.filter-wrapp').find('.angledown').remove();
+            });
+            
+            $('.angledown').on('click', function(e){
+                e.preventDefault();
+                if ($(this).siblings('.tokenize').hsaClass('focus')){
+                    Form.find('.tokenize').removeClass('focus');
+                    Form.find('select').each(function(){
+                        $(this).tokenize2().trigger('tokenize:dropdown:hide');
+                    });
+                }
+            });    
+
+            Form.find('select').on('tokenize:dropdown:fill', function(e, items){
+                let input = $(this).next().find('.token-search input');
+                if(items.length == 0 && input.val().length > 0) {
+                    input.val(input.val().slice(0,-1));
+                    $(this).tokenize2().trigger('tokenize:search', input.val());
+                }
+            });
+            
+            Form.find('select').on('tokenize:tokens:add tokenize:tokens:remove ', function(e, items){
+                Form.find('.fieldset-wrapper').addClass('blured spinner');
+                
+                const name = $(this).attr('data-name');
+                const value = this.value;
+                
+                const selected = [];
+                $('form#ckan-search-form select').each(function(){
+                    if ($(this).val()){
+                        selected[$(this).attr('data-name')] = $(this).val();
+                    }
+                });
+
+                const request_url = drupalSettings.spc_home_banner.dataBaseUrl + '/data/api/action/package_search?facet.field=';
+                let request_params = '["organization",+"tags",+"res_format",+"license_id",+"type",+"member_countries",+"topic"]&fq=';
+
+                for (let select in selected){
+                    request_params += '+' + select + ':' + selected[select].join(',');
+                }
+                
+                const countriesMapping = drupalSettings.spc_home_banner.mappingConfig.mapping.member_countries;
+                
+                $.ajax({
+                    url: request_url + request_params.split(" ").join("+"),
+                    type: 'GET',
+                    
+                    success: function(data) {
+                        if (data.success){
+                            const search_facets = data.result.search_facets;
+                            for (let facet_name in search_facets) {
+                                let facet_items = search_facets[facet_name].items;
+                                let facet_select = Form.find('select[data-name='+facet_name+']');
+                                facet_select.empty();
+                                
+                                if (facet_items.length){
+                                    facet_select.removeAttr('disabled');
+                                    $('.filter-wrapp.' + facet_name).find('.tokens-container').removeClass('disabled');
+                                    for (let option in facet_items) {
+                                        if (facet_name == 'member_countries'){
+                                            let CountryCode = facet_items[option].name;
+
+                                            if(selected[facet_name] && selected[facet_name].includes(facet_items[option].name)){
+                                                  facet_select.append($("<option></option>")
+                                                  .attr("selected", "selected")
+                                                  .attr("value", facet_items[option].name)
+                                                  .text(countriesMapping[CountryCode]));
+                                              } else {
+                                                  facet_select.append($("<option></option>")
+                                                  .attr("value", facet_items[option].name)
+                                                  .text(countriesMapping[CountryCode]));
+                                              }
+                                        } else {
+                                            if(selected[facet_name] && selected[facet_name].includes(facet_items[option].name)){
+                                                facet_select.append($("<option></option>")
+                                                .attr("selected", "selected")
+                                                .attr("value", facet_items[option].name)
+                                                .text(facet_items[option].display_name));
+                                            } else {
+                                                facet_select.append($("<option></option>")
+                                                .attr("value", facet_items[option].name)
+                                                .text(facet_items[option].display_name));
+                                            }                                        
+                                        }
+                                    }
+                                } else {
+                                    if (selected[facet_name]){
+                                        $('.filter-wrapp.' + facet_name).find('.tokens-container').removeClass('disabled');
+                                        selected[facet_name].forEach(function(entry) {
+                                            facet_select.append($("<option></option>")
+                                            .attr("selected", "selected")
+                                            .attr("value", entry)
+                                            .text(entry));
+                                        });
+                                    }
+                                }
+                            }
+                            Form.find('.fieldset-wrapper').removeClass('blured spinner');
+                        }
+                    },
+                    
+                    error: function(error) {
+                      Form.find('.fieldset-wrapper').removeClass('blured spinner');
+                      console.log('Error:');
+                      console.log(error);
+                    }
+                });
+            });
+            
+            $('.fieldset-wrapper legend.inner').on('click', function(e){
+                e.preventDefault();
+                $('fieldset.collapsible').addClass('collapsed');
+                $('.fieldset-wrapper').hide();
+            });
+            
+            $('a#adv-search-submit').on('click', function(e){
+                e.preventDefault();
+                Form.submit();
+            });
+            
+        }
+      }
+    };
+    
+    
 })(jQuery, Drupal, drupalSettings);
