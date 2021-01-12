@@ -1,3 +1,741 @@
 sdg_countries_fid: ''
 sdg_domains_fid: ''
 sdg_goals_fid: ''
+search_facets:
+  tags:
+    title: tags
+    items:
+      -
+        name: water
+        display_name: water
+        count: 196
+      -
+        name: tuna-fisheries
+        display_name: tuna-fisheries
+        count: 157
+      -
+        name: trip-reports-pr
+        display_name: trip-reports-pr
+        count: 473
+      -
+        name: training-reports-nr
+        display_name: training-reports-nr
+        count: 113
+      -
+        name: text
+        display_name: text
+        count: 2071
+      -
+        name: technical-reports-tr
+        display_name: technical-reports-tr
+        count: 399
+      -
+        name: statistics
+        display_name: statistics
+        count: 112
+      -
+        name: south-pacific
+        display_name: south-pacific
+        count: 88
+      -
+        name: sea-cucumbers
+        display_name: sea-cucumbers
+        count: 162
+      -
+        name: samoa
+        display_name: samoa
+        count: 88
+      -
+        name: published-report
+        display_name: published-report
+        count: 169
+      -
+        name: protected-areas---oceania---pacific
+        display_name: protected-areas---oceania---pacific
+        count: 105
+      -
+        name: protected-areas---oceania
+        display_name: protected-areas---oceania
+        count: 420
+      -
+        name: protected-areas---management
+        display_name: protected-areas---management
+        count: 564
+      -
+        name: protected-areas
+        display_name: protected-areas
+        count: 418
+      -
+        name: preliminary-reports-lr
+        display_name: preliminary-reports-lr
+        count: 141
+      -
+        name: population
+        display_name: population
+        count: 199
+      -
+        name: png
+        display_name: png
+        count: 146
+      -
+        name: piepsap-project-reports-pi
+        display_name: piepsap-project-reports-pi
+        count: 83
+      -
+        name: papua-new-guinea
+        display_name: papua-new-guinea
+        count: 86
+      -
+        name: oceanography
+        display_name: oceanography
+        count: 167
+      -
+        name: ocean-acidification
+        display_name: ocean-acidification
+        count: 207
+      -
+        name: north-pacific
+        display_name: north-pacific
+        count: 116
+      -
+        name: no-keyword-provided
+        display_name: no-keyword-provided
+        count: 110
+      -
+        name: niue
+        display_name: niue
+        count: 114
+      -
+        name: miscellaneous-reports-mr
+        display_name: miscellaneous-reports-mr
+        count: 653
+      -
+        name: marine-resources---pacific---oceania
+        display_name: marine-resources---pacific---oceania
+        count: 276
+      -
+        name: marine-resource-management
+        display_name: marine-resource-management
+        count: 279
+      -
+        name: marine-resource
+        display_name: marine-resource
+        count: 279
+      -
+        name: marine
+        display_name: marine
+        count: 226
+      -
+        name: laboratory
+        display_name: laboratory
+        count: 113
+      -
+        name: kiribati
+        display_name: kiribati
+        count: 102
+      -
+        name: internal-report
+        display_name: internal-report
+        count: 97
+      -
+        name: housing
+        display_name: housing
+        count: 88
+      -
+        name: health
+        display_name: health
+        count: 91
+      -
+        name: fishery-management
+        display_name: fishery-management
+        count: 219
+      -
+        name: fisheries
+        display_name: fisheries
+        count: 440
+      -
+        name: eu-sopac-project-reports-er
+        display_name: eu-sopac-project-reports-er
+        count: 128
+      -
+        name: environment---protection---samoa
+        display_name: environment---protection---samoa
+        count: 207
+      -
+        name: environment---cook-islands
+        display_name: environment---cook-islands
+        count: 84
+      -
+        name: energy
+        display_name: energy
+        count: 197
+      -
+        name: education
+        display_name: education
+        count: 170
+      -
+        name: cruise-report-cr
+        display_name: cruise-report-cr
+        count: 148
+      -
+        name: cook-islands
+        display_name: cook-islands
+        count: 101
+      -
+        name: climate-change
+        display_name: climate-change
+        count: 143
+      -
+        name: census
+        display_name: census
+        count: 116
+      -
+        name: biological-response
+        display_name: biological-response
+        count: 157
+      -
+        name: biodiversity
+        display_name: biodiversity
+        count: 135
+      -
+        name: bathymetry
+        display_name: bathymetry
+        count: 108
+      -
+        name: Exposure
+        display_name: Exposure
+        count: 128
+  organization:
+    title: organization
+    items:
+      -
+        name: vanuatu-ministry-of-education-and-training
+        display_name: 'Vanuatu Ministry of Education and Training'
+        count: 4
+      -
+        name: vanuatu-data
+        display_name: 'Vanuatu Environment Data Portal'
+        count: 50
+      -
+        name: united-nations-environment-programme-world-conservation-monitoring-centre-unep-wcmc
+        display_name: 'United Nations Environment Programme World Conservation Monitoring Centre (UNEP-WCMC)'
+        count: 1
+      -
+        name: unicef
+        display_name: 'United Nations Children''s Fund (UNICEF)'
+        count: 1
+      -
+        name: tuvalu-data
+        display_name: 'Tuvalu Environment Data Portal'
+        count: 72
+      -
+        name: tonga-data
+        display_name: 'Tonga Environment Data Portal'
+        count: 56
+      -
+        name: spc
+        display_name: 'The Pacific Community (SPC)'
+        count: 58
+      -
+        name: solomon-islands-ministry-of-education-and-human-resources-development
+        display_name: 'Solomon Islands Ministry of Education and Human Resources Development'
+        count: 7
+      -
+        name: solomonislands-data
+        display_name: 'Solomon Islands Environment Data Portal'
+        count: 103
+      -
+        name: socioeconomic-data-and-applications-center-sedac
+        display_name: 'Socioeconomic Data and Applications Center (SEDAC)'
+        count: 1
+      -
+        name: sprep
+        display_name: 'Secretariat of the Pacific Regional Environment Programme (SPREP)'
+        count: 2756
+      -
+        name: sea-education-association
+        display_name: 'Sea Education Association (SEA)'
+        count: 2
+      -
+        name: samoa-ministry-of-education-sports-and-culture
+        display_name: 'Samoa Ministry of Education, Sports and Culture'
+        count: 6
+      -
+        name: samoa-data
+        display_name: 'Samoa Environment Data Portal'
+        count: 65
+      -
+        name: spc-sdd
+        display_name: 'SPC Statistics for Development Division (SDD) '
+        count: 1201
+      -
+        name: spc-rrrt
+        display_name: 'SPC Regional Rights Resource Team (RRRT)'
+        count: 50
+      -
+        name: spc-phd
+        display_name: 'SPC Public Health Division (PHD)'
+        count: 17
+      -
+        name: spc-gem
+        display_name: 'SPC Geoscience, Energy and Maritime Division (GEM)'
+        count: 5838
+      -
+        name: spc-fame
+        display_name: 'SPC Fisheries, Aquaculture and Marine Ecosystems division (FAME)'
+        count: 1632
+      -
+        name: spc-eqap
+        display_name: 'SPC Educational Quality and Assessment Programme (EQAP)'
+        count: 6
+      -
+        name: rmi-data
+        display_name: 'Republic of Marshall Islands Environment Data Portal'
+        count: 81
+      -
+        name: papua-new-guinea-department-of-education
+        display_name: 'Papua New Guinea Department of Education'
+        count: 1
+      -
+        name: png-data
+        display_name: 'Papua New Guinea Data Portal'
+        count: 304
+      -
+        name: palau-ministry-of-education
+        display_name: 'Palau Ministry of Education'
+        count: 2
+      -
+        name: palau-data
+        display_name: 'Palau Environment Data Portal'
+        count: 58
+      -
+        name: pacific-islands-forum-secretariat
+        display_name: 'Pacific Islands Forum Secretariat'
+        count: 1
+      -
+        name: niue-data
+        display_name: 'Niue Environment Data Portal'
+        count: 104
+      -
+        name: nauru-data
+        display_name: 'Nauru Environment Data Portal'
+        count: 53
+      -
+        name: kiribati-data
+        display_name: 'Kiribati Environment Data Portal'
+        count: 81
+      -
+        name: iaea
+        display_name: 'International Atomic Energy Agency (IAEA)'
+        count: 194
+      -
+        name: institute-for-marine-remote-sensing
+        display_name: 'Institute for Marine Remote Sensing'
+        count: 1
+      -
+        name: general-bathymetric-chart-of-the-oceans-gebco
+        display_name: 'General Bathymetric Chart of the Oceans (GEBCO)'
+        count: 1
+      -
+        name: fiji-ministry-of-education-heritage-and-arts
+        display_name: 'Fiji Ministry of Education, Heritage and Arts'
+        count: 11
+      -
+        name: fsm-data
+        display_name: 'Federated States of Micronesia Environment Data Portal'
+        count: 107
+      -
+        name: cook-islands-ministry-of-education
+        display_name: 'Cook Islands Ministry of Education'
+        count: 3
+      -
+        name: cookislands-data
+        display_name: 'Cook Islands Environment Data Portal'
+        count: 68
+  res_format:
+    title: res_format
+    items:
+      -
+        name: 'zipped tif'
+        display_name: 'zipped tif'
+        count: 10
+      -
+        name: 'zipped shapefile'
+        display_name: 'zipped shapefile'
+        count: 2
+      -
+        name: 'zipped jpeg'
+        display_name: 'zipped jpeg'
+        count: 6
+      -
+        name: to/download/171/mics-survey/4759/tonga-mics-2019-snapshot-of-key-findings
+        display_name: to/download/171/mics-survey/4759/tonga-mics-2019-snapshot-of-key-findings
+        count: 1
+      -
+        name: tif
+        display_name: tif
+        count: 13
+      -
+        name: php/catalog/106/download/1038
+        display_name: php/catalog/106/download/1038
+        count: 1
+      -
+        name: php/catalog/106/download/1037
+        display_name: php/catalog/106/download/1037
+        count: 1
+      -
+        name: php/catalog/106/download/1036
+        display_name: php/catalog/106/download/1036
+        count: 1
+      -
+        name: 'pdf?ua=1'
+        display_name: 'pdf?ua=1'
+        count: 1
+      -
+        name: org/spc/digilib/doc/q949y
+        display_name: org/spc/digilib/doc/q949y
+        count: 1
+      -
+        name: int/chp/gshs/methodology/en/
+        display_name: int/chp/gshs/methodology/en/
+        count: 1
+      -
+        name: gpkg
+        display_name: gpkg
+        count: 1
+      -
+        name: gov/gshs/background/
+        display_name: gov/gshs/background/
+        count: 1
+      -
+        name: gov/gshs/
+        display_name: gov/gshs/
+        count: 1
+      -
+        name: dot
+        display_name: dot
+        count: 2
+      -
+        name: ZIP
+        display_name: ZIP
+        count: 46
+      -
+        name: XLSX
+        display_name: XLSX
+        count: 185
+      -
+        name: XLS
+        display_name: XLS
+        count: 49
+      -
+        name: WMS
+        display_name: WMS
+        count: 217
+      -
+        name: WFS
+        display_name: WFS
+        count: 168
+      -
+        name: WCS
+        display_name: WCS
+        count: 40
+      -
+        name: TXT
+        display_name: TXT
+        count: 35
+      -
+        name: SHP
+        display_name: SHP
+        count: 1
+      -
+        name: PPTX
+        display_name: PPTX
+        count: 7
+      -
+        name: PPT
+        display_name: PPT
+        count: 4
+      -
+        name: PNG
+        display_name: PNG
+        count: 236
+      -
+        name: PDF
+        display_name: PDF
+        count: 10676
+      -
+        name: KML
+        display_name: KML
+        count: 1
+      -
+        name: JSON
+        display_name: JSON
+        count: 5
+      -
+        name: JPEG
+        display_name: JPEG
+        count: 24
+      -
+        name: HTML
+        display_name: HTML
+        count: 609
+      -
+        name: GeoJSON
+        display_name: GeoJSON
+        count: 106
+      -
+        name: DOCX
+        display_name: DOCX
+        count: 55
+      -
+        name: DOC
+        display_name: DOC
+        count: 72
+      -
+        name: CSV
+        display_name: CSV
+        count: 608
+  license_id:
+    title: license_id
+    items:
+      -
+        name: sprep-public-license
+        display_name: 'SPREP Public License'
+        count: 3910
+      -
+        name: 'Public Domain (CC0 1.0)'
+        display_name: 'Public Domain (CC0 1.0)'
+        count: 28
+      -
+        name: other-pd
+        display_name: 'Other (Public Domain)'
+        count: 7
+      -
+        name: other-open
+        display_name: 'Other (Open)'
+        count: 560
+      -
+        name: other-nc
+        display_name: 'Other (Non-Commercial)'
+        count: 1
+      -
+        name: other-at
+        display_name: 'Other (Attribution)'
+        count: 1
+      -
+        name: odc-by
+        display_name: 'Open Data Commons Attribution License'
+        count: 10
+      -
+        name: notspecified
+        display_name: 'License not specified'
+        count: 7719
+      -
+        name: cc-nc-sa-4.0
+        display_name: 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0'
+        count: 17
+      -
+        name: cc-nc-4.0
+        display_name: 'Creative Commons Attribution-NonCommercial 4.0'
+        count: 1
+      -
+        name: cc-by-sa
+        display_name: 'Creative Commons Attribution Share-Alike'
+        count: 3
+      -
+        name: 'Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License'
+        display_name: 'Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License'
+        count: 41
+      -
+        name: 'Creative Commons Attribution (CC-BY) 4.0 License'
+        display_name: 'Creative Commons Attribution (CC-BY) 4.0 License'
+        count: 14
+      -
+        name: cc-by
+        display_name: 'Creative Commons Attribution'
+        count: 46
+  topic:
+    title: topic
+    items:
+      -
+        name: PCCOS
+        display_name: PCCOS
+        count: 2558
+      -
+        name: 'Official Statistics'
+        display_name: 'Official Statistics'
+        count: 1253
+      -
+        name: 'Land Resources'
+        display_name: 'Land Resources'
+        count: 1041
+      -
+        name: 'Human Rights'
+        display_name: 'Human Rights'
+        count: 66
+      -
+        name: Health
+        display_name: Health
+        count: 373
+      -
+        name: Geoscience
+        display_name: Geoscience
+        count: 3410
+      -
+        name: 'Gender and Youth'
+        display_name: 'Gender and Youth'
+        count: 537
+      -
+        name: Fisheries
+        display_name: Fisheries
+        count: 2610
+      -
+        name: Environment
+        display_name: Environment
+        count: 2138
+      -
+        name: Energy
+        display_name: Energy
+        count: 2047
+      -
+        name: Education
+        display_name: Education
+        count: 58
+      -
+        name: 'Economic Development'
+        display_name: 'Economic Development'
+        count: 817
+      -
+        name: 'Climate Change'
+        display_name: 'Climate Change'
+        count: 648
+  type:
+    title: type
+    items:
+      -
+        name: publications
+        display_name: Publications
+        count: 7752
+      -
+        name: geographic_data
+        display_name: 'Geographic data'
+        count: 264
+      -
+        name: dataset
+        display_name: Dataset
+        count: 4897
+      -
+        name: biodiversity_data
+        display_name: 'Biodiversity data'
+        count: 83
+  member_countries:
+    title: member_countries
+    items:
+      -
+        name: region
+        display_name: region
+        count: 3112
+      -
+        name: polynesia
+        display_name: polynesia
+        count: 9
+      -
+        name: other
+        display_name: other
+        count: 1769
+      -
+        name: micronesia
+        display_name: micronesia
+        count: 15
+      -
+        name: melanesia
+        display_name: melanesia
+        count: 9
+      -
+        name: wf
+        display_name: 'Wallis and Futuna'
+        count: 74
+      -
+        name: vu
+        display_name: Vanuatu
+        count: 661
+      -
+        name: tv
+        display_name: Tuvalu
+        count: 508
+      -
+        name: to
+        display_name: Tonga
+        count: 590
+      -
+        name: tk
+        display_name: Tokelau
+        count: 80
+      -
+        name: sb
+        display_name: 'Solomon Islands'
+        count: 555
+      -
+        name: ws
+        display_name: Samoa
+        count: 379
+      -
+        name: pn
+        display_name: 'Pitcairn Islands'
+        count: 33
+      -
+        name: pg
+        display_name: 'Papua New Guinea'
+        count: 656
+      -
+        name: pw
+        display_name: Palau
+        count: 294
+      -
+        name: mp
+        display_name: 'Northern Mariana Islands'
+        count: 76
+      -
+        name: nu
+        display_name: Niue
+        count: 342
+      -
+        name: nc
+        display_name: 'New Caledonia'
+        count: 120
+      -
+        name: nr
+        display_name: Nauru
+        count: 283
+      -
+        name: mh
+        display_name: 'Marshall Islands'
+        count: 409
+      -
+        name: ki
+        display_name: Kiribati
+        count: 651
+      -
+        name: gu
+        display_name: Guam
+        count: 92
+      -
+        name: pf
+        display_name: 'French Polynesia'
+        count: 101
+      -
+        name: fj
+        display_name: Fiji
+        count: 770
+      -
+        name: fm
+        display_name: 'Federated States of Micronesia'
+        count: 415
+      -
+        name: ck
+        display_name: 'Cook Islands'
+        count: 571
+      -
+        name: as
+        display_name: 'American Samoa'
+        count: 334
