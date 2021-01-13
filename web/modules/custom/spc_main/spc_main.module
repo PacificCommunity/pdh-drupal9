@@ -30,6 +30,11 @@ function spc_main_theme($existing, $type, $theme, $path){
       'variables' => [
         'partners' => null
       ]
+    ],
+    'spc_home_page' => [
+      'variables' => [
+        'data' => null
+      ]
     ],      
   ];
 }

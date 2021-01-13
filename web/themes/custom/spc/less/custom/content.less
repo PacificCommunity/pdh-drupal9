@@ -1666,3 +1666,91 @@ form {
         }        
     }
 }
+
+#homepage-stats-block {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 60px;
+    margin-top: 60px;
+    
+    .homepage-stat-item {
+        display: inline-block;
+        padding: 0 65px;
+        position: relative;
+        
+        .tooltip {
+            position: absolute;
+            opacity: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 10px;
+            color: #6f6f6f;
+            text-align: left;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+            z-index: 0;
+        }        
+        
+        &:hover, & a:hover {
+            text-decoration: none;
+            
+            .tooltip {
+                opacity: 1;
+            }
+        }
+        &:first-child {
+            border-right: 1px solid #ededed;
+            padding-left: 0;
+        }
+        &:nth-child(2) {
+            border-right: 1px solid #ededed;
+        }        
+        &:last-child {
+            padding-right: 0;
+        }
+        .homepage-stat-info {
+            display: inline-block;
+            color: #000;
+            margin-left: 45px;
+            .homepage-stat-count {
+                font-size: 36px;
+                line-height: 36px;
+                font-weight: 500;
+                
+            }
+            .homepage-stat-type {
+                font-size: 12px;
+                text-align: left;
+                margin-top: 5px;
+            }
+        }
+        .homepage-stat-icon {
+            height: 30px;
+            position: absolute;
+            top: 5px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    #homepage-stats-block {
+        margin-bottom: 40px;
+        margin-top: 40px;
+        .homepage-stat-item {
+            padding: 0 5%;
+            .homepage-stat-info {
+                margin: 0;
+                .homepage-stat-count {
+                    font-size: 24px;
+                    line-height: 24px;
+                }
+            }
+            .homepage-stat-icon {
+                display: none;
+            }
+        }
+    }
+}
