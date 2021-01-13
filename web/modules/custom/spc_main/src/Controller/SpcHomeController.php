@@ -18,7 +18,8 @@ class SpcHomeController  extends ControllerBase {
 
   public function mainLanding() {
 
-    $data['stats'] = $this->_get_spc_stats();
+    $data['stats'] = $this->get_spc_stats();
+    $data['datasets'] = $this->get_spc_datasets();
     
     return [
         '#theme' => 'spc_home_page',
@@ -26,13 +27,92 @@ class SpcHomeController  extends ControllerBase {
     ];
   }
   
-  public function _get_spc_stats() {
+  public function get_spc_stats() {
     
     $stats['datasets'] = $this->_ckan_dataset_count();
     $stats['publications'] = $this->_ckan_publications_count();
-    $stats['organizations'] = $this->_ckan_organisations_count();  
+    $stats['organizations'] = $this->_ckan_organisations_count(); 
     
     return $stats;
+  }
+  
+  public function get_spc_datasets() {
+    $datasets = [];
+    
+    $datasets['latest'] = $this->_ckan_datasets('latest');
+    $datasets['popular'] = $this->_ckan_datasets('popular');
+    $datasets['url'] = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN . '/data';
+    
+    return $datasets;
+  }
+  
+  public function _ckan_datasets($sort) {
+    $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
+    $data_url = $base_url . '/data/api/action/package_search';
+    
+    $params = '?';
+    $params .= '&rows=6'; 
+    
+    switch ($sort){
+      case 'latest':
+        $params .= '&sort=' . urlencode('metadata_modified desc');    
+        break;
+      case 'popular':
+        $params .= '&sort=' . urlencode('extras_ga_view_count desc');    
+        break;
+    }
+
+    $cached_dataset = ''; //TO DO Get from cache.
+    if ($cached_dataset) {
+      $publications = $cached_dataset;
+    } else {    
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $data_url . $params);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+      $result = curl_exec($ch);
+      curl_close($ch);
+
+      $responce = json_decode($result);
+
+      if ($responce->success){
+          $publications = $responce->result->results;
+          //TO DO Set cache.
+      }
+    }
+
+    foreach($publications as $key => $publication){
+      $dataset = [];
+      $dataset['name'] = $publication->name;
+      $dataset['title'] = $publication->title;
+      $dataset['url'] = $base_url . '/data/dataset/' . $publication->id;
+
+      //creation date.
+      $originalDate = $publication->metadata_created;
+      $dataset['date'] = date("M, d, Y", strtotime($originalDate));
+
+      //Organisation data.
+      if (filter_var($publication->organization->image_url, FILTER_VALIDATE_URL) !== false){
+          $dataset['organization']['image_url'] = $publication->organization->image_url;
+      } else {
+          $dataset['organization']['image_url'] = $base_url . '/data/uploads/group/'. $publication->organization->image_url;
+      }
+
+      $dataset['organization']['url'] = $base_url . '/data/organization/' . $publication->organization->name;
+      $dataset['organization']['title'] = $publication->organization->title;
+
+      //Resources data.
+      if ($resources = $publication->resources){
+          foreach ($resources as $resource){
+              $data_resource['url'] = $resource->url;
+              $data_resource['format'] = strtolower($resource->format);
+              $dataset['resources'][$resource->format] = $data_resource;
+          }
+      }
+
+      $datasets[] = $dataset;
+    }
+
+    return $datasets;
   }
   
   public function _ckan_dataset_count() {

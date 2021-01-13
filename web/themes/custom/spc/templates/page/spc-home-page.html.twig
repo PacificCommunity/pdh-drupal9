@@ -37,4 +37,90 @@
           </div>
       </div>            
   </div>
+          
+  <div id="ckan-dataset-tabs-block">
+      <div class="container ckan-dataset-tabs-content">
+          <div class="ckan-dataset-tabs-heading">
+              <h2>{{ 'Datasets' }}</h2>
+              <div class="ckan-dataset-tabs-intro">{{ 'Discover our latest and popular datasets' }}</div>
+              <div class="ckan-dataset-tabs-section">
+                  <ul class="nav" role="tablist">
+                      <li class="ckan-dataset-tabs-tab nav-item active" role="tab">
+                          <a class="nav-link" id="nav-recent-datasets-tab" data-toggle="pill" role="tab" href="#nav-recent-datasets" aria-selected="true">{{ 'Latest' }}</a>
+                      </li>
+                      <li class="ckan-dataset-tabs-tab nav-item" role="tab">
+                          <a class="nav-link" id="nav-popular-datasets-tab" data-toggle="pill" role="tab" href="#nav-popular-datasets" aria-selected="false">{{ 'Popular' }}</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="tab-content ckan-dataset-tabs-items" id="pills-tabContent">
+              <div class="tab-pane fade active in ckan-dataset-tabs-item" id="nav-recent-datasets" role="tabpanel" aria-labelledby="nav-recent-datasets-tab">
+                  <div class="ckan-dataset-tab-container">
+                      <div class="list-of-items">
+                          {% for dataset in data.datasets.latest %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+              <div class="tab-pane fade ckan-dataset-tabs-item" id="nav-popular-datasets" role="tabpanel" aria-labelledby="nav-popular-datasets-tab">
+                  <div class="ckan-dataset-tab-container">
+                      <div class="list-of-items">
+                          {% for dataset in data.datasets.popular %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="ckan-dataset-tabs-view-all">
+              <a href="{{ data.datasets.url }}" target="__blank">{{ 'View all' }}</a>
+          </div>
+      </div>	
+  </div>          
 </div>

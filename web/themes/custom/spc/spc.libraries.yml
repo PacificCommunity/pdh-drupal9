@@ -55,4 +55,11 @@ tokenize2:
     js/tokenize2.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once  
+    - core/jquery.once
+slick:
+  version: 2.x  
+  js:
+    js/slick.min.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

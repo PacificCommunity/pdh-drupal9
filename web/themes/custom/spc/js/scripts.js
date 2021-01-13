@@ -516,5 +516,23 @@
       }
     };
     
+    Drupal.behaviors.homePage = {
+      attach: function (context, settings) {
+        $('#nav-recent-datasets-tab', context).on('click', function(e){
+          e.preventDefault();
+          $('.ckan-dataset-tabs-tab').removeClass('active');
+          $(this).closest('.ckan-dataset-tabs-tab').addClass('active');
+          $('#nav-popular-datasets').fadeOut();          
+          $('#nav-recent-datasets').fadeIn();
+        });
+        $('#nav-popular-datasets-tab', context).on('click', function(e){
+          e.preventDefault();
+          $('.ckan-dataset-tabs-tab').removeClass('active');
+          $(this).closest('.ckan-dataset-tabs-tab').addClass('active');          
+          $('#nav-recent-datasets').fadeOut();
+          $('#nav-popular-datasets').fadeIn();
+        });        
+      }
+    };
     
 })(jQuery, Drupal, drupalSettings);
