@@ -1,15 +1,3 @@
-spc_main.spc_html_import_config:
-  title: 'SPC HTML Import settings'
-  description: 'SPC HTML Import settings page'
-  parent: system.admin_config_services
-  route_name: spc_main.spc_html_import
-  weight: 11
-spc_main.spc_publication_import_config:
-  title: 'SPC Publication Import settings'
-  description: 'SPC Publication Import settings page'
-  parent: system.admin_config_services
-  route_name: spc_main.spc_publication_import
-  weight: 11  
 spc_main.sdg_chart_config:
   title: 'SDG chart settings page'
   description: 'SPC Dashboard sdg chart settings page'

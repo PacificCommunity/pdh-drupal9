@@ -1,0 +1,6 @@
+spc_publication_import.spc_publication_import_config:
+  title: 'SPC Publication Import settings'
+  description: 'SPC Publication Import settings page'
+  parent: system.admin_config_services
+  route_name: spc_publication_import.spc_publication_import
+  weight: 11   

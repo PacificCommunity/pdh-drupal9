@@ -31,6 +31,9 @@ function spc_preprocess_html(&$variables) {
   if($route_name == 'spc_mbd.landing') {
     $variables['attributes']['class'][] = 'mbd-landing';
   }
+  if($route_name == 'spc_main.landing') {
+    $variables['attributes']['class'][] = 'spc-landing';
+  }  
 }
 
 /**

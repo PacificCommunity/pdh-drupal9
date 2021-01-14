@@ -48,36 +48,22 @@ class SpcHomeController  extends ControllerBase {
   
   public function _ckan_datasets($sort) {
     $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
-    $data_url = $base_url . '/data/api/action/package_search';
     
-    $params = '?';
-    $params .= '&rows=6'; 
-    
-    switch ($sort){
-      case 'latest':
-        $params .= '&sort=' . urlencode('metadata_modified desc');    
-        break;
-      case 'popular':
-        $params .= '&sort=' . urlencode('extras_ga_view_count desc');    
-        break;
-    }
+    //Get latest cached publications.
+    $cached_publications = \Drupal::config('spc_publication_import.settings')->get('spc_publications_' . $sort);
 
-    $cached_dataset = ''; //TO DO Get from cache.
-    if ($cached_dataset) {
-      $publications = $cached_dataset;
-    } else {    
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $data_url . $params);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-      $result = curl_exec($ch);
-      curl_close($ch);
+    if (empty($cached_publications)){
+      //Get new publications from API.
+      $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
+      $publications = $spcPublicationImport->get_ckan_datasets($sort);
 
-      $responce = json_decode($result);
-
-      if ($responce->success){
-          $publications = $responce->result->results;
-          //TO DO Set cache.
-      }
+      if ($publications){
+        \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+          ->set('spc_publications_' . $sort, json_encode($publications))
+          ->save();
+      }    
+    } else {
+      $publications = json_decode($cached_publications);
     }
 
     foreach($publications as $key => $publication){
@@ -88,7 +74,7 @@ class SpcHomeController  extends ControllerBase {
 
       //creation date.
       $originalDate = $publication->metadata_created;
-      $dataset['date'] = date("M, d, Y", strtotime($originalDate));
+      $dataset['date'] = date("F, d, Y", strtotime($originalDate));
 
       //Organisation data.
       if (filter_var($publication->organization->image_url, FILTER_VALIDATE_URL) !== false){
@@ -116,6 +102,7 @@ class SpcHomeController  extends ControllerBase {
   }
   
   public function _ckan_dataset_count() {
+    $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
     
     $res_formats = [
         'CSV','XML', 'XLS', 'XLSX', 'ODS', 'MDB', 'MDE', 'DBF',
@@ -124,34 +111,26 @@ class SpcHomeController  extends ControllerBase {
     $attr = ['dataset', 'service'];
     $type = ['dataset', 'biodiversity_data'];
 
-    $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
-    $data_url = $base_url . '/data/api/action/package_search';
-
     $query = '?q=';
     $params = urlencode('res_format:('. implode(' OR ', $res_formats) .')');
     $params .= urlencode(' OR dcat_type:('. implode(' OR ', $attr) .')');
-    $params .= urlencode(' OR type:('. implode(' OR ', $type) .')'); 
+    $params .= urlencode(' OR type:('. implode(' OR ', $type) .')');     
     
-    $cached_dataset_count = ''; //TO DO Get from cache.
+    $cached_dataset_count = \Drupal::config('spc_publication_import.settings')->get('spc_datasets_count');
     if ($cached_dataset_count) {
-      $count = $cached_dataset_count->data;
-    } else {    
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $data_url . $query. $params);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-      $result = curl_exec($ch);
-      curl_close($ch);
-
-      $count = 0;
-      $responce = json_decode($result, true);
-      if ($responce['success']){
-          $count = $responce['result']['count'];
-          //TO DO Set cache.
+      $count = $cached_dataset_count;
+    } else {   
+      //Get new count from API.
+      $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
+      $count = $spcPublicationImport->get_ckan_dataset_count();
+      if ($count){
+        \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+          ->set('spc_datasets_count', $count)
+          ->save();
       }
     }
 
     $description = 'Structured data files and links to data services';
-    
     $solorq = '&ext_advanced_type=solr&ext_advanced_operator=or';
     
     return [
@@ -163,38 +142,32 @@ class SpcHomeController  extends ControllerBase {
   }  
   
   public function _ckan_publications_count() {
+    $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
+    
     $res_formats = ['PDF','DOC', 'DOCX', 'ODF', 'ODT', 'EPUB', 'MOBI'];
     $attr = ['text'];
     $type = ['publications'];
-
-    $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
-    $data_url = $base_url . '/data/api/action/package_search';
-
+    
     $query = '?q=';
     $params = urlencode('res_format:('. implode(' OR ', $res_formats) .')');
     $params .= urlencode(' OR dcat_type:('. implode(' OR ', $attr) .')');
     $params .= urlencode(' OR type:('. implode(' OR ', $type) .')');
-
-    $cached_publications_count = ''; //TO DO Get from cache.
-    if ($cached_publications_count && $topic == '') {
-      $count = $cached_publications_count->data;
+    
+    $cached_publications_count = \Drupal::config('spc_publication_import.settings')->get('spc_publications_count');
+    if ($cached_publications_count) {
+      $count = $cached_publications_count;
     } else {
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $data_url . $query . $params);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-      $result = curl_exec($ch);
-      curl_close($ch);
-
-      $count = 0;
-      $responce = json_decode($result, true);
-      if ($responce['success']){
-          $count = $responce['result']['count'];
-          //TO DO Set cache.        
+      //Get new count from API.
+      $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
+      $count = $spcPublicationImport->get_ckan_publications_count();
+      if ($count){
+        \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+          ->set('spc_publications_count', $count)
+          ->save();        
       } 
     }
     
     $description = 'Scientific papers, publications, reports, policy briefs, policies documents, manuals, handbooks';
-
     $solorq = '&ext_advanced_type=solr&ext_advanced_operator=or';
     
     return [
@@ -208,16 +181,18 @@ class SpcHomeController  extends ControllerBase {
   public function _ckan_organisations_count() {
     $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
     $organizations_url = $base_url . '/data/api/action/organization_list';
-    $stats['data_url'] = $base_url . '/data/dataset';
     
-    $cached_organization_count = ''; //TO DO Get from cache.
+    $cached_organization_count = \Drupal::config('spc_publication_import.settings')->get('spc_organisations_count');
     if ($cached_organization_count){
-      $count = $cached_organization_count->data;
+      $count = $cached_organization_count;
     } else {
-      $responce = json_decode(file_get_contents($organizations_url), true);
-      if ($responce['success']){
-          $count = count($responce['result']);
-          //TO DO Set cache.
+      //Get new count from API.
+      $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
+      $count = $spcPublicationImport->get_ckan_organisations_count();
+      if ($count){
+        \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+          ->set('spc_organisations_count', $count)
+          ->save();
       }
     }
     
