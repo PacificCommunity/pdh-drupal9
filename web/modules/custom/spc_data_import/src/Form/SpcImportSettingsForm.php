@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\spc_main\Form;
+namespace Drupal\spc_data_import\Form;
 
 use Drupal\Core\Form\ConfigFormBase; 
 use Drupal\Core\Form\FormStateInterface;

@@ -11,6 +11,7 @@ libraries:
   - spc/social-share
   - spc/d3    
   - spc/ma5
+  - spc/slick
   - spc/select2
   - spc/tokenize2
   - spc/global

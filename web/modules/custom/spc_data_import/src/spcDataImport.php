@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\spc_main;
+namespace Drupal\spc_data_import;
 
 /**
  * spcDataImport Description.

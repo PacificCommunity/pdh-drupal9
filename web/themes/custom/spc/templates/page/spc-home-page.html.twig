@@ -84,6 +84,33 @@
                               </div>
                           {% endfor %}
                       </div>
+                      <div class="carusel-of-items">
+                          {% for dataset in data.datasets.latest %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>                      
                   </div>
               </div>
               <div class="tab-pane fade ckan-dataset-tabs-item" id="nav-popular-datasets" role="tabpanel" aria-labelledby="nav-popular-datasets-tab">
@@ -115,6 +142,33 @@
                               </div>
                           {% endfor %}
                       </div>
+                      <div class="carusel-of-items">
+                          {% for dataset in data.datasets.popular %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>                      
                   </div>
               </div>
           </div>

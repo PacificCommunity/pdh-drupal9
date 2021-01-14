@@ -1,1 +1,45 @@
 <?php
+
+/**
+ * Implements hook_cron().
+ */
+function spc_publication_import_cron() {
+  
+  $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
+  
+  $publications_latest = $spcPublicationImport->get_ckan_datasets('latest');
+  if ($publications_latest){
+    \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+      ->set('spc_publications_latest', json_encode($publications_latest))
+      ->save();
+  }
+  
+  $publications_popular = $spcPublicationImport->get_ckan_datasets('popular');
+  if ($publications_popular){
+    \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+      ->set('spc_publications_popular', json_encode($publications_popular))
+      ->save();
+  }
+  
+  //Get new count from API.
+  $dataset_count = $spcPublicationImport->get_ckan_dataset_count();
+  if ($dataset_count){
+    \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+      ->set('spc_datasets_count', $dataset_count)
+      ->save();
+  }
+
+  $publications_count = $spcPublicationImport->get_ckan_publications_count();
+  if ($publications_count){
+    \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+      ->set('spc_publications_count', $publications_count)
+      ->save();        
+  }
+
+  $organisations_count = $spcPublicationImport->get_ckan_organisations_count();
+  if ($organisations_count){
+    \Drupal::configFactory()->getEditable('spc_publication_import.settings')
+      ->set('spc_organisations_count', $organisations_count)
+      ->save();
+  }  
+}

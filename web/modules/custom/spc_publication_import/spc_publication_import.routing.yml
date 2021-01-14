@@ -1,0 +1,9 @@
+spc_publication_import.spc_publication_import:
+  path: '/admin/config/spc-publication-settings'
+  defaults:
+    _title: 'SPC Publication Import Settings'
+    _form: '\Drupal\spc_publication_import\Form\SpcPublicationImportSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'    
+
+  
