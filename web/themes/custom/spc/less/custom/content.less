@@ -32,6 +32,34 @@ main {
     }
 }
 
+.wa-status-messages {
+  max-width: 1013px;
+  margin: 0px auto; 
+  border: none !important;
+      
+  .message{
+    padding: 15px 30px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #f4daa6;
+    background:  #fdf8ed;
+    color: #e09600;      
+
+    &.status {
+      border: 1px solid #c9e1bd;
+      background:  #f3faef;
+      color: #77b259;        
+    }
+
+    &.error {
+      border: 1px solid #f9c9bf;
+      background:  #fcf4f2;
+      color: #e62600;
+    }
+  }
+
+}
+
 #block-spcmbdbanner,
 #block-spcmainbanner {
     position: relative;
