@@ -66,3 +66,9 @@ slick:
   dependencies:
     - core/jquery
     - core/jquery.once
+gmap:
+  version: 3.x
+  js:
+    js/members-countries-map.js: {}
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy9EQCIbFOhOfh-PPqxesjbjirYC6WZ0&callback=initMap: { type: external}
+
