@@ -8,6 +8,7 @@ package: 'SPC'
 base theme: stable
 
 libraries:
+  - spc/gmap
   - spc/social-share
   - spc/d3    
   - spc/ma5

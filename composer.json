@@ -47,6 +47,7 @@
         "drupal/redirect": "^1.6",
         "drupal/restui": "^1.19",
         "drupal/robotstxt": "^1.4",
+        "drupal/simple_gmap": "^3.0",
         "drupal/svg_image": " ^1.9",
         "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/views_infinite_scroll": "^1.7",

@@ -96,6 +96,261 @@
     }
 }
 
+#member-countries-block {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 120px 0 205px 0;
+    .block-content {
+        max-width: 1013px;
+        height: 437px;
+        margin: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .column {
+            margin-right: 8px;
+            height: 100%;
+            .throbber {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                background-color: #000;
+                opacity: 0.5;
+                text-align: center;
+                color: #fff;
+                .fa-spin {
+                    width: 10%;
+                    height: 100%;
+                }
+            }
+            &:last-child {
+                margin-right: 0px;
+            }
+            .column-inner {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                color: #fff;
+                font-size: 13px;
+                font-weight: 400;
+                & > div {
+                    width: 100%;
+                }
+                #members-countries-map{
+                  height: 100%;
+                }
+            }
+        }
+        .left-column {
+            width: 375px;
+            height: 100%;
+            background-image: url(../img/sprite/spc_sprite.png);
+            background-position: -200px -250px;
+            background-size: auto;
+            padding: 57px 30px 28px 30px;
+            position: relative;
+            flex: 0 0 auto;
+            &:before {
+                content: "";
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: linear-gradient(181deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+                .border-left-radius(25px);
+            }
+            .column-header {
+                z-index: 2;
+                h2 {
+                    color: #fff;
+                    text-align: left;
+                    font-size: 38px;
+                    font-weight: 700;
+                    margin: 0px 0px 14px 0px;
+                }
+                p {
+                    margin: 0 0 18px 0;
+                    opacity: 0.85;
+                }
+            }
+            .column-footer {
+                margin-top: auto;
+                z-index: 1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .datasets-count {
+                    position: relative;
+                    font-size: 13px;
+                    font-weight: 400;
+                    text-align: left;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-end;
+                    .datasets-icon {
+                        display: block;
+                        width: 23px;
+                        height: 30px;
+                        background: url(../img/document-icon.png) 50% 50% no-repeat;
+                        background-size: cover;
+                        margin-right: 10px;
+                    }
+                    .count {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        .amount {
+                            font-size: 25px;
+                            font-weight: 600;
+                            line-height: 1em;
+                        }
+                    }
+                }
+                .datasets-link {
+                    a {
+                        display: none;
+                    }
+                    .arrow-right-icon {
+                        display: block;
+                        width: 17px;
+                        height: 12px;
+                        background: url(../img/spc_new/right-arrow-icon.png) 50% 50% no-repeat;
+                        background-size: cover;
+                    }
+                }
+            }
+        }
+        .right-column {
+            flex: 1 1 auto;
+            border-radius: 0 25px 25px 0;
+            background-color: #00c6ec;
+            padding: 11px;
+            .gmap > div {
+                background: unset !important;
+                .zoom__controls {
+                    width: 32px;
+                    height: 74px;
+                    margin: 24px 24px 0 0;
+                    .controls--zoom-out,
+                    .controls--zoom-in {
+                        background-color: white;
+                        width: 30px;
+                        height: 30px;
+                        border: 1px solid white;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        color: #000;
+                        font-size: 28px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .controls--zoom-in {
+                        margin-bottom: 10px;
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+    }
+    .dropdown {
+        width: 100%;
+        max-width: 263px;
+        .btn.dropdown-toggle {
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 18px;
+            background-color: #fff;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1em;
+            color: #000;
+            padding: 10px 22px 10px 20px;
+            text-align: left;
+            position: relative;
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 20px;
+                border: solid #000;
+                border-width: 0 1px 1px 0;
+                padding: 4px;
+                transform: rotate(45deg);
+            }
+        }
+        .dropdown-menu {
+            /*position: relative;*/
+        }
+        .dropdown-list {
+            height: 200px;
+            overflow-y: scroll;
+        }
+        &.open {
+            .btn.dropdown-toggle {
+                &:after {
+                    top: 15px;
+                    .rotate(-135deg);
+                }
+            }
+        }
+    }
+    @media (max-width: 767px) {
+        & {
+            padding: 0;
+            background: unset;
+            .block-content {
+                align-items: flex-start;
+                flex-direction: column;
+                height: auto;
+                .column {
+                    width: 100%;
+                    
+                }
+                .left-column {
+                    background-size: 305%;
+                    padding: 34px 30px 20px 30px;
+                    height: 250px;
+                    margin: 0px;
+                    .column-header {
+                        h2 {
+                            font-size: 25px;
+                            margin-bottom: 22px;
+                        }
+                        p {
+                            display: none;
+                        }
+                    }
+                    .column-footer {
+                        justify-content: flex-start;
+                        .datasets-link {
+                            margin-left: 15px;
+                        }
+                    }
+                    &:before {
+                        border-bottom-left-radius: 0;
+                    }
+                }
+                .right-column {
+                    height: 436px;
+                    width: 100%;
+                    border-bottom-left-radius: 0px;
+                    border-top-left-radius: 0px;
+                    border-bottom-right-radius: 0px;
+                    border-top-right-radius: 0px;
+                }
+            }
+        }
+    }
+}
+
 #ckan-dataset-tabs-block {
     background-color: #F9F9F9;
     &:before {
