@@ -1,6 +1,83 @@
-function initMap() {
+(function ($, Drupal, drupalSettings) {
+    Drupal.behaviors.spcMembersCountriesMap = {
+        attach: function(context, settings) {
+          
+        membersCountriesCount = $('.datasets-count .amount');
+        $('#members-countries-list option').not('.default').each(function(){
+          if ($(this).data('amount')){
+            membersCountriesAmount[$(this).val()] = $(this).data('amount');
+          } else {
+            membersCountriesAmount[$(this).val()] = 0;
+          }
+        });
+          
+        membersCountriesSelect = $('#members-countries-list').select2({
+          minimumResultsForSearch: -1,
+          dataset: ''
+        }).on('select2:select', function (e) {
+            let data = e.params.data;  
+            let id = data.id;
 
-  const map = new google.maps.Map(document.getElementById('members-countries-map'), {
+            membersCountriesCount.text(data.title);
+            
+            let map = membersCountriesMap;
+            let polygons = membersCountriesPoligon;
+            let kiribatiPolygons = membersCountriesKiribatiPolygons;
+            let markers = membersCountriesMarkers;
+              
+            let bounds = new google.maps.LatLngBounds();
+            if (id.toLowerCase().includes('ki')) {
+              kiribatiPolygons.forEach(function(ki, i, arr) {
+                ki.getPath().forEach(function (element, index) { 
+                  bounds.extend(element); 
+                });
+              });
+            }
+            else {
+              polygons[id].getPath().forEach(function (element, index) { 
+                bounds.extend(element); 
+              });
+            }
+            map.fitBounds(bounds);
+            
+            for(i = 0; i < markers.length; i++) {
+                markers[i].setVisible(false);
+            }
+
+            // Setting new marker.
+            if (bounds) {
+              var marker_icon = {
+                url: '/themes/custom/spc/img/markers/spc-marker.png',
+                size: new google.maps.Size(24, 33)
+              };
+
+              var marker = new google.maps.Marker({
+                position: bounds.getCenter(),
+                map: map,
+                animation: google.maps.Animation.DROP,
+                icon: marker_icon,
+              });
+              markers.push(marker);
+            }            
+            
+        });          
+          
+      }
+    };
+})(jQuery, Drupal, drupalSettings);
+
+var membersCountriesMap;
+var membersCountriesData;
+var membersCountriesPoligon;
+var membersCountriesKiribatiPolygons;
+var membersCountriesSelect;
+var membersCountriesMarkers;
+var membersCountriesCount;
+var membersCountriesAmount = [];
+
+function initMap() {
+  
+  const map = membersCountriesMap = new google.maps.Map(document.getElementById('members-countries-map'), {
     center: { lat: -15.4492793, lng: 167.595411 },
     zoom: 3,          
     disableDefaultUI: true,
@@ -114,7 +191,7 @@ function initMap() {
   fetch('/modules/custom/spc_main/data/members-countries.json')
     .then(res => res.json())
     .then((data) => {
-        let markers = [];
+        let markers = membersCountriesMarkers = [];
         let polygons = [];
 
         let kiribatiPolygons = [];
@@ -128,7 +205,7 @@ function initMap() {
 
             var x = country.properties.x_1;
             var y = country.properties.y_1;
-
+            
             coordinates.forEach(function(point, i, arr) {
                 point.forEach(function(item, i, arr) {
                     polygonData.push(new google.maps.LatLng(item[1], item[0]));
@@ -156,7 +233,6 @@ function initMap() {
                 if (id.toLowerCase().includes('ki')){
                     kiribatiMarkers.push(markers[id]);
                 }
-
             });
 
             polygons[id] = new google.maps.Polygon({
@@ -222,8 +298,36 @@ function initMap() {
                   });
                 }
                 map.fitBounds(bounds);
+                
+                for(i = 0; i < markers.length; i++) {
+                    markers[i].setVisible(false);
+                }
+
+                // Setting new marker.
+                if (bounds) {
+                  var marker_icon = {
+                    url: '/themes/custom/spc/img/markers/spc-marker.png',
+                    size: new google.maps.Size(24, 33)
+                  };
+                  
+                  var marker = new google.maps.Marker({
+                    position: bounds.getCenter(),
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    icon: marker_icon,
+                  });
+                  markers.push(marker);
+                }
+
+                membersCountriesSelect.val(id).trigger('change');
+                membersCountriesCount.text(membersCountriesAmount[id]);
             }
         });
+        
+        membersCountriesData = data;
+        membersCountriesPoligon = polygons;
+        membersCountriesKiribatiPolygons = kiribatiPolygons;
+        
   }).catch(err => console.error(err));
 
 }
