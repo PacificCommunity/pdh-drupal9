@@ -52,9 +52,9 @@
                               <div class="btn btn-default dropdown-toggle" id="memberCountries" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                               {% if data.countries %}
                                 <select id="members-countries-list">
-                                  <option href="#" id="all" class="default">{{ 'Member Countries' }}</option>
+                                  <option id="all" class="default">{{ 'Member Countries' }}</option>
                                     {% for  country in data.countries.list %}
-                                      <option href="{{ country.url }}" title="{{ country.datasets }}" data-amount="{{ country.datasets }}" value="{{ country.code }}">{{ country.name }}</option>
+                                      <option data-url="{{ country.url }}" title="{{ country.datasets }}" data-amount="{{ country.datasets }}" value="{{ country.code }}">{{ country.name }}</option>
                                     {% endfor %}    
                                 </select>
                               {% endif %}

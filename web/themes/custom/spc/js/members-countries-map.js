@@ -1,14 +1,16 @@
 (function ($, Drupal, drupalSettings) {
     Drupal.behaviors.spcMembersCountriesMap = {
         attach: function(context, settings) {
-          
+        
+        membersCountriesAmountAll = $('.datasets-count .amount').text();
+        membersCountriesUrl = $('.datasets-link a');  
         membersCountriesCount = $('.datasets-count .amount');
-        $('#members-countries-list option').not('.default').each(function(){
-          if ($(this).data('amount')){
-            membersCountriesAmount[$(this).val()] = $(this).data('amount');
-          } else {
-            membersCountriesAmount[$(this).val()] = 0;
-          }
+        $('#members-countries-list option').each(function(){
+          let total = [];
+            total['amount'] = $(this).data('amount');
+            total['url'] = $(this).data('url');
+            
+            membersCountriesAmount[$(this).val()] = total;
         });
           
         membersCountriesSelect = $('#members-countries-list').select2({
@@ -18,8 +20,19 @@
             let data = e.params.data;  
             let id = data.id;
 
-            membersCountriesCount.text(data.title);
-            
+            if (id.toLowerCase().includes('ki')) {
+              membersCountriesUrl.attr('href', membersCountriesAmount['KI']['url']).show();
+              membersCountriesCount.text(membersCountriesAmount[id]['amount']);
+            } else {
+              if (membersCountriesAmount[id]['url']) {
+                membersCountriesUrl.attr('href', membersCountriesAmount[id]['url']).show();
+                membersCountriesCount.text(membersCountriesAmount[id]['amount']);
+              } else {
+                membersCountriesUrl.attr('href', membersCountriesAmount[id]['url']).hide();
+                membersCountriesCount.text(membersCountriesAmountAll);
+              }              
+            }
+
             let map = membersCountriesMap;
             let polygons = membersCountriesPoligon;
             let kiribatiPolygons = membersCountriesKiribatiPolygons;
@@ -32,13 +45,17 @@
                   bounds.extend(element); 
                 });
               });
-            }
-            else {
+              map.fitBounds(bounds);
+            } else if(id.toLowerCase().includes('countries')) {
+                map.setZoom(3);
+                map.setCenter(new google.maps.LatLng(membersCountriesLatLng.lat, membersCountriesLatLng.lng));
+                bounds = false;
+            } else {
               polygons[id].getPath().forEach(function (element, index) { 
                 bounds.extend(element); 
               });
+              map.fitBounds(bounds);
             }
-            map.fitBounds(bounds);
             
             for(i = 0; i < markers.length; i++) {
                 markers[i].setVisible(false);
@@ -73,12 +90,18 @@ var membersCountriesKiribatiPolygons;
 var membersCountriesSelect;
 var membersCountriesMarkers;
 var membersCountriesCount;
+var membersCountriesUrl;
+var membersCountriesAmountAll;
 var membersCountriesAmount = [];
+var membersCountriesLatLng = {
+  lat: -15.4492793,
+  lng: 167.595411
+}
 
 function initMap() {
   
   const map = membersCountriesMap = new google.maps.Map(document.getElementById('members-countries-map'), {
-    center: { lat: -15.4492793, lng: 167.595411 },
+    center: { lat: membersCountriesLatLng.lat, lng: membersCountriesLatLng.lng },
     zoom: 3,          
     disableDefaultUI: true,
     styles: [
@@ -319,8 +342,15 @@ function initMap() {
                   markers.push(marker);
                 }
 
-                membersCountriesSelect.val(id).trigger('change');
-                membersCountriesCount.text(membersCountriesAmount[id]);
+                if (id.toLowerCase().includes('ki')) {
+                  membersCountriesSelect.val('KI').trigger('change');
+                  membersCountriesCount.text(membersCountriesAmount['KI']['amount']);
+                  membersCountriesUrl.attr('href', membersCountriesAmount['KI']['url']).show();
+                } else {
+                  membersCountriesSelect.val(id).trigger('change');
+                  membersCountriesCount.text(membersCountriesAmount[id]['amount']);
+                  membersCountriesUrl.attr('href', membersCountriesAmount[id]['url']).show();
+                }
             }
         });
         

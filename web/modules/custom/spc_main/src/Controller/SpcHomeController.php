@@ -40,6 +40,7 @@ class SpcHomeController  extends ControllerBase {
   public function get_members_countries(){
     $countries = [];
 
+    $spc_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
     $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
     $theme = \Drupal::theme()->getActiveTheme();
     $theme_path = $theme->getPath();
@@ -64,7 +65,7 @@ class SpcHomeController  extends ControllerBase {
         $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
 
         $countries[] = [
-          'url' => $url,
+          'url' => $spc_base_url . 'dataset?member_countries=' . $country_code,
           'code' => $country_code,
           'name' => $name,
           'datasets' => $datasets_count
