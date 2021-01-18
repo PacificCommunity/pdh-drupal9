@@ -550,7 +550,7 @@
             $('#nav-popular-datasets .ckan-dataset-tab-container .carusel-of-items').slick('refresh');
           }
         });
-  
+        
       }
     };
     

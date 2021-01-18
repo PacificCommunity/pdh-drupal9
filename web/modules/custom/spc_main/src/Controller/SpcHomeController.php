@@ -19,6 +19,7 @@ class SpcHomeController  extends ControllerBase {
   public function mainLanding() {
 
     $data['stats'] = $this->get_spc_stats();
+    $data['countries'] = $this->get_members_countries();
     $data['datasets'] = $this->get_spc_datasets();
     
     return [
@@ -34,6 +35,46 @@ class SpcHomeController  extends ControllerBase {
     $stats['organizations'] = $this->_ckan_organisations_count(); 
     
     return $stats;
+  }
+  
+  public function get_members_countries(){
+    $countries = [];
+
+    $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+    $theme = \Drupal::theme()->getActiveTheme();
+    $theme_path = $theme->getPath();
+    
+    $total_datasets_count = 0;
+    $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');   
+    foreach($countries_tax as $country_term){
+        $country = Term::load($country_term->tid);
+
+        $name = $country->getName();
+        $country_code = $country->get('field_country_code')->getValue()[0]['value'];
+        $datasets_count = @$country->get('field_datasets_count')->getValue()[0]['value'];
+
+        if (!$datasets_count){
+          $datasets_count = $spcPublicationImport->get_ckan_country_datasets_count($country_code);
+          $country->set('field_datasets_count', $datasets_count);
+          $country->save();
+        }
+        $total_datasets_count += $datasets_count;
+
+        $aliasManager = \Drupal::service('path_alias.manager');
+        $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
+
+        $countries[] = [
+          'url' => $url,
+          'code' => $country_code,
+          'name' => $name,
+          'datasets' => $datasets_count
+        ];
+      }
+
+    return [
+        'list' => $countries,
+        'total_datasets' => $total_datasets_count
+    ] ;
   }
   
   public function get_spc_datasets() {

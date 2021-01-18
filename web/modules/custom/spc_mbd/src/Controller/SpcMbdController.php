@@ -23,19 +23,19 @@ class SpcMbdController extends ControllerBase {
         $data['maritime_zones'] = @$this->get_maritime_zones();
         if ($mbd_zones_fid = $config->get('mbd_zones_fid')){
             $mbd_zones_file = File::load($mbd_zones_fid);
-            $data['maritime_zones_file'] =  file_create_url($mbd_zones_file->uri->value);           
+            $data['maritime_zones_file'] =  @file_create_url($mbd_zones_file->uri->value);           
         }
 
         $data['boundaries_treaty'] = @$this->get_boundaries_treaty();
         if ($mbd_boundary_treaty_fid = $config->get('mbd_boundary_treaty_fid')){
             $mbd_boundary_treaty_file = File::load($mbd_boundary_treaty_fid);
-            $data['boundary_treaty_file'] =  file_create_url($mbd_boundary_treaty_file->uri->value);           
+            $data['boundary_treaty_file'] =  @file_create_url($mbd_boundary_treaty_file->uri->value);           
         }        
         
         $data['shelf_treaty'] = @$this->get_shelf_treaty();
         if ($mbd_shelf_treaty_fid = $config->get('mbd_shelf_treaty_fid')){
             $mbd_shelf_treat_file = File::load($mbd_shelf_treaty_fid);
-            $data['shelf_treaty_file'] =  file_create_url($mbd_shelf_treat_file->uri->value);           
+            $data['shelf_treaty_file'] =  @file_create_url($mbd_shelf_treat_file->uri->value);           
         }
         
         $data['partners'] = @$this->get_mbd_partners();

@@ -50,24 +50,22 @@
                           <p>{{ 'View data and knowledge by Pacific Island country' }}</p>
                           <div class="dropdown">
                               <div class="btn btn-default dropdown-toggle" id="memberCountries" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                  {{ 'Member Countries' }}
-                              </div>
-                              {% if data.members_countries.countries_list %}
-                              <ul class="dropdown-menu">
-                                  <div class="dropdown-list">
-                                  {% for  kountry_key in data.members_countries.countries_list %}
-                                      <li>{{ kountry_key }}</li>
-                                  {% endfor %}    
-                                  </div>  
-                              </ul>
+                              {% if data.countries %}
+                                <select id="members-countries-list">
+                                  <option href="#" id="all" class="default">{{ 'Member Countries' }}</option>
+                                    {% for  country in data.countries.list %}
+                                      <option href="{{ country.url }}" title="{{ country.datasets }}" data-amount="{{ country.datasets }}" value="{{ country.code }}">{{ country.name }}</option>
+                                    {% endfor %}    
+                                </select>
                               {% endif %}
+                              </div>
                           </div>
                       </div>
                       <div class="column-footer">
                           <div class="datasets-count">
                               <span class="datasets-icon"></span>
                               <div class="count">
-                                  <div class="amount">{{ '0' }}</div>
+                                  <div class="amount">{{ data.countries.total_datasets }}</div>
                                   <div class="description">
                                     {{ 'Datasets'|t }}
                                   </div>

@@ -238,5 +238,26 @@ class spcPublicationImport {
     
     return false;
    }
+   
+   public function get_ckan_country_datasets_count($country_code){
+    $data_url = $this->base_url . 'api/action/package_search';
+
+    $query = '?q=';
+    $params = 'member_countries:' . $country_code;
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $data_url . $query. $params);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $responce = json_decode($result, true);    
+      if ($responce['success']){
+        $count = $responce['result']['count'];
+        return $count;
+    }   
+    
+    return false;
+   }
   
 }
