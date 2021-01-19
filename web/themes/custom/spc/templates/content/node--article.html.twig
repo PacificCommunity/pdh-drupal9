@@ -73,7 +73,6 @@
 <div class="spc-panels">
   <div class="spc-middle-section">
     <article{{ attributes.addClass('article') }}>
-      
       <div class="group-title-block">
         {{ title_prefix }}
         {% if not page %}
@@ -84,9 +83,22 @@
         {{ title_suffix }}
 
         {% if display_submitted %}
-            <div{{ author_attributes }}>
-              {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-              {{ metadata }}
+            <div class="author">{{ author_name }}</div>
+            <div class="post-date">
+              {% set datetime = node.getCreatedTime|default(0) %}
+              {{ datetime|date('F d, Y') }}
+            </div>
+            <div class="insights-topic"><div class="view-mode-group_with_icon">
+              <div class="group-with-icon">
+                <a class="thematic-fa-link" href="/topic/official-statistics" aria-label="Official Statistics">
+                  <div class="field field-name-field-fa-icon">
+                    <i class=" fp fa-bar-chart fa-2x" aria-hidden="true"></i>
+                  </div>
+                  <span>{{ 'Official Statistics' }}</span>
+                </a>
+ 
+              </div>
+            </div>
             </div>
         {% endif %}
       </div>
@@ -98,7 +110,39 @@
       <div class="body-text">
         {{ content.body }}
       </div>
-
     </article>
+    <div class="related-datasets article-related-ds">
+      <h2 class="pane-title">{{ 'Related Datasets' }}</h2>
+      <div class="">
+        {% if datasets %}
+          {% for dataset in datasets %}
+            <div class="dataset-item">
+              <div class="dataset-org">
+                <a href="{{ dataset.organization.spc_base_url }}">
+                  <img class="media-object" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.org.title }}">
+                </a>
+              </div>		
+              <div class="dataset-title">
+                <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+              </div>
+              <div class="dataset-date">
+                <span>{{ 'Release Date' }}:</span>
+                <span class="dataset-date-green">{{ dataset.date }}</span>
+              </div>
+              {% if dataset.resources %}
+                <div class="dataset-formats">
+                  <span>{{ 'File Format' }}:</span>
+                  {% for res in dataset.resources %}
+                    <a href="{{ res.url }}" aria-label="{{ res.format }}">
+                      <div class="res-formats res-format-{{ res.format|lower }}"></div>
+                    </a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}        
+        {% endif %}
+      </div>  
+    </div>  
   </div>
 </div>
