@@ -253,12 +253,16 @@
     }
 }
 .spc-stories main{
-      max-width: 1200px;
+      max-width: 1170px;
       
   .stories-list  {
-
       padding: 0px 50px;
       margin-top: 60px;
+
+      @media(max-width: 1024px){
+        padding: 0px;
+      }      
+      
       .story-item {
           font-family: 'Roboto';
           display: flex;
@@ -267,10 +271,19 @@
           margin-bottom: 25px;
           padding: 10px;
           border-radius: 15px;
+          
+          @media(max-width: 1024px){
+            display: block;
+          }
           .node-content-container {
               width: 66%;
               padding: 0 15px;
               padding-left: 40px;
+              
+              @media(max-width: 1024px){
+                width: 100%;
+                padding: 0;
+              }              
               .story-title {
                   margin-bottom: 15px;
                   .title {
@@ -286,8 +299,11 @@
                   }
               }
               .node-body {
-                  font-size: 13px;
                   margin-bottom: 25px;
+                  font-size: 13px;
+                  p {
+                    font-size: 13px;
+                  }
               }
               .story-title h2, .node-body {
                   line-height: 24px;
@@ -296,7 +312,16 @@
           .group-preview-section {
               width: 33%;
               padding: 0;
+              
+              @media(max-width: 1024px){
+                width: 100%;
+              }              
               .preview-item {
+                  @media(max-width: 1024px){
+                    max-height: 300px;
+                    overflow: hidden;
+                    border-radius: 18px;
+                  } 
                   img {
                       width: 100%;
                       height: auto;
@@ -305,7 +330,6 @@
               }
           }
           .node-links-container {
-              margin-bottom: 25px;
               a {
                   font-size: 13px;
                   color: #0091C7;
