@@ -30,7 +30,7 @@ class spcBanner extends BlockBase {
     $data['title'] = isset($config['spc_banner_title']) ? $config['spc_banner_title'] : '';
     $data['breads'][] = [
       'name' => isset($config['spc_banner_title']) ? strip_tags($config['spc_banner_title']) : '<strong>Data</strong> Insights',
-      'url' => '/data-insights'
+      'url' => \Drupal::service('path.current')->getPath(), //todo: needs improovment.
     ];
 
     $node = \Drupal::routeMatch()->getParameter('node');
