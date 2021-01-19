@@ -29,7 +29,7 @@ class spcMainMenu extends BlockBase {
     $revision_apply = \Drupal::config('spc_data_import.settings')->get('revision_apply');
     
     if (empty($header_markup)){
-      $spcDataImport = \Drupal::service('spc_main.spcDataImport');
+      $spcDataImport = \Drupal::service('spc_data_import.spcDataImport');
       $response = $spcDataImport->getHeaderMenu();
 
       if (is_object($response)){

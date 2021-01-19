@@ -20,11 +20,6 @@ function spc_main_theme($existing, $type, $theme, $path){
       'variables' => [
         'data' => null
       ],
-    ],       
-    'spc_main_menu' => [
-      'variables' => [
-        'menu' => null
-      ]
     ],
     'spc_footer_partners' => [
       'variables' => [
@@ -40,62 +35,17 @@ function spc_main_theme($existing, $type, $theme, $path){
 }
 
 /**
- * Implements hook_preprocess_HOOK().
- */
-function spc_main_preprocess_html(&$variables) {
-    
-}
-
-/**
  * Implements hook_cron().
  */
 function spc_main_cron() {
-  
-    //Get latest cached header.
-    $cached_header = \Drupal::config('spc_data_import.settings')->get('header_markup');
-    $spc_base_url = \Drupal::config('spc_data_import.settings')->get('spc_base_url');
-    //Update header from API.
-    \Drupal::configFactory()->getEditable('spc_data_import.settings')
-      ->set('header_markup_revision', $cached_header)
-      ->save();
-  
-    $spcDataImport = \Drupal::service('spc_main.spcDataImport');
-    
-    $header = $spcDataImport->getHeaderMenu();
-    if (is_object($header)){
-      $main = $header->main[0];
-      $mobile = $header->mobile[0];
-      $header_markup = $main . $mobile;
-      
-      \Drupal::configFactory()->getEditable('spc_data_import.settings')
-        ->set('header_markup', str_replace('href="/', 'href="' . $spc_base_url , $header_markup))
-        ->save();
-    }
-    
-    //Get latest cached header.
-    $cached_footer = \Drupal::config('spc_data_import.settings')->get('footer_markup');
-    //Update header from API.
-    \Drupal::configFactory()->getEditable('spc_data_import.settings')
-      ->set('footer_markup_revision', $cached_footer)
-      ->save();
-    
-    $footer = $spcDataImport->getFooterMenu();
-    if (is_object($footer)){
-      $footer_markup = $footer->main[0];
-      
-      \Drupal::configFactory()->getEditable('spc_data_import.settings')
-        ->set('footer_markup', $footer_markup)
-        ->save();
-    }
-    
-    $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
-    $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
-    foreach($countries_tax as $country_term){
-      $country = Term::load($country_term->tid);
-      $country_code = $country->get('field_country_code')->getValue()[0]['value'];
-      $organisations_count = $spcPublicationImport->get_ckan_country_datasets_count($country_code);
-      $country->set('field_datasets_count', $country_term->tid);
-      $country->save();
-    }
-
+  // Getting Dataset Publications count for placing in country EEZ entity. 
+  $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
+  $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+  foreach($countries_tax as $country_term){
+    $country = Term::load($country_term->tid);
+    $country_code = $country->get('field_country_code')->getValue()[0]['value'];
+    $organisations_count = $spcPublicationImport->get_ckan_country_datasets_count($country_code);
+    $country->set('field_datasets_count', $country_term->tid);
+    $country->save();
+  }
 }
