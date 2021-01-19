@@ -86,6 +86,79 @@ function spc_preprocess_field(&$variables){
 /**
  * Implements theme_preprocess_node().
  */
+function spc_preprocess_node(&$variables){
+  $node = $variables['node'];
+  if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
+    $field_related_datasets = $node->get('field_related_datasets')->getValue();
+    $spc_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+    $story_detales = [];
+    
+    foreach ($field_related_datasets as $dataset_id){
+      $id = $dataset_id['value'];
+      $api = $spc_base_url . 'api/3/action/package_show';
+
+      if ($responce = json_decode(file_get_contents($api . '?id=' . $id))){
+        $publication = $responce->result;
+
+        if (is_object($publication)){
+          $dataset = [];
+          $dataset['name'] = $publication->name;
+          $dataset['title'] = $publication->title;
+          $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
+
+          //creation date.
+          $originalDate = $publication->metadata_created;
+          $dataset['date'] = date("M, d, Y", strtotime($originalDate));
+
+          //Organisation data.
+          $dataset['organization']['image_url'] = $spc_base_url . 'uploads/group/' . $publication->organization->image_url;
+          $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
+          $dataset['organization']['title'] = $publication->organization->title;
+
+          //Category mapper.
+          $tags = $publication->tags;
+          $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
+
+          foreach ($categories as $category_term) {
+            $category = Term::load($category_term->tid);
+            $term_code = $category->get('field_c_code')->getValue()[0]['value'];
+
+            foreach ($tags as $tag){
+              $tag_name = $tag->name;
+
+              if ($term_code == $tag_name){
+                $aliasManager = \Drupal::service('path_alias.manager');
+                $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
+
+                $dataset['tags'][] = [
+                  'url' => $url,
+                  'name' => $category->getName(),
+                ];
+              }
+
+            }
+          }
+
+          //Resources data.
+          if ($resources = $publication->resources){
+              foreach ($resources as $resource){
+                  $data_resource['url'] = $resource->url;
+                  $data_resource['format'] = $resource->format;
+                  $dataset['resources'][$resource->format] = $data_resource;
+              }
+          }
+
+          $variables['datasets'][] =  $dataset;
+        }
+      }
+    }
+    //dump($variables['datasets']); die;
+  }  
+}
+
+/**
+ * Implements theme_preprocess_term().
+ */
 function spc_preprocess_taxonomy_term(&$variables){
     $vocabulary = $variables['elements']['#taxonomy_term']->bundle();
     $term = $variables['term'];

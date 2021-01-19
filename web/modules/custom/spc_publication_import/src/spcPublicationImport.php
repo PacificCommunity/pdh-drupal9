@@ -125,6 +125,29 @@ class spcPublicationImport {
     return $response;
   }
   
+    /**
+   * {@inheritdoc}
+   */
+  public function get_ckan_dataset_by_id($sort) {
+    $data_url = $this->base_url . $this->requested_path;
+    $params = '?';
+    $params .= '&rows=6'; 
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $data_url . $params);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $responce = json_decode($result);
+    if ($responce->success){
+      $publications = $responce->result->results;
+      return $publications;
+    }
+    
+    return false;
+  }
+  
   /**
    * {@inheritdoc}
    */
