@@ -29,7 +29,7 @@ class spcFooterMenu extends BlockBase {
     $revision_apply = \Drupal::config('spc_data_import.settings')->get('revision_apply');    
     
     if (empty($footer_markup)){
-      $spcDataImport = \Drupal::service('spc_pbank.spcDataImport');
+      $spcDataImport = \Drupal::service('spc_data_import.spcDataImport');
       $response = $spcDataImport->getFooterMenu();
       
       if (is_object($response)){

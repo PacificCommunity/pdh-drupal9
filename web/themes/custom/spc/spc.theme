@@ -33,6 +33,9 @@ function spc_preprocess_html(&$variables) {
   }
   if($route_name == 'spc_main.landing') {
     $variables['attributes']['class'][] = 'spc-landing';
+  }
+  if($route_name == 'view.stories_list.page') {
+    $variables['attributes']['class'][] = 'spc-stories';
   }  
 }
 
