@@ -1,0 +1,23 @@
+uuid: 030f9dc0-bd56-4060-a76f-c68d0a00d7f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_datasets_count
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_datasets_count
+field_name: field_datasets_count
+entity_type: taxonomy_term
+bundle: country
+label: 'Datasets count'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

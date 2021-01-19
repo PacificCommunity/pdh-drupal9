@@ -21,6 +21,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/\r\n/home\r\n/user/*"
+    pages: "/\r\n/home"
     negate: false
     context_mapping: {  }
