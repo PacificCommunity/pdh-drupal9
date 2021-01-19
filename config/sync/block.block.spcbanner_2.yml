@@ -22,6 +22,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: "/\r\n/home\r\n/dashboard/*\r\n/data-insights\r\n/data-insights/*"
+    pages: "/\r\n/home\r\n/story\r\n/story/*\r\n/dashboard/*\r\n/data-insights\r\n/data-insights/*"
     negate: true
     context_mapping: {  }

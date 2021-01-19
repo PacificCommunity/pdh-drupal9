@@ -59,7 +59,7 @@ content:
     type: string_textfield
     region: content
   field_datasets_count:
-    weight: 16
+    weight: 12
     settings:
       placeholder: ''
     third_party_settings: {  }
@@ -130,7 +130,7 @@ content:
     region: content
   field_related_datasets:
     type: string_textfield
-    weight: 12
+    weight: 13
     region: content
     settings:
       size: 60
@@ -138,7 +138,7 @@ content:
     third_party_settings: {  }
   field_url:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60
@@ -154,7 +154,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -162,7 +162,7 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 15
+    weight: 16
     region: content
     third_party_settings: {  }
 hidden:
