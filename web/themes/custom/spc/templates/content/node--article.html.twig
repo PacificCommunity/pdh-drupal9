@@ -70,28 +70,37 @@
  *   in different view modes.
  */
 #}
-<article{{ attributes }}>
-  story full
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
+<div class="spc-panels">
+  <div class="spc-middle-section">
+    <article{{ attributes.addClass('article') }}>
+      
+      <div class="group-title-block">
+        {{ title_prefix }}
+        {% if not page %}
+          <h2{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h2>
+        {% endif %}
+        {{ title_suffix }}
 
-  {% if display_submitted %}
-    <footer>
-      {{ author_picture }}
-      <div{{ author_attributes }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
+        {% if display_submitted %}
+
+            {{ author_picture }}
+            <div{{ author_attributes }}>
+              {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+              {{ metadata }}
+            </div>
+        {% endif %}
       </div>
-    </footer>
-  {% endif %}
+              
+      <div class="field-type-image">
+        {{ content.field_image }}
+      </div>
 
-  <div{{ content_attributes }}>
-    {{ content }}
+      <div class="body-text">
+        {{ content.body }}
+      </div>
+
+    </article>
   </div>
-
-</article>
+</div>
