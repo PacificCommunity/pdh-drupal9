@@ -553,7 +553,7 @@
         });
 
         //Home page stories slider.
-        $('.stories-list').slick({
+        $('#latest-stories-block .stories-list').slick({
           slidesToShow: 3,
             dots: true,
             responsive: [
@@ -588,6 +588,21 @@
             } else {
                 $(this).text('show more');
             }
+        });
+        
+        //Home page Dashboards slider. 
+        $('.dashboard-list').slick({
+          slidesToShow: 2,
+            dots: true,
+            responsive: [
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 1,
+                  arrows: false
+                }
+              }
+            ]
         });
         
       }

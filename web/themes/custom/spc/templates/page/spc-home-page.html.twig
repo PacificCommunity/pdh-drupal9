@@ -45,131 +45,66 @@
         <h2 class="pane-title">{{ 'Dashboards and Tools' }}</h2>
         <div class="pane-subtitle">{{ 'Check out our featured dashboards and tools' }}</div>
 
-        <div class="node-dashboards view-mode-dashboard_highlight clearfix">
-            <div class="field field-type-image">
-               <img typeof="foaf:Image" src="/themes/custom/spc/img/SDG.png" width="230" height="230" alt="">
-            </div>
-            <div class="group-content">
-                <div class="group-content-left">
-                    <span>{{ '17 Goals to <strong>Transform </strong> the Pacific' }}</span>
-                    <a href="/dashboard/17-goals-transform-pacific" class="banner-button btn">
-                       {{ 'View DASHBOARD' }}
+        <div class="dashboard-list">
+          
+          <div class="dashboard-item node-dashboards view-mode-dashboard_highlight clearfix">
+              <div class="group-content">
+                  <div class="group-content-left">
+                    <a href="/dashboard/17-goals-transform-pacific" title="View Dashboard">
+                      <img src="/themes/custom/spc/img/map_tool.png" alt="...">
                     </a>
-                </div>
-                <div class="group-content-right">
-                    <div class="dashboard-description">
-                      {{ 'This SDG Dashboard is the regional dissemination platform for the 16 Pacific Island Countries and Territories which are members of the Pacific Islands Forum.' }}
-                    </div>
-                </div>
-            </div>
-            <div class="group-chart">
-               <a href="/dashboard/17-goals-transform-pacific" title="{{ 'View Dashboard' }}">
-                 <div class="chart-static lazy-load icon-dashboard-chart" style="background-repeat: no-repeat;"></div>
-               </a>
-            </div>
-        </div>
+                  </div>
+                  <div class="group-content-right">
+                      <span class="title">{{ '17 Goals to <strong>Transform </strong> the Pacific' }}</span>
+                      <div class="dashboard-description">
+                        {{ 'This SDG Dashboard is the regional dissemination platform for the 16 Pacific Island Countries and Territories which are members of the Pacific Islands Forum.' }}
+                      </div>
+                      <a href="/dashboard/17-goals-transform-pacific" class="banner-button btn">
+                         {{ 'View DASHBOARD' }}
+                      </a>
+                  </div>
+              </div>
+          </div>
+                      
+          <div class="dashboard-item node-dashboards view-mode-dashboard_highlight clearfix">
+              <div class="group-content">
+                  <div class="group-content-left">
+                    <a href="/dashboard/17-goals-transform-pacific" title="View Dashboard">
+                      <img src="/themes/custom/spc/img/map_tool.png" alt="...">
+                    </a>
+                  </div>
+                  <div class="group-content-right">
+                      <span class="title">{{ '17 Goals to <strong>Transform </strong> the Pacific' }}</span>
+                      <div class="dashboard-description">
+                        {{ 'This SDG Dashboard is the regional dissemination platform for the 16 Pacific Island Countries and Territories which are members of the Pacific Islands Forum.' }}
+                      </div>
+                      <a href="/dashboard/17-goals-transform-pacific" class="banner-button btn">
+                         {{ 'View DASHBOARD' }}
+                      </a>
+                  </div>
+              </div>
+          </div>
 
-        <div class="hl-dashboard-link">
-            <div class="node-dashboards view-mode-dashboard_highlight clearfix">
-                <div class="group-chart">
-                    <div class="sqare-preview left">
-                        <a href="https://stats.pacificdata.org/" title="{{ 'Explore PDH.Stat' }}">
-                          <div class="stat-tool"></div>
-                        </a>
-                    </div>
-                </div>
-                <div class="group-content right">
-                    <div class="group-content-left">
-                        <span>{{ 'PDH.Stat Data <strong>Explorer</strong>' }}</span>
-                        <a href="https://stats.pacificdata.org/" class="banner-button btn">
-                           {{ 'Explore PDH.Stat' }}
-                        </a>
-                    </div>
-                    <div class="group-content-right">
-                        <div class="dashboard-description">
-                           {{ 'Indicator database explorer which contains the 132 Pacific Sustainable Development Indicators (SDGs) as well as a range of economic, health, demographic and environmental datasets.' }}
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div> 
-
-        <div class="collapsible">
-            <div class="hl-dashboard-link">
-                <div class="node-dashboards view-mode-dashboard_highlight clearfix">       
-                    <div class="group-content">
-                        <div class="group-content-left">
-                            {{ '<strong>MANA</strong> Dashboard' }}
-                            <a href="{{ data.dashboards.mana.url }}" class="banner-button btn">
-                               {{ 'View DASHBOARD' }}
-                            </a>
-                        </div>
-                        <div class="group-content-right" style="flex: 1 1 75%;">
-                            <div class="dashboard-description">
-                              {{ 'The Pacific Monitoring Alliance for NCD Action (MANA) dashboard will enable PICTs to monitor <strong>status and progress of NCD policy and legislation</strong> against the <strong>Pacific NCD Roadmap</strong>, the <strong>Health Islands Monitoring Frameworks</strong> as well as the <strong>Sustainable Development Goals</strong>.' }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="group-chart">
-                        <a href="{{ data.dashboards.mana.url }}" title="{{ 'View Dashboard' }}">
-                          <div class="chart-static lazy-load icon-health-dashboard-chart" style="margin-left: 0; margin-left: -90px;"></div>
-                        </a>
-                    </div> 
-                </div>        
-            </div>
-
-            <div class="hl-dashboard-link">
-                <div class="node-dashboards view-mode-dashboard_highlight clearfix">
-                    <div class="group-chart">
-                        <div class="sqare-preview left">
-                           <a href="https://map.pacificdata.org/" title="{{ 'View Map Data' }}"> 
-                             <div class="map-tool"></div>
-                           </a>
-                        </div>
-                    </div>        
-                    <div class="group-content right">
-                        <div class="group-content-left">
-                           {{ 'Pacific <strong>Map</strong>' }}
-                             <a href="https://map.pacificdata.org/" class="banner-button btn">
-                               {{ 'View map data' }}
-                             </a>
-                        </div>
-                        <div class="group-content-right" style="flex: 1 1 75%;">
-                           <div class="dashboard-description">
-                             {{ 'A geospatial data exploration tool providing easy-to-use map-based visualisation of spatial data.' }}
-                           </div>
-                        </div>
-                    </div>
-                </div>        
-            </div>
-
-            <div class="node-dashboards view-mode-dashboard_highlight clearfix">
-                <div class="group-content">
-                    <div class="group-content-left">
-                      {{ 'Microdata <strong>Library</strong>' }}
-                        <a href="https://microdata.pacificdata.org/" class="banner-button btn">
-                           {{ 'Explore Microdata' }}
-                        </a>
-                    </div>
-                    <div class="group-content-right">
-                        <div class="dashboard-description">
-                           {{ 'Online census and survey documentation and archiving application which also provides access to microdata for some collections.' }}
-                        </div>
-                    </div>
-                </div>
-                <div class="group-chart">
-                    <div class="sqare-preview right">
-                        <a href="https://microdata.pacificdata.org/" title="{{ 'Explore Microdata' }}">
-                          <div class="microdata-tool"></div>
-                        </a>
-                    </div>
-                </div>
-            </div>            
-        </div> 
-
-        <div class="show-more">
-            <a href="#" title="show more">{{ 'show more' }}</a>
-        </div>
+          <div class="dashboard-item node-dashboards view-mode-dashboard_highlight clearfix">
+              <div class="group-content">
+                  <div class="group-content-left">
+                    <a href="/dashboard/17-goals-transform-pacific" title="View Dashboard">
+                      <img src="/themes/custom/spc/img/map_tool.png" alt="...">
+                    </a>
+                  </div>
+                  <div class="group-content-right">
+                      <span class="title">{{ '17 Goals to <strong>Transform </strong> the Pacific' }}</span>
+                      <div class="dashboard-description">
+                        {{ 'This SDG Dashboard is the regional dissemination platform for the 16 Pacific Island Countries and Territories which are members of the Pacific Islands Forum.' }}
+                      </div>
+                      <a href="/dashboard/17-goals-transform-pacific" class="banner-button btn">
+                         {{ 'View DASHBOARD' }}
+                      </a>
+                  </div>
+              </div>
+          </div>                      
+                      
+        </div>                       
      </div>    
  </div>         
           
