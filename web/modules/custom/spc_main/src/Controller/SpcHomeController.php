@@ -20,6 +20,7 @@ class SpcHomeController  extends ControllerBase {
   public function mainLanding() {
 
     $data['stats'] = $this->get_home_stats();
+    $data['dashboards'] = $this->get_home_dashboards();
     $data['countries'] = $this->get_members_countries();
     $data['stories'] = $this->get_home_stories();
     $data['datasets'] = $this->get_home_datasets();
@@ -37,6 +38,16 @@ class SpcHomeController  extends ControllerBase {
     $stats['organizations'] = $this->_ckan_organisations_count(); 
     
     return $stats;
+  }
+  
+  public function get_home_dashboards(){
+    $dashboards = [];
+    
+    $dashboards['mana'] = [
+        'url' => '/dashboard/health-dashboard/'
+    ];
+    
+    return $dashboards;
   }
   
   public function get_members_countries(){

@@ -519,6 +519,7 @@
     Drupal.behaviors.homePage = {
       attach: function (context, settings) {
         
+        // Home page datasets switcher.
         $('#nav-recent-datasets-tab', context).on('click', function(e){
           e.preventDefault();
           $('.ckan-dataset-tabs-tab').removeClass('active');
@@ -551,6 +552,7 @@
           }
         });
 
+        //Home page stories slider.
         $('.stories-list').slick({
           slidesToShow: 3,
             dots: true,
@@ -573,8 +575,20 @@
             slide = $('.latest-stories-slider .slick-dots .slick-active button').text();
             $('.latest-stories-slider .slide-number').html('<strong>' + slide + '</strong> of <strong>' + slides_num_stories + '</strong>');
           });
-        };        
+        };
         
+        //Home page Dashboards toggle. 
+        $('.dashboards-home .show-more a', context).on('click', function(e){
+            e.preventDefault();
+            $(this).toggleClass('open');
+            $('.dashboards-home .collapsible').toggle();
+            
+            if ($(this).hasClass('open')){
+                $(this).text('show less');
+            } else {
+                $(this).text('show more');
+            }
+        });
         
       }
     };

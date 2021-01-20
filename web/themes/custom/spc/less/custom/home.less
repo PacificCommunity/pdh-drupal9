@@ -341,6 +341,206 @@
         }
     }
 }
+
+.dashboards-home {
+    padding-top: 20px;
+    padding-bottom: 0px;
+    text-align: center;
+    color: #000;
+    
+    .pane-title {
+        margin-top: 0px;
+        margin-bottom: 14px;
+        font-size: 38px;
+        font-weight: 700;
+    }
+    .pane-subtitle {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: @screen-sm) {
+        & {
+            .pane-subtitle {
+                margin-bottom: 33px;
+            }
+            .attachment-before {
+                padding: 0px;
+            }
+            .banner-button {
+                margin: 10px auto;
+            }            
+        }
+    }
+    
+    @media (max-width: 1000px){
+        .container {
+            width: 100%; 
+            
+            .group-content.right {
+                padding-right: 20px; 
+            }
+        }
+    }
+    
+    @media (max-width: 768px){
+        .container {
+            .group-content.right {
+                padding-right: 70px; 
+            }
+        }
+    }
+    
+    .node-dashboards {
+        margin-bottom: 60px !important;
+        
+        .group-content {
+            width: 100%;
+            z-index: 0;
+        }
+        .group-chart {
+            z-index: 1;
+        }
+    }
+    
+    .collapsible {
+        display: none;
+    }
+    
+    .banner-button{
+        display: block;
+        max-width: 204px;
+        margin-top: 10px;
+    }
+    
+    .icon-dashboard-chart {
+        background-image: url(../img/sprite/spc_sprite.png);
+        background-position: -846px -404px;
+        width: 311px;
+        height: 311px;
+    }
+
+    .icon-health-dashboard-chart {
+        background-image: url(../img/sprite/spc_sprite.png);
+        background-position: 0 -972px;
+        width: 308px;
+        height: 305px;
+    }    
+    
+    .sqare-preview {
+        width: 311px;
+        height: 311px;
+        background: linear-gradient(312.58deg, #000366 -46.08%, #00C6EC 150.77%);
+        border-radius: 12px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+        border: 8px solid #fff;
+        
+        &.left {
+            margin-left: 0;
+            margin-right: -90px;
+        }
+        
+        &.right{
+            margin-right: 0;
+            margin-left: -90px;
+        }
+        
+        .stat-tool {
+            background: url(../img/stat-tool.svg) no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-tool {
+            background: url(../img/map_tool.png) no-repeat;
+            background-size: 125%;
+            background-position: center;
+            background-color: #fff;
+            border-radius: 4px;
+            width: 100%;
+            height: 100%;
+        }
+        .microdata-tool {
+            background: url(../img/PDH_white.svg) no-repeat;
+            background-position: center;
+            border-radius: 4px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            margin-top: -30px;
+            
+            &:before {
+                content: 'Microdata Library';
+                display: block;
+                width: 142px;
+                height: 44px;
+                position: absolute;
+                bottom: 50px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 20px;
+                line-height: 22px;
+                color: #FFC72E;
+            }
+        }
+        
+    }
+    
+    .show-more {
+        margin-bottom: 60px;
+        text-transform: uppercase;
+        
+        a {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border: 1px solid #001E73;
+            box-sizing: border-box;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 30px;
+            text-align: center;
+            color: #001E73;
+            position: relative;
+            
+            &.open {
+                &:after {
+                    top: 12px;
+                    -webkit-transform: rotate(-135deg);
+                    -ms-transform: rotate(-135deg);
+                    transform: rotate(-135deg);
+                }
+            }
+            
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 50px;
+                border: solid #001E73;
+                border-width: 0 2px 2px 0;
+                padding: 2px;
+                transform: rotate(45deg);
+            }
+
+            &:hover {
+                text-decoration: none;
+                background: #001E73;
+                color: #fff;
+                
+                &:after {
+                    border: solid #fff;
+                    border-width: 0 2px 2px 0;
+                }
+            }
+        }        
+    }
+}
+
 .stories_on_the_hp {
     background: url(../img/stories_hp_bg.png) no-repeat 50% 50%;
     background-size: cover;
