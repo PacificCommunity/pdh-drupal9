@@ -43,10 +43,26 @@ class SpcHomeController  extends ControllerBase {
   public function get_home_dashboards(){
     $dashboards = [];
     
-    $dashboards['mana'] = [
-        'url' => '/dashboard/health-dashboard/'
-    ];
-    
+    $query = \Drupal::entityQuery('node')
+      ->condition('status', 1)
+      ->condition('type', 'dashboards')
+      ->pager(10);
+    $nids = $query->execute();
+
+    foreach ($nids as $nid) {
+      $dashboard = [];
+      $node = \Drupal\node\Entity\Node::load($nid); 
+      $dashboard['url'] = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $nid);
+      $dashboard['title'] = $node->title->value;
+      $dashboard['body'] = substr(strip_tags($node->body->value), 0, 200);
+      
+      $style = ImageStyle::load('stories_slides');
+      $styled_image_url = $style->buildUrl($node->field_image->entity->getFileUri());
+      $dashboard['img'] = $styled_image_url;
+      
+      $dashboards[] = $dashboard;
+    }  
+    //dump($dashboards); die;
     return $dashboards;
   }
   
