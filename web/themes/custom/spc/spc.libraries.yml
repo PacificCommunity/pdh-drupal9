@@ -60,7 +60,8 @@ slick:
   version: 2.x  
   css:
     theme:
-      css/slick.css: {}  
+      css/slick.css: {} 
+      css/slick-theme.css: {}
   js:
     js/slick.min.js: {}
   dependencies:

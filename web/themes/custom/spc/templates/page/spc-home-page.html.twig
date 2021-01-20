@@ -86,7 +86,40 @@
               </div>
           </div>
       </div>           
-  </div>            
+  </div> 
+      
+  {# latest Stories block. #} 
+  {% if data.stories %}
+  <div id="latest-stories-block" class="stories_on_the_hp">  
+    <div  class="latest-stories-slider">
+      <h2 class="pane-title">{{ 'Latest Stories' }}</h2>
+         <div class="stories-list field-items">
+           {% for key, story in data.stories %}
+              <div class="field-item">
+                 <div class="views-field views-field-field-image">
+                    <div class="field-content">
+                       <div class="field field-type-image">
+                          <a href="{{ story.url }}" aria-label="{{ story.title }}" tabindex="{{ key }}">
+                          <img typeof="foaf:Image" data-src="{{ story.img }}" src="{{ story.img }}" class="lazy-load" width="320" height="224" alt="" style="background: none;">
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="views-field views-field-title">
+                    <div class="slide-num">{{ key + 1 }}</div>
+                    <span class="field-content">
+                       <a href="{{ story.url }}" tabindex="0">
+                          <h3>{{ story.title }}</h3>
+                       </a>
+                    </span>
+                 </div>
+              </div>
+            {% endfor %}
+         </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>          
+  {% endif %}
           
   {# Dataset block. #}
   <div id="ckan-dataset-tabs-block">
