@@ -28,13 +28,19 @@ class spcBanner extends BlockBase {
     $config = $this->getConfiguration();
     $data = [];
     $data['title'] = isset($config['spc_banner_title']) ? $config['spc_banner_title'] : '';
+    
+    $aliasManager = \Drupal::service('path_alias.manager');
+    $current_path = \Drupal::service('path.current')->getPath();
+    $url = $aliasManager->getAliasByPath($current_path);
+    
     $data['breads'][] = [
-      'name' => isset($config['spc_banner_title']) ? strip_tags($config['spc_banner_title']) : '<strong>Data</strong> Insights',
-      'url' => \Drupal::service('path.current')->getPath(), //todo: needs improovment.
+      'name' => isset($config['spc_banner_title']) ? strip_tags($config['spc_banner_title']) : substr($url, 0, strripos($url, '/')),
+      'url' => substr($url, 0, strripos($url, '/')), 
     ];
 
     $node = \Drupal::routeMatch()->getParameter('node');
-    if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'data_insights') {
+    if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'data_insights' 
+        || $node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
       $data['breads'][] = ['name' => $node->getTitle()];
     }
 

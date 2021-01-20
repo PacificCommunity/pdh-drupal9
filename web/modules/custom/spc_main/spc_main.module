@@ -44,8 +44,8 @@ function spc_main_cron() {
   foreach($countries_tax as $country_term){
     $country = Term::load($country_term->tid);
     $country_code = $country->get('field_country_code')->getValue()[0]['value'];
-    $organisations_count = $spcPublicationImport->get_ckan_country_datasets_count($country_code);
-    $country->set('field_datasets_count', $country_term->tid);
+    $datasets_count = $spcPublicationImport->get_ckan_country_datasets_count($country_code);
+    $country->set('field_datasets_count', $datasets_count);
     $country->save();
   }
 }
