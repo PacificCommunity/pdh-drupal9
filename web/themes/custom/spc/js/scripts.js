@@ -550,6 +550,31 @@
             $('#nav-popular-datasets .ckan-dataset-tab-container .carusel-of-items').slick('refresh');
           }
         });
+
+        $('.stories-list').slick({
+          slidesToShow: 3,
+            dots: true,
+            responsive: [
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 1,
+                  arrows: false
+                }
+              }
+            ]
+        });
+
+        if ($('.latest-stories-slider').length > 0 && $('.latest-stories-slider .slick-dots li').length > 0) {
+          let slides_num_stories = $('.latest-stories-slider .slick-dots li').length;
+          let slide = $('.latest-stories-slider .slick-dots .slick-active button').text();
+          $('.latest-stories-slider').append('<div class="slide-number"><strong>'+ slide +'</strong> of <strong>' + slides_num_stories + '</strong></div>');
+          $('.latest-stories-slider .slick-arrow').on('click', function(){
+            slide = $('.latest-stories-slider .slick-dots .slick-active button').text();
+            $('.latest-stories-slider .slide-number').html('<strong>' + slide + '</strong> of <strong>' + slides_num_stories + '</strong>');
+          });
+        };        
+        
         
       }
     };

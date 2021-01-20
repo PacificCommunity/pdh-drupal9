@@ -7,6 +7,7 @@ use Drupal\user\Entity\User;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Controller\ControllerBase;
 
@@ -18,9 +19,10 @@ class SpcHomeController  extends ControllerBase {
 
   public function mainLanding() {
 
-    $data['stats'] = $this->get_spc_stats();
+    $data['stats'] = $this->get_home_stats();
     $data['countries'] = $this->get_members_countries();
-    $data['datasets'] = $this->get_spc_datasets();
+    $data['stories'] = $this->get_home_stories();
+    $data['datasets'] = $this->get_home_datasets();
     
     return [
         '#theme' => 'spc_home_page',
@@ -28,7 +30,7 @@ class SpcHomeController  extends ControllerBase {
     ];
   }
   
-  public function get_spc_stats() {
+  public function get_home_stats() {
     
     $stats['datasets'] = $this->_ckan_dataset_count();
     $stats['publications'] = $this->_ckan_publications_count();
@@ -78,7 +80,32 @@ class SpcHomeController  extends ControllerBase {
     ] ;
   }
   
-  public function get_spc_datasets() {
+  public function get_home_stories(){
+    $stories = [];
+    
+    $query = \Drupal::entityQuery('node')
+      ->condition('status', 1)
+      ->condition('type', 'article')
+      ->pager(10);
+    $nids = $query->execute();
+
+    foreach ($nids as $nid) {
+      $story = [];
+      $node = \Drupal\node\Entity\Node::load($nid); 
+      $story['url'] = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $nid);
+      $story['title'] = $node->title->value;
+      
+      $style = ImageStyle::load('stories_slides');
+      $styled_image_url = $style->buildUrl($node->field_image->entity->getFileUri());
+      $story['img'] = $styled_image_url;
+      
+      $stories[] = $story;
+    }  
+    
+    return $stories;
+  }
+  
+  public function get_home_datasets() {
     $datasets = [];
     
     $datasets['latest'] = $this->_ckan_datasets('latest');
