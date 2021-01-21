@@ -44,25 +44,28 @@ class SpcHomeController  extends ControllerBase {
     $dashboards = [];
     
     $query = \Drupal::entityQuery('node')
-      ->condition('status', 1)
+      ->condition('status', 1)   
       ->condition('type', 'dashboards')
       ->pager(10);
     $nids = $query->execute();
 
     foreach ($nids as $nid) {
       $dashboard = [];
-      $node = \Drupal\node\Entity\Node::load($nid); 
-      $dashboard['url'] = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $nid);
-      $dashboard['title'] = $node->title->value;
-      $dashboard['body'] = substr(strip_tags($node->body->value), 0, 200);
-      
-      $style = ImageStyle::load('stories_slides');
-      $styled_image_url = $style->buildUrl($node->field_image->entity->getFileUri());
-      $dashboard['img'] = $styled_image_url;
-      
-      $dashboards[] = $dashboard;
+      $node = \Drupal\node\Entity\Node::load($nid);
+
+      if ($node->field_preview->value){
+        $dashboard['url'] = $node->field_url->value;
+        $dashboard['title'] = $node->field_dsp_title_markup->value;
+        $dashboard['body'] = $node->field_data_insights_preview->value;
+
+        $style = ImageStyle::load('stories_slides');
+        $styled_image_url = $style->buildUrl($node->field_image->entity->getFileUri());
+        $dashboard['img'] = $styled_image_url;
+
+        $dashboards[] = $dashboard;        
+      }
     }  
-    //dump($dashboards); die;
+
     return $dashboards;
   }
   

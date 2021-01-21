@@ -551,8 +551,16 @@
             $('#nav-popular-datasets .ckan-dataset-tab-container .carusel-of-items').slick('refresh');
           }
         });
-
+        
         //Home page stories slider.
+        $('.latest-stories-slider .field-item').each(function(i) {
+          let title_block = $(this).find('.views-field-title');
+          if (title_block.length > 0) {
+            let num = i + 1;
+            title_block.prepend('<div class="slide-num">' + (num <= 9 ? '0'+num : num) + '</div>')
+          }
+        });        
+        
         $('#latest-stories-block .stories-list').slick({
           slidesToShow: 3,
             dots: true,
