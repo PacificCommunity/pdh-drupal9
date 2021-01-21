@@ -58,10 +58,12 @@ class SpcHomeController  extends ControllerBase {
         $dashboard['title'] = $node->field_dsp_title_markup->value;
         $dashboard['body'] = $node->field_data_insights_preview->value;
 
-        $style = ImageStyle::load('stories_slides');
-        $styled_image_url = $style->buildUrl($node->field_image->entity->getFileUri());
-        $dashboard['img'] = $styled_image_url;
-
+        if (is_object($node->field_image->entity)){
+          $style = ImageStyle::load('medium');
+          $styled_image_url = $style->buildUrl($node->field_image->entity->getFileUri());
+          $dashboard['img'] = $styled_image_url;
+        }
+        
         $dashboards[] = $dashboard;        
       }
     }  
