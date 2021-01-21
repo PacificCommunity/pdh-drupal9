@@ -44,14 +44,19 @@
      <div class="container">
         <h2 class="pane-title">{{ 'Dashboards and Tools' }}</h2>
         <div class="pane-subtitle">{{ 'Check out our featured dashboards and tools' }}</div>
-
+        
+        {% if data.dashboards %}
         <div class="dashboard-list">
           {% for dashboard in data.dashboards %}
             <div class="dashboard-item node-dashboards view-mode-dashboard_highlight clearfix">
                 <div class="group-content">
                     <div class="group-content-left">
                       <a href="{{ dashboard.url }}" title="View Dashboard">
-                        <img src="{{ dashboard.img }}" alt="{{ dashboard.title }}">
+                        {% if dashboard.img %}
+                          <img src="{{ dashboard.img }}" alt="{{ dashboard.title|striptags }}">
+                        {% else %}  
+                          {{ dashboard.title|striptags }}
+                        {% endif %}
                       </a>
                     </div>
                     <div class="group-content-right">
@@ -66,7 +71,8 @@
                 </div>
             </div>                      
           {% endfor %}            
-        </div>                       
+        </div>
+        {% endif %}
      </div>    
  </div>         
           
