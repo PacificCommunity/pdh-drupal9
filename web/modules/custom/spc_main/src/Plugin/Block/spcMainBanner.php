@@ -33,6 +33,7 @@ class spcMainBanner extends BlockBase {
     $data = [];
     $data['title'] = $title;
     $data['subtitle'] = $subtitle;
+    $data['topics'] = $this->get_home_topics();
     
     $route_name = \Drupal::routeMatch()->getRouteName();
     
@@ -64,4 +65,28 @@ class spcMainBanner extends BlockBase {
       '#data' => $data,
     );
   }
+  
+  public function get_home_topics(){
+    $topics = [];
+    
+    $query = \Drupal::entityQuery('node')
+      ->condition('status', 1)   
+      ->condition('type', 'thematic_group')
+      ->pager(10);
+    $nids = $query->execute();
+
+    foreach ($nids as $nid) {
+      $topic = [];
+      $node = \Drupal\node\Entity\Node::load($nid);
+      
+      $topic['url'] = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $nid);
+      $topic['title'] = $node->title->value;
+      $topic['icon'] = $node->field_fa_icon->value;
+
+      $topics[] = $topic;        
+    }  
+
+    return $topics;
+  }
+  
 }
