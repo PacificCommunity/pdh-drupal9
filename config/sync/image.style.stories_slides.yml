@@ -1,0 +1,15 @@
+uuid: dc69eec7-2dee-4fa7-826c-7b7a9cce13a9
+langcode: en
+status: true
+dependencies: {  }
+name: stories_slides
+label: 'Stories slides'
+effects:
+  e784c0bb-5d66-4cb7-985c-bb66abf67631:
+    uuid: e784c0bb-5d66-4cb7-985c-bb66abf67631
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 224
+      anchor: center-center

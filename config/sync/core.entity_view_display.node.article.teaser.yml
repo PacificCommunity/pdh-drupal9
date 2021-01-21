@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_image
+    - field.field.node.article.field_related_datasets
     - field.field.node.article.field_tags
     - image.style.medium
     - node.type.article
@@ -55,4 +56,5 @@ content:
     label: above
 hidden:
   comment: true
+  field_related_datasets: true
   links: true
