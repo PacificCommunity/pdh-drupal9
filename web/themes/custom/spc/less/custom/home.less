@@ -349,8 +349,10 @@
     color: #000;
     
     .dashboard-list {
+      position: relative;
+      padding-bottom: 30px;
       
-      .slick-list.draggable {
+      .draggable {
         position: relative;
         &:before {
           content: '';
@@ -376,11 +378,20 @@
         }
       }
       
+      .slick-track {
+        display: flex;
+      }
+      
       .dashboard-item {
         width: 100%;
         height: auto;
         margin: 30px 10px;
         opacity: .5;
+        align-items: stretch;
+        
+        @media (max-width: 767px){
+          align-items: center;
+        }
         
         &.slick-active {
           opacity: 1;
@@ -395,6 +406,8 @@
             font-size: 20px;
             font-weight: 500;
             line-height: 24px;
+            margin-top: 0;
+            
             strong {
                 font-weight: 500;
                 color: #ffc72e;
@@ -402,16 +415,52 @@
           }
           
           .group-content-right {
+            position: relative;
             flex: 1 1 60%;
             min-height: 200px;
+            padding: 10px;
+            padding-bottom: 45px;
+            
+            @media (max-width: 767px){
+              padding-bottom: 10px;
+              text-align: center;
+            }            
+            
+            .dashboard-description {
+              font-size: 14px;
+              
+              @media (max-width: 767px){
+                display: block;
+              }               
+            }
+            
+            .banner-button {
+              position: absolute;
+              bottom: 10px;
+              left: 20px;
+              
+              @media (max-width: 767px){
+                position: static;
+                margin-bottom: 0;
+              }              
+            }            
           }
           .group-content-left {
-            flex: 1 1 40%;
-            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;            
+            flex: 1 1 35%;
+            width: 195px;
+            height: 195px;
             background: #fff;
             border-radius: 10px;
             padding: 10px;
             overflow: hidden;
+            
+            @media (max-width: 767px){
+                width: auto;
+                height: auto;
+            }             
             img {
               width: 100%;
             }
@@ -419,12 +468,51 @@
         }  
       }
       
+      .slick-arrow {
+        width: 40px;
+        height: 40px;
+        background: #001E73;
+        border-radius: 50%;
+        bottom: -30px;
+        top: auto;
+        z-index: 2;
+        
+        &:before {
+          font-size: 30px;
+          line-height: .5;
+        }
+        
+        &.slick-prev {
+          left: 300px;
+        }
+        &.slick-next {
+          right: 300px;
+        }
+        @media (max-width: 1024px){
+          &.slick-prev {
+            left: 100px;
+          }
+          &.slick-next {
+            right: 100px;
+          }
+        }
+      }
+      
       .slick-dots{
+        z-index: 1;
         li {
+          width: 10px;
+          height: 40px;
+              
           button {
             background: #DADADA;
             color: #DADADA;
             border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            &:before {
+              display: none;
+            }
           }
           &.slick-active {
             button {

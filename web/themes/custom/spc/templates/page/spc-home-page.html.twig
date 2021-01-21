@@ -55,9 +55,9 @@
                       </a>
                     </div>
                     <div class="group-content-right">
-                        <span class="title">{{ dashboard.title }}</span>
+                        <h3 class="title">{{ dashboard.title|raw }}</h3>
                         <div class="dashboard-description">
-                          {{ dashboard.body }}
+                          {{ dashboard.body|raw }}
                         </div>
                         <a href="{{ dashboard.url }}" class="banner-button btn">
                            {{ 'View DASHBOARD' }}
@@ -137,7 +137,6 @@
                     </div>
                  </div>
                  <div class="views-field views-field-title">
-                    <div class="slide-num">{{ key + 1 }}</div>
                     <span class="field-content">
                        <a href="{{ story.url }}" tabindex="0">
                           <h3>{{ story.title }}</h3>
