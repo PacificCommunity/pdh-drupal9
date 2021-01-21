@@ -519,6 +519,22 @@
     Drupal.behaviors.homePage = {
       attach: function (context, settings) {
         
+        $('.topics-list').slick({
+            slidesToShow: 4,
+            slidesToScroll: 4,            
+            dots: true,
+            infinite: false,
+            responsive: [
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 1,
+                  arrows: false
+                }
+              }
+            ]
+        }); 
+        
         // Home page datasets switcher.
         $('#nav-recent-datasets-tab', context).on('click', function(e){
           e.preventDefault();
@@ -612,7 +628,7 @@
               }
             ]
         });
-        
+          
       }
     };
     
