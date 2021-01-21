@@ -164,7 +164,7 @@ display:
           expose:
             label: ''
           granularity: second
-      title: 'Stories list'
+      title: 'All Stories'
       header: {  }
       footer: {  }
       empty: {  }

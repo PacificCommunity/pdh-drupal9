@@ -7,7 +7,11 @@ dependencies:
     - field.field.node.dashboards.field_dashboard_block_references
     - field.field.node.dashboards.field_dashboard_bottom_text
     - field.field.node.dashboards.field_dashboard_notes
+    - field.field.node.dashboards.field_data_insights_preview
     - field.field.node.dashboards.field_dsp_title_markup
+    - field.field.node.dashboards.field_image
+    - field.field.node.dashboards.field_preview
+    - field.field.node.dashboards.field_url
     - node.type.dashboards
   module:
     - entity_reference_revisions
@@ -30,7 +34,7 @@ content:
     region: content
   field_dashboard_block_references:
     type: entity_reference_revisions_entity_view
-    weight: 4
+    weight: 3
     label: hidden
     settings:
       view_mode: default
@@ -40,7 +44,7 @@ content:
         class: block-reference-block
     region: content
   field_dashboard_bottom_text:
-    weight: 5
+    weight: 4
     label: hidden
     settings: {  }
     third_party_settings:
@@ -57,6 +61,31 @@ content:
         class: dashboard-notes
     type: text_default
     region: content
+  field_data_insights_preview:
+    weight: 6
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_preview:
+    weight: 7
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_url:
+    weight: 5
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   links:
     weight: 0
     region: content
@@ -64,3 +93,4 @@ content:
     third_party_settings: {  }
 hidden:
   field_dsp_title_markup: true
+  field_image: true

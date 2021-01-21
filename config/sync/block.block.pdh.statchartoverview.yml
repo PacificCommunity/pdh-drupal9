@@ -9,7 +9,7 @@ dependencies:
 id: pdh.statchartoverview
 theme: spc
 region: blocks
-weight: 0
+weight: -7
 provider: null
 plugin: dot_stat_chart_overview
 settings:

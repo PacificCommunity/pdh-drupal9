@@ -9,7 +9,7 @@ dependencies:
 id: pdh.statdatatable
 theme: spc
 region: blocks
-weight: 0
+weight: -9
 provider: null
 plugin: dot_stat_data_table
 settings:

@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.comment
     - field.field.node.article.field_image
+    - field.field.node.article.field_related_datasets
     - field.field.node.article.field_tags
     - image.style.large
     - node.type.article
@@ -40,6 +41,14 @@ content:
       svg_render_as_image: true
     third_party_settings: {  }
     label: hidden
+  field_related_datasets:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
   field_tags:
     type: entity_reference_label
     weight: 2
