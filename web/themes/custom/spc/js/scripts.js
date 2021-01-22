@@ -578,7 +578,7 @@
         });        
         
         $('#latest-stories-block .stories-list').slick({
-          slidesToShow: 3,
+            slidesToShow: 3,
             dots: true,
             responsive: [
               {
@@ -616,7 +616,7 @@
         
         //Home page Dashboards slider. 
         $('.dashboard-list').slick({
-          slidesToShow: 2,
+            slidesToShow: 2,
             dots: true,
             responsive: [
               {
@@ -628,6 +628,68 @@
               }
             ]
         });
+        
+        //Data insights slider. 
+        let data_insights_len = $('.data-insights-list').children().length;
+
+        let centerMode = true;
+        let infiniteMode = false;
+        let defaultSlidesToShow = 3;
+        let slidesToShow = defaultSlidesToShow;
+        let variableWidth = true;
+
+        if (1 < data_insights_len && data_insights_len < defaultSlidesToShow){
+          centerMode = false;
+          infiniteMode = true;
+          variableWidth = false;
+          slidesToShow = data_insights_len;
+        }
+
+        $('.data-insights-list').slick({
+          slidesToShow: slidesToShow,
+          centerMode: centerMode,
+          useTransform: false,
+          infinite: infiniteMode,
+          variableWidth: variableWidth,
+          dots: true,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                arrows: false
+              }
+            }
+          ]
+        }); 
+        
+        if (1 < data_insights_len && data_insights_len < defaultSlidesToShow){
+          $('.data-insights-list').find('.slick-current').removeClass('slick-current');
+        }
+
+        if ($('.data-insights-list').length > 0 && $('.data-insights-list .slick-dots li').length > 0) {
+          let slides_num_di = $('.data-insights-list .slick-dots li').length;
+          let slide = $('.data-insights-list .slick-dots .slick-active button').text();
+          $('.data-insights-list').append('<div class="slide-number"><strong>' + slide + '</strong> of <strong>' + slides_num_di + '</strong></div>');
+          $('.data-insights-list .slick-arrow').on('click', function(){
+            slide = $('.data-insights-list .slick-dots .slick-active button').text();
+            $('.data-insights-list .slide-number').html('<strong>' + slide + '</strong> of <strong>' + slides_num_di + '</strong>');
+          });
+        };
+        
+        //Topic page Stories slider. 
+        $('.stories-list').slick({
+            slidesToShow: 3,
+            dots: true,
+            responsive: [
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 1,
+                  arrows: false
+                }
+              }
+            ]
+        });        
           
       }
     };

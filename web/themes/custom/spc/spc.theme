@@ -5,6 +5,7 @@ use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -47,7 +48,9 @@ function spc_preprocess_html(&$variables) {
     if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
       $variables['attributes']['class'][] = 'story-full';
     }
-
+    if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'thematic_group') {
+      $variables['attributes']['class'][] = 'topic-full';
+    }
   }  
 }
 
@@ -92,71 +95,127 @@ function spc_preprocess_field(&$variables){
 function spc_preprocess_node(&$variables){
   $node = $variables['node'];
   if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
-    $field_related_datasets = $node->get('field_related_datasets')->getValue();
-    $spc_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
-    $story_detales = [];
+    $variables['datasets'] = _get_related_datasets($node);
+  }
+  
+  if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'thematic_group') {
+    $variables['spc_base_url'] = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+    $variables['data_insights'] = _get_related_data_insights($node);
+    $variables['datasets'] = _get_related_datasets($node);
+    $variables['stories'] = _get_related_stories($node);
+  }  
+}
+
+function _get_related_data_insights($node){
+  $field_related_data_insights = $node->get('field_related_data_insights')->getValue();
+  $spc_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+  $data_insights = [];
+
+  foreach ($field_related_data_insights as $target){
+    $nid = $target['target_id'];
+    $data_insight = Node::load($nid);
     
-    foreach ($field_related_datasets as $dataset_id){
-      $id = $dataset_id['value'];
-      $api = $spc_base_url . 'api/3/action/package_show';
+    if (is_object($data_insight)){
+      $data['title'] = $data_insight->getTitle();
+      $data['url'] = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $nid);
+      $data['preview'] = @$data_insight->get('field_data_insights_preview')->getValue()[0]['value'];        
+              
+      $data_insights[] = $data;
+    }
+  }
+  
+  return $data_insights;
+}
 
-      if ($responce = json_decode(file_get_contents($api . '?id=' . $id))){
-        $publication = $responce->result;
+function _get_related_stories($node){
+  $field_related_data_insights = $node->get('field_related_stories')->getValue();
+  $spc_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+  $stories = [];
 
-        if (is_object($publication)){
-          $dataset = [];
-          $dataset['name'] = $publication->name;
-          $dataset['title'] = $publication->title;
-          $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
+  foreach ($field_related_data_insights as $target){
+    $nid = $target['target_id'];
+    $story = Node::load($nid);
+    
+    if (is_object($story)){
+      $data['title'] = $story->getTitle();
+      $data['url'] = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $nid);
 
-          //creation date.
-          $originalDate = $publication->metadata_created;
-          $dataset['date'] = date("M, d, Y", strtotime($originalDate));
+      $style = ImageStyle::load('stories_slides');
+      $styled_image_url = $style->buildUrl($story->field_image->entity->getFileUri());
+      $data['img'] = $styled_image_url;
+              
+      $stories[] = $data;
+    }
+  }
+  
+  return $stories;
+}
 
-          //Organisation data.
-          $dataset['organization']['image_url'] = $spc_base_url . 'uploads/group/' . $publication->organization->image_url;
-          $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
-          $dataset['organization']['title'] = $publication->organization->title;
+function _get_related_datasets($node){
+  $field_related_datasets = $node->get('field_related_datasets')->getValue();
+  $spc_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+  $detales = [];
 
-          //Category mapper.
-          $tags = $publication->tags;
-          $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
+  foreach ($field_related_datasets as $dataset_id){
+    $id = $dataset_id['value'];
+    $api = $spc_base_url . 'api/3/action/package_show';
 
-          foreach ($categories as $category_term) {
-            $category = Term::load($category_term->tid);
-            $term_code = $category->get('field_c_code')->getValue()[0]['value'];
+    if ($responce = json_decode(file_get_contents($api . '?id=' . $id))){
+      $publication = $responce->result;
 
-            foreach ($tags as $tag){
-              $tag_name = $tag->name;
+      if (is_object($publication)){
+        $dataset = [];
+        $dataset['name'] = $publication->name;
+        $dataset['title'] = $publication->title;
+        $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
 
-              if ($term_code == $tag_name){
-                $aliasManager = \Drupal::service('path_alias.manager');
-                $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
+        //creation date.
+        $originalDate = $publication->metadata_created;
+        $dataset['date'] = date("M, d, Y", strtotime($originalDate));
 
-                $dataset['tags'][] = [
-                  'url' => $url,
-                  'name' => $category->getName(),
-                ];
-              }
+        //Organisation data.
+        $dataset['organization']['image_url'] = $spc_base_url . 'uploads/group/' . $publication->organization->image_url;
+        $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
+        $dataset['organization']['title'] = $publication->organization->title;
 
+        //Category mapper.
+        $tags = $publication->tags;
+        $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
+
+        foreach ($categories as $category_term) {
+          $category = Term::load($category_term->tid);
+          $term_code = $category->get('field_c_code')->getValue()[0]['value'];
+
+          foreach ($tags as $tag){
+            $tag_name = $tag->name;
+
+            if ($term_code == $tag_name){
+              $aliasManager = \Drupal::service('path_alias.manager');
+              $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
+
+              $dataset['tags'][] = [
+                'url' => $url,
+                'name' => $category->getName(),
+              ];
             }
-          }
 
-          //Resources data.
-          if ($resources = $publication->resources){
-              foreach ($resources as $resource){
-                  $data_resource['url'] = $resource->url;
-                  $data_resource['format'] = $resource->format;
-                  $dataset['resources'][$resource->format] = $data_resource;
-              }
           }
-
-          $variables['datasets'][] =  $dataset;
         }
+
+        //Resources data.
+        if ($resources = $publication->resources){
+            foreach ($resources as $resource){
+                $data_resource['url'] = $resource->url;
+                $data_resource['format'] = $resource->format;
+                $dataset['resources'][$resource->format] = $data_resource;
+            }
+        }
+
+        $detales[] = $dataset;
       }
     }
-    //dump($variables['datasets']); die;
-  }  
+  }
+  return $detales;
 }
 
 /**
