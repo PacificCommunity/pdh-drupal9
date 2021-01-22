@@ -28,7 +28,11 @@ function spc_preprocess_menu(array &$variables) {
  */
 function spc_preprocess_html(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
+  $is_login = \Drupal::currentUser()->isAuthenticated();
   
+  if ($is_login){
+    $variables['attributes']['class'][] = 'is-login';
+  }
   if($route_name == 'spc_mbd.landing') {
     $variables['attributes']['class'][] = 'mbd-landing';
   }
@@ -38,7 +42,6 @@ function spc_preprocess_html(&$variables) {
   if($route_name == 'view.stories_list.page') {
     $variables['attributes']['class'][] = 'spc-stories';
   }
-
   if($route_name == 'entity.node.canonical') {
     $node = \Drupal::routeMatch()->getParameter('node');
     if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
