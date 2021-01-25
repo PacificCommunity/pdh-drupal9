@@ -60,6 +60,7 @@ class spcTopicBanner extends BlockBase {
 
     return array(
       '#theme' => 'topic_banner_block',
+      '#cache' => ['max-age'=> 0],
       '#data' => $data,
     );
   }
