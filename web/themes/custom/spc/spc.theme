@@ -96,6 +96,17 @@ function spc_preprocess_node(&$variables){
   $node = $variables['node'];
   if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
     $variables['datasets'] = _get_related_datasets($node);
+    
+    $related_topic_entity = $node->field_related_topic->entity;
+    if ($related_topic_entity instanceof \Drupal\node\NodeInterface && $related_topic_entity->getType() == 'thematic_group') {
+      $tid = $related_topic_entity->id();
+      $variables['related_topic'] = [
+          'id' => $tid,
+          'url' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $tid),
+          'title' => $related_topic_entity->title->value,
+          'icon' => $related_topic_entity->field_fa_icon->value
+      ];
+    }
   }
   
   if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'thematic_group') {

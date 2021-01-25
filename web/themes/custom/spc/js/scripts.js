@@ -677,7 +677,7 @@
         };
         
         //Topic page Stories slider. 
-        $('.stories-list').slick({
+        $('.related-stories .stories-list').slick({
             slidesToShow: 3,
             dots: true,
             responsive: [
@@ -689,7 +689,19 @@
                 }
               }
             ]
-        });        
+        }); 
+        
+        $('.topics-dropdown .dropdown-button').on('click', function(e){
+          e.preventDefault();
+          $('.topics-dropdown .dropdown-list').toggle();
+          console.log($(this).find('.fa-angle-down').length == 1);
+          if ($(this).find('.fa-angle-down').length == 1){
+            $(this).find('.fa-angle-down').removeClass('fa-angle-down').addClass('fa-angle-up');
+          } else {
+            $(this).find('.fa-angle-up').removeClass('fa-angle-up').addClass('fa-angle-down');
+          }
+
+        });
           
       }
     };

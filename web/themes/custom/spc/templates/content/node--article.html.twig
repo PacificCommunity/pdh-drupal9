@@ -90,11 +90,11 @@
             </div>
             <div class="insights-topic"><div class="view-mode-group_with_icon">
               <div class="group-with-icon">
-                <a class="thematic-fa-link" href="/topic/official-statistics" aria-label="Official Statistics">
+                <a class="thematic-fa-link" href="{{ related_topic.url }}" aria-label="{{ related_topic.title }}">
                   <div class="field field-name-field-fa-icon">
-                    <i class=" fp fa-bar-chart fa-2x" aria-hidden="true"></i>
+                    <i class="{{ related_topic.icon }} fa-2x" aria-hidden="true"></i>
                   </div>
-                  <span>{{ 'Official Statistics' }}</span>
+                  <span>{{ related_topic.title }}</span>
                 </a>
  
               </div>
