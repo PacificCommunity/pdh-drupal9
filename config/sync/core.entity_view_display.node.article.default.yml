@@ -8,9 +8,10 @@ dependencies:
     - field.field.node.article.field_image
     - field.field.node.article.field_related_datasets
     - field.field.node.article.field_tags
-    - image.style.large
+    - image.style.stories_slides
     - node.type.article
   module:
+    - field_formatter_class
     - svg_image
     - text
     - user
@@ -33,13 +34,15 @@ content:
     weight: 0
     region: content
     settings:
-      image_style: large
+      image_style: stories_slides
       image_link: ''
+      svg_render_as_image: true
       svg_attributes:
         width: null
         height: null
-      svg_render_as_image: true
-    third_party_settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: ''
     label: hidden
   field_related_datasets:
     weight: 3
