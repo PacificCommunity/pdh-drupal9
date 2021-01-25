@@ -16,6 +16,11 @@ function spc_main_theme($existing, $type, $theme, $path){
         'data' => null
       ]
     ],
+    'topic_banner_block' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],      
     'spc_dashboard_transform_chart_block' => [
       'variables' => [
         'data' => null
