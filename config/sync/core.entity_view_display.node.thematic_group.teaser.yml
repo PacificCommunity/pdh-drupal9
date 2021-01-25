@@ -7,6 +7,9 @@ dependencies:
     - field.field.node.thematic_group.body
     - field.field.node.thematic_group.field_fa_icon
     - field.field.node.thematic_group.field_pathificdata_topic_page
+    - field.field.node.thematic_group.field_related_data_insights
+    - field.field.node.thematic_group.field_related_datasets
+    - field.field.node.thematic_group.field_related_stories
     - node.type.thematic_group
   module:
     - text
@@ -32,3 +35,6 @@ content:
 hidden:
   field_fa_icon: true
   field_pathificdata_topic_page: true
+  field_related_data_insights: true
+  field_related_datasets: true
+  field_related_stories: true

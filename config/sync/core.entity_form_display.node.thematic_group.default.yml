@@ -6,6 +6,9 @@ dependencies:
     - field.field.node.thematic_group.body
     - field.field.node.thematic_group.field_fa_icon
     - field.field.node.thematic_group.field_pathificdata_topic_page
+    - field.field.node.thematic_group.field_related_data_insights
+    - field.field.node.thematic_group.field_related_datasets
+    - field.field.node.thematic_group.field_related_stories
     - node.type.thematic_group
   module:
     - link
@@ -47,6 +50,34 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
+    region: content
+  field_related_data_insights:
+    weight: 125
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_related_datasets:
+    weight: 124
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_related_stories:
+    weight: 126
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   path:
     type: path
@@ -93,4 +124,9 @@ content:
       match_limit: 10
     region: content
     third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden: {  }
