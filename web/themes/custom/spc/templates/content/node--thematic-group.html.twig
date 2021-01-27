@@ -117,7 +117,10 @@
       <div class="related-data-insights">
         <h2 class="pane-title">{{ 'Data Insights' }}</h2>
         <div class="data-insights-list">
-          {% for insight in data_insights %}
+          {% set slide = 1 %}
+          {% set slides_num = 0 %}
+          {% for key, insight in data_insights %}
+            {% set slides_num = key + 1 %}
             <div class="insight-item">
               <div class="preview">
                 {{ insight.preview|raw }}
@@ -127,6 +130,9 @@
               </div>              
             </div>
           {% endfor %}  
+        </div>
+        <div class="slide-number">
+          <strong>{{ slide }}</strong> {{ 'of' }} <strong>{{ slides_num }}</strong>
         </div>
       </div>
     {% endif %}

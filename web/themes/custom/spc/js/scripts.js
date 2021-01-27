@@ -519,7 +519,7 @@
     Drupal.behaviors.homePage = {
       attach: function (context, settings) {
         
-        $('.topics-list').slick({
+        $('.topics-list', context).slick({
             slidesToShow: 4,
             slidesToScroll: 4,            
             dots: true,
@@ -551,7 +551,7 @@
           $('#nav-popular-datasets').fadeIn();
         });
         
-        $('.ckan-dataset-tab-container .carusel-of-items').slick({
+        $('.ckan-dataset-tab-container .carusel-of-items', context).slick({
           dots: false,
           infinite: true,
           speed: 600,
@@ -577,7 +577,7 @@
           }
         });        
         
-        $('#latest-stories-block .stories-list').slick({
+        $('#latest-stories-block .stories-list', context).slick({
             slidesToShow: 3,
             dots: true,
             responsive: [
@@ -615,7 +615,7 @@
         });
         
         //Home page Dashboards slider. 
-        $('.dashboard-list').slick({
+        $('.dashboard-list', context).slick({
             slidesToShow: 2,
             dots: true,
             responsive: [
@@ -645,11 +645,11 @@
           slidesToShow = data_insights_len;
         }
 
-        $('.data-insights-list').slick({
+        $('.data-insights-list', context).slick({
           slidesToShow: slidesToShow,
           centerMode: centerMode,
           useTransform: false,
-          infinite: infiniteMode,
+          //infinite: infiniteMode,
           variableWidth: variableWidth,
           dots: true,
           responsive: [
@@ -669,15 +669,23 @@
         if ($('.data-insights-list').length > 0 && $('.data-insights-list .slick-dots li').length > 0) {
           let slides_num_di = $('.data-insights-list .slick-dots li').length;
           let slide = $('.data-insights-list .slick-dots .slick-active button').text();
-          $('.data-insights-list').append('<div class="slide-number"><strong>' + slide + '</strong> of <strong>' + slides_num_di + '</strong></div>');
-          $('.data-insights-list .slick-arrow').on('click', function(){
-            slide = $('.data-insights-list .slick-dots .slick-active button').text();
-            $('.data-insights-list .slide-number').html('<strong>' + slide + '</strong> of <strong>' + slides_num_di + '</strong>');
+          if ($('.slide-number').length == 0){
+            $('.data-insights-list').append('<div class="slide-number"><strong>' + slide + '</strong> of <strong>' + slides_num_di + '</strong></div>');
+          }
+
+          $('.related-data-insights .slick-arrow').on('click', function(){
+            slide = $('.related-data-insights .slick-dots .slick-active button').text();
+            $('.related-data-insights .slide-number').html('<strong>' + slide + '</strong> of <strong>' + slides_num_di + '</strong>');
+          });
+          
+          $('.data-insights-list').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            slide = $('.related-data-insights .slick-dots .slick-active button').text();
+            $('.related-data-insights .slide-number').html('<strong>' + (currentSlide+1) + '</strong> of <strong>' + slides_num_di + '</strong>');
           });
         };
         
         //Topic page Stories slider. 
-        $('.related-stories .stories-list').slick({
+        $('.related-stories .stories-list', context).slick({
             slidesToShow: 3,
             dots: true,
             responsive: [
@@ -691,10 +699,9 @@
             ]
         }); 
         
-        $('.topics-dropdown .dropdown-button').on('click', function(e){
+        $('.topics-dropdown .dropdown-button', context).on('click', function(e){
           e.preventDefault();
           $('.topics-dropdown .dropdown-list').toggle();
-          console.log($(this).find('.fa-angle-down').length == 1);
           if ($(this).find('.fa-angle-down').length == 1){
             $(this).find('.fa-angle-down').removeClass('fa-angle-down').addClass('fa-angle-up');
           } else {
