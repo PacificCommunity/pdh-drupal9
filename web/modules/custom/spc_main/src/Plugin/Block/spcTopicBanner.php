@@ -42,17 +42,42 @@ class spcTopicBanner extends BlockBase {
           'icon' => $node->field_fa_icon->value,
       ];
       
+      if (!$datasets_count = $node->field_stats_datasets_count->value){
+        $datasets_responce = json_decode(file_get_contents($data_base_url . 'api/action/package_search?ext_advanced_value=res_format%3A%28CSV+OR+XML+OR+XLS+OR+XLSX+OR+ODS+OR+MDB+OR+MDE+OR+DBF+OR+SQL+OR+SQLITE+OR+DB+OR+DBF+OR+DBS+OR+ODB+OR+JSON+OR+GEOJSON+OR+KML+OR+KMZ+OR+SHP+OR+SHX+OR+WMS+OR+WFS+OR+WCS+OR+CSW%29+OR+dcat_type%3A%28dataset+OR+service%29+OR+type%3A%28dataset+OR+biodiversity_data%29+AND+extras_thematic_area_string:' . rawurlencode($title) . '&ext_advanced_type=solr&ext_advanced_operator=or'), true);
+        if ($datasets_responce['success']){
+          $datasets_count = $datasets_responce['result']['count'];
+          $node->set('field_stats_datasets_count', $datasets_count);
+        }
+      }
+
+      if (!$publications_count = $node->field_stats_publications_count->value){
+        $publications_responce = json_decode(file_get_contents($data_base_url . 'api/action/package_search?ext_advanced_value=res_format%3A%28PDF+OR+DOC+OR+DOCX+OR+ODF+OR+ODT+OR+EPUB+OR+MOBI%29+OR+dcat_type%3A%28text%29+OR+type%3A%28publications%29+AND+extras_thematic_area_string:' . rawurlencode($title) . '&ext_advanced_type=solr&ext_advanced_operator=or'), true);
+        if ($publications_responce['success']){
+          $publications_count = $publications_responce['result']['count'];
+          $node->set('field_stats_publications_count', $publications_count);
+        }
+      }
+      
+      if (!$organisations_count = $node->field_stats_organisations_count->value){      
+        $organisations_responce = json_decode(file_get_contents($data_base_url . 'api/action/organization_list'), true);
+        if ($organisations_responce['success']){
+          $organisations_count = count($organisations_responce['result']);
+          $node->set('field_stats_organisations_count', $organisations_count);
+        }
+      }  
+      $node->save();
+      
       $data['stats'] = [
           'datasets' => [
-              'count' => $node->field_stats_datasets_count->value,
+              'count' => $datasets_count,
               'url' => $data_base_url . 'dataset?ext_advanced_value=res_format%3A%28CSV+OR+XML+OR+XLS+OR+XLSX+OR+ODS+OR+MDB+OR+MDE+OR+DBF+OR+SQL+OR+SQLITE+OR+DB+OR+DBF+OR+DBS+OR+ODB+OR+JSON+OR+GEOJSON+OR+KML+OR+KMZ+OR+SHP+OR+SHX+OR+WMS+OR+WFS+OR+WCS+OR+CSW%29+OR+dcat_type%3A%28dataset+OR+service%29+OR+type%3A%28dataset+OR+biodiversity_data%29+AND+extras_thematic_area_string:'.$title.'&ext_advanced_type=solr&ext_advanced_operator=or',
           ],
           'publications' => [
-              'count' => $node->field_stats_publications_count->value,
+              'count' => $publications_count,
               'url' => $data_base_url . 'dataset?ext_advanced_value=res_format%3A%28PDF+OR+DOC+OR+DOCX+OR+ODF+OR+ODT+OR+EPUB+OR+MOBI%29+OR+dcat_type%3A%28text%29+OR+type%3A%28publications%29+AND+extras_thematic_area_string:' . $title . '&ext_advanced_type=solr&ext_advanced_operator=or',
           ],
           'organisations' => [
-              'count' => $node->field_stats_organisations_count->value,
+              'count' => $organisations_count,
               'url' => $data_base_url . 'organization'
           ],
       ];
