@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.article.comment
     - field.field.node.article.field_image
     - field.field.node.article.field_related_datasets
+    - field.field.node.article.field_related_topic
     - field.field.node.article.field_tags
     - image.style.stories_slides
     - node.type.article
@@ -59,4 +60,5 @@ content:
 hidden:
   comment: true
   field_related_datasets: true
+  field_related_topic: true
   links: true

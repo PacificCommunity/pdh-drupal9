@@ -1,0 +1,23 @@
+uuid: a3737850-96f3-464c-9279-433835d37450
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_stats_organisations_count
+    - node.type.thematic_group
+id: node.thematic_group.field_stats_organisations_count
+field_name: field_stats_organisations_count
+entity_type: node
+bundle: thematic_group
+label: 'stats organisations count'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -9,6 +9,9 @@ dependencies:
     - field.field.node.thematic_group.field_related_data_insights
     - field.field.node.thematic_group.field_related_datasets
     - field.field.node.thematic_group.field_related_stories
+    - field.field.node.thematic_group.field_stats_datasets_count
+    - field.field.node.thematic_group.field_stats_organisations_count
+    - field.field.node.thematic_group.field_stats_publications_count
     - node.type.thematic_group
   module:
     - link
@@ -69,6 +72,33 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_stats_datasets_count:
+    weight: 107
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_stats_organisations_count:
+    weight: 108
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_stats_publications_count:
+    weight: 109
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   links:
     weight: 100
