@@ -1,0 +1,23 @@
+uuid: aaad5d88-6fe3-45cf-9cdb-13f7ccd838b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_stats_publications_count
+    - node.type.thematic_group
+id: node.thematic_group.field_stats_publications_count
+field_name: field_stats_publications_count
+entity_type: node
+bundle: thematic_group
+label: 'stats publications count'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

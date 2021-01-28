@@ -1,0 +1,20 @@
+uuid: e408c2a5-6152-4abd-8ddb-2db4640dd330
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_stats_organisations_count
+field_name: field_stats_organisations_count
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
