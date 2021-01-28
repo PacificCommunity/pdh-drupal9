@@ -572,8 +572,10 @@
         $('.latest-stories-slider .field-item').each(function(i) {
           let title_block = $(this).find('.views-field-title');
           if (title_block.length > 0) {
-            let num = i + 1;
-            title_block.prepend('<div class="slide-num">' + (num <= 9 ? '0'+num : num) + '</div>')
+            if (title_block.find('.slide-num').length == 0){
+              let num = i + 1;
+              title_block.prepend('<div class="slide-num">' + (num <= 9 ? '0'+num : num) + '</div>');
+            }
           }
         });        
         
@@ -594,7 +596,9 @@
         if ($('.latest-stories-slider').length > 0 && $('.latest-stories-slider .slick-dots li').length > 0) {
           let slides_num_stories = $('.latest-stories-slider .slick-dots li').length;
           let slide = $('.latest-stories-slider .slick-dots .slick-active button').text();
-          $('.latest-stories-slider').append('<div class="slide-number"><strong>'+ slide +'</strong> of <strong>' + slides_num_stories + '</strong></div>');
+          if ($('.latest-stories-slider .slide-number').length == 0){
+            $('.latest-stories-slider', context).append('<div class="slide-number"><strong>'+ slide +'</strong> of <strong>' + slides_num_stories + '</strong></div>');
+          }
           $('.latest-stories-slider .slick-arrow').on('click', function(){
             slide = $('.latest-stories-slider .slick-dots .slick-active button').text();
             $('.latest-stories-slider .slide-number').html('<strong>' + slide + '</strong> of <strong>' + slides_num_stories + '</strong>');
