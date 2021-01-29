@@ -5,6 +5,10 @@
             {{ data.description|raw }}
         </div>
     {% endif %}
+    
+    <iframe id="terria-map" src="https://terriajs.dev.spc.links.com.au/#spc&hideWorkbench=1" width="100%" height="720px">
+    </iframe>
+    
     <h3 class="collapsed" data-id="maritime-zones">1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
     <div id="maritime-zones" class="maritime-zones">
         {% if data.maritime_zones_file %}
