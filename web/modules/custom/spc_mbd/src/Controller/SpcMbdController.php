@@ -19,6 +19,7 @@ class SpcMbdController extends ControllerBase {
         $data['title'] =  $config->get('mbd_landing_title');
         $data['description'] = $config->get('mbd_landing_description');
         
+        $data['map'] = @$this->get_map_data();
         
         $data['maritime_zones'] = @$this->get_maritime_zones();
         if ($mbd_zones_fid = $config->get('mbd_zones_fid')){
@@ -45,6 +46,11 @@ class SpcMbdController extends ControllerBase {
         return [
             '#theme' => 'spc_mbd_landing',
             '#data' => $data,
+            '#attached' => [
+                'library' => [
+                  'spc_mbd/terria',
+                ],
+              ],
         ];
     }
     
@@ -347,6 +353,44 @@ class SpcMbdController extends ControllerBase {
         }
 
         return $output;
+    }  
+    
+    public function get_map_data(){
+
+        $countries = [];
+        
+        $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();
+
+        $geojson = '[';
+        foreach($countries_tax as $key => $country_term){
+            $country = Term::load($country_term->tid);
+            
+            $name = $country->getName();
+            $code = $country->get('field_country_code')->getValue()[0]['value'];
+            $plygon = $country->get('field_eez_plygon')->getValue()[0]['value'];
+            
+            if ($plygon){
+              //dump($name);
+              //dump($plygon);
+              $geojson .= $plygon . ',';
+            }
+            
+
+            $countries[] = [
+              'name' => $name,
+              'code' => $code
+            ];
+          }
+          
+          $geojson =  substr($geojson, 0, -1) . ']';
+          file_put_contents('modules/custom/spc_mbd/js/eez.json', $geojson);
+        
+          //dump($geojson); die;
+          
+        return $countries;
+      
     }    
     
     

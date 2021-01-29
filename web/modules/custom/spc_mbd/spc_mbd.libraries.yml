@@ -1,0 +1,4 @@
+terria:
+  version: 1.x
+  js:
+    js/terria.js: {} 
