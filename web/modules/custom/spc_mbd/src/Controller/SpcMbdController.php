@@ -18,9 +18,7 @@ class SpcMbdController extends ControllerBase {
         
         $data['title'] =  $config->get('mbd_landing_title');
         $data['description'] = $config->get('mbd_landing_description');
-        
-        $data['map'] = @$this->get_map_data();
-        
+
         $data['maritime_zones'] = @$this->get_maritime_zones();
         if ($mbd_zones_fid = $config->get('mbd_zones_fid')){
             $mbd_zones_file = File::load($mbd_zones_fid);
@@ -43,19 +41,29 @@ class SpcMbdController extends ControllerBase {
         
         $data['countries'] = @$this->get_countries();
         
+        
+        $map = @$this->get_map_data();
+                
+        
         return [
-            '#theme' => 'spc_mbd_landing',
-            '#data' => $data,
-            '#attached' => [
-                'library' => [
-                  'spc_mbd/terria',
-                ],
+          '#theme' => 'spc_mbd_landing',
+          '#data' => $data,
+          '#attached' => [
+              'library' => [
+                'spc_mbd/terria',
               ],
+              'drupalSettings' => [
+                'spcMbd' => [
+                    'map' => $map,
+                ]
+              ]
+            ],
         ];
     }
     
     public function get_countries(){
         $countries = [];
+        $geojson = '[';
         
         $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
         $theme = \Drupal::theme()->getActiveTheme();
@@ -79,6 +87,10 @@ class SpcMbdController extends ControllerBase {
 
             $aliasManager = \Drupal::service('path.alias_manager');
             $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
+            
+            if ($plygon = $country->get('field_eez_plygon')->getValue()[0]['value']){
+              $geojson .= $plygon . ',';
+            }
 
             $countries[] = [
               'url' => $url,
@@ -86,6 +98,9 @@ class SpcMbdController extends ControllerBase {
               'name' => $name,
             ];
           }
+          
+        $geojson =  substr($geojson, 0, -1) . ']';
+        file_put_contents('modules/custom/spc_mbd/data/eez.json', $geojson);  
         
         return $countries;
     }
@@ -199,7 +214,8 @@ class SpcMbdController extends ControllerBase {
     
     public function get_combine_boundaries_treaty($treaty_name){
         $combine_states = [];
-
+        $geojson = '[';
+        
         $q = db_select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'boundary_treaty');
@@ -210,11 +226,15 @@ class SpcMbdController extends ControllerBase {
             foreach($results as $key => $value){
                 $treaty = Node::load($value->nid);
                 $steps = $treaty->get('field_boundaries_treaty_steps')->getValue();
+                
+                if ($line = $treaty->get('field_geojson_coordinates')->getValue()[0]['value']){
+                  $geojson .= $line . ',';
+                }
 
                 foreach($steps as $step){
                     if (!empty($step['target_id'])){
                         $paragraph_step = Paragraph::load($step['target_id']);
-                        $state = $paragraph_step->field_progress_type->value;
+                        $state = $paragraph_step->field_progress_type->value;                        
 
                         $step_term_id = $paragraph_step->field_boundary_treaty->getValue()[0]['target_id'];
                         if ($step_term_id){
@@ -232,6 +252,9 @@ class SpcMbdController extends ControllerBase {
                     }
                 }
             }
+            
+            $geojson =  substr($geojson, 0, -1) . ']';
+            file_put_contents('modules/custom/spc_mbd/data/boundaries.json', $geojson);
         }
 
         foreach ($combine_states as $key => $value){
@@ -245,14 +268,13 @@ class SpcMbdController extends ControllerBase {
     
     public function get_shelf_treaty(){
         $treaty = [];
-        
+                
         $treaty_steps_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('continental_shelf');
         $theme = \Drupal::theme()->getActiveTheme();
         $theme_path = $theme->getPath();
         
         foreach($treaty_steps_tax as $treaty_step_term){
             $treaty_step = Term::load($treaty_step_term->tid);
-            
             $name = $treaty_step->getName();
             
             $fid = $treaty_step->get('field_image')->getValue()[0]['target_id'];
@@ -264,8 +286,7 @@ class SpcMbdController extends ControllerBase {
             }     
             
             $state = '';
-            $state = $this->get_combine_boundaries_treaty_states($name);
-            
+            $state = $this->get_combine_shelf_treaty_states($name);
 
             $treaty[] = [
               'icon' => $icon,  
@@ -277,9 +298,10 @@ class SpcMbdController extends ControllerBase {
         return $treaty;
     }
     
-    public function get_combine_boundaries_treaty_states($treaty_name){
+    public function get_combine_shelf_treaty_states($treaty_name){
         $combine_states = [];
-
+        $geojson = '[';
+        
         $q = db_select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'continental_shelf');
@@ -290,6 +312,10 @@ class SpcMbdController extends ControllerBase {
             foreach($results as $key => $value){
                 $treaty = Node::load($value->nid);
                 $steps = $treaty->get('field_shelf_steps')->getValue();
+                
+                if ($plygon = $treaty->get('field_geojson_coordinates')->getValue()[0]['value']){
+                  $geojson .= $plygon . ',';
+                }                
 
                 foreach($steps as $step){
                     if (!empty($step['target_id'])){
@@ -312,6 +338,9 @@ class SpcMbdController extends ControllerBase {
                     }
                 }
             }
+            
+            $geojson =  substr($geojson, 0, -1) . ']';
+            file_put_contents('modules/custom/spc_mbd/data/shelf.json', $geojson);            
         }
 
         foreach ($combine_states as $key => $value){
@@ -356,42 +385,28 @@ class SpcMbdController extends ControllerBase {
     }  
     
     public function get_map_data(){
-
-        $countries = [];
-        
-        $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
-        $theme = \Drupal::theme()->getActiveTheme();
-        $theme_path = $theme->getPath();
-
+        $map = [];
         $geojson = '[';
-        foreach($countries_tax as $key => $country_term){
-            $country = Term::load($country_term->tid);
-            
-            $name = $country->getName();
-            $code = $country->get('field_country_code')->getValue()[0]['value'];
-            $plygon = $country->get('field_eez_plygon')->getValue()[0]['value'];
-            
-            if ($plygon){
-              //dump($name);
-              //dump($plygon);
-              $geojson .= $plygon . ',';
+        
+        $q = db_select('node','n')
+            ->fields('n', ['nid'])
+            ->condition('n.type', 'high_seas_limit');
+        
+        $results = $q->execute()->fetchAll();
+
+        if (!empty($results)){
+            foreach($results as $key => $value){
+                $treaty = Node::load($value->nid);
+                if ($line = $treaty->get('field_geojson_coordinates')->getValue()[0]['value']){
+                  $geojson .= $line . ',';
+                }                
             }
             
+            $geojson =  substr($geojson, 0, -1) . ']';
+            file_put_contents('modules/custom/spc_mbd/data/limits.json', $geojson);            
+        }        
 
-            $countries[] = [
-              'name' => $name,
-              'code' => $code
-            ];
-          }
-          
-          $geojson =  substr($geojson, 0, -1) . ']';
-          file_put_contents('modules/custom/spc_mbd/js/eez.json', $geojson);
-        
-          //dump($geojson); die;
-          
-        return $countries;
-      
+        return $map['limits'] = $geojson;
     }    
-    
-    
+
 }
