@@ -6,9 +6,157 @@
         </div>
     {% endif %}
     
-    <iframe id="terria-map" src="https://terriajs.dev.spc.links.com.au/#spc&hideWorkbench=1" width="100%" height="720px">
-    </iframe>
-    
+    <div class="globe">
+      <iframe id="terria-map" src="https://terriajs.dev.spc.links.com.au/#spc&hideWorkbench=1" width="100%" height="880px"></iframe>
+      
+      <div id="eez-popup">
+        <h3 class="title">{{ 'Exclusive Economic Zone (Polygon)' }}</h3>
+        <div class="metadata">
+          <div class="country line">
+            <div class="name">{{ 'Country' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="area line">
+            <div class="name">{{ 'EEZ Area' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="treaties line">
+            <div class="name">{{ 'No. of Treaties' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="pockets line">
+            <div class="name">{{ 'No. of High Seas pockets' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="deposited line">
+            <div class="name">{{ 'EEZ Deposited' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="date line">
+            <div class="name">{{ 'Date deposited' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="shelf line">
+            <div class="name">{{ 'Extended Continental Shelf Claims' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="ecs line">
+            <div class="name">{{ 'Name of ECS Area/s' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="url line">
+            <div class="name">{{ 'URL Link' }}</div>
+            <div class="value"></div>
+          </div>            
+        </div>
+        <div class="datasets"></div>
+      </div>
+            
+      <div id="boundary-popup">
+        <h3 class="title">{{ 'Treaty Line (Line)' }}</h3>
+        <div class="metadata">
+          <div class="country line">
+            <div class="name">{{ 'Countries' }}</div>
+            <div class="value one"></div>
+            <div class="value two"></div>
+          </div>
+          <div class="signed line">
+            <div class="name">{{ 'Signed' }}</div>
+            <div class="value"></div>
+          </div>  
+          <div class="year-signed line">
+            <div class="name">{{ 'Year signed' }}</div>
+            <div class="value"></div>
+          </div>   
+          <div class="force line">
+            <div class="name">{{ 'Enter into Force (EIF)' }}</div>
+            <div class="value"></div>
+          </div>              
+          <div class="date line">
+            <div class="name">{{ 'Date of EIF' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="url line">
+            <div class="name">{{ 'URL Link' }}</div>
+            <div class="value"></div>
+          </div>             
+        </div>
+        <div class="datasets"></div>
+      </div>              
+            
+      <div id="shelf-popup">
+        <h3 class="title">{{ 'Extended Continental Shelf (Polygon)' }}</h3>
+        <div class="metadata">
+          <div class="name line">
+            <div class="name">{{ 'ECS Area Name' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="joint-submission line">
+            <div class="name">{{ 'Joint submission' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="country line">
+            <div class="name">{{ 'Country(s) submitting claim' }}</div>
+            <div class="value"></div>
+          </div>            
+          <div class="submission-done line">
+            <div class="name">{{ 'Preliminary submission done' }}</div>
+            <div class="value"></div>
+          </div>  
+          <div class="date line">
+            <div class="name">{{ 'Date of Preliminary submission' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="submission-complied line">
+            <div class="name">{{ 'Full submission complied and lodged' }}</div>
+            <div class="value"></div>
+          </div>   
+          <div class="established-year line">
+            <div class="name">{{ 'Sub-commission established - Year' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="defence-year line">
+            <div class="name">{{ 'Submission defence – Year' }}</div>
+            <div class="value"></div>
+          </div>             
+          <div class="established-year line">
+            <div class="name">{{ 'Deposited to DOALOS' }}</div>
+            <div class="value"></div>
+          </div> 
+            
+          <div class="recommendation line">
+            <div class="name">{{ 'Recommendation' }}</div>
+            <div class="value"></div>
+          </div>           
+        </div>
+        <div class="datasets"></div>
+      </div>            
+            
+      <div id="limit-popup">
+        <h3 class="title">{{ 'High Seas Limit (Line)' }}</h3>
+        <div class="metadata">
+          <div class="country line">
+            <div class="name">{{ 'Countries' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="deposited line">
+            <div class="name">{{ 'Deposited to DOALOS' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="date line">
+            <div class="name">{{ 'Date Deposited' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="url line">
+            <div class="name">{{ 'URL Link' }}</div>
+            <div class="value"></div>
+          </div>             
+        </div>
+        <div class="datasets"></div>
+      </div>            
+            
+    </div>
+
     <h3 class="collapsed" data-id="maritime-zones">1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
     <div id="maritime-zones" class="maritime-zones">
         {% if data.maritime_zones_file %}

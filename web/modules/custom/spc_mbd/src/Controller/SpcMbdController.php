@@ -38,13 +38,9 @@ class SpcMbdController extends ControllerBase {
         }
         
         $data['partners'] = @$this->get_mbd_partners();
-        
         $data['countries'] = @$this->get_countries();
-        
-        
         $map = @$this->get_map_data();
-                
-        
+
         return [
           '#theme' => 'spc_mbd_landing',
           '#data' => $data,
@@ -63,8 +59,7 @@ class SpcMbdController extends ControllerBase {
     
     public function get_countries(){
         $countries = [];
-        $geojson = '[';
-        
+
         $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
         $theme = \Drupal::theme()->getActiveTheme();
         $theme_path = $theme->getPath();
@@ -84,13 +79,8 @@ class SpcMbdController extends ControllerBase {
                 $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
             }
 
-
             $aliasManager = \Drupal::service('path.alias_manager');
             $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
-            
-            if ($plygon = $country->get('field_eez_plygon')->getValue()[0]['value']){
-              $geojson .= $plygon . ',';
-            }
 
             $countries[] = [
               'url' => $url,
@@ -98,10 +88,7 @@ class SpcMbdController extends ControllerBase {
               'name' => $name,
             ];
           }
-          
-        $geojson =  substr($geojson, 0, -1) . ']';
-        file_put_contents('modules/custom/spc_mbd/data/eez.json', $geojson);  
-        
+
         return $countries;
     }
     
@@ -300,12 +287,10 @@ class SpcMbdController extends ControllerBase {
     
     public function get_combine_shelf_treaty_states($treaty_name){
         $combine_states = [];
-        $geojson = '[';
         
         $q = db_select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'continental_shelf');
-        
         $results = $q->execute()->fetchAll();
 
         if (!empty($results)){
@@ -313,10 +298,6 @@ class SpcMbdController extends ControllerBase {
                 $treaty = Node::load($value->nid);
                 $steps = $treaty->get('field_shelf_steps')->getValue();
                 
-                if ($plygon = $treaty->get('field_geojson_coordinates')->getValue()[0]['value']){
-                  $geojson .= $plygon . ',';
-                }                
-
                 foreach($steps as $step){
                     if (!empty($step['target_id'])){
                         $paragraph_step = Paragraph::load($step['target_id']);
@@ -337,10 +318,7 @@ class SpcMbdController extends ControllerBase {
                         }
                     }
                 }
-            }
-            
-            $geojson =  substr($geojson, 0, -1) . ']';
-            file_put_contents('modules/custom/spc_mbd/data/shelf.json', $geojson);            
+            }           
         }
 
         foreach ($combine_states as $key => $value){
@@ -385,28 +363,286 @@ class SpcMbdController extends ControllerBase {
     }  
     
     public function get_map_data(){
-        $map = [];
+      
+        $map['limits'] = $this->get_limits_map_data();
+        $map['eez'] = $this->get_eez_map_data();
+        $map['shelf'] = $this->get_shelf_map_data();
+        $map['boundary'] = $this->get_boundaries_map_data();
+        //dump($map); die;
+        return $map;
+    }
+    
+    public function get_eez_map_data(){
+        $data = [];
         $geojson = '[';
+        
+        $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();
+
+        foreach($countries_tax as $country_term){
+            $term = Term::load($country_term->tid);
+            
+            $name = $term->getName();
+            $country_code = $term->get('field_country_code')->getValue()[0]['value'];
+
+            $fid = $term->get('field_flag')->getValue()[0]['target_id'];
+            $file = File::load($fid);
+            
+            if (is_object($file)){
+              $flag = $file->url();
+            } else {
+                $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
+            }
+
+            $aliasManager = \Drupal::service('path.alias_manager');
+            $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
+            
+            if ($plygon_json = $term->get('field_eez_plygon')->getValue()[0]['value']){
+                $plygon_array = json_decode($plygon_json, true);
+
+                $plygon_array['id'] = 'eez-' . $country_code;
+                $geojson .= json_encode($plygon_array) . ',';
+            }
+            
+            $country['country'] = [
+              'url' => $url,
+              'flag' => $flag,
+              'name' => $name,
+              'code' => $country_code,
+            ];
+  
+            $country['area'] = $term->get('field_eez_area')->getValue()[0]['value'] ?? 'N/A';
+            $country['deposited'] = $term->get('field_eez_deposited')->getValue()[0]['value'] ?? 'N/A';
+            $country['date'] = $term->get('field_date_deposited')->getValue()[0]['value'] ?? 'N/A';
+            $country['url'] = $term->get('field_url')->getValue()[0]['value'] ?? 'N/A';
+            
+            //ToDo - need clarification about calculetion.
+            $country['treaties'] = '-';
+            $country['pockets'] = '-';
+            $country['shelf'] = '-';
+            $country['ecs'] = '-';            
+
+            $data['eez-' . $country_code] = $country;
+          }
+          
+        $geojson =  substr($geojson, 0, -1) . ']';
+        file_put_contents('modules/custom/spc_mbd/data/eez.json', $geojson);  
+        
+        return $data;
+    }
+    
+    public function get_shelf_map_data(){
+        $data = [];
+        $geojson = '[';
+        $data_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
         
         $q = db_select('node','n')
             ->fields('n', ['nid'])
-            ->condition('n.type', 'high_seas_limit');
-        
+            ->condition('n.type', 'continental_shelf');
         $results = $q->execute()->fetchAll();
 
         if (!empty($results)){
             foreach($results as $key => $value){
-                $treaty = Node::load($value->nid);
-                if ($line = $treaty->get('field_geojson_coordinates')->getValue()[0]['value']){
-                  $geojson .= $line . ',';
-                }                
+                $limit = [];
+                $node = Node::load($value->nid);
+                $tid = $node->get('field_limit_countries')->getValue()[0]['target_id'];
+                if ($term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid)){
+                  $limit['country']['name'] = $term->label();
+                  $limit['country']['code'] = $term->get('field_country_code')->value;
+                  
+                  $fid = $term->get('field_image')->getValue()[0]['target_id'];
+                  $file = File::load($fid);
+                  if (is_object($file)){
+                    $limit['country']['flag'] = $file->url();
+                  }
+                }
+
+                $limit['name'] = $node->getTitle() ?? '-';
+                $limit['submission_done'] = $node->get('field_submission_done')->getValue()[0]['value'] ? 'Yes' : 'No';
+                $limit['defence_year'] = $node->get('field_defence_year')->getValue()[0]['value'] ?? '-';
+                $limit['established_year'] = $node->get('field_established_year')->getValue()[0]['value'] ?? '-';
+                $limit['recommendation'] = strip_tags($node->get('field_recommendation')->getValue()[0]['value']) ?? '-';
+                $limit['joint_submission'] = $node->get('field_joint_submission')->getValue()[0]['value'] ? 'Yes' : 'No';
+                $limit['submission_complied'] = $node->get('field_full_submission_complied')->getValue()[0]['value'] ? 'Yes' : 'No';
+                
+                $limit['date'] = $node->get('field_date')->getValue()[0]['value'] ?? '-';
+                
+                $related_datasets = $node->get('field_related_datasets')->getValue();
+                if($related_datasets){
+                  foreach($related_datasets as $dataset_id){
+                    $request = json_decode(file_get_contents($data_base_url . 'api/action/package_show?id=' . $dataset_id['value']), true);
+                    if ($request['success']){
+                      $dataset = [];
+                      $dataset['title'] = $request['result']['title'];
+                      $dataset['url'] = $data_base_url . $dataset_id;
+                      $dataset['organization']['img'] = $data_base_url . 'uploads/group/' . $request['result']['organization']['image_url'];
+                      $dataset['organization']['title'] = $request['result']['organization']['title'];
+                      $dataset['organization']['url'] = $data_base_url . 'organization/'. $request['result']['organization']['name'];
+                      $dataset['resources'] = $request['result']['resources'];
+                      
+                      $limit['datasets'][] = $dataset;
+                    }
+                  }
+                }
+                
+                if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
+                  $line_array = json_decode($line_json, true);
+                  $line_array['id'] = 'shelf-' . $value->nid;
+
+                  $geojson .= json_encode($line_array) . ',';   
+                  $data['shelf-' . $value->nid] = $limit;
+                }
             }
-            
+
+            $geojson =  substr($geojson, 0, -1) . ']';
+            file_put_contents('modules/custom/spc_mbd/data/shelf.json', $geojson);            
+        }  
+        
+        return $data;
+    }    
+
+    public function get_limits_map_data() {
+        $data = [];
+        $geojson = '[';
+        $data_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+        
+        $q = db_select('node','n')
+            ->fields('n', ['nid'])
+            ->condition('n.type', 'high_seas_limit');
+        $results = $q->execute()->fetchAll();
+
+        if (!empty($results)){
+            foreach($results as $key => $value){
+                $limit = [];
+                $node = Node::load($value->nid);
+                $tid = $node->get('field_limit_countries')->getValue()[0]['target_id'];
+                if ($term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid)){
+                  $limit['country']['name'] = $term->label();
+                  $limit['country']['code'] = $term->get('field_country_code')->value;
+                  
+                  $fid = $term->get('field_image')->getValue()[0]['target_id'];
+                  $file = File::load($fid);
+                  if (is_object($file)){
+                    $limit['country']['flag'] = $file->url();
+                  }
+                }
+
+                $limit['deposited'] = $node->get('field_deposited')->getValue()[0]['value'] ? 'Yes' : 'No';
+                $limit['date'] = $node->get('field_date_deposited')->getValue()[0]['value'];
+                $limit['url'] = $node->get('field_url')->getValue()[0]['value'];
+                
+                $related_datasets = $node->get('field_related_datasets')->getValue();
+                if($related_datasets){
+                  foreach($related_datasets as $dataset_id){
+                    $request = json_decode(file_get_contents($data_base_url . 'api/action/package_show?id=' . $dataset_id['value']), true);
+                    if ($request['success']){
+                      $dataset = [];
+                      $dataset['title'] = $request['result']['title'];
+                      $dataset['url'] = $data_base_url . $dataset_id;
+                      $dataset['organization']['img'] = $data_base_url . 'uploads/group/' . $request['result']['organization']['image_url'];
+                      $dataset['organization']['title'] = $request['result']['organization']['title'];
+                      $dataset['organization']['url'] = $data_base_url . 'organization/'. $request['result']['organization']['name'];
+                      $dataset['resources'] = $request['result']['resources'];
+                      
+                      $limit['datasets'][] = $dataset;
+                    }
+                  }
+                }
+                
+                if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
+                  $line_array = json_decode($line_json, true);
+                  $line_array['id'] = 'limit-' . $value->nid;
+
+                  $geojson .= json_encode($line_array) . ',';
+                  $data['limit-' . $value->nid] = $limit;
+                }
+            }
+
             $geojson =  substr($geojson, 0, -1) . ']';
             file_put_contents('modules/custom/spc_mbd/data/limits.json', $geojson);            
-        }        
+        } 
 
-        return $map['limits'] = $geojson;
+      return $data;
+    }
+    
+    public function get_boundaries_map_data() {
+        $data = [];
+        $geojson = '[';
+        $data_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+        
+        $q = db_select('node','n')
+            ->fields('n', ['nid'])
+            ->condition('n.type', 'boundary_treaty');
+        $results = $q->execute()->fetchAll();
+
+        if (!empty($results)){
+            foreach($results as $key => $value){
+                $limit = [];
+                $node = Node::load($value->nid);
+                
+                $tid_one = $node->get('field_boundary_country_one')->getValue()[0]['target_id'];
+                if ($term_one = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid_one)){
+                  $limit['country_one']['name'] = $term_one->label();
+                  $limit['country_one']['code'] = $term_one->get('field_country_code')->value;
+                  
+                  $fid_one = $term_one->get('field_image')->getValue()[0]['target_id'];
+                  $file_one = File::load($fid_one);
+                  if (is_object($file_one)){
+                    $limit['country_one']['flag'] = $file_one->url();
+                  }
+                }
+                
+                $tid_two = $node->get('field_boundary_country_two')->getValue()[0]['target_id'];
+                if ($term_two = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid_two)){
+                  $limit['country_two']['name'] = $term_two->label();
+                  $limit['country_two']['code'] = $term_two->get('field_country_code')->value;
+                  
+                  $fid_two = $term_two->get('field_image')->getValue()[0]['target_id'];
+                  $file_two = File::load($fid_one);
+                  if (is_object($file_two)){
+                    $limit['country_two']['flag'] = $file_two->url();
+                  }
+                }                
+
+                $limit['signed'] = $node->get('field_signed')->getValue()[0]['value']  ?? '-';
+                $limit['year_signed'] = $node->get('field_year_only')->getValue()[0]['value']  ?? '-';
+                $limit['force'] = $node->get('field_into_force')->getValue()[0]['value']  ?? '-';
+                $limit['date'] = $node->get('field_date')->getValue()[0]['value'] ?? '-';
+                $limit['url'] = $node->get('field_url')->getValue()[0]['value'] ?? '-';
+                
+                $related_datasets = $node->get('field_related_datasets')->getValue();
+                if($related_datasets){
+                  foreach($related_datasets as $dataset_id){
+                    $request = json_decode(file_get_contents($data_base_url . 'api/action/package_show?id=' . $dataset_id['value']), true);
+                    if ($request['success']){
+                      $dataset = [];
+                      $dataset['title'] = $request['result']['title'];
+                      $dataset['url'] = $data_base_url . $dataset_id;
+                      $dataset['organization']['img'] = $data_base_url . 'uploads/group/' . $request['result']['organization']['image_url'];
+                      $dataset['organization']['title'] = $request['result']['organization']['title'];
+                      $dataset['organization']['url'] = $data_base_url . 'organization/'. $request['result']['organization']['name'];
+                      $dataset['resources'] = $request['result']['resources'];
+                      
+                      $limit['datasets'][] = $dataset;
+                    }
+                  }
+                }
+                
+                if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
+                  $line_array = json_decode($line_json, true);
+                  $line_array['id'] = 'boundary-' . $value->nid;
+
+                  $geojson .= json_encode($line_array) . ',';
+                  $data['boundary-' . $value->nid] = $limit;
+                }
+            }
+
+            $geojson =  substr($geojson, 0, -1) . ']';
+            file_put_contents('modules/custom/spc_mbd/data/boundaries.json', $geojson);            
+        } 
+
+      return $data;
     }    
 
 }

@@ -36,4 +36,14 @@ select2:
     theme:
       css/select2.min.css: {}  
   js:
-    js/select2.min.js: {}   
+    js/select2.min.js: {}
+jquery-ui:
+  version: 1.12.x
+  css:
+    theme:
+      css/jquery-ui.min.css: {}  
+  js:
+    js/jquery-ui.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
