@@ -201,8 +201,7 @@ class SpcMbdController extends ControllerBase {
     
     public function get_combine_boundaries_treaty($treaty_name){
         $combine_states = [];
-        $geojson = '[';
-        
+
         $q = db_select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'boundary_treaty');
@@ -213,10 +212,6 @@ class SpcMbdController extends ControllerBase {
             foreach($results as $key => $value){
                 $treaty = Node::load($value->nid);
                 $steps = $treaty->get('field_boundaries_treaty_steps')->getValue();
-                
-                if ($line = $treaty->get('field_geojson_coordinates')->getValue()[0]['value']){
-                  $geojson .= $line . ',';
-                }
 
                 foreach($steps as $step){
                     if (!empty($step['target_id'])){
@@ -239,9 +234,6 @@ class SpcMbdController extends ControllerBase {
                     }
                 }
             }
-            
-            $geojson =  substr($geojson, 0, -1) . ']';
-            file_put_contents('modules/custom/spc_mbd/data/boundaries.json', $geojson);
         }
 
         foreach ($combine_states as $key => $value){
@@ -368,7 +360,7 @@ class SpcMbdController extends ControllerBase {
         $map['eez'] = $this->get_eez_map_data();
         $map['shelf'] = $this->get_shelf_map_data();
         $map['boundary'] = $this->get_boundaries_map_data();
-        //dump($map); die;
+
         return $map;
     }
     
@@ -427,7 +419,21 @@ class SpcMbdController extends ControllerBase {
           }
           
         $geojson =  substr($geojson, 0, -1) . ']';
-        file_put_contents('modules/custom/spc_mbd/data/eez.json', $geojson);  
+        $file = File::create([
+          'uid' => 1,
+          'filename' => 'eez.json',
+          'uri' => 'public://mbd/eez.json',
+          'status' => 1,
+        ]);
+        $file->save();
+
+        $dir = dirname($file->getFileUri());
+        if (!file_exists($dir)) {
+          mkdir($dir, 0777, TRUE);
+        }
+
+        file_put_contents($file->getFileUri(), $geojson);
+        $file->save();
         
         return $data;
     }
@@ -496,7 +502,21 @@ class SpcMbdController extends ControllerBase {
             }
 
             $geojson =  substr($geojson, 0, -1) . ']';
-            file_put_contents('modules/custom/spc_mbd/data/shelf.json', $geojson);            
+            $file = File::create([
+              'uid' => 1,
+              'filename' => 'shelf.json',
+              'uri' => 'public://mbd/shelf.json',
+              'status' => 1,
+            ]);
+            $file->save();
+
+            $dir = dirname($file->getFileUri());
+            if (!file_exists($dir)) {
+              mkdir($dir, 0777, TRUE);
+            }
+            
+            file_put_contents($file->getFileUri(), $geojson);
+            $file->save();
         }  
         
         return $data;
@@ -560,7 +580,21 @@ class SpcMbdController extends ControllerBase {
             }
 
             $geojson =  substr($geojson, 0, -1) . ']';
-            file_put_contents('modules/custom/spc_mbd/data/limits.json', $geojson);            
+            $file = File::create([
+              'uid' => 1,
+              'filename' => 'limits.json',
+              'uri' => 'public://mbd/limits.json',
+              'status' => 1,
+            ]);
+            $file->save();
+
+            $dir = dirname($file->getFileUri());
+            if (!file_exists($dir)) {
+              mkdir($dir, 0777, TRUE);
+            }
+            
+            file_put_contents($file->getFileUri(), $geojson);
+            $file->save();
         } 
 
       return $data;
@@ -639,7 +673,21 @@ class SpcMbdController extends ControllerBase {
             }
 
             $geojson =  substr($geojson, 0, -1) . ']';
-            file_put_contents('modules/custom/spc_mbd/data/boundaries.json', $geojson);            
+            $file = File::create([
+              'uid' => 1,
+              'filename' => 'boundaries.json',
+              'uri' => 'public://mbd/boundaries.json',
+              'status' => 1,
+            ]);
+            $file->save();
+
+            $dir = dirname($file->getFileUri());
+            if (!file_exists($dir)) {
+              mkdir($dir, 0777, TRUE);
+            }
+            
+            file_put_contents($file->getFileUri(), $geojson);
+            $file->save();
         } 
 
       return $data;

@@ -17,7 +17,7 @@
           iframe = map.contentWindow;
           origin = map.src;
           
-          fetch('/modules/custom/spc_mbd/data/boundaries.json')
+          fetch('/sites/default/files/mbd/boundaries.json')
             .then(res => res.json())
             .then((data) => {      
               borersGeoJson = data;
@@ -33,7 +33,7 @@
               }, 20000);
           });
           
-          fetch('/modules/custom/spc_mbd/data/limits.json')
+          fetch('/sites/default/files/mbd/limits.json')
             .then(res => res.json())
             .then((data) => {      
               limitsGeoJson = data;
@@ -49,7 +49,7 @@
               }, 20000);
           });          
 
-          fetch('/modules/custom/spc_mbd/data/eez.json')
+          fetch('/sites/default/files/mbd/eez.json')
           .then(res => res.json())
           .then((data) => {
             zonesGeoJson = data;
@@ -65,7 +65,7 @@
             }, 15000);
           }); 
           
-          fetch('/modules/custom/spc_mbd/data/shelf.json')
+          fetch('/sites/default/files/mbd/shelf.json')
           .then(res => res.json())
           .then((data) => {
             shelfGeoJson = data;
