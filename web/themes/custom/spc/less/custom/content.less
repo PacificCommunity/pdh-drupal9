@@ -1584,6 +1584,18 @@ form {
     .na {
         background: rgba(229, 229, 229, 0.5);
         border: 1px solid #E6E6E6;
+    }
+    .boundary {
+        background: #7674E7;
+        border: 1px solid #7674E7;
+    }    
+    .eez {
+        background: #C8D9DE;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .ecs {
+        background: #E0E973;
+        border: 1px solid rgba(0, 0, 0, 0.2);
     }    
 }
 
@@ -1666,6 +1678,33 @@ form {
         }        
     }
 }
+.globe {
+    position: relative;
+    
+    #legend-button {
+        position: absolute;
+        background: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        top: 40px;
+        right: 0px;
+        cursor: pointer;
+        
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          background-image: url(../img/carret-left.svg);
+          background-position: center;
+          background-repeat: no-repeat;
+          margin-right: 5px;
+          vertical-align: middle;         
+        }
+    }    
+}
+
+
 #terria-map {
     border-radius: 25px;
     border: 5px solid #FFFFFF;
@@ -1673,9 +1712,30 @@ form {
     filter: drop-shadow(0px 2px 50px rgba(0, 5, 160, 0.102));
 }
 .ui-dialog {
+    font-family: 'Montserrat';
     padding: 20px;
     border-radius: 20px;
-    overflow: hidden;
+    border: none !important;
+    box-shadow: 0px 2px 50px rgba(0, 5, 160, 0.102);
+    
+    @media(max-width: 767px){
+      width: 80% !important;
+    }
+    
+    &.legend-popup {
+      .ui-dialog-titlebar {
+        left: -30px;
+        right: auto;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        .ui-dialog-titlebar-close {
+          .ui-icon {
+              background-image: url(../img/carret-right.svg);
+              background-position: center;
+          }
+        }        
+      }
+    }
     
     .ui-dialog-titlebar {
         position: absolute;
@@ -1696,13 +1756,48 @@ form {
       font-weight: 600;
       font-size: 16px;
       line-height: 20px;
-      color: #000; 
+      color: #000;
+      
+      &.legend {
+        display: block;
+        text-align: center;
+      }
     }
     .metadata {
+      margin-bottom: 25px;
       .line {
             margin: 10px 0;
             border-bottom: 1px solid #E8EEFF;
             display: flex;
+            
+            &.legend {
+              border: none;
+              .value {
+                height: 2px;
+                width: 20%;
+                max-width: 30px;
+                margin-top: 15px;
+                margin-right: 15px;
+                line-height: 137px;
+                
+                &.eez {
+                  height: 10px;
+                  border-radius: 3px;
+                  margin-top: 5px;                  
+                }
+                &.ecs {
+                  height: 10px;
+                  border-radius: 3px;
+                  margin-top: 5px;
+                }
+              }
+              .name {
+                width: 80%;
+                font-weight: 300;
+                font-size: 10px;
+                line-height: 12px;
+              }
+            }
 
             .name,
             .value {
@@ -1727,5 +1822,132 @@ form {
             }
         }        
     }
+    .related-datasets {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
 
+        .dataset {
+            width: 48%;
+            background: #FFFFFF;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+
+            @media(max-width: 500px){
+                width: 100%;
+                margin-right: 0;
+            }            
+
+            .dataset-org {
+                position: relative;
+                text-align: left;
+                margin-bottom: 20px;
+
+                .tooltip {
+                    display: none;
+                    padding: 5px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    position: absolute;
+                    background: #fff;
+                    margin-right: 50%;
+                    width: 100%;
+                }            
+
+                img {
+                    background: none;
+                    max-height: 30px;
+                    max-width: 100%;
+                    padding-left: 10px;
+                }
+                &:hover {
+                    .tooltip {
+                        display: block;
+                    }
+                }
+            }
+            .dataset-title {
+                margin-bottom: 20px;
+
+                a {
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 27px;
+                    color: #000000;
+                }
+            }
+            .dataset-tags {
+                margin-bottom: 20px;
+
+                .tag-item {
+                    display: inline-block;
+                    padding: 0px 15px;
+                    border: 1px solid #000366;
+                    border-radius: 20px;
+                    color: #000366;
+                    font-size: 12px !important;
+                }
+            }
+            .dataset-countries {
+                &.search {
+                    margin-bottom: 20px;
+                }
+                .country-item {
+                    padding: 5px;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #000;
+                    white-space: nowrap;
+                }
+            }
+            .dataset-date {
+                line-height: 60px;
+                .date {
+                    font-weight: bold;
+                    font-size: 12px;
+                    line-height: 15px;
+                    color: #000366;
+                }
+                @media(max-width: 976px){
+                    float: none !important;
+                }
+            }
+            .dataset-formats {
+                line-height: 60px;
+                .res-formats {
+                    display: inline-block;
+                    position: relative;
+                    top: 14px;
+                }
+                @media(max-width: 976px){
+                    float: none !important;
+                }                
+            }
+            .view-dataset-btn {
+                background: #FFFFFF;
+                border: 1px solid #002B7F;
+                box-sizing: border-box;
+                border-radius: 8px;
+                padding: 8px 20px;
+                color: #000;
+            }            
+            .left {
+                float: left;
+            }
+            .right {
+                float: right;
+            }
+            .grey {
+                color: #ccc;
+            }
+        }
+    }    
+}
+.ui-widget-overlay {
+  background: #fff;
 }

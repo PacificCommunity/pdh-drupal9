@@ -8,6 +8,40 @@
     
     <div class="globe">
       <iframe id="terria-map" src="https://terriajs.dev.spc.links.com.au/#spc&hideWorkbench=1" width="100%" height="880px"></iframe>
+      <div id='legend-button'>{{ 'Legend' }}</div>
+      <div id="legend-popup">
+        <h3 class="title legend">{{ 'Legend' }}</h3>
+        <div class="metadata">
+          <div class="legend line">
+            <div class="value completed"></div>
+            <div class="name">{{ 'Maritime boundary delimitation treaty in force and desposited with DOALOS' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value boundary"></div>
+            <div class="name">{{ 'Exclusive Economic Zone limit (200M) - adjacent to the high seas deposited to DOALOS' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value in_progress"></div>
+            <div class="name">{{ 'Maritime boundary delimitation treaty signed but not yet in force' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value not_started"></div>
+            <div class="name">{{ 'Maritime boundary to be negotiated' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value na"></div>
+            <div class="name">{{ 'Exclusive Economic Zone limit (200M) - adjacent to the high seas to be deposited to DOALOS' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value eez"></div>
+            <div class="name">{{ 'Pacific Island Country and Territories Exclusive Economic Zone (EEZ)' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value ecs"></div>
+            <div class="name">{{ 'Pacific Island Country and Territories Exclusive Continental Shelf (ECS)' }}</div>
+          </div>
+        </div>
+      </div>
       
       <div id="eez-popup">
         <h3 class="title">{{ 'Exclusive Economic Zone (Polygon)' }}</h3>
@@ -49,7 +83,8 @@
             <div class="value"></div>
           </div>            
         </div>
-        <div class="datasets"></div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
       </div>
             
       <div id="boundary-popup">
@@ -57,8 +92,10 @@
         <div class="metadata">
           <div class="country line">
             <div class="name">{{ 'Countries' }}</div>
-            <div class="value one"></div>
-            <div class="value two"></div>
+            <div class="value">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
           </div>
           <div class="signed line">
             <div class="name">{{ 'Signed' }}</div>
@@ -81,7 +118,8 @@
             <div class="value"></div>
           </div>             
         </div>
-        <div class="datasets"></div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
       </div>              
             
       <div id="shelf-popup">
@@ -129,7 +167,8 @@
             <div class="value"></div>
           </div>           
         </div>
-        <div class="datasets"></div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
       </div>            
             
       <div id="limit-popup">
@@ -152,7 +191,8 @@
             <div class="value"></div>
           </div>             
         </div>
-        <div class="datasets"></div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
       </div>            
             
     </div>
