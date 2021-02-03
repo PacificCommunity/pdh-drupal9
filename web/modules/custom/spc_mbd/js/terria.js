@@ -94,7 +94,7 @@
           autoOpen: false,
           draggable: false,
           resizable: false,
-          width: 600,
+          width: 560,
           open: function(event, ui){ 
             $('.ui-widget-overlay').bind('click', function(){ 
                 eezPopup.dialog('close'); 
@@ -121,7 +121,12 @@
           console.log(clickedZoneId);
 
           if (clickedZoneId.includes('eez-')){
-            target = mapData.eez[clickedZoneId];
+            
+            if (clickedZoneId.includes('eez-KI')){
+              target = mapData.eez['eez-KI'];
+            } else {
+              target = mapData.eez[clickedZoneId];
+            }
 
             eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'">' + target.country.name +' ('+target.country.code +')</a>' );
             eezPopup.find('.area .value').text(target.area);
@@ -132,6 +137,7 @@
             eezPopup.find('.deposited .value').text(target.deposited);
             eezPopup.find('.date .value').text(target.date);
             eezPopup.find('.url .value').html('<a href="'+target.url+'">'+target.url+'</a>');
+            eezPopup.find('.related-datasets').html(datasets_html(target));
             eezPopup.dialog( 'open' );
             
           } else if (clickedZoneId.includes('limit-')){
@@ -140,6 +146,7 @@
             limitPopup.find('.deposited .value').text(target.deposited);
             limitPopup.find('.date .value').text(target.date);
             limitPopup.find('.url .value').html('<a href="'+target.url+'">'+target.url+'</a>');
+            limitPopup.find('.related-datasets').html(datasets_html(target));
             limitPopup.dialog( 'open' );
             
           } else if (clickedZoneId.includes('shelf-')){
@@ -153,17 +160,19 @@
             shelfPopup.find('.joint-submission .value').text(target.joint_submission);
             shelfPopup.find('.recommendation .value').text(target.recommendation); 
             shelfPopup.find('.date .value').text(target.date);
+            shelfPopup.find('.related-datasets').html(datasets_html(target));
             shelfPopup.dialog( 'open' );
             
           }  else if (clickedZoneId.includes('boundary-')){
             target = mapData.boundary[clickedZoneId];
-            boundaryPopup.find('.country .value.one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'">' + target.country_one.name +' ('+target.country_one.code +')</a>' );;
-            boundaryPopup.find('.country .value.two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'">' + target.country_two.name +' ('+target.country_two.code +')</a>' );;
+            boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'">' + target.country_one.name +' ('+target.country_one.code +')</a>' );;
+            boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'">' + target.country_two.name +' ('+target.country_two.code +')</a>' );;
             boundaryPopup.find('.signed .value').text(target.signed);
             boundaryPopup.find('.year-signed .value').text(target.year_signed);
             boundaryPopup.find('.force .value').text(target.force); 
             boundaryPopup.find('.date .value').text(target.date);
             boundaryPopup.find('.url .value').html('<a href="'+target.url+'">'+target.url+'</a>');
+            boundaryPopup.find('.related-datasets').html(datasets_html(target));          
             boundaryPopup.dialog( 'open' );
           }     
           
@@ -171,6 +180,63 @@
 
           //iframe.postMessage({interactiveLayer: true, type: 'zone.hide', id: clickedZoneId}, origin);
         }
+        
+        function datasets_html(target){
+          let html = '';
+          if (target.hasOwnProperty('datasets')){
+
+            target.datasets.forEach(function(dataset, key){
+              html += '<div data-key="'+ key +'" class="dataset">';
+                html += '<div class="dataset-title">';
+                  html += '<a class="title" href="'+ dataset.url +'" target="_blank" title="'+ dataset.title +'">'+ dataset.title +'</a>';
+                html += '</div>';
+                html += '<div class="dataset-org">';
+                  html += '<span>Organization:</span>';
+                  html += '<div class="tooltip">'+ dataset.organization.title +'</div>';
+                  html += '<a href="'+ dataset.organization.url +'" target="_blank" title="'+ dataset.organization.title +'">';
+                      html += '<img src="'+dataset.organization.img +'" alt="'+dataset.organization.title +'">';
+                  html += '</a>';
+                html += '</div>';
+                html += '<div class="metadata clearfix">';
+                    html += '<div class="dataset-formats right">';
+                    if (dataset.resources){
+                      dataset.resources.forEach(function(resource, key){
+                          html += '<a href="'+ dataset.url +'" target="_blank" aria-label="'+ resource.format.toLowerCase() +'">'
+                              html += '<div class="res-formats res-format-'+ resource.format.toLowerCase() +'"></div>'
+                          html += '</a>';
+                      });
+                    }
+                  html += '</div>';
+                  html += '<div class="dataset-date left">';
+                      html += '<a class="view-dataset-btn" href="'+ dataset.url +'" target="_blank" >View dataset</a>';
+                  html += '</div>';
+                html += '</div>';
+              html+= '</div>';
+            });
+          } else {
+            html += '<p>No related datasets.</p>';
+          }  
+          
+          return html;
+        }
+        
+        $('#legend-popup').dialog({
+          modal: true,
+          autoOpen: false,
+          draggable: false,
+          resizable: false,
+          width: 300,
+          dialogClass: "legend-popup",
+          open: function(event, ui){ 
+            $('.ui-widget-overlay').bind('click', function(){ 
+                $('#legend-popup').dialog('close'); 
+            }); 
+          }
+        });
+        
+        $('#legend-button').on('click', function(){
+          $('#legend-popup').parent().css({position:"fixed"}).end().dialog( 'open' );
+        });
 
       });
     }

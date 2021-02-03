@@ -11,6 +11,13 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Controller\ControllerBase;
 
 class SpcMbdController extends ControllerBase {
+  
+    public $states_colors = [
+      'na' => '#F2F2F2',
+      'not_started' => '#F6999A',
+      'in_progress' => '#FBCD6A',
+      'completed' => '#05F904',
+    ]; 
     
     public function MbdLanding() {
         
@@ -367,14 +374,15 @@ class SpcMbdController extends ControllerBase {
     public function get_eez_map_data(){
         $data = [];
         $geojson = '[';
-        
+
+        $data_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
         $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
         $theme = \Drupal::theme()->getActiveTheme();
         $theme_path = $theme->getPath();
 
         foreach($countries_tax as $country_term){
             $term = Term::load($country_term->tid);
-            
+            $country = [];
             $name = $term->getName();
             $country_code = $term->get('field_country_code')->getValue()[0]['value'];
 
@@ -390,13 +398,6 @@ class SpcMbdController extends ControllerBase {
             $aliasManager = \Drupal::service('path.alias_manager');
             $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
             
-            if ($plygon_json = $term->get('field_eez_plygon')->getValue()[0]['value']){
-                $plygon_array = json_decode($plygon_json, true);
-
-                $plygon_array['id'] = 'eez-' . $country_code;
-                $geojson .= json_encode($plygon_array) . ',';
-            }
-            
             $country['country'] = [
               'url' => $url,
               'flag' => $flag,
@@ -404,19 +405,51 @@ class SpcMbdController extends ControllerBase {
               'code' => $country_code,
             ];
   
-            $country['area'] = $term->get('field_eez_area')->getValue()[0]['value'] ?? 'N/A';
-            $country['deposited'] = $term->get('field_eez_deposited')->getValue()[0]['value'] ?? 'N/A';
-            $country['date'] = $term->get('field_date_deposited')->getValue()[0]['value'] ?? 'N/A';
-            $country['url'] = $term->get('field_url')->getValue()[0]['value'] ?? 'N/A';
-            
-            //ToDo - need clarification about calculetion.
-            $country['treaties'] = '-';
-            $country['pockets'] = '-';
-            $country['shelf'] = '-';
-            $country['ecs'] = '-';            
+            $country['area'] = $term->get('field_eez_area')->getValue()[0]['value'] ?? '-';
+            $country['deposited'] = $term->get('field_eez_deposited')->getValue()[0]['value'] ? 'Yes': 'No';
+            $country['date'] = $term->get('field_date_deposited')->getValue()[0]['value'] ?? '-';
+            $country['url'] = $term->get('field_url')->getValue()[0]['value'] ?? '-';
 
-            $data['eez-' . $country_code] = $country;
-          }
+            $country['treaties'] = $this->eez_treaties_count($country_term->tid);
+            $country['pockets'] = $this->eez_pockets_count($country_term->tid);
+            
+            $ecs = $this->eez_ecs_areas($country_term->tid);
+            $country['shelf'] = $ecs ? 'Yes': 'No';
+            $country['ecs'] = $ecs ? $ecs: '-';
+            
+            $related_datasets = $term->get('field_related_datasets')->getValue();
+            if($related_datasets){
+              foreach($related_datasets as $dataset_id){
+                $request = json_decode(file_get_contents($data_base_url . 'api/action/package_show?id=' . $dataset_id['value']), true);
+                if ($request['success']){
+                  $dataset = [];
+                  $dataset['title'] = $request['result']['title'];
+                  $dataset['url'] = $data_base_url . $dataset_id['value'];
+                  $dataset['organization']['img'] = $data_base_url . 'uploads/group/' . $request['result']['organization']['image_url'];
+                  $dataset['organization']['title'] = $request['result']['organization']['title'];
+                  $dataset['organization']['url'] = $data_base_url . 'organization/'. $request['result']['organization']['name'];
+                  $dataset['resources'] = $request['result']['resources'];
+
+                  $country['datasets'][] = $dataset;
+                }
+              }
+            }
+
+            if ($plygon_json = $term->get('field_eez_plygon')->getValue()[0]['value']){
+                if ($country_code == 'KI'){
+                  $ki_polygons = json_decode($plygon_json, true);
+                  foreach ($ki_polygons['KI'] as $key => $ki_polygon){
+                    $ki_polygon['id'] = 'eez-' . $country_code . $key;
+                    $geojson .= json_encode($ki_polygon) . ',';
+                  }
+                } else {
+                    $plygon_array = json_decode($plygon_json, true);
+                    $plygon_array['id'] = 'eez-' . $country_code;
+                    $geojson .= json_encode($plygon_array) . ',';
+                }
+                $data['eez-' . $country_code] = $country;                
+            }            
+        }
           
         $geojson =  substr($geojson, 0, -1) . ']';
         $file = File::create([
@@ -434,7 +467,7 @@ class SpcMbdController extends ControllerBase {
 
         file_put_contents($file->getFileUri(), $geojson);
         $file->save();
-        
+
         return $data;
     }
     
@@ -481,7 +514,7 @@ class SpcMbdController extends ControllerBase {
                     if ($request['success']){
                       $dataset = [];
                       $dataset['title'] = $request['result']['title'];
-                      $dataset['url'] = $data_base_url . $dataset_id;
+                      $dataset['url'] = $data_base_url . $dataset_id['value'];
                       $dataset['organization']['img'] = $data_base_url . 'uploads/group/' . $request['result']['organization']['image_url'];
                       $dataset['organization']['title'] = $request['result']['organization']['title'];
                       $dataset['organization']['url'] = $data_base_url . 'organization/'. $request['result']['organization']['name'];
@@ -559,7 +592,7 @@ class SpcMbdController extends ControllerBase {
                     if ($request['success']){
                       $dataset = [];
                       $dataset['title'] = $request['result']['title'];
-                      $dataset['url'] = $data_base_url . $dataset_id;
+                      $dataset['url'] = $data_base_url . $dataset_id['value'];
                       $dataset['organization']['img'] = $data_base_url . 'uploads/group/' . $request['result']['organization']['image_url'];
                       $dataset['organization']['title'] = $request['result']['organization']['title'];
                       $dataset['organization']['url'] = $data_base_url . 'organization/'. $request['result']['organization']['name'];
@@ -652,7 +685,7 @@ class SpcMbdController extends ControllerBase {
                     if ($request['success']){
                       $dataset = [];
                       $dataset['title'] = $request['result']['title'];
-                      $dataset['url'] = $data_base_url . $dataset_id;
+                      $dataset['url'] = $data_base_url . $dataset_id['value'];
                       $dataset['organization']['img'] = $data_base_url . 'uploads/group/' . $request['result']['organization']['image_url'];
                       $dataset['organization']['title'] = $request['result']['organization']['title'];
                       $dataset['organization']['url'] = $data_base_url . 'organization/'. $request['result']['organization']['name'];
@@ -666,7 +699,11 @@ class SpcMbdController extends ControllerBase {
                 if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
                   $line_array = json_decode($line_json, true);
                   $line_array['id'] = 'boundary-' . $value->nid;
-
+                  
+                  if ($state = $node->get('field_treaty_state')->getValue()[0]['value']){
+                    $line_array['feature']['features'][0]['properties']['stroke'] = $this->states_colors[$state];
+                  }
+                  
                   $geojson .= json_encode($line_array) . ',';
                   $data['boundary-' . $value->nid] = $limit;
                 }
@@ -691,6 +728,77 @@ class SpcMbdController extends ControllerBase {
         } 
 
       return $data;
-    }    
-
+    } 
+    
+    public function eez_treaties_count($tid){
+      $count = 0;
+      
+      $q = db_select('node','n')
+          ->fields('n', ['nid'])
+          ->condition('n.type', 'boundary_treaty');
+      $results = $q->execute()->fetchAll();
+      
+      if (!empty($results)){
+          foreach($results as $key => $value){
+              $limit = [];
+              $node = Node::load($value->nid);
+              $tid_one = $node->get('field_boundary_country_one')->getValue()[0]['target_id'];
+              $tid_two = $node->get('field_boundary_country_two')->getValue()[0]['target_id'];
+              if ($tid_one == $tid || $tid_two == $tid){
+                $count +=1;
+              }
+          }
+      }      
+      
+      return $count;
+    }
+    
+    public function eez_pockets_count($tid){
+      $count = 0;
+      
+      $q = db_select('node','n')
+          ->fields('n', ['nid'])
+          ->condition('n.type', 'high_seas_limit');
+      $results = $q->execute()->fetchAll();
+      
+      if (!empty($results)){
+          foreach($results as $key => $value){
+              $limit = [];
+              $node = Node::load($value->nid);
+              $target_id = $node->get('field_limit_countries')->getValue()[0]['target_id'];
+              if ($target_id == $tid){
+                $count +=1;
+              }
+          }
+      }       
+      
+      return $count;
+    }
+    
+    public function eez_ecs_areas($tid){
+      $areas = [];
+      
+      $q = db_select('node','n')
+          ->fields('n', ['nid'])
+          ->condition('n.type', 'continental_shelf');
+      $results = $q->execute()->fetchAll();
+      
+      if (!empty($results)){
+          foreach($results as $key => $value){
+              $limit = [];
+              $node = Node::load($value->nid);
+              $target_id = $node->get('field_limit_countries')->getValue()[0]['target_id'];
+              if ($target_id == $tid){
+                
+                $areas[] = $node->getTitle();
+              }
+          }
+      }
+      
+      if (!empty($areas)){
+        implode(', ', $areas);
+      }
+      
+      return $areas;
+    }
 }
