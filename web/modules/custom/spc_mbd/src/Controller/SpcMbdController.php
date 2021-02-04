@@ -698,13 +698,30 @@ class SpcMbdController extends ControllerBase {
                 
                 if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
                   $line_array = json_decode($line_json, true);
-                  $line_array['id'] = 'boundary-' . $value->nid;
+                  $geo_item = [];
                   
-                  if ($state = $node->get('field_treaty_state')->getValue()[0]['value']){
-                    $line_array['feature']['features'][0]['properties']['stroke'] = $this->states_colors[$state];
+                  if (!array_key_exists('id', $line_array)){
+                    $geo_item['id'] = 'boundary-' . $value->nid;
+                    $geo_item['feature'] = $line_array;
+                  } else {
+                    $line_array['id'] = 'boundary-' . $value->nid;
+                    $geo_item = $line_array;
                   }
-                  
-                  $geojson .= json_encode($line_array) . ',';
+
+                  if ($state = $node->get('field_treaty_state')->getValue()[0]['value']){
+                    $feature_count = count($geo_item['feature']['features']);
+                    if ($feature_count > 1){
+                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $this->states_colors[$state];
+                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = 8;
+                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = 1;
+                    } else {
+                      $geo_item['feature']['features'][0]['properties']['stroke'] = $this->states_colors[$state];
+                      $geo_item['feature']['features'][0]['properties']['stroke-width'] = 8;
+                      $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = 1;
+                    }
+                  }
+
+                  $geojson .= json_encode($geo_item) . ',';
                   $data['boundary-' . $value->nid] = $limit;
                 }
             }
