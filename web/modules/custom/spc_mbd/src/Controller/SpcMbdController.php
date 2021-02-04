@@ -17,7 +17,33 @@ class SpcMbdController extends ControllerBase {
       'not_started' => '#F6999A',
       'in_progress' => '#FBCD6A',
       'completed' => '#05F904',
-    ]; 
+    ];
+    
+    public $eez_colors = [
+      'stroke' => '#000000',
+      "stroke-width" => 2,
+      "stroke-opacity" => 1,            
+      "fill" => "#E0E973",
+      "fill-opacity" => 0.7,
+    ];
+    
+    public $shelf_colors = [
+      'stroke' => '#000000',
+      "stroke-width" => 2,
+      "stroke-opacity" => 1,            
+      "fill" => "#E0E973",
+      "fill-opacity" => 0.7,
+    ];
+    
+    public $limit_colors = [
+      "stroke" => "#F2F2F2",
+      "stroke-width" => 6,
+      "stroke-opacity" => 1, 
+    ];
+    
+    //todo: get from config.
+    public $terriaMapUrl = 'https://terriajs.dev.spc.links.com.au/'; 
+    public $initCamera = '{"initSources":[{"initialCamera":{"west": 145.65364175379182,"south": -22.15106845160314,"east": -156.55733400327983,"north": 12.164394494917866}}]}';
     
     public function MbdLanding() {
         
@@ -25,6 +51,7 @@ class SpcMbdController extends ControllerBase {
         
         $data['title'] =  $config->get('mbd_landing_title');
         $data['description'] = $config->get('mbd_landing_description');
+        $data['terri_map_url'] = $this->terriaMapUrl . '#spc&hideWorkbench=1&start='. urlencode($this->initCamera);
 
         $data['maritime_zones'] = @$this->get_maritime_zones();
         if ($mbd_zones_fid = $config->get('mbd_zones_fid')){
@@ -527,9 +554,32 @@ class SpcMbdController extends ControllerBase {
                 
                 if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
                   $line_array = json_decode($line_json, true);
-                  $line_array['id'] = 'shelf-' . $value->nid;
+                  $geo_item = [];
+                  
+                  if (!array_key_exists('id', $line_array)){
+                    $geo_item['id'] = 'shelf-' . $value->nid;
+                    $geo_item['feature'] = $line_array;
+                  } else {
+                    $line_array['id'] = 'shelf-' . $value->nid;
+                    $geo_item = $line_array;
+                  }
 
-                  $geojson .= json_encode($line_array) . ',';   
+                  $feature_count = count($geo_item['feature']['features']);
+                  if ($feature_count > 1){
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $this->shelf_colors['stroke'];
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $this->shelf_colors['stroke-width'];
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $this->shelf_colors['stroke-opacity'];
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['fill'] = $this->shelf_colors['fill'];
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['fill-opacity'] = $this->shelf_colors['fill-opacity'];
+                  } else {
+                    $geo_item['feature']['features'][0]['properties']['stroke'] = $this->shelf_colors['na'];
+                    $geo_item['feature']['features'][0]['properties']['stroke-width'] = $this->shelf_colors['stroke-width'];
+                    $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $this->shelf_colors['stroke-opacity'];
+                    $geo_item['feature']['features'][0]['properties']['fill'] = $this->shelf_colors['fill'];
+                    $geo_item['feature']['features'][0]['properties']['fill-opacity'] = $this->shelf_colors['fill-opacity'];                    
+                  }
+                    
+                  $geojson .= json_encode($geo_item) . ','; 
                   $data['shelf-' . $value->nid] = $limit;
                 }
             }
@@ -605,9 +655,28 @@ class SpcMbdController extends ControllerBase {
                 
                 if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
                   $line_array = json_decode($line_json, true);
-                  $line_array['id'] = 'limit-' . $value->nid;
+                  $geo_item = [];
+                  
+                  if (!array_key_exists('id', $line_array)){
+                    $geo_item['id'] = 'limit-' . $value->nid;
+                    $geo_item['feature'] = $line_array;
+                  } else {
+                    $line_array['id'] = 'limit-' . $value->nid;
+                    $geo_item = $line_array;
+                  }
 
-                  $geojson .= json_encode($line_array) . ',';
+                  $feature_count = count($geo_item['feature']['features']);
+                  if ($feature_count > 1){
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $this->limit_colors['stroke'];
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $this->limit_colors['stroke-width'];
+                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $this->limit_colors['stroke-opacity'];
+                  } else {
+                    $geo_item['feature']['features'][0]['properties']['stroke'] = $this->limit_colors['stroke'];
+                    $geo_item['feature']['features'][0]['properties']['stroke-width'] = $this->limit_colors['stroke-width'];
+                    $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $this->limit_colors['stroke-opacity'];
+                  }
+
+                  $geojson .= json_encode($geo_item) . ',';
                   $data['limit-' . $value->nid] = $limit;
                 }
             }
@@ -672,9 +741,9 @@ class SpcMbdController extends ControllerBase {
                   }
                 }                
 
-                $limit['signed'] = $node->get('field_signed')->getValue()[0]['value']  ?? '-';
-                $limit['year_signed'] = $node->get('field_year_only')->getValue()[0]['value']  ?? '-';
-                $limit['force'] = $node->get('field_into_force')->getValue()[0]['value']  ?? '-';
+                $limit['signed'] = $node->get('field_signed')->getValue()[0]['value'] ? 'Yes': 'No';
+                $limit['year_signed'] = $node->get('field_year_only')->getValue()[0]['value'] ?? '-';
+                $limit['force'] = $node->get('field_into_force')->getValue()[0]['value'] ? 'Yes': 'No';
                 $limit['date'] = $node->get('field_date')->getValue()[0]['value'] ?? '-';
                 $limit['url'] = $node->get('field_url')->getValue()[0]['value'] ?? '-';
                 
