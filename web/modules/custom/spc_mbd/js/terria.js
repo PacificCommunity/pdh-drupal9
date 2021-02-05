@@ -128,7 +128,7 @@
               target = mapData.eez[clickedZoneId];
             }
 
-            eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'">' + target.country.name +' ('+target.country.code +')</a>' );
+            eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
             eezPopup.find('.area .value').text(target.area);
             eezPopup.find('.treaties .value').text(target.treaties);
             eezPopup.find('.pockets .value').text(target.pockets);
@@ -136,23 +136,23 @@
             eezPopup.find('.ecs .value').text(target.ecs);
             eezPopup.find('.deposited .value').text(target.deposited);
             eezPopup.find('.date .value').text(target.date);
-            eezPopup.find('.url .value').html('<a href="'+target.url+'">'+target.url+'</a>');
+            eezPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ target.url.substring(0, 30) +'</a>');
             eezPopup.find('.related-datasets').html(datasets_html(target));
             eezPopup.dialog( 'open' );
             
           } else if (clickedZoneId.includes('limit-')){
             target = mapData.limits[clickedZoneId];
-            limitPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'">' + target.country.name +' ('+target.country.code +')</a>' );
+            limitPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
             limitPopup.find('.deposited .value').text(target.deposited);
             limitPopup.find('.date .value').text(target.date);
-            limitPopup.find('.url .value').html('<a href="'+target.url+'">'+target.url+'</a>');
+            limitPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
             limitPopup.find('.related-datasets').html(datasets_html(target));
             limitPopup.dialog( 'open' );
             
           } else if (clickedZoneId.includes('shelf-')){
             target = mapData.shelf[clickedZoneId];
             shelfPopup.find('.name .value').text(target.name);
-            shelfPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'">' + target.country.name +' ('+target.country.code +')</a>' );
+            shelfPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
             shelfPopup.find('.submission-done .value').text(target.submission_done);
             shelfPopup.find('.submission-complied .value').text(target.submission_complied);
             shelfPopup.find('.defence-year .value').text(target.defence_year);
@@ -165,13 +165,13 @@
             
           }  else if (clickedZoneId.includes('boundary-')){
             target = mapData.boundary[clickedZoneId];
-            boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'">' + target.country_one.name +' ('+target.country_one.code +')</a>' );;
-            boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'">' + target.country_two.name +' ('+target.country_two.code +')</a>' );;
+            boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'" target="_blank">' + target.country_one.name +' ('+target.country_one.code +')</a>' );;
+            boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'" target="_blank">' + target.country_two.name +' ('+target.country_two.code +')</a>' );;
             boundaryPopup.find('.signed .value').text(target.signed);
             boundaryPopup.find('.year-signed .value').text(target.year_signed);
             boundaryPopup.find('.force .value').text(target.force); 
             boundaryPopup.find('.date .value').text(target.date);
-            boundaryPopup.find('.url .value').html('<a href="'+target.url+'">'+target.url+'</a>');
+            boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
             boundaryPopup.find('.related-datasets').html(datasets_html(target));          
             boundaryPopup.dialog( 'open' );
           }     

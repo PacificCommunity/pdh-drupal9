@@ -517,7 +517,7 @@ class SpcMbdController extends ControllerBase {
                   $limit['country']['name'] = $term->label();
                   $limit['country']['code'] = $term->get('field_country_code')->value;
                   
-                  $fid = $term->get('field_image')->getValue()[0]['target_id'];
+                  $fid = $term->get('field_flag')->getValue()[0]['target_id'];
                   $file = File::load($fid);
                   if (is_object($file)){
                     $limit['country']['flag'] = $file->url();
@@ -624,7 +624,7 @@ class SpcMbdController extends ControllerBase {
                   $limit['country']['name'] = $term->label();
                   $limit['country']['code'] = $term->get('field_country_code')->value;
                   
-                  $fid = $term->get('field_image')->getValue()[0]['target_id'];
+                  $fid = $term->get('field_flag')->getValue()[0]['target_id'];
                   $file = File::load($fid);
                   if (is_object($file)){
                     $limit['country']['flag'] = $file->url();
@@ -722,7 +722,7 @@ class SpcMbdController extends ControllerBase {
                   $limit['country_one']['name'] = $term_one->label();
                   $limit['country_one']['code'] = $term_one->get('field_country_code')->value;
                   
-                  $fid_one = $term_one->get('field_image')->getValue()[0]['target_id'];
+                  $fid_one = $term_one->get('field_flag')->getValue()[0]['target_id'];
                   $file_one = File::load($fid_one);
                   if (is_object($file_one)){
                     $limit['country_one']['flag'] = $file_one->url();
@@ -734,7 +734,7 @@ class SpcMbdController extends ControllerBase {
                   $limit['country_two']['name'] = $term_two->label();
                   $limit['country_two']['code'] = $term_two->get('field_country_code')->value;
                   
-                  $fid_two = $term_two->get('field_image')->getValue()[0]['target_id'];
+                  $fid_two = $term_two->get('field_flag')->getValue()[0]['target_id'];
                   $file_two = File::load($fid_one);
                   if (is_object($file_two)){
                     $limit['country_two']['flag'] = $file_two->url();
