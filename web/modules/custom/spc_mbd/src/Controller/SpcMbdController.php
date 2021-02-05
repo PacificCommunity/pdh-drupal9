@@ -29,7 +29,7 @@ class SpcMbdController extends ControllerBase {
     
     public $shelf_colors = [
       'stroke' => '#000000',
-      "stroke-width" => 2,
+      "stroke-width" => 1,
       "stroke-opacity" => 1,            
       "fill" => "#E0E973",
       "fill-opacity" => 0.7,
@@ -502,6 +502,8 @@ class SpcMbdController extends ControllerBase {
         $data = [];
         $geojson = '[';
         $data_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();        
         
         $q = db_select('node','n')
             ->fields('n', ['nid'])
@@ -517,10 +519,15 @@ class SpcMbdController extends ControllerBase {
                   $limit['country']['name'] = $term->label();
                   $limit['country']['code'] = $term->get('field_country_code')->value;
                   
+                  $aliasManager = \Drupal::service('path.alias_manager');
+                  $limit['country']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
+                  
                   $fid = $term->get('field_flag')->getValue()[0]['target_id'];
                   $file = File::load($fid);
                   if (is_object($file)){
                     $limit['country']['flag'] = $file->url();
+                  } else {
+                    $limit['country']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country']['code'] . '.svg';
                   }
                 }
 
@@ -609,6 +616,8 @@ class SpcMbdController extends ControllerBase {
         $data = [];
         $geojson = '[';
         $data_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();        
         
         $q = db_select('node','n')
             ->fields('n', ['nid'])
@@ -624,10 +633,15 @@ class SpcMbdController extends ControllerBase {
                   $limit['country']['name'] = $term->label();
                   $limit['country']['code'] = $term->get('field_country_code')->value;
                   
+                  $aliasManager = \Drupal::service('path.alias_manager');
+                  $limit['country']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
+                  
                   $fid = $term->get('field_flag')->getValue()[0]['target_id'];
                   $file = File::load($fid);
                   if (is_object($file)){
                     $limit['country']['flag'] = $file->url();
+                  } else {
+                    $limit['country']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country']['code'] . '.svg';
                   }
                 }
 
@@ -706,6 +720,8 @@ class SpcMbdController extends ControllerBase {
         $data = [];
         $geojson = '[';
         $data_base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+        $theme = \Drupal::theme()->getActiveTheme();
+        $theme_path = $theme->getPath();         
         
         $q = db_select('node','n')
             ->fields('n', ['nid'])
@@ -722,12 +738,19 @@ class SpcMbdController extends ControllerBase {
                   $limit['country_one']['name'] = $term_one->label();
                   $limit['country_one']['code'] = $term_one->get('field_country_code')->value;
                   
+                  $aliasManager = \Drupal::service('path.alias_manager');
+                  $limit['country_one']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term_one->id());                  
+                  
                   $fid_one = $term_one->get('field_flag')->getValue()[0]['target_id'];
                   $file_one = File::load($fid_one);
                   if (is_object($file_one)){
                     $limit['country_one']['flag'] = $file_one->url();
+                  } else {
+                    $limit['country_one']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country_one']['code'] . '.svg';
                   }
                 }
+
+                $limit['country_two']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term_one->id());                
                 
                 $tid_two = $node->get('field_boundary_country_two')->getValue()[0]['target_id'];
                 if ($term_two = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid_two)){
@@ -738,6 +761,8 @@ class SpcMbdController extends ControllerBase {
                   $file_two = File::load($fid_one);
                   if (is_object($file_two)){
                     $limit['country_two']['flag'] = $file_two->url();
+                  } else {
+                    $limit['country_two']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country_two']['code'] . '.svg';
                   }
                 }                
 
