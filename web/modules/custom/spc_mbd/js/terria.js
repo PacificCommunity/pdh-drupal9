@@ -17,6 +17,10 @@
           iframe = map.contentWindow;
           origin = map.src;
           
+          window.setTimeout(function(){
+            $('.globe').removeClass('loader');
+          }, 50000);
+          
           fetch('/sites/default/files/mbd/boundaries.json')
             .then(res => res.json())
             .then((data) => {      
@@ -28,7 +32,7 @@
                   console.log(item.id)
                   iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
                 });
-      
+
                 iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
               }, 20000);
           });
