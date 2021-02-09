@@ -2,3 +2,7 @@ terria:
   version: 1.x
   js:
     js/terria.js: {} 
+terria_country:
+  version: 1.x
+  js:
+    js/terria_country.js: {}     

@@ -7,6 +7,7 @@ use Drupal\user\Entity\User;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\spc_mbd\Controller\SpcMbdController;
 
 /**
  * Implementation of hook_preprocess_menu().
@@ -96,6 +97,7 @@ function spc_preprocess_taxonomy_term(&$variables){
     $term = $variables['term'];
 
     if ($variables['view_mode'] == 'full' && $vocabulary == 'country'){
+        $country_code = $term->get('field_country_code')->getValue()[0]['value'];
         
         @$variables['treaty'] = _get_country_treaty($term);
         
@@ -125,6 +127,16 @@ function spc_preprocess_taxonomy_term(&$variables){
         if (!$term->get('field_maritime_zone')->getValue()){
             $variables['empty_zone'] = true;
         }
+        
+        //todo: get from config.
+        $terriaMapUrl = 'https://terriajs.dev.spc.links.com.au/'; 
+        $initCamera = '{"initSources":[{"initialCamera":{"west": 145.65364175379182,"south": -22.15106845160314,"east": -156.55733400327983,"north": 12.164394494917866}}]}';
+        $variables['terri_map_url'] = $terriaMapUrl . '#spc&hideWorkbench=1&start='. urlencode($initCamera);
+
+        $variables['#attached']['library'][] =  'spc_mbd/terria_country';
+        $variables['#attached']['drupalSettings']['spcMbd']['map'] = _get_country_map_data($term);
+        $variables['#attached']['drupalSettings']['spcMbd']['countryCode'] = $country_code;
+
     }
     
     if ($variables['view_mode'] == 'step' && $vocabulary == 'maritime_zone'){
@@ -443,6 +455,213 @@ function _get_shelf_treaty($term){
             $output[] = $shelf;
         }
     }            
-    //dump($output); die;
+    
     return $output;
+}
+
+function _get_country_map_data($term){
+    $country_code = $term->get('field_country_code')->getValue()[0]['value'];
+    $filespath = \Drupal::service('file_system')->realpath(file_default_scheme() . "://");
+
+    $SpcMbdController = new SpcMbdController();
+    $map_data = $SpcMbdController->get_map_data();    
+
+    $eez = json_decode(file_get_contents($filespath.'/mbd/eez.json'), true);
+    if ($eez){
+      foreach($eez as $key => $zone){
+        if ($zone['id'] != 'eez-' .  $country_code) {
+          $eez[$key]['feature']['features'][0]['properties']['stroke-opacity']  = 0.2;
+          $eez[$key]['feature']['features'][0]['properties']['fill-opacity']  = 0.2;
+        }
+      }
+      
+      $eezjson = json_encode($eez);
+      create_json_file('eez-'. $country_code.'.json', $eezjson );      
+    }
+
+    set_country_boundaries_json($country_code, $SpcMbdController);
+    set_country_limits_json($country_code, $SpcMbdController);       
+    set_country_shelf_json($country_code, $SpcMbdController);
+    
+    $map['eez']['eez-' . $country_code] = $map_data['eez']['eez-' . $country_code];
+    $map['limits'] = $map_data['limits'];
+    $map['shelf'] = $map_data['shelf'];
+    $map['boundary'] = $map_data['boundary'];
+
+    return $map;
+}
+
+function set_country_boundaries_json($country_code, $SpcMbdController){
+    $treatyjson = '[';
+  
+    $q = db_select('node','n')
+        ->fields('n', ['nid'])
+        ->condition('n.type', 'boundary_treaty');
+    $results = $q->execute()->fetchAll();
+    
+    if (!empty($results)){
+        foreach($results as $key => $value){
+          $node = Node::load($value->nid);
+
+          $tid_one = $node->get('field_boundary_country_one')->getValue()[0]['target_id'];
+          $term_one = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid_one);
+
+          $tid_two = $node->get('field_boundary_country_two')->getValue()[0]['target_id'];
+          $term_two = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid_two);
+          if ($term_one->get('field_country_code')->value == $country_code || $term_two->get('field_country_code')->value == $country_code){
+
+            if ($line_json = @$node->get('field_geojson_coordinates')->getValue()[0]['value']){
+              $line_array = json_decode($line_json, true);
+              $geo_item = [];
+
+              if (!array_key_exists('id', $line_array)){
+                $geo_item['id'] = 'boundary-' . $value->nid;
+                $geo_item['feature'] = $line_array;
+              } else {
+                $line_array['id'] = 'boundary-' . $value->nid;
+                $geo_item = $line_array;
+              }
+
+              if ($state = $node->get('field_treaty_state')->getValue()[0]['value']){
+                $feature_count = count($geo_item['feature']['features']);
+                if ($feature_count > 1){
+                  $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->states_colors[$state];
+                  $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = 8;
+                  $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = 1;
+                } else {
+                  $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->states_colors[$state];
+                  $geo_item['feature']['features'][0]['properties']['stroke-width'] = 8;
+                  $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = 1;
+                }
+              }
+
+              $treatyjson .= json_encode($geo_item) . ',';
+            }
+          }
+        }
+        
+        $treatyjson =  substr($treatyjson, 0, -1) . ']';
+        create_json_file('boundaries-'. $country_code.'.json', $treatyjson ); 
+    }
+}
+
+function set_country_limits_json($country_code, $SpcMbdController){
+    $geojson = '[';
+  
+    $q = db_select('node','n')
+    ->fields('n', ['nid'])
+    ->condition('n.type', 'high_seas_limit');
+    $results = $q->execute()->fetchAll();
+
+    if (!empty($results)){
+        foreach($results as $key => $value){
+            $limit = [];
+            $node = Node::load($value->nid);
+            $tid = $node->get('field_limit_countries')->getValue()[0]['target_id'];
+            if (@$term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid)){
+              if ($term->get('field_country_code')->value == $country_code) {
+                  if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
+                    $line_array = json_decode($line_json, true);
+                    $geo_item = [];
+
+                    if (!array_key_exists('id', $line_array)){
+                      $geo_item['id'] = 'limit-' . $value->nid;
+                      $geo_item['feature'] = $line_array;
+                    } else {
+                      $line_array['id'] = 'limit-' . $value->nid;
+                      $geo_item = $line_array;
+                    }
+
+                    $feature_count = count($geo_item['feature']['features']);
+                    if ($feature_count > 1){
+                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->limit_colors['stroke'];
+                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $SpcMbdController->limit_colors['stroke-width'];
+                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $SpcMbdController->limit_colors['stroke-opacity'];
+                    } else {
+                      $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->limit_colors['stroke'];
+                      $geo_item['feature']['features'][0]['properties']['stroke-width'] = $SpcMbdController->limit_colors['stroke-width'];
+                      $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $SpcMbdController->limit_colors['stroke-opacity'];
+                    }
+
+                    $geojson .= json_encode($geo_item) . ',';
+                  }
+              }
+            }
+        }
+        
+        $geojson =  substr($geojson, 0, -1) . ']';
+        create_json_file('limits-'. $country_code.'.json', $geojson ); 
+    }
+}
+
+function set_country_shelf_json($country_code, $SpcMbdController){
+    $geojson = '[';
+    
+    $q = db_select('node','n')
+        ->fields('n', ['nid'])
+        ->condition('n.type', 'continental_shelf');
+    $results = $q->execute()->fetchAll();    
+    
+    if (!empty($results)){
+      foreach($results as $key => $value){
+        $limit = [];
+        $node = Node::load($value->nid);
+        $tid = @$node->get('field_limit_countries')->getValue()[0]['target_id'];
+        
+        if (@$term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid)){
+          if ($term->get('field_country_code')->value == $country_code) {
+            if ($line_json = @$node->get('field_geojson_coordinates')->getValue()[0]['value']){
+              $line_array = json_decode($line_json, true);
+              $geo_item = [];
+
+              if (!array_key_exists('id', $line_array)){
+                $geo_item['id'] = 'shelf-' . $value->nid;
+                $geo_item['feature'] = $line_array;
+              } else {
+                $line_array['id'] = 'shelf-' . $value->nid;
+                $geo_item = $line_array;
+              }
+
+              $feature_count = count($geo_item['feature']['features']);
+              if ($feature_count > 1){
+                $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->shelf_colors['stroke'];
+                $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $SpcMbdController->shelf_colors['stroke-width'];
+                $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $SpcMbdController->shelf_colors['stroke-opacity'];
+                $geo_item['feature']['features'][$feature_count-1]['properties']['fill'] = $SpcMbdController->shelf_colors['fill'];
+                $geo_item['feature']['features'][$feature_count-1]['properties']['fill-opacity'] = $SpcMbdController->shelf_colors['fill-opacity'];
+              } else {
+                $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->shelf_colors['stroke'];
+                $geo_item['feature']['features'][0]['properties']['stroke-width'] = $SpcMbdController->shelf_colors['stroke-width'];
+                $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $SpcMbdController->shelf_colors['stroke-opacity'];
+                $geo_item['feature']['features'][0]['properties']['fill'] = $SpcMbdController->shelf_colors['fill'];
+                $geo_item['feature']['features'][0]['properties']['fill-opacity'] = $SpcMbdController->shelf_colors['fill-opacity'];                    
+              }
+
+              $geojson .= json_encode($geo_item) . ','; 
+            }
+          }
+        }
+      }
+    }
+
+    $geojson =  substr($geojson, 0, -1) . ']';
+    create_json_file('shelf-'. $country_code.'.json', $geojson ); 
+}
+
+function create_json_file($filename, $json){
+    $file = File::create([
+      'uid' => 1,
+      'filename' => $filename,
+      'uri' => 'public://mbd/'. $filename,
+      'status' => 1,
+    ]);
+    $file->save();
+
+    $dir = dirname($file->getFileUri());
+    if (!file_exists($dir)) {
+      mkdir($dir, 0777, TRUE);
+    }
+
+    file_put_contents($file->getFileUri(), $json);
+    $file->save();
 }
