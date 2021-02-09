@@ -27,22 +27,25 @@
           fetch('/sites/default/files/mbd/boundaries-' + countryCode + '.json')
             .then(res => res.json())
             .then((data) => {      
-              borersGeoJson = data;
-              window.setTimeout(function(){
-                iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: borersGeoJson}, origin);
-      
-                borersGeoJson.forEach(function(item){
-                  console.log(item.id)
-                  iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
-                });
+              if (data) {
+                borersGeoJson = data;
+                window.setTimeout(function(){
+                  iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: borersGeoJson}, origin);
 
-                iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-              }, 20000);
+                  borersGeoJson.forEach(function(item){
+                    console.log(item.id)
+                    iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+                  });
+
+                  iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+                }, 20000);
+              }
           });
           
           fetch('/sites/default/files/mbd/limits-' + countryCode + '.json')
             .then(res => res.json())
-            .then((data) => {      
+            .then((data) => {   
+              if (data) {
               limitsGeoJson = data;
               window.setTimeout(function(){
                 iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: limitsGeoJson}, origin);
@@ -54,11 +57,13 @@
       
                 iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
               }, 20000);
+            }
           });          
 
           fetch('/sites/default/files/mbd/eez-' + countryCode + '.json')
           .then(res => res.json())
           .then((data) => {
+            if (data) {
             zonesGeoJson = data;
             window.setTimeout(function(){
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: zonesGeoJson}, origin);
@@ -70,11 +75,13 @@
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
             }, 15000);
+          }
           }); 
           
           fetch('/sites/default/files/mbd/shelf-' + countryCode + '.json')
           .then(res => res.json())
           .then((data) => {
+            if (data) {
             shelfGeoJson = data;
             window.setTimeout(function(){
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: shelfGeoJson}, origin);
@@ -86,6 +93,7 @@
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
             }, 15000);
+            }
           });          
 
         }  

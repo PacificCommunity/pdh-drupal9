@@ -466,19 +466,7 @@ function _get_country_map_data($term){
     $SpcMbdController = new SpcMbdController();
     $map_data = $SpcMbdController->get_map_data();    
 
-    $eez = json_decode(file_get_contents($filespath.'/mbd/eez.json'), true);
-    if ($eez){
-      foreach($eez as $key => $zone){
-        if ($zone['id'] != 'eez-' .  $country_code) {
-          $eez[$key]['feature']['features'][0]['properties']['stroke-opacity']  = 0.2;
-          $eez[$key]['feature']['features'][0]['properties']['fill-opacity']  = 0.2;
-        }
-      }
-      
-      $eezjson = json_encode($eez);
-      create_json_file('eez-'. $country_code.'.json', $eezjson );      
-    }
-
+    set_country_eez_json($country_code, $SpcMbdController);
     set_country_boundaries_json($country_code, $SpcMbdController);
     set_country_limits_json($country_code, $SpcMbdController);       
     set_country_shelf_json($country_code, $SpcMbdController);
@@ -492,14 +480,14 @@ function _get_country_map_data($term){
 }
 
 function set_country_boundaries_json($country_code, $SpcMbdController){
-    $treatyjson = '[';
-  
     $q = db_select('node','n')
         ->fields('n', ['nid'])
         ->condition('n.type', 'boundary_treaty');
     $results = $q->execute()->fetchAll();
     
     if (!empty($results)){
+        $treatyjson = '';
+        
         foreach($results as $key => $value){
           $node = Node::load($value->nid);
 
@@ -539,21 +527,27 @@ function set_country_boundaries_json($country_code, $SpcMbdController){
             }
           }
         }
-        
-        $treatyjson =  substr($treatyjson, 0, -1) . ']';
-        create_json_file('boundaries-'. $country_code.'.json', $treatyjson ); 
+        if ($treatyjson != ''){
+          $treatyjson =  '[' . substr($treatyjson, 0, -1) . ']';
+          create_json_file('boundaries-'. $country_code.'.json', $treatyjson ); 
+        } else {
+      create_json_file('boundaries-'. $country_code.'.json', '' ); 
+    }
+
+    } else {
+      create_json_file('boundaries-'. $country_code.'.json', '' ); 
     }
 }
 
 function set_country_limits_json($country_code, $SpcMbdController){
-    $geojson = '[';
-  
     $q = db_select('node','n')
     ->fields('n', ['nid'])
     ->condition('n.type', 'high_seas_limit');
     $results = $q->execute()->fetchAll();
 
     if (!empty($results)){
+        $geojson = '';
+
         foreach($results as $key => $value){
             $limit = [];
             $node = Node::load($value->nid);
@@ -589,20 +583,26 @@ function set_country_limits_json($country_code, $SpcMbdController){
             }
         }
         
-        $geojson =  substr($geojson, 0, -1) . ']';
-        create_json_file('limits-'. $country_code.'.json', $geojson ); 
+        if ($geojson !== ''){
+          $geojson =  '[' . substr($geojson, 0, -1) . ']';
+          create_json_file('limits-'. $country_code.'.json', $geojson );
+        } else {
+        create_json_file('limits-'. $country_code.'.json', '' ); 
+    }
+ 
+    } else {
+        create_json_file('limits-'. $country_code.'.json', '' ); 
     }
 }
 
 function set_country_shelf_json($country_code, $SpcMbdController){
-    $geojson = '[';
-    
     $q = db_select('node','n')
         ->fields('n', ['nid'])
         ->condition('n.type', 'continental_shelf');
     $results = $q->execute()->fetchAll();    
     
     if (!empty($results)){
+      $geojson = '';
       foreach($results as $key => $value){
         $limit = [];
         $node = Node::load($value->nid);
@@ -641,11 +641,64 @@ function set_country_shelf_json($country_code, $SpcMbdController){
             }
           }
         }
-      }
+      } 
+      if ($geojson != ''){
+      $geojson =  substr($geojson, 0, -1) . ']';
+      create_json_file('shelf-'. $country_code.'.json', $geojson );
+      }else {
+      create_json_file('shelf-'. $country_code.'.json', '' );
+    }
+
+    } else {
+      create_json_file('shelf-'. $country_code.'.json', '' );
+    }
+ 
+}
+
+function set_country_eez_json($country_code, $SpcMbdController){
+    $geojson = '[';
+    
+    $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');    
+    foreach($countries_tax as $country_term){
+        $term = Term::load($country_term->tid);
+
+      if ($plygon_json = $term->get('field_eez_plygon')->getValue()[0]['value']){
+          $current_country_code = $term->get('field_country_code')->getValue()[0]['value'];
+
+        if ($term->get('field_country_code')->value == $country_code) {
+          if ($current_country_code == 'KI'){
+            $ki_polygons = json_decode($plygon_json, true);
+            foreach ($ki_polygons['KI'] as $key => $ki_polygon){
+              $ki_polygon['id'] = 'eez-' . $current_country_code . $key;
+              $geojson .= json_encode($ki_polygon) . ',';
+            }
+          } else {
+              $plygon_array = json_decode($plygon_json, true);
+              $plygon_array['id'] = 'eez-' . $current_country_code;
+              $geojson .= json_encode($plygon_array) . ',';
+          }
+        } else {
+          if ($current_country_code == 'KI'){
+            $ki_polygons = json_decode($plygon_json, true);
+            foreach ($ki_polygons['KI'] as $key => $ki_polygon){
+              $ki_polygon['id'] = 'eez-' . $current_country_code . $key;
+              $ki_polygon['feature']['features'][0]['properties']['stroke-opacity']  = 0.2;
+              $ki_polygon['feature']['features'][0]['properties']['fill-opacity']  = 0.2;
+              $geojson .= json_encode($ki_polygon) . ',';
+            }
+          } else {
+              $plygon_array = json_decode($plygon_json, true);
+              $plygon_array['id'] = 'eez-' . $current_country_code;
+              $plygon_array['feature']['features'][0]['properties']['stroke-opacity']  = 0.2;
+              $plygon_array['feature']['features'][0]['properties']['fill-opacity']  = 0.2;
+              $geojson .= json_encode($plygon_array) . ',';
+          }
+        }
+      }   
     }
 
     $geojson =  substr($geojson, 0, -1) . ']';
-    create_json_file('shelf-'. $country_code.'.json', $geojson ); 
+    create_json_file('eez-'. $country_code.'.json', $geojson ); 
 }
 
 function create_json_file($filename, $json){
