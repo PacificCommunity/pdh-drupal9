@@ -3,6 +3,8 @@
     attach: function(context, settings) {
       window.addEventListener('message', e => {
         
+        console.log(drupalSettings.spcMbd);
+        
         let map = {};
         let iframe = {};
         let origin = {};
@@ -11,6 +13,7 @@
         let shelfGeoJson = {};
         let limitsGeoJson = {};
         const mapData = drupalSettings.spcMbd.map;
+        const countryCode = drupalSettings.spcMbd.countryCode;
 
         if (e.data === 'ready') {
           map = document.getElementById('terria-map');
@@ -21,7 +24,7 @@
             $('.globe').removeClass('loader');
           }, 50000);
           
-          fetch('/sites/default/files/mbd/boundaries.json')
+          fetch('/sites/default/files/mbd/boundaries-' + countryCode + '.json')
             .then(res => res.json())
             .then((data) => {      
               borersGeoJson = data;
@@ -37,7 +40,7 @@
               }, 20000);
           });
           
-          fetch('/sites/default/files/mbd/limits.json')
+          fetch('/sites/default/files/mbd/limits-' + countryCode + '.json')
             .then(res => res.json())
             .then((data) => {      
               limitsGeoJson = data;
@@ -53,7 +56,7 @@
               }, 20000);
           });          
 
-          fetch('/sites/default/files/mbd/eez.json')
+          fetch('/sites/default/files/mbd/eez-' + countryCode + '.json')
           .then(res => res.json())
           .then((data) => {
             zonesGeoJson = data;
@@ -69,7 +72,7 @@
             }, 15000);
           }); 
           
-          fetch('/sites/default/files/mbd/shelf.json')
+          fetch('/sites/default/files/mbd/shelf-' + countryCode + '.json')
           .then(res => res.json())
           .then((data) => {
             shelfGeoJson = data;
@@ -83,7 +86,7 @@
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
             }, 15000);
-          });           
+          });          
 
         }  
         

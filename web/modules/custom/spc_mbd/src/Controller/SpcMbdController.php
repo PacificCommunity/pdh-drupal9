@@ -390,10 +390,10 @@ class SpcMbdController extends ControllerBase {
     
     public function get_map_data(){
       
-        $map['limits'] = $this->get_limits_map_data();
-        $map['eez'] = $this->get_eez_map_data();
-        $map['shelf'] = $this->get_shelf_map_data();
-        $map['boundary'] = $this->get_boundaries_map_data();
+        $map['limits'] = @$this->get_limits_map_data();
+        $map['eez'] = @$this->get_eez_map_data();
+        $map['shelf'] = @$this->get_shelf_map_data();
+        $map['boundary'] = @$this->get_boundaries_map_data();
 
         return $map;
     }
@@ -413,7 +413,7 @@ class SpcMbdController extends ControllerBase {
             $name = $term->getName();
             $country_code = $term->get('field_country_code')->getValue()[0]['value'];
 
-            $fid = $term->get('field_flag')->getValue()[0]['target_id'];
+            $fid = @$term->get('field_flag')->getValue()[0]['target_id'];
             $file = File::load($fid);
             
             if (is_object($file)){
@@ -514,7 +514,7 @@ class SpcMbdController extends ControllerBase {
             foreach($results as $key => $value){
                 $limit = [];
                 $node = Node::load($value->nid);
-                $tid = $node->get('field_limit_countries')->getValue()[0]['target_id'];
+                $tid = @$node->get('field_limit_countries')->getValue()[0]['target_id'];
                 if ($term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid)){
                   $limit['country']['name'] = $term->label();
                   $limit['country']['code'] = $term->get('field_country_code')->value;
@@ -522,7 +522,7 @@ class SpcMbdController extends ControllerBase {
                   $aliasManager = \Drupal::service('path.alias_manager');
                   $limit['country']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
                   
-                  $fid = $term->get('field_flag')->getValue()[0]['target_id'];
+                  $fid = @$term->get('field_flag')->getValue()[0]['target_id'];
                   $file = File::load($fid);
                   if (is_object($file)){
                     $limit['country']['flag'] = $file->url();
@@ -532,12 +532,12 @@ class SpcMbdController extends ControllerBase {
                 }
 
                 $limit['name'] = $node->getTitle() ?? '-';
-                $limit['submission_done'] = $node->get('field_submission_done')->getValue()[0]['value'] ? 'Yes' : 'No';
-                $limit['defence_year'] = $node->get('field_defence_year')->getValue()[0]['value'] ?? '-';
-                $limit['established_year'] = $node->get('field_established_year')->getValue()[0]['value'] ?? '-';
-                $limit['recommendation'] = strip_tags($node->get('field_recommendation')->getValue()[0]['value']) ?? '-';
-                $limit['joint_submission'] = $node->get('field_joint_submission')->getValue()[0]['value'] ? 'Yes' : 'No';
-                $limit['submission_complied'] = $node->get('field_full_submission_complied')->getValue()[0]['value'] ? 'Yes' : 'No';
+                $limit['submission_done'] = @$node->get('field_submission_done')->getValue()[0]['value'] ? 'Yes' : 'No';
+                $limit['defence_year'] = @$node->get('field_defence_year')->getValue()[0]['value'] ?? '-';
+                $limit['established_year'] = @$node->get('field_established_year')->getValue()[0]['value'] ?? '-';
+                $limit['recommendation'] = @strip_tags($node->get('field_recommendation')->getValue()[0]['value']) ?? '-';
+                $limit['joint_submission'] = @$node->get('field_joint_submission')->getValue()[0]['value'] ? 'Yes' : 'No';
+                $limit['submission_complied'] = @$node->get('field_full_submission_complied')->getValue()[0]['value'] ? 'Yes' : 'No';
                 
                 $limit['date'] = $node->get('field_date')->getValue()[0]['value'] ?? '-';
                 
@@ -559,7 +559,7 @@ class SpcMbdController extends ControllerBase {
                   }
                 }
                 
-                if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
+                if ($line_json = @$node->get('field_geojson_coordinates')->getValue()[0]['value']){
                   $line_array = json_decode($line_json, true);
                   $geo_item = [];
                   
@@ -579,7 +579,7 @@ class SpcMbdController extends ControllerBase {
                     $geo_item['feature']['features'][$feature_count-1]['properties']['fill'] = $this->shelf_colors['fill'];
                     $geo_item['feature']['features'][$feature_count-1]['properties']['fill-opacity'] = $this->shelf_colors['fill-opacity'];
                   } else {
-                    $geo_item['feature']['features'][0]['properties']['stroke'] = $this->shelf_colors['na'];
+                    $geo_item['feature']['features'][0]['properties']['stroke'] = @$this->shelf_colors['stroke'];
                     $geo_item['feature']['features'][0]['properties']['stroke-width'] = $this->shelf_colors['stroke-width'];
                     $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $this->shelf_colors['stroke-opacity'];
                     $geo_item['feature']['features'][0]['properties']['fill'] = $this->shelf_colors['fill'];
@@ -748,17 +748,16 @@ class SpcMbdController extends ControllerBase {
                   } else {
                     $limit['country_one']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country_one']['code'] . '.svg';
                   }
-                }
-
-                $limit['country_two']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term_one->id());                
+                }               
                 
                 $tid_two = $node->get('field_boundary_country_two')->getValue()[0]['target_id'];
                 if ($term_two = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid_two)){
                   $limit['country_two']['name'] = $term_two->label();
                   $limit['country_two']['code'] = $term_two->get('field_country_code')->value;
-                  
-                  $fid_two = $term_two->get('field_flag')->getValue()[0]['target_id'];
-                  $file_two = File::load($fid_one);
+                  $limit['country_two']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term_two->id()); 
+                
+                  $fid_two = @$term_two->get('field_flag')->getValue()[0]['target_id'];
+                  $file_two = File::load($fid_two);
                   if (is_object($file_two)){
                     $limit['country_two']['flag'] = $file_two->url();
                   } else {
@@ -790,7 +789,7 @@ class SpcMbdController extends ControllerBase {
                   }
                 }
                 
-                if ($line_json = $node->get('field_geojson_coordinates')->getValue()[0]['value']){
+                if ($line_json = @$node->get('field_geojson_coordinates')->getValue()[0]['value']){
                   $line_array = json_decode($line_json, true);
                   $geo_item = [];
                   
@@ -898,7 +897,7 @@ class SpcMbdController extends ControllerBase {
           foreach($results as $key => $value){
               $limit = [];
               $node = Node::load($value->nid);
-              $target_id = $node->get('field_limit_countries')->getValue()[0]['target_id'];
+              $target_id = @$node->get('field_limit_countries')->getValue()[0]['target_id'];
               if ($target_id == $tid){
                 
                 $areas[] = $node->getTitle();
