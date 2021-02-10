@@ -130,7 +130,11 @@ function spc_preprocess_taxonomy_term(&$variables){
         
         //todo: get from config.
         $terriaMapUrl = 'https://terriajs.dev.spc.links.com.au/'; 
-        $initCamera = '{"initSources":[{"initialCamera":{"west": 145.65364175379182,"south": -22.15106845160314,"east": -156.55733400327983,"north": 12.164394494917866}}]}';
+        $module_handler = \Drupal::service('module_handler');
+        $module_path = $module_handler->getModule('spc_mbd')->getPath();
+        $cameras = json_decode(file_get_contents($module_path . '/data/camera.json'), true);
+        $initCamera = json_encode($cameras[$country_code]);
+        
         $variables['terri_map_url'] = $terriaMapUrl . '#spc&hideWorkbench=1&start='. urlencode($initCamera);
 
         $variables['#attached']['library'][] =  'spc_mbd/terria_country';
@@ -661,8 +665,9 @@ function set_country_eez_json($country_code, $SpcMbdController){
     $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');    
     foreach($countries_tax as $country_term){
         $term = Term::load($country_term->tid);
-
-      if ($plygon_json = $term->get('field_eez_plygon')->getValue()[0]['value']){
+        $plygon_json = @$term->get('field_eez_plygon')->getValue()[0]['value'];
+        
+      if ($SpcMbdController->is_json($plygon_json)){
           $current_country_code = $term->get('field_country_code')->getValue()[0]['value'];
 
         if ($term->get('field_country_code')->value == $country_code) {

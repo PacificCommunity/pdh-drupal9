@@ -461,8 +461,9 @@ class SpcMbdController extends ControllerBase {
                 }
               }
             }
-
-            if ($plygon_json = $term->get('field_eez_plygon')->getValue()[0]['value']){
+            
+            $plygon_json = $term->get('field_eez_plygon')->getValue()[0]['value'];
+            if ($this->is_json($plygon_json)){
                 if ($country_code == 'KI'){
                   $ki_polygons = json_decode($plygon_json, true);
                   foreach ($ki_polygons['KI'] as $key => $ki_polygon){
@@ -910,5 +911,10 @@ class SpcMbdController extends ControllerBase {
       }
       
       return $areas;
+    }
+    
+    public function is_json($string) {
+      json_decode($string);
+      return (json_last_error() == JSON_ERROR_NONE);
     }
 }
