@@ -8,10 +8,17 @@
         let map = {};
         let iframe = {};
         let origin = {};
+        
         let zonesGeoJson  = {};
         let borersGeoJson = {};
         let shelfGeoJson = {};
         let limitsGeoJson = {};
+        
+        let baselineGeoJson = {};
+        let seelimitGeoJson = {};
+        let marineGeoJson = {};
+        let contiguousGeoJson = {};
+
         const mapData = drupalSettings.spcMbd.map;
         const countryCode = drupalSettings.spcMbd.countryCode;
 
@@ -58,8 +65,8 @@
                 iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
               }, 20000);
             }
-          });          
-
+          });
+          
           fetch('/sites/default/files/mbd/eez-' + countryCode + '.json')
           .then(res => res.json())
           .then((data) => {
@@ -76,8 +83,8 @@
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
             }, 15000);
           }
-          }); 
-          
+          });          
+
           fetch('/sites/default/files/mbd/shelf-' + countryCode + '.json')
           .then(res => res.json())
           .then((data) => {
@@ -94,11 +101,83 @@
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
             }, 15000);
             }
-          });          
+          }); 
 
+          fetch('/sites/default/files/mbd/contiguous-' + countryCode + '.json')
+          .then(res => res.json())
+          .then((data) => {
+            if (data) {
+            contiguousGeoJson = data;
+            window.setTimeout(function(){
+              iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: contiguousGeoJson}, origin);
+
+              contiguousGeoJson.forEach(function(item){
+                console.log(item.id)
+                iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+              });
+
+              iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+            }, 16000);
+            }
+          });
+          
+          fetch('/sites/default/files/mbd/seelimit-' + countryCode + '.json')
+          .then(res => res.json())
+          .then((data) => {
+            if (data) {
+            seelimitGeoJson = data;
+            window.setTimeout(function(){
+              iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: seelimitGeoJson}, origin);
+
+              seelimitGeoJson.forEach(function(item){
+                console.log(item.id)
+                iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+              });
+
+              iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+            }, 17000);
+            }
+          });          
+          
+          fetch('/sites/default/files/mbd/baseline-' + countryCode + '.json')
+          .then(res => res.json())
+          .then((data) => {
+            if (data) {
+            baselineGeoJson = data;
+            window.setTimeout(function(){
+              iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: baselineGeoJson}, origin);
+
+              baselineGeoJson.forEach(function(item){
+                console.log(item.id)
+                iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+              });
+
+              iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+            }, 18000);
+            }
+          });
+          
+          fetch('/sites/default/files/mbd/marine-' + countryCode + '.json')
+          .then(res => res.json())
+          .then((data) => {
+            if (data) {
+            marineGeoJson = data;
+            window.setTimeout(function(){
+              iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: marineGeoJson}, origin);
+
+              marineGeoJson.forEach(function(item){
+                console.log(item.id)
+                iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+              });
+
+              iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+            }, 19000);
+            }
+          });
+          
+ 
         }  
-        
-        
+
         let eezPopup = $('#eez-popup');
         let limitPopup = $('#limit-popup');
         let shelfPopup = $('#shelf-popup');
@@ -189,7 +268,26 @@
             boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
             boundaryPopup.find('.related-datasets').html(datasets_html(target));          
             boundaryPopup.dialog( 'open' );
-          }     
+          } else if (clickedZoneId.includes('marine-') || clickedZoneId.includes('contiguous-') || clickedZoneId.includes('baseline-') || clickedZoneId.includes('seelimit-')){
+            
+            if (clickedZoneId.includes('KI')){
+              target = mapData.eez['eez-KI'];
+            } else {
+              target = mapData.eez['eez-'+ countryCode];
+            }
+
+            eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
+            eezPopup.find('.area .value').text(target.area);
+            eezPopup.find('.treaties .value').text(target.treaties);
+            eezPopup.find('.pockets .value').text(target.pockets);
+            eezPopup.find('.shelf .value').text(target.shelf);
+            eezPopup.find('.ecs .value').text(target.ecs);
+            eezPopup.find('.deposited .value').text(target.deposited);
+            eezPopup.find('.date .value').text(target.date);
+            eezPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ target.url.substring(0, 30) +'</a>');
+            eezPopup.find('.related-datasets').html(datasets_html(target));
+            eezPopup.dialog( 'open' );
+          }         
           
           console.log(target);
 
