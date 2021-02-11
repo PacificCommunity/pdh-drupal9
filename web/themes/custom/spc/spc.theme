@@ -662,10 +662,10 @@ function set_country_shelf_json($country_code, $SpcMbdController){
 function set_country_eez_json($country_code, $SpcMbdController){
     $geojson = '[';
     
-    $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');    
+    $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country'); 
     foreach($countries_tax as $country_term){
-        $term = Term::load($country_term->tid);
-        $plygon_json = @$term->get('field_eez_plygon')->getValue()[0]['value'];
+      $term = Term::load($country_term->tid);
+      $plygon_json = @$term->get('field_eez_plygon')->getValue()[0]['value'];
         
       if ($SpcMbdController->is_json($plygon_json)){
           $current_country_code = $term->get('field_country_code')->getValue()[0]['value'];
@@ -699,9 +699,21 @@ function set_country_eez_json($country_code, $SpcMbdController){
               $geojson .= json_encode($plygon_array) . ',';
           }
         }
-      }   
+      }
+      
+      $additional_data_list = [
+          'baseline' => 'field_eez_sea_baseline',
+          'seelimit' => 'field_eez_sea_limit',
+          'marine' => 'field_eez_marine_protected_areas',
+          'contiguous' => 'field_eez_contiguous_zone',
+      ];
+      
+      foreach ($additional_data_list as $key => $field){
+        if ($term->get('field_country_code')->value == $country_code){
+          set_additional_json_data($term, $country_code, $SpcMbdController, $key, $field);
+        }
+      }
     }
-
     $geojson =  substr($geojson, 0, -1) . ']';
     create_json_file('eez-'. $country_code.'.json', $geojson ); 
 }
@@ -722,4 +734,43 @@ function create_json_file($filename, $json){
 
     file_put_contents($file->getFileUri(), $json);
     $file->save();
+}
+
+function set_additional_json_data($term, $country_code, $SpcMbdController, $key, $field){
+  
+  $json = @$term->get($field)->getValue()[0]['value'];
+  
+  if ($SpcMbdController->is_json($json)){
+      $geoarray = json_decode($json, true);
+      $geo_item = [];
+    
+      if (!array_key_exists('id', $geoarray)){
+        $geo_item['id'] = $key . '-' . $country_code;
+        $geo_item['feature'] = $geoarray;
+      } else {
+        $line_array['id'] = $key . '-' . $country_code;
+        $geo_item = $geoarray;
+      }
+
+      $feature_count = count($geo_item['feature']['features']);
+      if ($feature_count > 1){
+        $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->aditional_colors[$key]['stroke'];
+        $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $SpcMbdController->aditional_colors[$key]['stroke-width'];
+        $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $SpcMbdController->aditional_colors[$key]['stroke-opacity'];
+        $geo_item['feature']['features'][$feature_count-1]['properties']['fill'] = $SpcMbdController->aditional_colors[$key]['fill'];
+        $geo_item['feature']['features'][$feature_count-1]['properties']['fill-opacity'] = $SpcMbdController->aditional_colors[$key]['fill-opacity'];
+      } else {
+        $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->aditional_colors[$key]['stroke'];
+        $geo_item['feature']['features'][0]['properties']['stroke-width'] = $SpcMbdController->aditional_colors[$key]['stroke-width'];
+        $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $SpcMbdController->aditional_colors[$key]['stroke-opacity'];
+        $geo_item['feature']['features'][0]['properties']['fill'] = $SpcMbdController->aditional_colors[$key]['fill'];
+        $geo_item['feature']['features'][0]['properties']['fill-opacity'] = $SpcMbdController->aditional_colors[$key]['fill-opacity'];                    
+      }
+
+      $geojson = json_encode($geo_item) . ','; 
+      if (!empty($geojson)){
+        $geojson =  '[' . substr($geojson, 0, -1) . ']';
+        create_json_file($key . '-'. $country_code.'.json', $geojson );
+      }
+  }
 }

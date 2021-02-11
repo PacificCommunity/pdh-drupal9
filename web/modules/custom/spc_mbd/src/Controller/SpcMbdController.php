@@ -41,6 +41,37 @@ class SpcMbdController extends ControllerBase {
       "stroke-opacity" => 1, 
     ];
     
+    public $aditional_colors = [
+      'baseline' => [
+        'stroke' => '#555555',
+        "stroke-width" => 2,
+        "stroke-opacity" => 1,            
+        "fill" => "#555555",
+        "fill-opacity" => 0.5,
+      ],
+      'seelimit' => [
+        'stroke' => '#e5c381',
+        "stroke-width" => 2,
+        "stroke-opacity" => 1,            
+        "fill" => "#e5c381",
+        "fill-opacity" => 0.5,
+      ],
+      'marine' => [
+        'stroke' => '#67c0e4',
+        "stroke-width" => 2,
+        "stroke-opacity" => 1,            
+        "fill" => "#67c0e4",
+        "fill-opacity" => 0.5,
+      ],        
+      'contiguous' => [
+        'stroke' => '#8f056a',
+        "stroke-width" => 2,
+        "stroke-opacity" => 1,            
+        "fill" => "#8f056a",
+        "fill-opacity" => 0.5,
+      ],        
+    ];
+    
     //todo: get from config.
     public $terriaMapUrl = 'https://terriajs.dev.spc.links.com.au/'; 
     public $initCamera = '{"initSources":[{"initialCamera":{"west": 145.65364175379182,"south": -22.15106845160314,"east": -156.55733400327983,"north": 12.164394494917866}}]}';
