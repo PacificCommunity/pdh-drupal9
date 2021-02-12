@@ -159,7 +159,13 @@
             eezPopup.find('.ecs .value').text(target.ecs);
             eezPopup.find('.deposited .value').text(target.deposited);
             eezPopup.find('.date .value').text(target.date);
-            eezPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ target.url.substring(0, 30) +'</a>');
+            
+            let url = target.url;
+            if (target.url.length > 30){
+              let url = target.url.substring(0, 30) + '...';
+            }            
+            
+            eezPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');
             eezPopup.find('.related-datasets').html(datasets_html(target));
             eezPopup.dialog( 'open' );
             
@@ -173,7 +179,13 @@
             
             limitPopup.find('.deposited .value').text(target.deposited);
             limitPopup.find('.date .value').text(target.date);
-            limitPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
+            
+            let url = target.url;
+            if (target.url.length > 30){
+              url = target.url.substring(0, 30) + '...';
+            }            
+            
+            limitPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');
             limitPopup.find('.related-datasets').html(datasets_html(target));
             limitPopup.dialog( 'open' );
             
@@ -211,7 +223,13 @@
             boundaryPopup.find('.year-signed .value').text(target.year_signed);
             boundaryPopup.find('.force .value').text(target.force); 
             boundaryPopup.find('.date .value').text(target.date);
-            boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
+            
+            let url = target.url;
+            if (target.url.length > 30){
+              url = target.url.substring(0, 30) + '...';
+            }
+            
+            boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');
             boundaryPopup.find('.related-datasets').html(datasets_html(target));          
             boundaryPopup.dialog( 'open' );
           }     
