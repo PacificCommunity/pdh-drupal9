@@ -273,19 +273,35 @@
                 {% for item in treaty.completed %}
                 <div class="treaty-item">
                     <div class="flags">
-                        <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
-                            <div class="img">
-                                <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
-                            </div>
-                            <span>{{ item.country_one }}</span>
-                        </a>
-                        <span class="union">&nbsp{{ '&' }}&nbsp</span>
-                        <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
-                            <div class="img">
-                                <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
-                            </div>    
-                            <span>{{ item.country_two }}</span>
-                        </a>
+                      {% if item.country_one_code == country_code %}
+                          <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                              <div class="img">
+                                  <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                              </div>
+                              <span>{{ item.country_one }}</span>
+                          </a>
+                          <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                          <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                              <div class="img">
+                                  <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                              </div>    
+                              <span>{{ item.country_two }}</span>
+                          </a>
+                      {% else %}
+                          <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                              <div class="img">
+                                  <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                              </div>    
+                              <span>{{ item.country_two }}</span>
+                          </a>
+                          <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                          <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                              <div class="img">
+                                  <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                              </div>
+                              <span>{{ item.country_one }}</span>
+                          </a>                        
+                      {% endif %}
                     </div>
                     <div class="state {{ item.state }}"></div>
                     <div class="date">{{ 'Published' }}&nbsp{{ item.completed_date }}</div>
@@ -312,6 +328,7 @@
                             </div>
                         {% endif %}                        
                         <div class="flags">
+                          {% if item.country_one_code == country_code %}
                             <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
                                 <div class="img">
                                     <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
@@ -325,6 +342,21 @@
                                 </div>    
                                 <span>{{ item.country_two }}</span>
                             </a>
+                            {% else %}
+                            <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                                <div class="img">
+                                    <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                                </div>    
+                                <span>{{ item.country_two }}</span>
+                            </a>
+                            <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                            <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                                <div class="img">
+                                    <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                                </div>
+                                <span>{{ item.country_one }}</span>
+                            </a>
+                            {% endif %}  
                         </div>
                         <div class="treaty-steps">
                             {% for step in item.treaty_steps %}
@@ -355,6 +387,7 @@
                 {% for item in treaty.not_started %}
                 <div class="treaty-item">
                     <div class="flags">
+                      {% if item.country_one_code == country_code %}
                         <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
                             <div class="img">
                                 <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
@@ -368,6 +401,21 @@
                             </div>    
                             <span>{{ item.country_two }}</span>
                         </a>
+                        {% else %}
+                        <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                            <div class="img">
+                                <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                            </div>    
+                            <span>{{ item.country_two }}</span>
+                        </a>
+                        <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                        <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                            <div class="img">
+                                <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                            </div>
+                            <span>{{ item.country_one }}</span>
+                        </a>                        
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}

@@ -137,28 +137,30 @@ class SpcMbdController extends ControllerBase {
 
         foreach($countries_tax as $country_term){
             $country = Term::load($country_term->tid);
-            
-            $name = $country->getName();
-            $country_code = $country->get('field_country_code')->getValue()[0]['value'];
+            $published_status = $country->get('status')->getValue()[0]['value'];
+            if ($published_status){
+                $name = $country->getName();
+                $country_code = $country->get('field_country_code')->getValue()[0]['value'];
 
-            $fid = @$country->get('field_flag')->getValue()[0]['target_id'];
-            $file = File::load($fid);
-            
-            if (is_object($file)){
-              $flag = $file->url();
-            } else {
-                $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
+                $fid = @$country->get('field_flag')->getValue()[0]['target_id'];
+                $file = File::load($fid);
+
+                if (is_object($file)){
+                  $flag = $file->url();
+                } else {
+                    $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
+                }
+
+                $aliasManager = \Drupal::service('path.alias_manager');
+                $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
+
+                $countries[] = [
+                  'url' => $url,
+                  'flag' => $flag,
+                  'name' => $name,
+                ];
             }
-
-            $aliasManager = \Drupal::service('path.alias_manager');
-            $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
-
-            $countries[] = [
-              'url' => $url,
-              'flag' => $flag,
-              'name' => $name,
-            ];
-          }
+        }
 
         return $countries;
     }
@@ -449,6 +451,7 @@ class SpcMbdController extends ControllerBase {
             $country = [];
             $name = $term->getName();
             $country_code = $term->get('field_country_code')->getValue()[0]['value'];
+            $published_status = $term->get('status')->getValue()[0]['value'];
 
             $fid = @$term->get('field_flag')->getValue()[0]['target_id'];
             $file = File::load($fid);
@@ -467,6 +470,7 @@ class SpcMbdController extends ControllerBase {
               'flag' => $flag,
               'name' => $name,
               'code' => $country_code,
+              'status' => $published_status 
             ];
   
             $country['area'] = $term->get('field_eez_area')->getValue()[0]['value'] ?? '-';
@@ -556,6 +560,7 @@ class SpcMbdController extends ControllerBase {
                 if ($term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid)){
                   $limit['country']['name'] = $term->label();
                   $limit['country']['code'] = $term->get('field_country_code')->value;
+                  $limit['country']['status'] = $term->get('status')->getValue()[0]['value'];
                   
                   $aliasManager = \Drupal::service('path.alias_manager');
                   $limit['country']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
@@ -663,6 +668,7 @@ class SpcMbdController extends ControllerBase {
                 if ($term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid)){
                   $limit['country']['name'] = $term->label();
                   $limit['country']['code'] = $term->get('field_country_code')->value;
+                  $limit['country']['status'] = $term->get('status')->getValue()[0]['value'];
                   
                   $aliasManager = \Drupal::service('path.alias_manager');
                   $limit['country']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
@@ -763,6 +769,7 @@ class SpcMbdController extends ControllerBase {
                 if ($term_one = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($tid_one)){
                   $limit['country_one']['name'] = $term_one->label();
                   $limit['country_one']['code'] = $term_one->get('field_country_code')->value;
+                  $limit['country_one']['status'] = $term_one->get('status')->getValue()[0]['value'];
                   
                   $aliasManager = \Drupal::service('path.alias_manager');
                   $limit['country_one']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term_one->id());                  
@@ -781,7 +788,8 @@ class SpcMbdController extends ControllerBase {
                   $limit['country_two']['name'] = $term_two->label();
                   $limit['country_two']['code'] = $term_two->get('field_country_code')->value;
                   $limit['country_two']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term_two->id()); 
-                
+                  $limit['country_two']['status'] = $term_two->get('status')->getValue()[0]['value'];
+                  
                   $fid_two = @$term_two->get('field_flag')->getValue()[0]['target_id'];
                   $file_two = File::load($fid_two);
                   if (is_object($file_two)){
