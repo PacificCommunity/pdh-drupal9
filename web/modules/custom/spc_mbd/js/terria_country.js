@@ -15,7 +15,7 @@
         let limitsGeoJson = {};
         
         let baselineGeoJson = {};
-        let seelimitGeoJson = {};
+        let seelimGeoJson = {};
         let marineGeoJson = {};
         let contiguousGeoJson = {};
 
@@ -81,7 +81,7 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 15000);
+            }, 20000);
           }
           });          
 
@@ -99,7 +99,7 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 15000);
+            }, 20000);
             }
           }); 
 
@@ -117,25 +117,25 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 16000);
+            }, 21000);
             }
           });
           
-          fetch('/sites/default/files/mbd/seelimit-' + countryCode + '.json')
+          fetch('/sites/default/files/mbd/seelim-' + countryCode + '.json')
           .then(res => res.json())
           .then((data) => {
             if (data) {
-            seelimitGeoJson = data;
+            seelimGeoJson = data;
             window.setTimeout(function(){
-              iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: seelimitGeoJson}, origin);
+              iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: seelimGeoJson}, origin);
 
-              seelimitGeoJson.forEach(function(item){
+              seelimGeoJson.forEach(function(item){
                 console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 17000);
+            }, 22000);
             }
           });          
           
@@ -153,7 +153,7 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 18000);
+            }, 23000);
             }
           });
           
@@ -171,7 +171,7 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 19000);
+            }, 24000);
             }
           });
           
@@ -209,12 +209,26 @@
           iframe = map.contentWindow;
           origin = map.src; 
 
-          let clickedZoneId = e.data.ids[0];
+          let clickedZoneId = null;
           let target = {};
           
+          if (e.data.ids.length == 1){
+            clickedZoneId = e.data.ids[0];
+          } else if (e.data.ids.length > 1){
+            for (let i = 0; i < e.data.ids.length; i++){
+              if (e.data.ids[i].includes('limit-') || e.data.ids[i].includes('shelf-') || e.data.ids[i].includes('boundary-')){
+                clickedZoneId = e.data.ids[i];
+                break;
+              } else if (e.data.ids[i].includes('eez-')){
+                clickedZoneId = e.data.ids[i];
+              }
+            }
+          }
+          
+          console.log(e.data.ids);
           console.log(clickedZoneId);
 
-          if (clickedZoneId.includes('eez-')){
+          if (clickedZoneId && clickedZoneId.includes('eez-') && clickedZoneId.includes(countryCode)){
             
             if (clickedZoneId.includes('eez-KI')){
               target = mapData.eez['eez-KI'];
@@ -234,7 +248,7 @@
             eezPopup.find('.related-datasets').html(datasets_html(target));
             eezPopup.dialog( 'open' );
             
-          } else if (clickedZoneId.includes('limit-')){
+          } else if (clickedZoneId && clickedZoneId.includes('limit-')){
             target = mapData.limits[clickedZoneId];
             limitPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
             limitPopup.find('.deposited .value').text(target.deposited);
@@ -243,7 +257,7 @@
             limitPopup.find('.related-datasets').html(datasets_html(target));
             limitPopup.dialog( 'open' );
             
-          } else if (clickedZoneId.includes('shelf-')){
+          } else if (clickedZoneId && clickedZoneId.includes('shelf-')){
             target = mapData.shelf[clickedZoneId];
             shelfPopup.find('.name .value').text(target.name);
             shelfPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
@@ -257,7 +271,7 @@
             shelfPopup.find('.related-datasets').html(datasets_html(target));
             shelfPopup.dialog( 'open' );
             
-          }  else if (clickedZoneId.includes('boundary-')){
+          }  else if (clickedZoneId && clickedZoneId.includes('boundary-')){
             target = mapData.boundary[clickedZoneId];
             boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'" target="_blank">' + target.country_one.name +' ('+target.country_one.code +')</a>' );;
             boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'" target="_blank">' + target.country_two.name +' ('+target.country_two.code +')</a>' );;
@@ -268,29 +282,9 @@
             boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
             boundaryPopup.find('.related-datasets').html(datasets_html(target));          
             boundaryPopup.dialog( 'open' );
-          } else if (clickedZoneId.includes('marine-') || clickedZoneId.includes('contiguous-') || clickedZoneId.includes('baseline-') || clickedZoneId.includes('seelimit-')){
-            
-            if (clickedZoneId.includes('KI')){
-              target = mapData.eez['eez-KI'];
-            } else {
-              target = mapData.eez['eez-'+ countryCode];
-            }
-
-            eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
-            eezPopup.find('.area .value').text(target.area);
-            eezPopup.find('.treaties .value').text(target.treaties);
-            eezPopup.find('.pockets .value').text(target.pockets);
-            eezPopup.find('.shelf .value').text(target.shelf);
-            eezPopup.find('.ecs .value').text(target.ecs);
-            eezPopup.find('.deposited .value').text(target.deposited);
-            eezPopup.find('.date .value').text(target.date);
-            eezPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ target.url.substring(0, 30) +'</a>');
-            eezPopup.find('.related-datasets').html(datasets_html(target));
-            eezPopup.dialog( 'open' );
-          }         
+          }     
           
           console.log(target);
-
           //iframe.postMessage({interactiveLayer: true, type: 'zone.hide', id: clickedZoneId}, origin);
         }
         

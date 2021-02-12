@@ -37,7 +37,13 @@ class SpcMbdController extends ControllerBase {
     
     public $limit_colors = [
       "stroke" => "#F2F2F2",
-      "stroke-width" => 6,
+      "stroke-width" => 4,
+      "stroke-opacity" => 1, 
+    ];
+    
+    public $boundary_colors = [
+      "stroke" => "#F2F2F2",
+      "stroke-width" => 4,
       "stroke-opacity" => 1, 
     ];
     
@@ -49,7 +55,7 @@ class SpcMbdController extends ControllerBase {
         "fill" => "#555555",
         "fill-opacity" => 0.5,
       ],
-      'seelimit' => [
+      'seelim' => [
         'stroke' => '#e5c381',
         "stroke-width" => 2,
         "stroke-opacity" => 1,            
@@ -603,19 +609,12 @@ class SpcMbdController extends ControllerBase {
                     $geo_item = $line_array;
                   }
 
-                  $feature_count = count($geo_item['feature']['features']);
-                  if ($feature_count > 1){
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $this->shelf_colors['stroke'];
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $this->shelf_colors['stroke-width'];
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $this->shelf_colors['stroke-opacity'];
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['fill'] = $this->shelf_colors['fill'];
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['fill-opacity'] = $this->shelf_colors['fill-opacity'];
-                  } else {
-                    $geo_item['feature']['features'][0]['properties']['stroke'] = @$this->shelf_colors['stroke'];
-                    $geo_item['feature']['features'][0]['properties']['stroke-width'] = $this->shelf_colors['stroke-width'];
-                    $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $this->shelf_colors['stroke-opacity'];
-                    $geo_item['feature']['features'][0]['properties']['fill'] = $this->shelf_colors['fill'];
-                    $geo_item['feature']['features'][0]['properties']['fill-opacity'] = $this->shelf_colors['fill-opacity'];                    
+                  foreach ($geo_item['feature']['features'] as $fid => $feature){
+                    $geo_item['feature']['features'][$fid]['properties']['stroke'] = $this->shelf_colors['stroke'];
+                    $geo_item['feature']['features'][$fid]['properties']['stroke-width'] = $this->shelf_colors['stroke-width'];
+                    $geo_item['feature']['features'][$fid]['properties']['stroke-opacity'] = $this->shelf_colors['stroke-opacity'];
+                    $geo_item['feature']['features'][$fid]['properties']['fill'] = $this->shelf_colors['fill'];
+                    $geo_item['feature']['features'][$fid]['properties']['fill-opacity'] = $this->shelf_colors['fill-opacity'];
                   }
                     
                   $geojson .= json_encode($geo_item) . ','; 
@@ -711,15 +710,10 @@ class SpcMbdController extends ControllerBase {
                     $geo_item = $line_array;
                   }
 
-                  $feature_count = count($geo_item['feature']['features']);
-                  if ($feature_count > 1){
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $this->limit_colors['stroke'];
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $this->limit_colors['stroke-width'];
-                    $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $this->limit_colors['stroke-opacity'];
-                  } else {
-                    $geo_item['feature']['features'][0]['properties']['stroke'] = $this->limit_colors['stroke'];
-                    $geo_item['feature']['features'][0]['properties']['stroke-width'] = $this->limit_colors['stroke-width'];
-                    $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $this->limit_colors['stroke-opacity'];
+                  foreach ($geo_item['feature']['features'] as $fid => $feature){
+                    $geo_item['feature']['features'][$fid]['properties']['stroke'] = $this->limit_colors['stroke'];
+                    $geo_item['feature']['features'][$fid]['properties']['stroke-width'] = $this->limit_colors['stroke-width'];
+                    $geo_item['feature']['features'][$fid]['properties']['stroke-opacity'] = $this->limit_colors['stroke-opacity'];
                   }
 
                   $geojson .= json_encode($geo_item) . ',';
@@ -834,15 +828,10 @@ class SpcMbdController extends ControllerBase {
                   }
 
                   if ($state = $node->get('field_treaty_state')->getValue()[0]['value']){
-                    $feature_count = count($geo_item['feature']['features']);
-                    if ($feature_count > 1){
-                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $this->states_colors[$state];
-                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = 8;
-                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = 1;
-                    } else {
-                      $geo_item['feature']['features'][0]['properties']['stroke'] = $this->states_colors[$state];
-                      $geo_item['feature']['features'][0]['properties']['stroke-width'] = 8;
-                      $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = 1;
+                    foreach ($geo_item['feature']['features'] as $fid => $feature){
+                      $geo_item['feature']['features'][$fid]['properties']['stroke'] = $this->states_colors[$state];
+                      $geo_item['feature']['features'][$fid]['properties']['stroke-width'] = $this->boundary_colors['stroke-width'];
+                      $geo_item['feature']['features'][$fid]['properties']['stroke-opacity'] = $this->boundary_colors['stroke-opacity'];
                     }
                   }
 
