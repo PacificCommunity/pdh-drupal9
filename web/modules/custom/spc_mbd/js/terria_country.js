@@ -225,8 +225,8 @@
             }
           }
           
-          console.log(e.data.ids);
-          console.log(clickedZoneId);
+          //console.log(e.data.ids);
+          //console.log(clickedZoneId);
 
           if (clickedZoneId && clickedZoneId.includes('eez-') && clickedZoneId.includes(countryCode)){
             
@@ -236,7 +236,11 @@
               target = mapData.eez[clickedZoneId];
             }
 
-            eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
+            if (target.country.status == 1){
+              eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
+            } else {
+              eezPopup.find('.country .value').html('<img src="'+target.country.flag+'"><span>' + target.country.name +' ('+target.country.code +')</span>' );
+            }
             eezPopup.find('.area .value').text(target.area);
             eezPopup.find('.treaties .value').text(target.treaties);
             eezPopup.find('.pockets .value').text(target.pockets);
@@ -244,23 +248,43 @@
             eezPopup.find('.ecs .value').text(target.ecs);
             eezPopup.find('.deposited .value').text(target.deposited);
             eezPopup.find('.date .value').text(target.date);
-            eezPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ target.url.substring(0, 30) +'</a>');
+            
+            let url = target.url;
+            if (target.url.length > 30){
+              let url = target.url.substring(0, 30) + '...';
+            }            
+            
+            eezPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');
             eezPopup.find('.related-datasets').html(datasets_html(target));
             eezPopup.dialog( 'open' );
             
           } else if (clickedZoneId && clickedZoneId.includes('limit-')){
             target = mapData.limits[clickedZoneId];
-            limitPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
+            if (target.country.status == 1){
+              limitPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
+            }  else {
+              limitPopup.find('.country .value').html('<img src="'+target.country.flag+'"><span>' + target.country.name +' ('+target.country.code +')</span>' );
+            } 
             limitPopup.find('.deposited .value').text(target.deposited);
             limitPopup.find('.date .value').text(target.date);
-            limitPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
+            
+            let url = target.url;
+            if (target.url.length > 30){
+              url = target.url.substring(0, 30) + '...';
+            }            
+            
+            limitPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');
             limitPopup.find('.related-datasets').html(datasets_html(target));
             limitPopup.dialog( 'open' );
             
           } else if (clickedZoneId && clickedZoneId.includes('shelf-')){
             target = mapData.shelf[clickedZoneId];
             shelfPopup.find('.name .value').text(target.name);
-            shelfPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
+            if (target.country.status == 1){
+              shelfPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
+            }  else {
+              shelfPopup.find('.country .value').html('<img src="'+target.country.flag+'"><span>' + target.country.name +' ('+target.country.code +')</span>' );
+            }
             shelfPopup.find('.submission-done .value').text(target.submission_done);
             shelfPopup.find('.submission-complied .value').text(target.submission_complied);
             shelfPopup.find('.defence-year .value').text(target.defence_year);
@@ -273,18 +297,52 @@
             
           }  else if (clickedZoneId && clickedZoneId.includes('boundary-')){
             target = mapData.boundary[clickedZoneId];
-            boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'" target="_blank">' + target.country_one.name +' ('+target.country_one.code +')</a>' );;
-            boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'" target="_blank">' + target.country_two.name +' ('+target.country_two.code +')</a>' );;
+            
+            if (target.country_one.status == 1){
+              if (target.country_one.code == countryCode) {
+                boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'" target="_blank">' + target.country_one.name +' ('+target.country_one.code +')</a>' );
+              } else {
+                boundaryPopup.find('.country .value .two').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'" target="_blank">' + target.country_one.name +' ('+target.country_one.code +')</a>' );
+              }
+
+            }  else {
+              if (target.country_one.code == countryCode) {
+                boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><span>' + target.country_one.name +' ('+target.country_one.code +')</span>' );
+              } else {
+                boundaryPopup.find('.country .value .two').html('<img src="'+target.country_one.flag+'"><span>' + target.country_one.name +' ('+target.country_one.code +')</span>' );
+              }
+
+            }
+            if (target.country_two.status == 1){
+              if (target.country_two.code == countryCode) {
+                boundaryPopup.find('.country .value .one').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'" target="_blank">' + target.country_two.name +' ('+target.country_two.code +')</a>' );
+              }  else {
+                boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'" target="_blank">' + target.country_two.name +' ('+target.country_two.code +')</a>' );
+              }
+            }  else {
+              if (target.country_two.code == countryCode) {
+                boundaryPopup.find('.country .value .one').html('<img src="'+target.country_two.flag+'"><span>' + target.country_two.name +' ('+target.country_two.code +')</span>' );
+              } else {
+                boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><span>' + target.country_two.name +' ('+target.country_two.code +')</span>' );
+              }
+            }
+            
             boundaryPopup.find('.signed .value').text(target.signed);
             boundaryPopup.find('.year-signed .value').text(target.year_signed);
             boundaryPopup.find('.force .value').text(target.force); 
             boundaryPopup.find('.date .value').text(target.date);
-            boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+target.url.substring(0, 30)+'</a>');
+            
+            let url = target.url;
+            if (target.url.length > 30){
+              url = target.url.substring(0, 30) + '...';
+            }
+            
+            boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');
             boundaryPopup.find('.related-datasets').html(datasets_html(target));          
             boundaryPopup.dialog( 'open' );
           }     
           
-          console.log(target);
+          //console.log(target);
           //iframe.postMessage({interactiveLayer: true, type: 'zone.hide', id: clickedZoneId}, origin);
         }
         
