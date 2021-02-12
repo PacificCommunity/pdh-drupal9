@@ -515,16 +515,11 @@ function set_country_boundaries_json($country_code, $SpcMbdController){
               }
 
               if ($state = $node->get('field_treaty_state')->getValue()[0]['value']){
-                $feature_count = count($geo_item['feature']['features']);
-                if ($feature_count > 1){
-                  $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->states_colors[$state];
-                  $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = 8;
-                  $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = 1;
-                } else {
-                  $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->states_colors[$state];
-                  $geo_item['feature']['features'][0]['properties']['stroke-width'] = 8;
-                  $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = 1;
-                }
+                  foreach ($geo_item['feature']['features'] as $fid => $feature){
+                    $geo_item['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->states_colors[$state];
+                    $geo_item['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->boundary_colors['stroke-width'];
+                    $geo_item['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->boundary_colors['stroke-opacity'];
+                  }
               }
 
               $treatyjson .= json_encode($geo_item) . ',';
@@ -570,16 +565,11 @@ function set_country_limits_json($country_code, $SpcMbdController){
                       $geo_item = $line_array;
                     }
 
-                    $feature_count = count($geo_item['feature']['features']);
-                    if ($feature_count > 1){
-                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->limit_colors['stroke'];
-                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $SpcMbdController->limit_colors['stroke-width'];
-                      $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $SpcMbdController->limit_colors['stroke-opacity'];
-                    } else {
-                      $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->limit_colors['stroke'];
-                      $geo_item['feature']['features'][0]['properties']['stroke-width'] = $SpcMbdController->limit_colors['stroke-width'];
-                      $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $SpcMbdController->limit_colors['stroke-opacity'];
-                    }
+                    foreach ($geo_item['feature']['features'] as $fid => $feature){
+                      $geo_item['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->limit_colors['stroke'];
+                      $geo_item['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->limit_colors['stroke-width'];
+                      $geo_item['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->limit_colors['stroke-opacity'];
+                    } 
 
                     $geojson .= json_encode($geo_item) . ',';
                   }
@@ -626,19 +616,12 @@ function set_country_shelf_json($country_code, $SpcMbdController){
                 $geo_item = $line_array;
               }
 
-              $feature_count = count($geo_item['feature']['features']);
-              if ($feature_count > 1){
-                $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->shelf_colors['stroke'];
-                $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $SpcMbdController->shelf_colors['stroke-width'];
-                $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $SpcMbdController->shelf_colors['stroke-opacity'];
-                $geo_item['feature']['features'][$feature_count-1]['properties']['fill'] = $SpcMbdController->shelf_colors['fill'];
-                $geo_item['feature']['features'][$feature_count-1]['properties']['fill-opacity'] = $SpcMbdController->shelf_colors['fill-opacity'];
-              } else {
-                $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->shelf_colors['stroke'];
-                $geo_item['feature']['features'][0]['properties']['stroke-width'] = $SpcMbdController->shelf_colors['stroke-width'];
-                $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $SpcMbdController->shelf_colors['stroke-opacity'];
-                $geo_item['feature']['features'][0]['properties']['fill'] = $SpcMbdController->shelf_colors['fill'];
-                $geo_item['feature']['features'][0]['properties']['fill-opacity'] = $SpcMbdController->shelf_colors['fill-opacity'];                    
+              foreach ($geo_item['feature']['features'] as $fid => $feature){
+                $geo_item['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->shelf_colors['stroke'];
+                $geo_item['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->shelf_colors['stroke-width'];
+                $geo_item['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->shelf_colors['stroke-opacity'];
+                $geo_item['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->shelf_colors['fill'];
+                $geo_item['feature']['features'][$fid]['properties']['fill-opacity'] = $SpcMbdController->shelf_colors['fill-opacity'];
               }
 
               $geojson .= json_encode($geo_item) . ','; 
@@ -703,7 +686,7 @@ function set_country_eez_json($country_code, $SpcMbdController){
       
       $additional_data_list = [
           'baseline' => 'field_eez_sea_baseline',
-          'seelimit' => 'field_eez_sea_limit',
+          'seelim' => 'field_eez_sea_limit',
           'marine' => 'field_eez_marine_protected_areas',
           'contiguous' => 'field_eez_contiguous_zone',
       ];
@@ -751,20 +734,13 @@ function set_additional_json_data($term, $country_code, $SpcMbdController, $key,
         $line_array['id'] = $key . '-' . $country_code;
         $geo_item = $geoarray;
       }
-
-      $feature_count = count($geo_item['feature']['features']);
-      if ($feature_count > 1){
-        $geo_item['feature']['features'][$feature_count-1]['properties']['stroke'] = $SpcMbdController->aditional_colors[$key]['stroke'];
-        $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-width'] = $SpcMbdController->aditional_colors[$key]['stroke-width'];
-        $geo_item['feature']['features'][$feature_count-1]['properties']['stroke-opacity'] = $SpcMbdController->aditional_colors[$key]['stroke-opacity'];
-        $geo_item['feature']['features'][$feature_count-1]['properties']['fill'] = $SpcMbdController->aditional_colors[$key]['fill'];
-        $geo_item['feature']['features'][$feature_count-1]['properties']['fill-opacity'] = $SpcMbdController->aditional_colors[$key]['fill-opacity'];
-      } else {
-        $geo_item['feature']['features'][0]['properties']['stroke'] = $SpcMbdController->aditional_colors[$key]['stroke'];
-        $geo_item['feature']['features'][0]['properties']['stroke-width'] = $SpcMbdController->aditional_colors[$key]['stroke-width'];
-        $geo_item['feature']['features'][0]['properties']['stroke-opacity'] = $SpcMbdController->aditional_colors[$key]['stroke-opacity'];
-        $geo_item['feature']['features'][0]['properties']['fill'] = $SpcMbdController->aditional_colors[$key]['fill'];
-        $geo_item['feature']['features'][0]['properties']['fill-opacity'] = $SpcMbdController->aditional_colors[$key]['fill-opacity'];                    
+      
+      foreach ($geo_item['feature']['features'] as $fid => $feature){
+        $geo_item['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->aditional_colors[$key]['stroke'];
+        $geo_item['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->aditional_colors[$key]['stroke-width'];
+        $geo_item['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->aditional_colors[$key]['stroke-opacity'];
+        $geo_item['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->aditional_colors[$key]['fill'];
+        $geo_item['feature']['features'][$fid]['properties']['fill-opacity'] = $SpcMbdController->aditional_colors[$key]['fill-opacity'];
       }
 
       $geojson = json_encode($geo_item) . ','; 

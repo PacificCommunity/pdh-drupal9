@@ -66,7 +66,7 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 15000);
+            }, 20000);
           }); 
           
           fetch('/sites/default/files/mbd/shelf.json')
@@ -82,7 +82,7 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 15000);
+            }, 20000);
           });           
 
         }  
@@ -119,12 +119,26 @@
           iframe = map.contentWindow;
           origin = map.src; 
 
-          let clickedZoneId = e.data.ids[0];
+          let clickedZoneId = null;
           let target = {};
           
+          if (e.data.ids.length == 1){
+            clickedZoneId = e.data.ids[0];
+          } else if (e.data.ids.length > 1){
+            for (let i = 0; i < e.data.ids.length; i++){
+              if (e.data.ids[i].includes('limit-') || e.data.ids[i].includes('shelf-') || e.data.ids[i].includes('boundary-')){
+                clickedZoneId = e.data.ids[i];
+                break;
+              } else if (e.data.ids[i].includes('eez-')){
+                clickedZoneId = e.data.ids[i];
+              }
+            }
+          }
+          
+          console.log(e.data.ids);
           console.log(clickedZoneId);
 
-          if (clickedZoneId.includes('eez-')){
+          if (clickedZoneId && clickedZoneId.includes('eez-')){
             
             if (clickedZoneId.includes('eez-KI')){
               target = mapData.eez['eez-KI'];
@@ -144,7 +158,7 @@
             eezPopup.find('.related-datasets').html(datasets_html(target));
             eezPopup.dialog( 'open' );
             
-          } else if (clickedZoneId.includes('limit-')){
+          } else if (clickedZoneId && clickedZoneId.includes('limit-')){
             target = mapData.limits[clickedZoneId];
             limitPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
             limitPopup.find('.deposited .value').text(target.deposited);
@@ -153,7 +167,7 @@
             limitPopup.find('.related-datasets').html(datasets_html(target));
             limitPopup.dialog( 'open' );
             
-          } else if (clickedZoneId.includes('shelf-')){
+          } else if (clickedZoneId && clickedZoneId.includes('shelf-')){
             target = mapData.shelf[clickedZoneId];
             shelfPopup.find('.name .value').text(target.name);
             shelfPopup.find('.country .value').html('<img src="'+target.country.flag+'"><a href="'+target.country.url+'" target="_blank">' + target.country.name +' ('+target.country.code +')</a>' );
@@ -167,7 +181,7 @@
             shelfPopup.find('.related-datasets').html(datasets_html(target));
             shelfPopup.dialog( 'open' );
             
-          }  else if (clickedZoneId.includes('boundary-')){
+          }  else if (clickedZoneId && clickedZoneId.includes('boundary-')){
             target = mapData.boundary[clickedZoneId];
             boundaryPopup.find('.country .value .one').html('<img src="'+target.country_one.flag+'"><a href="'+target.country_one.url+'" target="_blank">' + target.country_one.name +' ('+target.country_one.code +')</a>' );;
             boundaryPopup.find('.country .value .two').html('<img src="'+target.country_two.flag+'"><a href="'+target.country_two.url+'" target="_blank">' + target.country_two.name +' ('+target.country_two.code +')</a>' );;
@@ -181,7 +195,6 @@
           }     
           
           console.log(target);
-
           //iframe.postMessage({interactiveLayer: true, type: 'zone.hide', id: clickedZoneId}, origin);
         }
         
