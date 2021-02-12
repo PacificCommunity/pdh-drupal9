@@ -19,39 +19,7 @@
           
           window.setTimeout(function(){
             $('.globe').removeClass('loader');
-          }, 50000);
-          
-          fetch('/sites/default/files/mbd/boundaries.json')
-            .then(res => res.json())
-            .then((data) => {      
-              borersGeoJson = data;
-              window.setTimeout(function(){
-                iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: borersGeoJson}, origin);
-      
-                borersGeoJson.forEach(function(item){
-                  console.log(item.id)
-                  iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
-                });
-
-                iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-              }, 20000);
-          });
-          
-          fetch('/sites/default/files/mbd/limits.json')
-            .then(res => res.json())
-            .then((data) => {      
-              limitsGeoJson = data;
-              window.setTimeout(function(){
-                iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: limitsGeoJson}, origin);
-      
-                limitsGeoJson.forEach(function(item){
-                  console.log(item.id)
-                  iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
-                });
-      
-                iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-              }, 20000);
-          });          
+          }, 50000);          
 
           fetch('/sites/default/files/mbd/eez.json')
           .then(res => res.json())
@@ -83,7 +51,39 @@
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
             }, 20000);
-          });           
+          });  
+          
+          fetch('/sites/default/files/mbd/boundaries.json')
+            .then(res => res.json())
+            .then((data) => {      
+              borersGeoJson = data;
+              window.setTimeout(function(){
+                iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: borersGeoJson}, origin);
+      
+                borersGeoJson.forEach(function(item){
+                  console.log(item.id)
+                  iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+                });
+
+                iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+              }, 15000);
+          });
+          
+          fetch('/sites/default/files/mbd/limits.json')
+            .then(res => res.json())
+            .then((data) => {      
+              limitsGeoJson = data;
+              window.setTimeout(function(){
+                iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: limitsGeoJson}, origin);
+      
+                limitsGeoJson.forEach(function(item){
+                  console.log(item.id)
+                  iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+                });
+      
+                iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+              }, 15000);
+          });          
 
         }  
         
