@@ -37,13 +37,13 @@ class SpcMbdController extends ControllerBase {
     
     public $limit_colors = [
       "stroke" => "#F2F2F2",
-      "stroke-width" => 4,
+      "stroke-width" => 5,
       "stroke-opacity" => 1, 
     ];
     
     public $boundary_colors = [
       "stroke" => "#F2F2F2",
-      "stroke-width" => 4,
+      "stroke-width" => 5,
       "stroke-opacity" => 1, 
     ];
     
