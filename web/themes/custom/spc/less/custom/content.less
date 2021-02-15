@@ -1745,7 +1745,10 @@ h3.globe-title > div {
         right: 0;
         text-align: center;
         z-index: 100;        
-      }      
+      }   
+      #terria-map {
+          filter: blur(10px);
+      }
     }
     
     #legend-button {
@@ -1756,6 +1759,10 @@ h3.globe-title > div {
         top: 40px;
         right: 0px;
         cursor: pointer;
+        
+        @media(max-width:811px){
+          top: 80px;
+        }
         
         &:before {
           content: '';
@@ -1775,6 +1782,7 @@ h3.globe-title > div {
 #terria-map {
   position: relative;
   width: 100%;
+  margin-bottom: -40px;
 }
 .ui-dialog {
     font-family: 'Montserrat';
