@@ -29,7 +29,7 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: zonesGeoJson}, origin);
 
               zonesGeoJson.forEach(function(item){
-                console.log(item.id)
+                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -45,7 +45,7 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: shelfGeoJson}, origin);
 
               shelfGeoJson.forEach(function(item){
-                console.log(item.id)
+                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -61,7 +61,7 @@
                 iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: borersGeoJson}, origin);
       
                 borersGeoJson.forEach(function(item){
-                  console.log(item.id)
+                  //console.log(item.id)
                   iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
                 });
 
@@ -77,7 +77,7 @@
                 iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: limitsGeoJson}, origin);
       
                 limitsGeoJson.forEach(function(item){
-                  console.log(item.id)
+                  //console.log(item.id)
                   iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
                 });
       
