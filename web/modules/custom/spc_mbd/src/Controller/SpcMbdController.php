@@ -77,15 +77,17 @@ class SpcMbdController extends ControllerBase {
         "fill-opacity" => 0.5,
       ],        
     ];
-    
-    //todo: get from config.
-    public $terriaMapUrl = 'https://terriajs.dev.spc.links.com.au/'; 
+
+    public $terriaMapUrl = ''; 
     public $initCamera = '{"initSources":[{"initialCamera":{"west": 145.65364175379182,"south": -22.15106845160314,"east": -156.55733400327983,"north": 12.164394494917866}}]}';
     
+    function __construct() {
+        $this->terriaMapUrl = \Drupal::config('spc_mbd.settings')->get('mbd_terria_url');
+    }    
+
     public function MbdLanding() {
-        
         $config = \Drupal::config('spc_mbd.settings');
-        
+
         $data['title'] =  $config->get('mbd_landing_title');
         $data['description'] = $config->get('mbd_landing_description');
         $data['terri_map_url'] = $this->terriaMapUrl . '#spc&hideWorkbench=1&start='. urlencode($this->initCamera);
