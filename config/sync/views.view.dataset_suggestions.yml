@@ -1276,6 +1276,7 @@ display:
         filter_groups: false
         header: false
         cache: false
+        sorts: false
       style:
         type: default
         options:
@@ -1455,7 +1456,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: "<div class=\"datasets-sorting\">\r\n<label>Order by </label><a id=\"sorting-select\" href=\"#\"><span> </span><i class=\"fa fa-chevron-down\"></i></a>\r\n<ul>\r\n<li><a data-order=\"value\" data-sort=\"desc\" href=\"/dataset-suggestions?order=value&sort=desc\">Most popular first</a></li>\r\n<li><a data-order=\"value\" data-sort=\"asc\" href=\"/dataset-suggestions?order=value&sort=asc\">Least popular first</a></li>\r\n<li><a data-order=\"created\" data-sort=\"desc\" href=\"/dataset-suggestions?order=created&sort=desc\">Latest first</a></li>\r\n<li><a data-order=\"created\" data-sort=\"asc\" href=\"/dataset-suggestions?order=created&sort=asc\">Oldest first</a></li>\r\n</ul>\r\n</div>"
+            value: "<div class=\"datasets-sorting\">\r\n<label>Order by </label><a id=\"sorting-select\" href=\"#\"><span> </span><i class=\"fa fa-chevron-down\"></i></a>\r\n<ul>\r\n<li><a data-order=\"value\" data-sort=\"DESC\" href=\"/dataset-suggestions?sort_by=value&sort_order=DESC\">Most popular first</a></li>\r\n<li><a data-order=\"value\" data-sort=\"ASC\" href=\"/dataset-suggestions?sort_by=value&sort_order=ASC\">Least popular first</a></li>\r\n<li><a data-order=\"created\" data-sort=\"DESC\" href=\"/dataset-suggestions?sort_by=created&sort_order=DESC\">Latest first</a></li>\r\n<li><a data-order=\"created\" data-sort=\"ASC\" href=\"/dataset-suggestions?sort_by=created&sort_order=ASC\">Oldest first</a></li>\r\n</ul>\r\n</div>"
             format: full_html
           plugin_id: text
         area_4:
@@ -1487,6 +1488,36 @@ display:
       cache:
         type: tag
         options: {  }
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: true
+          expose:
+            label: 'Authored on'
+          granularity: second
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+        value:
+          id: value
+          table: votingapi_result
+          field: value
+          relationship: node_vote_result_vote_count
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: true
+          expose:
+            label: Value
+          entity_type: vote_result
+          entity_field: value
+          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
@@ -1494,6 +1525,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
         - 'user.node_grants:view'
         - user.permissions
       tags:

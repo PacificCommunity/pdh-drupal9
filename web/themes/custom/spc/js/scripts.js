@@ -2,14 +2,16 @@
   Drupal.behaviors.spc = {
     attach: function (context, settings) {
       // dataset suggestion filter
-      $("#suggestion-search-form").on("submit", function (e) {
-        e.preventDefault();
-        let key = $(this).find("#suggestion-search").val();
+      $("#suggestion-search-form")
+        .off("submit")
+        .on("submit", function (e) {
+          e.preventDefault();
+          let key = $(this).find("#suggestion-search").val();
 
-        $("#edit-body-value").val(key);
-        $("#edit-title").val(key);
-        $("#views-exposed-form-dataset-suggestions-page-1").submit();
-      });
+          $("#edit-body-value").val(key);
+          $("#edit-title").val(key);
+          $("#views-exposed-form-dataset-suggestions-page-1").submit();
+        });
 
       // dataset suggestion sorting
       (function () {
@@ -26,9 +28,8 @@
           }
         };
 
-        let sort = $.urlParam("sort");
-        let order = $.urlParam("order");
-
+        let sort = $.urlParam("sort_order");
+        let order = $.urlParam("sort_by");
         if (sort && order) {
           sortList.each(function () {
             if (
@@ -40,10 +41,12 @@
           });
         }
 
-        $("#sorting-select").on("click", function (e) {
-          e.preventDefault();
-          $(this).siblings("ul").toggle();
-        });
+        $("#sorting-select")
+          .off("click")
+          .on("click", function (e) {
+            e.preventDefault();
+            $(this).siblings("ul").toggle();
+          });
       })();
 
       // Secondary Datasep pages header dropdown
