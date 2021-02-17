@@ -11,11 +11,6 @@ class SpcDatasetSuggestionController {
       ->getStorage('node')
       ->create(['type' => 'dataset_suggestion']);
 
-    $node->title->setValue('hey');
-    $node->body->setValue('hey');
-    $node->field_suggester_name->setValue('hey');
-    $node->field_suggester_email->setValue('hey@he.lh');
-
     $form_arg = \Drupal::entityTypeManager()
       ->getFormObject('node', 'default')
       ->setEntity($node);
