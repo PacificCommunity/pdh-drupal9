@@ -53,6 +53,7 @@
         "drupal/redirect": "^1.6",
         "drupal/restui": "^1.19",
         "drupal/robotstxt": "^1.4",
+        "drupal/rules": "^3.0-dev",
         "drupal/simple_gmap": "^3.0",
         "drupal/svg_image": " ^1.9",
         "drupal/swiftmailer": "^2.0",

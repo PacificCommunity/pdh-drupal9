@@ -65,6 +65,7 @@ module:
   rest: 0
   restui: 0
   robotstxt: 0
+  rules: 0
   search: 0
   serialization: 0
   shortcut: 0
@@ -85,6 +86,7 @@ module:
   token: 0
   toolbar: 0
   tour: 0
+  typed_data: 0
   update: 0
   user: 0
   views_infinite_scroll: 0
