@@ -1,0 +1,17 @@
+<div id="hdb-landing">           
+    
+    {% if  data.countries %}
+        <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>
+        <div id="countries-list" class="clearfix">
+            {% for country in data.countries %}
+                <a class="one-country {{ country.name }}" href="{{ country.url }}" title="{{ country.name }}">
+                    <p class="img">
+                        <img src="{{ country.flag }}" alt="{{ country.name }}">
+                    </p>
+                    <span>{{ country.name }}</span>
+                </a>            
+            {% endfor %}
+        </div>
+    {% endif %}   
+    
+</div>
