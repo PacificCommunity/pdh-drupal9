@@ -1,0 +1,11 @@
+spc_hdb.settings:
+  title: Global Settings
+  route_name : spc_hdb.settings
+  base_route: spc_hdb.settings
+  weight: 10
+
+spc_hdb.countries_settings:
+  title: Countries Settings
+  route_name: spc_hdb.countries_settings
+  base_route: spc_hdb.settings
+  weight: 20
