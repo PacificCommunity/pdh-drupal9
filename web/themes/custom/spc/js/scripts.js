@@ -999,39 +999,64 @@
       } catch (e) {
         // pass
       }
+      function endTour(anno, evt) {
+        window.localStorage.setItem("annoDatasetSuggestionTourCompleted", "1");
+
+        anno.hide();
+      }
+      function prevStep(anno, evt) {
+        anno.switchToChainPrev();
+      }
+      function nextStep(anno, evt) {
+        anno.switchToChainNext();
+      }
+
       var ds_steps = [
         {
+          autoFocusLastButton: false,
           target: "#suggestion-search-form #suggestion-search",
+          position: "center-top",
           content:
             "Cannot find your desired data? Search here to see if someone else has already requested the same dataset.",
+          buttons: [
+            { text: "Prev", className: "tour-prev-btn disabled" },
+            { text: "Next", className: "tour-next-btn", click: nextStep },
+            { text: "End tour", className: "tour-end-btn", click: endTour },
+          ],
         },
         {
+          autoFocusLastButton: false,
           target: ".dataset-suggestions-listing .datasets-sorting",
-          position: "left",
+          position: "center-left",
           content: "You can order search results by popularity and date.",
+          buttons: [
+            { text: "Prev", className: "tour-prev-btn", click: prevStep },
+            { text: "Next", className: "tour-next-btn", click: nextStep },
+            { text: "End tour", className: "tour-end-btn", click: endTour },
+          ],
         },
         {
+          autoFocusLastButton: false,
           target: ".views-row:eq(0) .rate-widget-thumbs-up",
+          position: "top",
           content:
             "If you find the suggestion you would like to make, you can add your request by clicking on the upvote button.",
+          buttons: [
+            { text: "Prev", className: "tour-prev-btn", click: prevStep },
+            { text: "Next", className: "tour-next-btn", click: nextStep },
+            { text: "End tour", className: "tour-end-btn", click: endTour },
+          ],
         },
         {
+          autoFocusLastButton: false,
           target: ".suggestion-search .action-add",
-          position: "left",
+          position: "center-left",
           content:
             "If you still can’t find the dataset you want in the list, make use of our “Suggest a dataset” form.",
           buttons: [
-            {
-              text: "Done",
-              click: function (anno, evt) {
-                window.localStorage.setItem(
-                  "annoDatasetSuggestionTourCompleted",
-                  "1"
-                );
-
-                anno.hide();
-              },
-            },
+            { text: "Prev", className: "tour-prev-btn", click: prevStep },
+            { text: "Next", className: "tour-next-btn disabled" },
+            { text: "End tour", className: "tour-end-btn", click: endTour },
           ],
         },
       ];
@@ -1040,6 +1065,7 @@
       var steps_length = ds_steps.length;
       if (suggestion_listing.length == 1) {
         var tour = new Anno(ds_steps);
+        console.log(tour);
         tour.show();
         annoTourStarted = true;
       }
