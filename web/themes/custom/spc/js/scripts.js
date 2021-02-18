@@ -984,8 +984,12 @@
     },
   };
 
+  var annoTourStarted = false;
   Drupal.behaviors.datasetSuggestions = {
     attach: function (context, settings) {
+      if (annoTourStarted) {
+        return;
+      }
       try {
         if (
           !!window.localStorage.getItem("annoDatasetSuggestionTourCompleted")
@@ -1037,6 +1041,7 @@
       if (suggestion_listing.length == 1) {
         var tour = new Anno(ds_steps);
         tour.show();
+        annoTourStarted = true;
       }
     },
   };
