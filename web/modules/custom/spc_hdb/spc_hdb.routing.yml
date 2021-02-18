@@ -20,7 +20,7 @@ spc_hdb.settings:
     _title: 'SPC Health dashboard Settings'
     _form: '\Drupal\spc_hdb\Form\SpcHdbSettingsForm'
   requirements:
-    _permission: 'administer site configuration'    
+    _permission: 'administer spc hdb'    
     
 spc_hdb.countries_settings:
   path: '/admin/config/health-dashboard/countries'
@@ -28,4 +28,4 @@ spc_hdb.countries_settings:
     _title: 'SPC Health dashboard Settings'
     _form: '\Drupal\spc_hdb\Form\SpcHdbCountriesSettingsForm'
   requirements:
-    _permission: 'administer site configuration'    
+    _permission: 'administer spc hdb'    
