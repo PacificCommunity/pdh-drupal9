@@ -94,6 +94,12 @@
   background: #fff;
   border-radius: 3px 0 0 3px;
 }
+.anno .anno-inner .anno-btn-container .anno-btn.tour-next-btn.disabled,
+.anno .anno-inner .anno-btn-container .anno-btn.tour-prev-btn.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 .anno .anno-inner .anno-btn-container .anno-btn.tour-end-btn:hover,
 .anno .anno-inner .anno-btn-container .anno-btn.tour-prev-btn:hover {
   background: #031f79;
