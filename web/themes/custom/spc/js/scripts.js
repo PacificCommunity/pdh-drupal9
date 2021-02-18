@@ -983,4 +983,61 @@
       });
     },
   };
+
+  Drupal.behaviors.datasetSuggestions = {
+    attach: function (context, settings) {
+      try {
+        if (
+          !!window.localStorage.getItem("annoDatasetSuggestionTourCompleted")
+        ) {
+          return;
+        }
+      } catch (e) {
+        // pass
+      }
+      var ds_steps = [
+        {
+          target: "#suggestion-search-form #suggestion-search",
+          content:
+            "Cannot find your desired data? Search here to see if someone else has already requested the same dataset.",
+        },
+        {
+          target: ".dataset-suggestions-listing .datasets-sorting",
+          position: "left",
+          content: "You can order search results by popularity and date.",
+        },
+        {
+          target: ".views-row:eq(0) .rate-widget-thumbs-up",
+          content:
+            "If you find the suggestion you would like to make, you can add your request by clicking on the upvote button.",
+        },
+        {
+          target: ".suggestion-search .action-add",
+          position: "left",
+          content:
+            "If you still can’t find the dataset you want in the list, make use of our “Suggest a dataset” form.",
+          buttons: [
+            {
+              text: "Done",
+              click: function (anno, evt) {
+                window.localStorage.setItem(
+                  "annoDatasetSuggestionTourCompleted",
+                  "1"
+                );
+
+                anno.hide();
+              },
+            },
+          ],
+        },
+      ];
+
+      var suggestion_listing = $(".dataset-suggestions-listing");
+      var steps_length = ds_steps.length;
+      if (suggestion_listing.length == 1) {
+        var tour = new Anno(ds_steps);
+        tour.show();
+      }
+    },
+  };
 })(jQuery, Drupal, drupalSettings);
