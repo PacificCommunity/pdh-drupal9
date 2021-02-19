@@ -20,11 +20,11 @@ class SpcMbdController extends ControllerBase {
     ];
     
     public $eez_colors = [
-      'stroke' => '#000000',
-      "stroke-width" => 2,
+      'stroke' => '#7674E7',
+      "stroke-width" => 3,
       "stroke-opacity" => 1,            
-      "fill" => "#E0E973",
-      "fill-opacity" => 0.7,
+      "fill" => "#254D87",
+      "fill-opacity" => 0.5,
     ];
     
     public $shelf_colors = [
@@ -510,11 +510,38 @@ class SpcMbdController extends ControllerBase {
                 if ($country_code == 'KI'){
                   $ki_polygons = json_decode($plygon_json, true);
                   foreach ($ki_polygons['KI'] as $key => $ki_polygon){
+
+                    if (!array_key_exists('feature', $ki_polygon)){
+                      $ki_polygon['feature'] = $ki_polygon;
+                    }       
+                    
+                    foreach ($ki_polygon['feature']['features'] as $fid => $feature){
+                      $ki_polygon['feature']['features'][$fid]['properties']['stroke'] = $this->eez_colors['stroke'];
+                      $ki_polygon['feature']['features'][$fid]['properties']['stroke-width'] = $this->eez_colors['stroke-width'];
+                      $ki_polygon['feature']['features'][$fid]['properties']['stroke-opacity'] = $this->eez_colors['stroke-opacity'];
+                      $ki_polygon['feature']['features'][$fid]['properties']['fill'] = $this->eez_colors['fill'];
+                      $ki_polygon['feature']['features'][$fid]['properties']['fill-opacity'] = $this->eez_colors['fill-opacity'];
+                    }
+                    
                     $ki_polygon['id'] = 'eez-' . $country_code . $key;
                     $geojson .= json_encode($ki_polygon) . ',';
                   }
+                  
                 } else {
                     $plygon_array = json_decode($plygon_json, true);
+                    
+                    if (!array_key_exists('feature', $plygon_array)){
+                      $plygon_array['feature'] = $plygon_array;
+                    }       
+                    
+                    foreach ($plygon_array['feature']['features'] as $fid => $feature){
+                      $plygon_array['feature']['features'][$fid]['properties']['stroke'] = $this->eez_colors['stroke'];
+                      $plygon_array['feature']['features'][$fid]['properties']['stroke-width'] = $this->eez_colors['stroke-width'];
+                      $plygon_array['feature']['features'][$fid]['properties']['stroke-opacity'] = $this->eez_colors['stroke-opacity'];
+                      $plygon_array['feature']['features'][$fid]['properties']['fill'] = $this->eez_colors['fill'];
+                      $plygon_array['feature']['features'][$fid]['properties']['fill-opacity'] = $this->eez_colors['fill-opacity'];
+                    }                   
+                    
                     $plygon_array['id'] = 'eez-' . $country_code;
                     $geojson .= json_encode($plygon_array) . ',';
                 }

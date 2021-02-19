@@ -662,6 +662,9 @@ function set_country_eez_json($country_code, $SpcMbdController){
       $term = Term::load($country_term->tid);
       $plygon_json = @$term->get('field_eez_plygon')->getValue()[0]['value'];
         
+      //dump($term->get('field_country_code')->value);
+      //dump($SpcMbdController->is_json($plygon_json));
+                
       if ($SpcMbdController->is_json($plygon_json)){
           $current_country_code = $term->get('field_country_code')->getValue()[0]['value'];
 
@@ -669,11 +672,37 @@ function set_country_eez_json($country_code, $SpcMbdController){
           if ($current_country_code == 'KI'){
             $ki_polygons = json_decode($plygon_json, true);
             foreach ($ki_polygons['KI'] as $key => $ki_polygon){
+              
+              if (!array_key_exists('feature', $ki_polygon)){
+                $ki_polygon['feature'] = $ki_polygon;
+              }       
+
+              foreach ($ki_polygon['feature']['features'] as $fid => $feature){
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->eez_colors['stroke'];
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->eez_colors['stroke-width'];
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->eez_colors['stroke-opacity'];
+                $ki_polygon['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
+                $ki_polygon['feature']['features'][$fid]['properties']['fill-opacity'] = $SpcMbdController->eez_colors['fill-opacity'];
+              }
+
               $ki_polygon['id'] = 'eez-' . $current_country_code . $key;
               $geojson .= json_encode($ki_polygon) . ',';
             }
           } else {
               $plygon_array = json_decode($plygon_json, true);
+              
+              if (!array_key_exists('feature', $plygon_array)){
+                $plygon_array['feature'] = $plygon_array;
+              }       
+
+              foreach ($plygon_array['feature']['features'] as $fid => $feature){
+                $plygon_array['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->eez_colors['stroke'];
+                $plygon_array['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->eez_colors['stroke-width'];
+                $plygon_array['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->eez_colors['stroke-opacity'];
+                $plygon_array['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
+                $plygon_array['feature']['features'][$fid]['properties']['fill-opacity'] = $SpcMbdController->eez_colors['fill-opacity'];
+              }              
+
               $plygon_array['id'] = 'eez-' . $current_country_code;
               $geojson .= json_encode($plygon_array) . ',';
           }
@@ -681,16 +710,43 @@ function set_country_eez_json($country_code, $SpcMbdController){
           if ($current_country_code == 'KI'){
             $ki_polygons = json_decode($plygon_json, true);
             foreach ($ki_polygons['KI'] as $key => $ki_polygon){
+              
+
+              if (!array_key_exists('feature', $ki_polygon)){
+                $ki_polygon['feature'] = $ki_polygon;
+              }       
+
+              foreach ($ki_polygon['feature']['features'] as $fid => $feature){
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->eez_colors['stroke'];
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->eez_colors['stroke-width'];
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke-opacity'] = 0.2;;
+                $ki_polygon['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
+                $ki_polygon['feature']['features'][$fid]['properties']['fill-opacity'] = 0.2;;
+              }
+
               $ki_polygon['id'] = 'eez-' . $current_country_code . $key;
-              $ki_polygon['feature']['features'][0]['properties']['stroke-opacity']  = 0.2;
-              $ki_polygon['feature']['features'][0]['properties']['fill-opacity']  = 0.2;
               $geojson .= json_encode($ki_polygon) . ',';
             }
           } else {
               $plygon_array = json_decode($plygon_json, true);
+              
+              if (!array_key_exists('feature', $plygon_array)){
+                $plygon_array['feature'] = $plygon_array;
+              }       
+
+              foreach ($plygon_array['feature']['features'] as $fid => $feature){
+                $plygon_array['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->eez_colors['stroke'];
+                $plygon_array['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->eez_colors['stroke-width'];
+                $plygon_array['feature']['features'][$fid]['properties']['stroke-opacity'] = 0.2;
+                $plygon_array['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
+                $plygon_array['feature']['features'][$fid]['properties']['fill-opacity']  = 0.2;
+              } 
+              
+//              dump($term->get('field_country_code')->value);
+//              dump($SpcMbdController->is_json($plygon_json));
+//              dump($plygon_array);
+              
               $plygon_array['id'] = 'eez-' . $current_country_code;
-              $plygon_array['feature']['features'][0]['properties']['stroke-opacity']  = 0.2;
-              $plygon_array['feature']['features'][0]['properties']['fill-opacity']  = 0.2;
               $geojson .= json_encode($plygon_array) . ',';
           }
         }
@@ -711,6 +767,7 @@ function set_country_eez_json($country_code, $SpcMbdController){
     }
     $geojson =  substr($geojson, 0, -1) . ']';
     create_json_file('eez-'. $country_code.'.json', $geojson ); 
+//    die;
 }
 
 function create_json_file($filename, $json){
