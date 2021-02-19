@@ -4,9 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_banner_image
+    - field.field.node.page.field_header_type
+    - image.style.thumbnail
     - node.type.page
   module:
     - path
+    - svg_image
     - text
 _core:
   default_config_hash: AD_lefuYmjsKeH3OQApsyP_nLj6ZnGaALznLQSQ0Z_o
@@ -31,6 +35,20 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_banner_image:
+    weight: 122
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_header_type:
+    weight: 121
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   path:
     type: path
     weight: 30
@@ -75,5 +93,10 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

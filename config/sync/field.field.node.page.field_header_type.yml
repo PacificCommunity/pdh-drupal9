@@ -1,0 +1,23 @@
+uuid: f08dfe24-d087-44e7-b617-ac2d0aa20f8f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_type
+    - node.type.page
+id: node.page.field_header_type
+field_name: field_header_type
+entity_type: node
+bundle: page
+label: 'Header type'
+description: 'Header type for a basic page'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Maximal
+  off_label: Minimal
+field_type: boolean
