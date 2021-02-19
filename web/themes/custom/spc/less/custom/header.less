@@ -285,6 +285,45 @@ header[role="banner"] {
     }
 }
 
+// basic page different style for minimal subheader
+body.minimal {
+    & header[role="banner"] {
+        background: linear-gradient(135deg,#007AD8 0%,#031F79 100%);
+        position: relative;
+        height: 90px;
+    }
+    & .spc-region-subheader {
+        & .banner-image {
+            background-image: unset;
+            height: 200px;
+            .breadcrumbs {
+                margin-top: 0;
+                .breadcrumb, a {
+                    color: #000;
+                }
+            }
+            .banner-title {
+                h1, h1 strong {
+                    color: #000;
+                    font-weight: 700;
+                    text-transform: capitalize;
+                    overflow: visible;
+                }
+            }
+
+        }
+    }
+}
+body.minimal, body.maximal {
+    .banner-title {
+        h1 {
+            font-weight: 700;
+            text-transform: capitalize;
+            overflow: visible;
+        }
+    }
+}
+
 #mobile-menu {
     display: none;
 }
