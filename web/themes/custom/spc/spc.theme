@@ -661,10 +661,7 @@ function set_country_eez_json($country_code, $SpcMbdController){
     foreach($countries_tax as $country_term){
       $term = Term::load($country_term->tid);
       $plygon_json = @$term->get('field_eez_plygon')->getValue()[0]['value'];
-        
-      //dump($term->get('field_country_code')->value);
-      //dump($SpcMbdController->is_json($plygon_json));
-                
+       
       if ($SpcMbdController->is_json($plygon_json)){
           $current_country_code = $term->get('field_country_code')->getValue()[0]['value'];
 
@@ -680,9 +677,9 @@ function set_country_eez_json($country_code, $SpcMbdController){
               foreach ($ki_polygon['feature']['features'] as $fid => $feature){
                 $ki_polygon['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->eez_colors['stroke'];
                 $ki_polygon['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->eez_colors['stroke-width'];
-                $ki_polygon['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->eez_colors['stroke-opacity'];
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke-opacity'] = 0.5;
                 $ki_polygon['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
-                $ki_polygon['feature']['features'][$fid]['properties']['fill-opacity'] = $SpcMbdController->eez_colors['fill-opacity'];
+                $ki_polygon['feature']['features'][$fid]['properties']['fill-opacity'] = 0.5;
               }
 
               $ki_polygon['id'] = 'eez-' . $current_country_code . $key;
@@ -698,9 +695,9 @@ function set_country_eez_json($country_code, $SpcMbdController){
               foreach ($plygon_array['feature']['features'] as $fid => $feature){
                 $plygon_array['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->eez_colors['stroke'];
                 $plygon_array['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->eez_colors['stroke-width'];
-                $plygon_array['feature']['features'][$fid]['properties']['stroke-opacity'] = $SpcMbdController->eez_colors['stroke-opacity'];
+                $plygon_array['feature']['features'][$fid]['properties']['stroke-opacity'] = 0.5;
                 $plygon_array['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
-                $plygon_array['feature']['features'][$fid]['properties']['fill-opacity'] = $SpcMbdController->eez_colors['fill-opacity'];
+                $plygon_array['feature']['features'][$fid]['properties']['fill-opacity'] =  0.5;
               }              
 
               $plygon_array['id'] = 'eez-' . $current_country_code;
@@ -719,9 +716,9 @@ function set_country_eez_json($country_code, $SpcMbdController){
               foreach ($ki_polygon['feature']['features'] as $fid => $feature){
                 $ki_polygon['feature']['features'][$fid]['properties']['stroke'] = $SpcMbdController->eez_colors['stroke'];
                 $ki_polygon['feature']['features'][$fid]['properties']['stroke-width'] = $SpcMbdController->eez_colors['stroke-width'];
-                $ki_polygon['feature']['features'][$fid]['properties']['stroke-opacity'] = 0.2;;
+                $ki_polygon['feature']['features'][$fid]['properties']['stroke-opacity'] = 0.2;
                 $ki_polygon['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
-                $ki_polygon['feature']['features'][$fid]['properties']['fill-opacity'] = 0.2;;
+                $ki_polygon['feature']['features'][$fid]['properties']['fill-opacity'] = 0.2;
               }
 
               $ki_polygon['id'] = 'eez-' . $current_country_code . $key;
@@ -741,11 +738,7 @@ function set_country_eez_json($country_code, $SpcMbdController){
                 $plygon_array['feature']['features'][$fid]['properties']['fill'] = $SpcMbdController->eez_colors['fill'];
                 $plygon_array['feature']['features'][$fid]['properties']['fill-opacity']  = 0.2;
               } 
-              
-//              dump($term->get('field_country_code')->value);
-//              dump($SpcMbdController->is_json($plygon_json));
-//              dump($plygon_array);
-              
+
               $plygon_array['id'] = 'eez-' . $current_country_code;
               $geojson .= json_encode($plygon_array) . ',';
           }
