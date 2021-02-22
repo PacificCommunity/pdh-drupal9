@@ -7,6 +7,8 @@
 namespace Drupal\spc_hdb\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;    
+use Drupal\taxonomy\Entity\Term;
+use Drupal\file\Entity\File;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 /**
@@ -33,7 +35,6 @@ class spcHdbBanner extends BlockBase {
     $data = [];
     $data['title'] = $title;
     $data['subtitle'] = $subtitle;
-    $data['displaySearch'] = false;
     $data['displaySubtitle'] = true;
     
     $route_name = \Drupal::routeMatch()->getRouteName();
@@ -67,10 +68,81 @@ class spcHdbBanner extends BlockBase {
         }
     }
     
+    $search_results = [
+        'search_countries' => $this->get_search_countries(),
+        'search_categories' => $this->get_search_categories(),
+        'search_indicators' => $this->get_search_indicators(),
+    ];
+
     return array(
       '#theme' => 'hdb_banner_block',
       '#cache' => ['max-age'=> 0],
       '#data' => $data,
+      '#attached' => [
+        'drupalSettings' => [
+          'spc_hdb' => $search_results,
+        ],
+      ],        
     );
   }
+
+  public function get_search_countries(){
+    $countries = [];
+
+    $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+    foreach($countries_tax as $country_term){
+        $country = Term::load($country_term->tid);
+
+        $name = $country->getName();
+        $country_code = $country->get('field_country_code')->getValue()[0]['value'];
+        
+        $key = str_replace(' ', '-', strtolower($name));
+
+        $countries[$key] = [
+          'title' => $name,
+          'code'  => $country_code
+        ];
+      }
+
+    return $countries;
+  }
+  
+  public function get_search_categories(){
+    $categories = [];
+    
+    $config = \Drupal::config('spc_hdb.settings');
+    
+    if ($fid = $config->get('health_categories_fid')){
+      $file = File::load($fid);
+      if (is_object($file)){
+        $flag = file_create_url($file->getFileUri());
+      }
+   
+      $file_path = file_create_url($file->getFileUri());
+      $categories = json_decode(file_get_contents($file_path), true);
+      
+    }
+ 
+    return $categories;
+  }
+  
+  public function get_search_indicators(){
+    $indicators = [];
+
+    $config = \Drupal::config('spc_hdb.settings');
+    
+    if ($fid = $config->get('health_indicators_fid')){
+      $file = File::load($fid);
+      if (is_object($file)){
+        $flag = file_create_url($file->getFileUri());
+      }
+   
+      $file_path = file_create_url($file->getFileUri());
+      $indicators = json_decode(file_get_contents($file_path), true);
+      
+    }
+
+    return $indicators;
+  }
+  
 }
