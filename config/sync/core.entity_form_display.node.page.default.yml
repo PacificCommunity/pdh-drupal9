@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_banner_image
+    - field.field.node.page.field_content_wrapper_type
     - field.field.node.page.field_header_type
     - image.style.thumbnail
     - node.type.page
@@ -42,6 +43,12 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_content_wrapper_type:
+    weight: 123
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
     region: content
   field_header_type:
     weight: 121
