@@ -79,5 +79,12 @@ function spc_main_preprocess_html(&$variables)
       $header_type = $node->get('field_header_type')->getValue()[0]['value'] ? 'maximal' : 'minimal';
       $variables['attributes']['class'][] = $header_type;
     }
+
+    if ($node->hasField('field_content_wrapper_type')) {
+      $page_wrapper_type = $node->get('field_content_wrapper_type')->getValue()[0]['value'];
+      if ($page_wrapper_type === 'container-fluid') {
+        $variables['attributes']['class'][] = 'page-fluid';
+      }
+    }
   }
 }
