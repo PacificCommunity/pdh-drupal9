@@ -79,7 +79,7 @@ class SpcHdbSettingsForm extends ConfigFormBase {
       ],
       '#upload_location' => 'public://hdb/',
       '#default_value' => [$config->get('health_categories_fid')],
-      '#required' => FALSE,
+      '#required' => true,
     ];
     
     $form['health_indicators_file'] = [
@@ -91,7 +91,7 @@ class SpcHdbSettingsForm extends ConfigFormBase {
       ],
       '#upload_location' => 'public://hdb/',
       '#default_value' => [$config->get('health_indicators_fid')],
-      '#required' => FALSE,
+      '#required' => true,
     ];
     
     $form['health_chart_download_file'] = [
