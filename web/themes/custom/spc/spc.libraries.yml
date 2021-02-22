@@ -23,12 +23,13 @@ ma5:
     - core/jquery
     - core/jquery.once
 d3:
-  version: 3.x
+  version: 4.x
   js:
     js/d3/d3.v4.js: {}
-  dependencies:
-    - core/jquery
-    - core/jquery.once
+d3v3:
+  version: 3.x
+  js:
+    js/d3/d3.v3.js: {}    
 social-share:
   version: 1.00
   css:
