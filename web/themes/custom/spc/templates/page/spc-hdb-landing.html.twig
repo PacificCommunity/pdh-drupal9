@@ -1,7 +1,95 @@
-<div id="hdb-landing">           
+<div id="hdb-landing" class="health-dashboard-content">  
+  
+    <div class="health-home-description">
+        <h4 class="title-text">{{ 'Background' }}</h4>
+        <span class="less">{{ data.description.less|raw }}</span>
+        
+        {% if data.description.more %}
+          <span class="dots">...</span>
+          <span class="more">{{ data.description.more|raw }}</span>
+          <p class="more-less show-more">{{ 'Read more' }}</p>
+        {% endif %}  
+    </div>
     
+    <div class="health-home-chart">
+        <h4>{{ data.chart.name }}</h4>
+        <div class="col-sm-9" style="z-index: 1;">
+          <div id="stacked-chart-global" class="stacked-chart-global"></div>
+        </div> 
+        <div class="col-sm-3">
+            <div class="chart-global-legend">
+              <div class="legend present"><span>{{ 'Present' }}</span></div>
+              <div class="legend development"><span>{{ 'Under Development' }}</span></div>
+              <div class="legend not-present"><span>{{ 'Not Present' }}</span></div>
+            </div>
+            <div class="chart-pdf-export">
+                <a target="_blank" href="{{ data.summary_chart_download }}" aria-label="Download pdf"></a>
+              <div class="chart-pdf-text">
+                <p><strong>{{ 'Download pdf file' }}</strong></p>
+                <p>{{ 'Summary of status of indicators across the categories (%) across the 21 PICTs' }}</p>
+              </div>
+            </div>
+        </div>    
+    </div>
+
+    <div class="health-dashboard-categories">
+        <h4>{{ 'NCD Response Areas' }}</h4>
+        <ul class="nav__list">
+            {% for key, item in data.categories %}
+            <li class="{{ key }}">
+                <input id="group-{{ key }}" type="checkbox" hidden />
+                <label for="group-{{ key }}" class="first-level">
+                    {% if key != 'wrapper' %}
+                      <a href="{{ item.url }}">{{ item.title }}</a>
+                    {% else %}
+                        <span>{{ item.title }}</span>
+                    {% endif %}    
+                    <span class="category-toggle">
+                        <span class="fa fa-angle-down"></span>
+                    </span>
+                </label>
+                <ul class="group-list">
+                  {% for key2, item2 in item.indicators  %}
+                    {% if item2.indicators %}
+                      <li>
+                          <input id="sub-group-{{ key2 }}" type="checkbox" hidden />
+                          <label for="sub-group-{{ key2 }}" class="indicator">
+                            <a class="subcategory" href="{{ item2.url }}">
+                                {{ item2.title }}
+                            </a>
+                            <span class="fa fa-angle-down"></span>
+                          </label>
+                            <ul class="sub-group-list">
+                            {% for key3, item3 in item2.indicators %}  
+                                <li>
+                                  <a href="{{ item3.url }}">
+                                    {{ item3.code }}. {{ item3.title }}
+                                  </a>
+                                </li>
+                            {% endfor %}    
+                          </ul>
+                      </li>
+                    {% else %}  
+                      <li>
+                          <input id="sub-group-{{ key2 }}" type="checkbox" hidden />
+                          <label for="sub-group-{{ key2 }}">
+                            <a href="{{ item2.url }}">
+                                {{ item2.title }}
+                            </a>
+                          </label>
+                      </li>
+                     {% endif %} 
+                     
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="health-dashboard-countries">
     {% if  data.countries %}
-        <h3 class="block-title">{{ 'Pacific Island Countries'|t }}</h3>
+        <h4>{{ 'Pacific Island Countries and Territories (PICTs)' }}</h4>
         <div id="countries-list" class="clearfix">
             {% for country in data.countries %}
                 <a class="one-country {{ country.name }}" href="{{ country.url }}" title="{{ country.name }}">
@@ -13,5 +101,6 @@
             {% endfor %}
         </div>
     {% endif %}   
+    </div>
     
 </div>

@@ -14,11 +14,41 @@ class SpcHdbController extends ControllerBase {
     
     public function hdbLanding() {
       
+        $config = \Drupal::config('spc_hdb.settings');
+
+        $background = $config->get('hdb_landing_description');
+        $limit = 682;
+        
+        if (strlen($background) > $limit) {
+          $data['description']['less'] = substr($background, 0, $limit);
+          $data['description']['more'] = substr($background, $limit, strlen($background));
+        } else {
+          $data['description']['less'] = $background;
+        }
+        
+        $summary_chart = @$this->get_summary_chart();
+        $summary_chart_fid = $config->get('health_chart_download_fid');
+        $file = File::load($summary_chart_fid);
+        $data['summary_chart_download'] = file_create_url($file->getFileUri());
+        
+        $data['categories'] = @$this->get_hdb_categories();
+
         $data['countries'] = @$this->get_countries();
         
         return [
-            '#theme' => 'spc_hdb_landing',
-            '#data' => $data,
+          '#theme' => 'spc_hdb_landing',
+          '#data' => $data,
+          '#attached' => [
+            'library' => [
+              'spc_hdb/hdb',
+              'spc/d3v3',  
+            ],
+            'drupalSettings' => [
+              'spc_hdb' => [
+                'summary_chart' => $summary_chart,
+              ],
+            ],
+          ],
         ];
     }
     
@@ -31,6 +61,39 @@ class SpcHdbController extends ControllerBase {
             '#data' => $data,
         ];
     }
+    
+    public function get_summary_chart(){
+
+      $module_handler = \Drupal::service('module_handler');
+      $module_path = $module_handler->getModule('spc_hdb')->getPath();      
+      $summary_chart_data = json_decode(file_get_contents($module_path . '/data/summary_chart.json'), true);
+      
+      return $summary_chart_data;
+    }
+    
+    public function get_hdb_categories(){
+
+      $module_handler = \Drupal::service('module_handler');
+      $module_path = $module_handler->getModule('spc_hdb')->getPath();      
+      $categories = json_decode(file_get_contents($module_path . '/data/categories.json'), true);
+      
+      $category_menu = [];
+      foreach ($categories as $key => $value) {
+        if ($value['wrapper']) {
+          $categories[$key]['wrapper'] = FALSE;
+          $indicators[$key] = $value;
+          $category_menu['wrapper'] = [
+            'title' => $value['wrapper'],
+            'indicators' => $indicators,
+          ];
+        }
+        else {
+          $category_menu[$key] = $categories[$key];
+        }
+      }
+
+      return $category_menu;
+    }    
     
     public function get_countries(){
         $countries = [];
