@@ -5,9 +5,11 @@ dependencies:
   config:
     - field.field.node.page.body
     - field.field.node.page.field_banner_image
+    - field.field.node.page.field_content_wrapper_type
     - field.field.node.page.field_header_type
     - node.type.page
   module:
+    - options
     - text
     - user
 _core:
@@ -24,6 +26,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_content_wrapper_type:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
   links:
     weight: 1
     region: content
