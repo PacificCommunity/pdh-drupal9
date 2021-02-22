@@ -10,7 +10,7 @@ dependencies:
 id: spcbanner_3
 theme: spc
 region: subheader
-weight: 0
+weight: -7
 provider: null
 plugin: spc_banner
 settings:

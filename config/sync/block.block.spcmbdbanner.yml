@@ -10,7 +10,7 @@ dependencies:
 id: spcmbdbanner
 theme: spc
 region: subheader
-weight: -9
+weight: -10
 provider: null
 plugin: sps_mbd_banner
 settings:
