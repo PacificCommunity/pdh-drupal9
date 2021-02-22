@@ -54,3 +54,30 @@ function spc_main_cron() {
     $country->save();
   }
 }
+
+/**
+ * Implements form_alter().
+ */
+function spc_main_form_alter(&$form, &$form_state, $form_id)
+{
+  // Delete N\A option in header_type field for basic page form
+  if ($form_id === 'node_page_form' || $form_id === 'node_page_edit_form') {
+    unset($form['field_header_type']['widget']['#options']['_none']);
+  }
+}
+
+/**
+ * Implements preprocess_html().
+ */
+function spc_main_preprocess_html(&$variables)
+{
+  // Add class to body based on .header_type field of basic page node
+  if ($variables['node_type'] === 'page') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+
+    if ($node->hasField('field_header_type')) {
+      $header_type = $node->get('field_header_type')->getValue()[0]['value'] ? 'maximal' : 'minimal';
+      $variables['attributes']['class'][] = $header_type;
+    }
+  }
+}

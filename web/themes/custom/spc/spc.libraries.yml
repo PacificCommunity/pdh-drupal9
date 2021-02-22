@@ -2,8 +2,11 @@ global:
   version: 1.00
   css:
     theme:
+      css/anno.css: {}
       css/spc.css: {}
   js:
+    js/jquery.scrollintoview.min.js: {minified: true}
+    js/anno.js: {}
     js/scripts.js: {}
   dependencies:
     - core/jquery
@@ -36,41 +39,45 @@ social-share:
     js/social-share.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once    
+    - core/jquery.once
 select2:
   version: 4.x
   css:
     theme:
-      css/select2.min.css: {}  
+      css/select2.min.css: {}
   js:
     js/select2.min.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once    
+    - core/jquery.once
 tokenize2:
   version: 2.x
   css:
     theme:
-      css/tokenize2.css: {}   
+      css/tokenize2.css: {}
   js:
     js/tokenize2.js: {}
   dependencies:
     - core/jquery
     - core/jquery.once
 slick:
-  version: 2.x  
+  version: 2.x
   css:
     theme:
-      css/slick.css: {} 
+      css/slick.css: {}
       css/slick-theme.css: {}
   js:
     js/slick.min.js: {}
   dependencies:
     - core/jquery
     - core/jquery.once
-gmap:
-  version: 3.x
+member_countries:
+  version: 1.x
   js:
     js/members-countries-map.js: {}
+gmap:
+  version: 3.x
+  dependencies:
+    - spc/member_countries
+  js:
     https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy9EQCIbFOhOfh-PPqxesjbjirYC6WZ0&callback=initMap: { type: external}
-

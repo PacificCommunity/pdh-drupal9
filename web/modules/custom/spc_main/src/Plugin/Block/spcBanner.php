@@ -47,6 +47,31 @@ class spcBanner extends BlockBase {
     if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'data_insights' || $node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
       $data['breads'][] = ['name' => $node->getTitle()];
     }
+    
+    if ($node->getType() === 'page') {
+      $title = $node->getTitle();
+      $title_parts = explode(' ', $title);
+      $title_parts[0] = '<strong>' . $title_parts[0] . '</strong>';
+      $title = implode(' ', $title_parts);
+
+      $data['base_page_title'] = $title;
+
+      if ($node->hasField('field_banner_image')) {
+        $banner_image_entity = $node->field_banner_image->entity;
+
+        if ($banner_image_entity !== null) {
+          $banner_image_url = file_create_url($banner_image_entity->getFileUri());
+          $data['banner_image_url'] = $banner_image_url;
+        }
+      }
+
+      if ($node->hasField('field_header_type')) {
+        $header_type = $node->get('field_header_type')->getValue()[0]['value'];
+        if ($header_type) {
+          $data['maximum_header'] = boolval($header_type);
+        }
+      }
+    }
 
     return array(
       '#theme' => 'main_banner_block',

@@ -8,6 +8,7 @@ module:
   block_content: 0
   block_field: 0
   breakpoint: 0
+  captcha: 0
   ckeditor: 0
   ckeditor_bootstrap_grid: 0
   color: 0
@@ -26,6 +27,7 @@ module:
   devel_generate: 0
   dynamic_page_cache: 0
   editor: 0
+  entity_redirect: 0
   entity_reference_revisions: 0
   field: 0
   field_formatter_class: 0
@@ -38,6 +40,8 @@ module:
   hotjar: 0
   image: 0
   link: 0
+  mail_safety: 0
+  mailsystem: 0
   menu_link_attributes: 0
   menu_link_content: 0
   menu_ui: 0
@@ -51,7 +55,9 @@ module:
   path: 0
   path_alias: 0
   quickedit: 0
+  rate: 0
   rdf: 0
+  recaptcha: 0
   redirect: 0
   redirect_404: 0
   redirect_domain: 0
@@ -59,9 +65,11 @@ module:
   rest: 0
   restui: 0
   robotstxt: 0
+  rules: 0
   search: 0
   serialization: 0
   shortcut: 0
+  spc_dataset_suggestion: 0
   spc_dot_stat_chart: 0
   spc_dot_stat_data: 0
   spc_dot_stat_links: 0
@@ -71,16 +79,19 @@ module:
   spc_sdg_summary: 0
   svg_image: 0
   svg_image_responsive: 0
+  swiftmailer: 0
   system: 0
   taxonomy: 0
   text: 0
   token: 0
   toolbar: 0
   tour: 0
+  typed_data: 0
   update: 0
   user: 0
   views_infinite_scroll: 0
   views_ui: 0
+  votingapi: 0
   yearonly: 0
   pathauto: 1
   views: 10
