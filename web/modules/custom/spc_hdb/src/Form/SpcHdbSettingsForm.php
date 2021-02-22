@@ -106,7 +106,7 @@ class SpcHdbSettingsForm extends ConfigFormBase {
       '#required' => FALSE,
     ];    
 
-    return parent::buildForm($form, $form_state);
+    return parent::buildForm(@$form, @$form_state);
   }
 
   /**

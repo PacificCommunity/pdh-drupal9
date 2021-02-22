@@ -29,7 +29,9 @@ class SpcHdbController extends ControllerBase {
         $summary_chart = @$this->get_summary_chart();
         $summary_chart_fid = $config->get('health_chart_download_fid');
         $file = File::load($summary_chart_fid);
-        $data['summary_chart_download'] = file_create_url($file->getFileUri());
+        if (is_object($file)){
+          $data['summary_chart_download'] = file_create_url($file->getFileUri());
+        }
         
         $data['categories'] = @$this->get_hdb_categories();
 
