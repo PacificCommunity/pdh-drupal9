@@ -11,17 +11,18 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Core\Controller\ControllerBase;
 
 class SpcHdbController extends ControllerBase {
+  
+  
+    public $limit = 682;
     
     public function hdbLanding() {
       
         $config = \Drupal::config('spc_hdb.settings');
 
         $background = $config->get('hdb_landing_description');
-        $limit = 682;
-        
-        if (strlen($background) > $limit) {
-          $data['description']['less'] = substr($background, 0, $limit);
-          $data['description']['more'] = substr($background, $limit, strlen($background));
+        if (strlen($background) > $this->limit) {
+          $data['description']['less'] = substr($background, 0, $this->limit);
+          $data['description']['more'] = substr($background, $this->limit, strlen($background));
         } else {
           $data['description']['less'] = $background;
         }
@@ -54,13 +55,78 @@ class SpcHdbController extends ControllerBase {
         ];
     }
     
-    public function hdbCountry(){
+    public function hdbCategory($category){
+      $categories = $this->get_file_from_config('health_categories_fid');
+      $categories = json_decode($categories, true);
       
-        $data['country'] = $code;
-        
+      if (!isset($categories, $categories[$category])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+      }
+
+      $data['category'] = $categories[$category];
+      
+      $module_handler = \Drupal::service('module_handler');
+      $module_path = $module_handler->getModule('spc_hdb')->getPath();
+      $data['module']['path'] = $module_path;
+
+      $description = $categories[$category]['description'];
+      $data['category']['id'] = $category;
+      $data['category']['description'] = [];
+      if (strlen($description) > $this->limit) {
+        $data['category']['description']['less'] = substr($description, 0, $this->limit);
+        $data['category']['description']['more'] = substr($description, $this->limit, strlen($description));
+      } else {
+        $data['category']['description']['less'] = $description;
+      }
+      
+      $data['categories'] = $categories;
+
+      $indicators = $this->get_file_from_config('health_indicators_fid');
+      $indicators = json_decode($indicators, true);
+      $data['indicators'] = $indicators;
+      
+      $data_values = $this->get_file_from_config('health_json_fid');
+      $data_values = json_decode($data_values, true);
+      $data['values'] = $data_values['countries-data'];
+
+      if (count($data['category']['indicators']) <= 3){
+        $data['category_countries_class'] = 'col-sm-6';
+        $data['category_detales_class'] = 'col-sm-6';
+      } else {
+        $data['category_countries_class'] = 'col-sm-12';
+        $data['category_detales_class'] = 'col-sm-12';
+      }
+
+      return [
+          '#theme' => 'spc_hdb_category',
+          '#data' => $data,
+          '#attached' => [
+            'library' => [
+              'spc_hdb/hdb',
+              'spc/d3v3',  
+            ],
+            'drupalSettings' => [
+              'spc_hdb' => [
+                'indicator_detales' => $indicators,
+              ],
+            ],
+          ],          
+      ];
+    }
+    
+    public function hdbIndicator($category, $indicator){
+      
         return [
-            '#markup' => '<h1>as'.$code.'</h1>',
-            '#data' => $data,
+            '#markup' => '<h1>' . $category . '/' . $indicator . '</h1>',
+            '#data' => $indicator,
+        ];
+    }
+    
+    public function hdbCountry($country){
+
+        return [
+            '#markup' => '<h1>'.$country.'</h1>',
+            '#data' => $country,
         ];
     }
     
@@ -109,7 +175,8 @@ class SpcHdbController extends ControllerBase {
             
             $name = $country->getName();
             $country_code = $country->get('field_country_code')->getValue()[0]['value'];
-
+            $country_id = str_replace(' ', '-', strtolower($name));
+            
             $fid = @$country->get('field_flag')->getValue()[0]['target_id'];
             $file = File::load($fid);
             
@@ -119,11 +186,11 @@ class SpcHdbController extends ControllerBase {
                 $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
             }
 
-
-            $aliasManager = \Drupal::service('path_alias.manager');
-            $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
+            $url = '/dashboard/health-dashboard/country/' . $country_id;
 
             $countries[] = [
+              'id' => $country_id, 
+              'code' => $country_code,
               'url' => $url,
               'flag' => $flag,
               'name' => $name,
@@ -131,6 +198,17 @@ class SpcHdbController extends ControllerBase {
           }
         
         return $countries;
+    }
+    
+    private function get_file_from_config($config_name){
+      $config = \Drupal::config('spc_hdb.settings');
+      $fid = $config->get($config_name);
+      $file = File::load($fid);
+      if (is_object($file)){
+        $furl = file_create_url($file->getFileUri());
+        $fcontent = file_get_contents($furl);
+        return $fcontent;
+      }
     }
     
 }

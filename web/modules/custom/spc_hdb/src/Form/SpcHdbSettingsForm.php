@@ -55,7 +55,7 @@ class SpcHdbSettingsForm extends ConfigFormBase {
       '#format' => 'full_html',
       '#title' => $this->t('Landing description'),
       '#default_value' => $config->get('hdb_landing_description'),
-      '#required' => false
+      '#required' => true
     ];     
     
     $form['health_json_file'] = [
@@ -67,7 +67,7 @@ class SpcHdbSettingsForm extends ConfigFormBase {
       ],
       '#upload_location' => 'public://hdb/',
       '#default_value' => [$config->get('health_json_fid')],
-      '#required' => FALSE,
+      '#required' => true,
     ];
     
     $form['health_categories_file'] = [
