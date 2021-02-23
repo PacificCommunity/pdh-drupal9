@@ -1,0 +1,234 @@
+<div class="row category-content">
+  <h2>{{ data.category.name }}</h2>
+  
+    <div class="category-description">
+        <img class="category-img" src="{{ data.category.image }}" alt="{{ data.category.name }}" onerror="this.style.display = 'none'">
+        <div class="text">
+          <span class="less">{{ data.category.description.less|raw }}</span>
+          {% if data.category.description.more %}
+            <span class="dots">...</span>
+            <span class="more">{{ data.category.description.more|raw }}</span>
+            <p class="more-less show-more">{{ 'Read more' }}</p>
+          {% endif %}
+        </div>
+    </div>  
+        
+  <h4>{{ 'PICT ratings for Pacific NCD Dashboard ' }} {{ data.category.name }} {{ ' indicators' }}</h4>
+  <div class="category-countries {{ data.category_countries_class }} clearfix">
+      <h4>{{ 'PICT ratings for Pacific NCD Dashboard ' }} {{ data.category.name }} {{ ' indicators' }}</h4>
+
+      <div class="country-id">
+        <div class="category-header clearfix">
+            <div class="countries-names">
+                {{ 'Indicator' }}
+            </div>  
+        </div>
+        {% for country in data.values %}
+        <div class="country-item  clearfix">
+          <div class="country-flag">
+              <img id="{{ country.id }}" src="/{{ data.module.path }}/img/flags/{{ country.id }}.svg" alt="{{ country.title }}">
+          </div>
+          <div class="country-name">
+              <a href="/dashboard/health-dashboard/country/{{ country.id }}" title="{{ country.title }}">{{ country.title }}</a>
+          </div>
+        </div> 
+        {% endfor %} 
+      </div>
+          
+      <div class="country-indicators helth-indicators">
+        <div class="country-indicators-scroll ind-count-{{ indicators_count }}">
+          <div class="category-header clearfix">  
+            <div class="country-indicators">
+            {% for key, indicator in data.indicators %}
+              {% if indicator['indicator-category'] == data.category.id  %}
+                <div class="indicator-title">
+                    <a data-name="{{ key }}" href="/dashboard/health-dashboard/{{ data.category.id }}/{{ key }}">
+                    {{ indicator.code }} . {{ indicator.title }}
+                  </a>
+                </div>
+              {% endif %}
+            {% endfor %}
+            </div>
+          </div>    
+
+          {% for country in data.values %}
+            <div class="country-item ">
+              {% for key, indicator in country.indicators %}
+                  {% if indicator['indicator-category'] == data.category.id  %}
+                    <div class="status-strength {{ indicator.value }}" 
+                         data-value="{{ indicator.value }}"
+                         data-category="{{ data.category.id }}"
+                         data-indicator="{{ key }}"
+                         data-country-title="{{ country.title }}"
+                         data-country="{{ country.id }}"></div>
+                  {% endif %}
+                {% endfor %} 
+            </div>          
+          {% endfor %} 
+        </div>    
+      </div>  
+  </div>
+        
+  <div class="category-detales {{ data.category_detales_class }}">
+    <h4>{{ 'Summary of findings for Pacific NCD dashboard' }} {{ data.category.name }} {{ 'indicators' }}</h4>
+    
+    <div class="wrapper">
+      <div class="summary-indicators ">
+          <div class="indicator-name">
+              {{ 'Indicator' }}
+          </div>
+
+          <div class="country-indicators">
+            {% for key, indicator in data.indicators %}
+              {% if indicator['indicator-category'] == data.category.id  %}
+                <div class="indicator-title">
+                    <a data-name="{{ key }}" href="/dashboard/health-dashboard/{{ data.category.id }}/{{ key }}">
+                    {{ indicator.code }} . {{ indicator.title }}
+                  </a>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div> 
+      </div> 
+        
+      <div class="category-data">
+          <div class="not-present values">
+          <h4>{{ 'Not Present' }}</h4>  
+          {% for key, value in data.category.indicators %}
+            {% if value['not-present'] %}
+              <div class="{{ key }}-value indicator">
+                  <p class="number value">{{ value['not-present']['number'] }}</p>
+                  <p class="percentage value">{{ value['not-present']['percentage'] }}%</p>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          
+          <div class="under-development values">
+          <h4>{{ 'Under Development' }}</h4>  
+            {% for key, value in data.category.indicators %}
+              {% if value['under-development'] %}
+              <div class="{{ key }}-value indicator">
+                  <p class="number value">{{ value['under-development']['number'] }}</p>
+                  <p class="percentage value">{{ value['under-development']['percentage'] }}%</p>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          
+          <div class="present values">
+          <h4>{{ 'Present' }}</h4>    
+            {% for key, value in data.category.indicators %}
+              {% if value['present'] %}
+              <div class="{{ key }}-value indicator">
+                  <p class="number value">{{ value['present']['number'] }}</p>
+                  <p class="percentage value">{{ value['present']['percentage'] }}%</p>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>    
+      </div>
+    </div>
+        
+  </div>        
+</div>
+          
+<div class="categories-switcher">
+    <p class="prev">
+      <span>{{ 'Previous category' }}</span>
+    </p>
+    <div class="list">
+    {% for key, category in data.categories  %}  
+      <div class="category-item {% if key == data.category.id %} current {% endif %}">
+          <a href="/dashboard/health-dashboard/{{ key }}">{{ category.name }}</a>
+      </div>    
+    {% endfor %}
+    </div>    
+    <p class="next">
+      <span>{{ 'Next category' }}</span>
+    </p>
+</div>
+
+<div class="indicator-popup">
+    <div class="country-detales col-sm-5">
+        <img class="country-flag" src="" alt="">
+        <h4></h4>
+        <div class="content clearfix">
+            <p class="indicator-title"></p>
+            <div class="col-sm-4">
+              <p id="indicator-value"></p>
+            </div>
+            <div class="col-sm-8">
+              <p id="indicator-text" class="text"></p>
+            </div>
+        </div>
+        <div id="map" class="map"></div>
+    </div>
+    <div class="description-detales col-sm-7">
+      <h4>{{ 'Description' }}</h4>
+        <div class="content detales">
+
+            <div id="not-present" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength not-present"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="under-development" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength under-development"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="present" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength present"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="low" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength low"></p>
+                </div>  
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="medium" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength medium"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="high" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength high"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+            <div id="not-applicable" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength not-applicable">{{ 'N/A' }}</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>          

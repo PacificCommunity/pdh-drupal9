@@ -37,37 +37,23 @@ class spcHdbBanner extends BlockBase {
     $data['subtitle'] = $subtitle;
     $data['displaySubtitle'] = true;
     
+    $categories = $this->get_file_from_config('health_categories_fid');
+    $categories = json_decode($categories, true);
     $route_name = \Drupal::routeMatch()->getRouteName();
-    
-    $entities = [];
     foreach (\Drupal::routeMatch()->getParameters() as $param) {
-      if ($param instanceof \Drupal\Core\Entity\EntityInterface) {
-        $entities[] = $param;
+      if (isset($categories, $categories[$param])) {
+        foreach ($categories as $key => $category){
+            $term_data[] = [
+             'id' => $key,
+             'name' => $category['name'],
+             'url' => '/dashboard/health-dashboard/' . $key
+            ];
+        }
+        $data['terms'] = $term_data;
+        $data['term'] = $categories[$param]['name'];
       }
     }    
-    
-    if (!empty($entities) && is_object($entities[0])){
-        if ($entities[0]->getEntityTypeId() == 'taxonomy_term'){
-          $tax_entity = $entities[0];
-          $data['term'] = $tax_entity->getName();
-          $data['vocabulary'] = $tax_entity->bundle();
-          
-          //Breadcrumbs.
-          $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($data['vocabulary']);
-          foreach ($terms as $term) {
-            $aliasManager = \Drupal::service('path_alias.manager');
-            $url = $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->tid);
-            
-            $term_data[] = array(
-             'id' => $term->tid,
-             'name' => $term->name,
-             'url' => $url
-            );
-          }
-          $data['terms'] = $term_data;
-        }
-    }
-    
+
     $search_results = [
         'search_countries' => $this->get_search_countries(),
         'search_categories' => $this->get_search_categories(),
@@ -144,5 +130,16 @@ class spcHdbBanner extends BlockBase {
 
     return $indicators;
   }
+  
+  private function get_file_from_config($config_name){
+    $config = \Drupal::config('spc_hdb.settings');
+    $fid = $config->get($config_name);
+    $file = File::load($fid);
+    if (is_object($file)){
+      $furl = file_create_url($file->getFileUri());
+      $fcontent = file_get_contents($furl);
+      return $fcontent;
+    }
+  }  
   
 }

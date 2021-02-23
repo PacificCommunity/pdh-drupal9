@@ -11,15 +11,20 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function spc_hdb_theme($existing, $type, $theme, $path){
   return [
-    'spc_hdb_landing' => [
-      'variables' => [
-        'data' => null
-      ]
-    ],
     'hdb_banner_block' => [
       'variables' => [
         'data' => null
       ]
-    ],       
+    ],
+    'spc_hdb_landing' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],      
+    'spc_hdb_category' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],      
   ];
 }

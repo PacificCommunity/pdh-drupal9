@@ -6,8 +6,24 @@ spc_hdb.landing:
   requirements:
     _permission: 'access content'
     
+spc_hdb.category:
+  path: '/dashboard/health-dashboard/{category}'
+  defaults:
+    _title: 'Health dashboard home page'
+    _controller: '\Drupal\spc_hdb\Controller\SpcHdbController::hdbCategory'
+  requirements:
+    _permission: 'access content'     
+    
+spc_hdb.indicator:
+  path: '/dashboard/health-dashboard/{category}/{indicator}'
+  defaults:
+    _title: 'Health dashboard home page'
+    _controller: '\Drupal\spc_hdb\Controller\SpcHdbController::hdbIndicator'
+  requirements:
+    _permission: 'access content'    
+    
 spc_hdb.country:
-  path: '/dashboard/health-dashboard/country/{term}'
+  path: '/dashboard/health-dashboard/country/{country}'
   defaults:
     _title: 'Health dashboard home page'
     _controller: '\Drupal\spc_hdb\Controller\SpcHdbController::hdbCountry'
