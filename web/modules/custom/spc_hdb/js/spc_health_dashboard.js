@@ -16,6 +16,17 @@
 
         });
         
+        $('.toggle', context).add('.toggle-lbl', context).on('click', function(e){
+            e.preventDefault();
+            $(this).siblings('.helth-indicators').toggle(); 
+            if ($(this).hasClass('toggle')){
+                $(this).find('.arrow').toggleClass('down');                
+            } else if($(this).hasClass('toggle-lbl')) {
+                $(this).siblings('.toggle').find('.arrow').toggleClass('down');        
+            }
+
+        });        
+        
         if ($('.indicator-popup').length){
 
             const indicatorDetales = drupalSettings.spc_hdb.indicator_detales;

@@ -25,6 +25,16 @@ function spc_hdb_theme($existing, $type, $theme, $path){
       'variables' => [
         'data' => null
       ]
+    ],    
+    'spc_hdb_country' => [
+      'variables' => [
+        'data' => null
+      ]
     ],      
+    'spc_hdb_indicator' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
   ];
 }
