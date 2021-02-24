@@ -37,20 +37,41 @@ class spcHdbBanner extends BlockBase {
     $data['subtitle'] = $subtitle;
     $data['displaySubtitle'] = true;
     
-    $categories = $this->get_file_from_config('health_categories_fid');
-    $categories = json_decode($categories, true);
-    $route_name = \Drupal::routeMatch()->getRouteName();
-    foreach (\Drupal::routeMatch()->getParameters() as $param) {
-      if (isset($categories, $categories[$param])) {
-        foreach ($categories as $key => $category){
-            $term_data[] = [
-             'id' => $key,
-             'name' => $category['name'],
-             'url' => '/dashboard/health-dashboard/' . $key
-            ];
+    $current_path = \Drupal::service('path.current')->getPath();
+    if (strpos($current_path, '/dashboard/health-dashboard/country/') !== false){
+      $countries = $this->get_search_countries();
+      //dump($countries);
+      foreach (\Drupal::routeMatch()->getParameters() as $param) {
+        //dump($param);
+        if (isset($countries, $countries[$param])){
+          //dump($countries[$param]);
+          foreach ($countries as $key => $country){
+              $term_data[] = [
+               'id' => $key,
+               'name' => $country['title'],
+               'url' => '/dashboard/health-dashboard/country/' . $key
+              ];
+          }
+          $data['terms'] = $term_data;
+          $data['term'] = $countries[$param]['title'];          
         }
-        $data['terms'] = $term_data;
-        $data['term'] = $categories[$param]['name'];
+      }
+    } else {
+      $categories = $this->get_file_from_config('health_categories_fid');
+      $categories = json_decode($categories, true);
+      $route_name = \Drupal::routeMatch()->getRouteName();
+      foreach (\Drupal::routeMatch()->getParameters() as $param) {
+        if (isset($categories, $categories[$param])) {
+          foreach ($categories as $key => $category){
+              $term_data[] = [
+               'id' => $key,
+               'name' => $category['name'],
+               'url' => '/dashboard/health-dashboard/' . $key
+              ];
+          }
+          $data['terms'] = $term_data;
+          $data['term'] = $categories[$param]['name'];
+        }
       }
     }    
 

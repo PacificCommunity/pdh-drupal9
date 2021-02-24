@@ -98,36 +98,91 @@ class SpcHdbController extends ControllerBase {
       }
 
       return [
-          '#theme' => 'spc_hdb_category',
-          '#data' => $data,
-          '#attached' => [
-            'library' => [
-              'spc_hdb/hdb',
-              'spc/d3v3',  
+        '#theme' => 'spc_hdb_category',
+        '#data' => $data,
+        '#attached' => [
+          'library' => [
+            'spc_hdb/hdb',
+            'spc/d3v3',  
+          ],
+          'drupalSettings' => [
+            'spc_hdb' => [
+              'indicator_detales' => $indicators,
             ],
-            'drupalSettings' => [
-              'spc_hdb' => [
-                'indicator_detales' => $indicators,
-              ],
-            ],
-          ],          
+          ],
+        ],          
       ];
     }
     
     public function hdbIndicator($category, $indicator){
+      $country_chart = [];
       
-        return [
-            '#markup' => '<h1>' . $category . '/' . $indicator . '</h1>',
-            '#data' => $indicator,
-        ];
+      return [
+        '#theme' => 'spc_hdb_indicator',
+        '#data' => $data,
+        '#attached' => [
+          'library' => [
+            'spc_hdb/hdb',
+            'spc/d3v3',  
+          ],
+          'drupalSettings' => [
+            'spc_hdb' => [
+              'country_chart' => $country_chart,
+            ],
+          ],
+        ],          
+      ];
     }
     
     public function hdbCountry($country){
+      $health_dashboard_data = $this->get_file_from_config('health_json_fid');
+      $health_dashboard_data = json_decode($health_dashboard_data, true);
+      
+      $module_handler = \Drupal::service('module_handler');
+      $module_path = $module_handler->getModule('spc_hdb')->getPath();      
+      $categories = json_decode(file_get_contents($module_path . '/data/categories.json'), true);
+      
+      $indicators = $this->get_file_from_config('health_indicators_fid');
+      $indicators = json_decode($indicators, true);
+      
+      $countries = @$this->get_countries();
+      if (!isset($countries, $countries[$country])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+      }
+      
+      foreach($health_dashboard_data['countries-data'] as $country_data){
+        if ($country_data['id'] == $country){
+          
+          $data['title'] = $country_data['title'];
+          $data['country'] = $country_data['title'];
+          $data['country_id'] = $country_data['id'];
+          $data['indicators'] = $country_data['indicators'];
+          $data['categories'] = $categories;
+          
+          $data['flag']['src'] = '/' . $module_path . '/img/flags/' . $data['country_id'] . '.svg';
+          $data['map']['url'] = '/' . $module_path . '/img/maps/' . $data['country_id'] . '.svg';
+          
+          $summary_chart = $this->get_country_summary_chart_data($country_data['indicators']);
 
-        return [
-            '#markup' => '<h1>'.$country.'</h1>',
-            '#data' => $country,
-        ];
+        }
+      }
+
+      return [
+        '#theme' => 'spc_hdb_country',
+        '#data' => $data,
+        '#attached' => [
+          'library' => [
+            'spc_hdb/hdb',
+            'spc/d3v3',  
+          ],
+          'drupalSettings' => [
+            'spc_hdb' => [
+              'summary_chart' => $summary_chart,
+              'indicator_detales' => $indicators  
+            ],
+          ],
+        ],          
+      ];
     }
     
     public function get_summary_chart(){
@@ -188,7 +243,7 @@ class SpcHdbController extends ControllerBase {
 
             $url = '/dashboard/health-dashboard/country/' . $country_id;
 
-            $countries[] = [
+            $countries[$country_id] = [
               'id' => $country_id, 
               'code' => $country_code,
               'url' => $url,
@@ -198,6 +253,42 @@ class SpcHdbController extends ControllerBase {
           }
         
         return $countries;
+    }
+    
+    function get_country_summary_chart_data($country_data){
+      $summary = array();
+
+      foreach($country_data as $key => $indicator){
+        switch ($indicator['value']){
+          case 'present':
+          case 'low':
+          case 'medium':
+          case 'high':  
+              @$summary[$indicator['indicator-category']]['present'] += 1;
+            break;  
+          case 'under-development':
+              @$summary[$indicator['indicator-category']]['under-development'] += 1;
+            break;
+          case 'not-present':
+              @$summary[$indicator['indicator-category']]['not-present'] += 1;
+            break;
+        }
+      } 
+
+      $summary_filtred = [];
+      foreach($summary as $key => $detales){
+        $count = 0;
+        $count = @$detales['present'] + @$detales['under-development'] + @$detales['not-present'];
+
+        $summary_filtred[] = [
+          'indicator' => ucfirst(str_replace('-', ' ', $key)),
+          'present' => (@$detales['present']/$count) * 100,
+          'under-development' => (@$detales['under-development']/$count) * 100,
+          'not-present' => (@$detales['not-present']/$count) * 100
+          ] ;
+      }
+
+      return $summary_filtred;
     }
     
     private function get_file_from_config($config_name){
