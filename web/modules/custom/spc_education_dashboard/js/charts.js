@@ -3,56 +3,22 @@
   Drupal.behaviors.educationDashboard = {
     attach: function (context, settings) {
       if (initialized) {
-        console.log("Already initialized");
         return;
       }
       initialized = true;
 
-      const availableTags = [];
-      let availableItems = {};
-
-      $(".title-text").each(function () {
-        availableTags.push($(this).text());
-        availableItems[$(this).attr("id")] = $(this).text();
-      });
-
-      function getKeyByValue(object, value) {
-        return Object.keys(object).find(function (key) {
-          return object[key] === value;
-        });
-      }
-
-      $("#education-dashboard-search")
-        .once("enable autocomplete")
-        .autocomplete({
-          source: availableTags,
-          select: function (event, ui) {
-            let itemValue = ui.item.value;
-            let itemKey = getKeyByValue(availableItems, itemValue);
-
-            $([document.documentElement, document.body]).animate(
-              {
-                scrollTop: $("#" + itemKey).offset().top,
-              },
-              100
-            );
-          },
-        });
-
       //chart block description toggle.
-      $(".toggle")
-        .once("toggle description")
-        .on("click", function () {
-          let active = $(this).siblings("p").hasClass("hidden");
+      $(".toggle").on("click", function () {
+        let active = $(this).siblings("p").hasClass("hidden");
 
-          $(this).closest(".description").find("p").addClass("hidden");
-          $(this).closest(".description").find(".arrow").removeClass("down");
+        $(this).closest(".description").find("p").addClass("hidden");
+        $(this).closest(".description").find(".arrow").removeClass("down");
 
-          if (active) {
-            $(this).siblings("p").removeClass("hidden");
-            $(this).find(".arrow").toggleClass("down");
-          }
-        });
+        if (active) {
+          $(this).siblings("p").removeClass("hidden");
+          $(this).find(".arrow").toggleClass("down");
+        }
+      });
 
       //read more
       $(".more-less").on("click", function () {
@@ -846,7 +812,6 @@
       if ($(".chart-1").length) {
         const id = "1";
         const chart1Thd = settings.spc_education_dashboard.threshold1;
-        console.log(settings.spc_education_dashboard.chart1);
         let chart1data = settings.spc_education_dashboard.chart1[0].data;
 
         chart1data = addColorsToData(chart1data, chart1Thd);

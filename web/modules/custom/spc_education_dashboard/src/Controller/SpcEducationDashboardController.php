@@ -3,12 +3,7 @@
 namespace Drupal\spc_education_dashboard\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
-use Drupal\user\Entity\User;
-use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
-use Drupal\taxonomy\Entity\Term;
-use Drupal\paragraphs\Entity\Paragraph;
 
 
 /**
@@ -20,6 +15,7 @@ class SpcEducationDashboardController extends ControllerBase {
    * Builds the response.
    */
   public function index() {
+    $data = ['items' => []];
     $config = \Drupal::config('spc_education_dashboard.settings');
 
     $fid = $config->get('education_json_fid') ?? 0;

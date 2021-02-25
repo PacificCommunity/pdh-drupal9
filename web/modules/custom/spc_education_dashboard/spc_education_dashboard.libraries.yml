@@ -12,6 +12,14 @@ charts:
     - core/jquery.ui.autocomplete
     - spc_education_dashboard/switcher
 
+search-autocomplete:
+  js:
+    js/search-autocomplete.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+
 switcher:
   js:
     js/switcher.js: {}

@@ -3,6 +3,7 @@
 namespace Drupal\spc_education_dashboard\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\file\Entity\File;
 
 /**
  * Provides an example block.
@@ -20,14 +21,29 @@ class SpcEducationDashboardBanner extends BlockBase {
    */
   public function build() {
     $data = [];
-    $search_results = [];
+    $config = \Drupal::config('spc_education_dashboard.settings');
+
+    $fid = $config->get('education_json_fid') ?? 0;
+    $file = File::load($fid);
+
+    if (is_object($file)){
+      $json = json_decode(file_get_contents($file->getFileUri()), true);
+      $data = $json['educationChartsData'] ?? [];
+    }
+    $details = [
+      'tags' => array_column($data, 'id', 'name'),
+    ];
+
     return [
       '#theme' => 'spc_education_dashboard_banner_block',
       '#cache' => ['max-age'=> 0],
       '#data' => $data,
       '#attached' => [
+        'library' => [
+          'spc_education_dashboard/search-autocomplete',
+        ],
         'drupalSettings' => [
-          'spc_education_dashboard' => $search_results,
+          'spc_education_dashboard_ac' => $details,
         ],
       ],
     ];
