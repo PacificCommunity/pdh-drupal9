@@ -1,0 +1,4 @@
+administer spc education dashboard:
+  title: 'Administer SPC Education Dashboard'
+  description: 'Allow to access the administration form to configure SPC Education Dashboard.'
+  restrict access: true
