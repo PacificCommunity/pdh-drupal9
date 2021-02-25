@@ -20,7 +20,7 @@ function spc_main_theme($existing, $type, $theme, $path){
       'variables' => [
         'data' => null
       ]
-    ],      
+    ],
     'spc_dashboard_transform_chart_block' => [
       'variables' => [
         'data' => null
@@ -35,7 +35,7 @@ function spc_main_theme($existing, $type, $theme, $path){
       'variables' => [
         'data' => null
       ]
-    ],      
+    ],
   ];
 }
 
@@ -43,7 +43,7 @@ function spc_main_theme($existing, $type, $theme, $path){
  * Implements hook_cron().
  */
 function spc_main_cron() {
-  // Getting Dataset Publications count for placing in country EEZ entity. 
+  // Getting Dataset Publications count for placing in country EEZ entity.
   $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
   $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
   foreach($countries_tax as $country_term){
@@ -74,14 +74,13 @@ function spc_main_preprocess_html(&$variables)
   // Add class to body based on .header_type field of basic page node
   if (array_key_exists('node_type', $variables) && $variables['node_type'] === 'page') {
     $node = \Drupal::routeMatch()->getParameter('node');
-
     if ($node->hasField('field_header_type')) {
-      $header_type = $node->get('field_header_type')->getValue()[0]['value'] ? 'maximal' : 'minimal';
+      $header_type = ($node->get('field_header_type')->getValue()[0]['value'] ?? null) ? 'maximal' : 'minimal';
       $variables['attributes']['class'][] = $header_type;
     }
 
     if ($node->hasField('field_content_wrapper_type')) {
-      $page_wrapper_type = $node->get('field_content_wrapper_type')->getValue()[0]['value'];
+      $page_wrapper_type = $node->get('field_content_wrapper_type')->getValue()[0]['value'] ?? null;
       if ($page_wrapper_type === 'container-fluid') {
         $variables['attributes']['class'][] = 'page-fluid';
       }

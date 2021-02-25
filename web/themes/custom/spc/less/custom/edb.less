@@ -1,0 +1,195 @@
+#block-spceducationdashboardbanner {
+  background-image: linear-gradient(135deg, rgba(0, 198, 236, 0.85) 0%, rgba(0, 3, 102, 0.95) 80%), url('../img/all_stories_bg_0.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 50% 0;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  .ed-lable {
+    font-size: 14px;
+    padding: 0 10px;
+    display: inline-block;
+    background: #fff;
+    line-height: 29px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    @media (min-width: @screen-sm-min) {
+      padding: 11px;
+      font-size: 24px;
+    }
+  }
+  .ed-heading {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    strong {
+      color: #ffbc00;
+    }
+    @media (min-width: @screen-sm-min) {
+      font-size: 54px;
+
+    }
+  }
+}
+
+.education-block-content {
+  .education-chart-block {
+    padding: 20px;
+    margin: 30px;
+    .title {
+      margin-left: 10px;
+      h4 {
+        font-weight: 800;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      .subtitle {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+    .sample {
+      margin-top: 20px;
+      margin-bottom: 0;
+      padding-left: 10px;
+    }
+    .gender-wrapp {
+      margin-left: 60px;
+      &>div {
+        float: left;
+        position: relative;
+        margin: 10px 20px;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      .male:before, .female:before {
+        display: block;
+        content: '';
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        margin: 10px;
+        position: absolute;
+        left: -35px;
+        top: -10px;
+      }
+      .male:before {
+        background: #ccc;
+      }
+    }
+    .switchers {
+      margin-bottom: 50px;
+      margin-top: -50px;
+      .labels {
+        text-align: right;
+        float: left;
+        span {
+          display: block;
+          margin-bottom: 10px;
+        }
+        .checked {
+          font-size: 14px;
+          font-weight: 800;
+          text-align: right;
+        }
+      }
+      .vertical .switcher {
+        transform: rotate(
+          90deg
+        );
+        width: 50px;
+        margin-top: 15px;
+        float: right;
+      }
+      .switch-wrapper {
+        float: right;
+        &.horizontal {
+          margin-top: 10px;
+          .switcher a {
+            position: relative;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 24px;
+            color: #fff;
+            background: #ccc;
+            border-radius: 16px;
+            padding: 6px 15px;
+            margin: 5px 10px;
+            border: 1px solid #ccc;
+            width: 100px;
+            z-index: 0;
+            transition: transform 2s;
+            &.checked {
+              background: #0039dc;
+              border: 1px solid #0039dc;
+              padding-left: 40px;
+              &:before {
+                content: '';
+                background-color: #fff;
+                background-image: url(/modules/custom/spc_education_dashboard/img/checked.svg);
+                background-repeat: no-repeat;
+                background-size: 50%;
+                background-position: 50% 50%;
+                display: block;
+                width: 26px;
+                height: 26px;
+                border-radius: 15px;
+                position: absolute;
+                left: 1px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+    .definition, .threshold, .rationale {
+      position: relative;
+      margin-bottom: 30px;
+      .toggle {
+        top: -8px;
+        right: -10px;
+      }
+    }
+    .education-pdf {
+      &, &:hover, &:focus {
+        position: absolute;
+        right: 35px;
+        bottom: 30px;
+        color: #000;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 24px;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+      &:before {
+        content: '';
+        width: 15px;
+        height: 15px;
+        display: block;
+        background-image: url(/modules/custom/spc_education_dashboard/img/share.svg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        float: right;
+        margin-top: 5px;
+        margin-left: 10px;
+      }
+    }
+    .chart {
+      svg:not(:root) {
+        padding-top: 30px;
+        overflow: visible !important;
+      }
+    }
+  }
+}

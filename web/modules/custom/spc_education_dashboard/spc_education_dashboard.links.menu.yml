@@ -1,0 +1,6 @@
+spc_education_dashboard.settings:
+  title: 'SPC Education Dashboard settings'
+  description: 'SPC Education Dashboard settings page'
+  parent: system.admin_config_services
+  route_name: spc_education_dashboard.settings
+  weight: 12
