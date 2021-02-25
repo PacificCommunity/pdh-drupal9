@@ -475,7 +475,7 @@ class SpcMbdController extends ControllerBase {
               'status' => $published_status 
             ];
   
-            $country['area'] = $term->get('field_eez_area')->getValue()[0]['value'] ?? '-';
+            $country['area'] = number_format($term->get('field_eez_area')->getValue()[0]['value']) ?? '-';
             $country['deposited'] = $term->get('field_eez_deposited')->getValue()[0]['value'] ? 'Yes': 'No';
             $country['date'] = $term->get('field_date_deposited')->getValue()[0]['value'] ?? '-';
             $country['url'] = $term->get('field_url')->getValue()[0]['value'] ?? '-';
