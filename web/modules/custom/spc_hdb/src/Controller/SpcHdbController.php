@@ -115,8 +115,43 @@ class SpcHdbController extends ControllerBase {
     }
     
     public function hdbIndicator($category, $indicator){
-      $country_chart = [];
       
+      $indicators = $this->get_file_from_config('health_indicators_fid');
+      $indicators = json_decode($indicators, true);
+
+      if (!isset($indicators, $indicators[$indicator])) {
+        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+      }
+      
+      $data['indicator'] = $indicators[$indicator];      
+      $data['indicators'] = $indicators;
+      
+      $data_values = $this->get_file_from_config('health_json_fid');
+      $data_values = json_decode($data_values, true);
+      $data['countries'] = $data_values['countries-data'];
+
+      $categories = $this->get_file_from_config('health_categories_fid');
+      $categories = json_decode($categories, true);
+      $data['category_data'] = $categories[$category];
+
+      $description = $indicators[$indicator]['indicator-description'];
+      if (strlen($description) > $this->limit) {
+        $data['indicator']['description']['less'] = substr($description, 0, $this->limit);
+        $data['indicator']['description']['more'] = substr($description, $this->limit, strlen($description));
+      } else {
+        $data['indicator']['description']['less'] = $description;
+      }
+
+      $data['current_indicator'] = $indicator;
+      $data['current_category'] = $category; 
+
+      $module_handler = \Drupal::service('module_handler');
+      $module_path = $module_handler->getModule('spc_hdb')->getPath();
+      $data['module']['path'] = $module_path;
+      
+      //dump($data);
+      $map = [];      
+
       return [
         '#theme' => 'spc_hdb_indicator',
         '#data' => $data,
@@ -127,7 +162,7 @@ class SpcHdbController extends ControllerBase {
           ],
           'drupalSettings' => [
             'spc_hdb' => [
-              'country_chart' => $country_chart,
+              'country_chart' => $map,
             ],
           ],
         ],          

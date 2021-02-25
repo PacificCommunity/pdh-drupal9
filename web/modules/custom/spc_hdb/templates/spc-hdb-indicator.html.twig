@@ -1,0 +1,532 @@
+<div class="row indicator-content">
+  <h4>{{ data.indicator.code }}. {{ data.indicator.title }}</h4>
+  
+  {% if data.indicator.description.less %}
+    <div class="category-description">
+        <div class="text">
+          <span class="less">{{ data.indicator.description.less|raw }}</span>
+          {% if data.indicator.description.more %}
+            <span class="dots">...</span>
+            <span class="more">{{ data.indicator.description.more|raw }}</span>
+            <p class="more-less show-more">{{ 'Read more' }}</p>
+          {% endif %}
+        </div>
+    </div> 
+  {% endif %}    
+      
+  <div class="category-detales {{ data.category_detales_class }}">
+    <h4>{{ 'Summary of findings' }} {{ data.indicator.title }}</h4>
+    
+    <div class="wrapper">
+      <div class="summary-indicators ">
+          <div class="indicator-name">
+            {{ 'Indicator' }}
+          </div>
+
+          <div class="country-indicators">
+              <div class="indicator-title">
+                  <a data-name="{{ data.indicator.id }}" href="">
+                  {{ data.indicator.id }} {{ data.indicator.title }}
+                </a>
+              </div>
+          </div> 
+      </div> 
+        
+      <div class="category-data">
+          <div class="not-present values">
+          <h4>{{ 'Not Present' }}</h4>  
+              <div class="{{ data.current_indicator }}-value indicator">
+                  <p class="number value">
+                    {{ data.category_data.indicators[data.current_indicator]['not-present']['number'] }}
+                  </p>
+                  <p class="percentage value">
+                    {{ data.category_data.indicators[data.current_indicator]['not-present']['percentage'] }}%
+                  </p>
+              </div>
+          </div>
+          
+          <div class="under-development values">
+          <h4>{{ 'Under Development' }}</h4>    
+              <div class="{{ data.current_indicator }}-value indicator">
+                  <p class="number value">
+                    {{ data.category_data.indicators[data.current_indicator]['under-development']['number'] }}
+                  </p>
+                  <p class="percentage value">
+                    {{ data.category_data.indicators[data.current_indicator]['under-development']['percentage'] }}%
+                  </p>
+              </div>
+          </div>
+          
+          <div class="present values">
+          <h4>{{ 'Present' }}</h4>    
+              <div class="{{ data.current_indicator }}-value indicator">
+                  <p class="number value">
+                    {{ data.category_data.indicators[data.current_indicator]['present']['number'] }}
+                  </p>
+                  <p class="percentage value">
+                    {{ data.category_data.indicators[data.current_indicator]['present']['percentage'] }}%
+                  </p>
+              </div>
+          </div>    
+      </div>
+    </div>
+  </div>  
+                  
+  <div class="category-countries col-sm-3">
+      {% for country in data.countries %}
+      <div class="country-item clearfix"
+           data-country="{{ country.id }}"
+           data-name="{{ country.title }}"
+           data-lat="{{ country['map-coordinates']['lat'] }}"
+           data-lng="{{ country['map-coordinates']['lng'] }}"
+           data-value="{{ country['indicators'][data.current_indicator]['value'] }}">
+        <div class="country-flag">
+            <img id="{{ country.id }}" src="/{{ data.module.path }}/img/flags/{{ country.id }}.svg" alt="{{ country.title }}">       
+        </div>
+
+        <div class="country-name">
+            <a id="{{ country.id }}-link"
+               data-country-id="{{ country.id }}" 
+               href="/dashboard/health-dashboard/country/{{ country.id }}"
+               class="country-on-map">
+                {{ country.title }}
+            </a>
+        </div>
+
+        <div class="country-indicators helth-indicators">
+            {% for key, indicator in country.indicators %}
+              {% if indicator['indicator-category'] == data.current_category and key == data.current_indicator %}
+                <div id ="country-{{ country.id  }}-id"
+                     class="status-strength {{ indicator.value }}" 
+                     data-value="{{ indicator.value }}"
+                     data-category="{{ data.current_category.id }}"
+                     data-indicator="{{ key }}"
+                     data-country-title="{{ country.title }}"
+                     data-country="{{ country.id }}"></div>
+              {% endif %}
+            {% endfor %}
+        </div>   
+      </div> 
+      {% endfor %}
+  </div>  
+  
+  <div class="pacific-map col-sm-9">
+    <div id="pacific-map"></div>
+    <script>
+      function initMap() {
+
+        const map = new google.maps.Map(document.getElementById('pacific-map'), {
+          disableDefaultUI: true,
+          styles: [
+            {elementType: 'geometry', stylers: [{color: '#ffffff'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#ffffff'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#000000'}]},
+            {
+              featureType: 'administrative',
+              elementType: 'geometry.fill',
+              stylers: [{color: '#000000'}]
+            },
+            {
+              featureType: 'administrative.province',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#000000'}]
+            },
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#000000'}]
+            },            
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#000000'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#000000'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#33c5ec'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
+        });
+
+        const iconBase = '/{{ data.module.path }}/img/markers/';
+        const lebleDefault = {
+          color: "#3a3a3a",
+          fontWeight: "bold",
+          fontSize: "0px"
+        }
+        
+        let countriesData = []; 
+        const countryItems = document.querySelectorAll('.country-item');
+        
+        for (let i = 0; i < countryItems.length; i++){
+          
+          let countryId = countryItems[i].dataset.country;
+          let lat = countryItems[i].dataset.lat;
+          let lng = countryItems[i].dataset.lng;
+          
+          countriesData[countryId] = {};
+          countriesData[countryId]['lat'] = countryItems[i].dataset.lat;
+          countriesData[countryId]['lng'] = countryItems[i].dataset.lng;
+          countriesData[countryId]['name'] = countryItems[i].dataset.name;
+          countriesData[countryId]['value'] = countryItems[i].dataset.value;
+          countriesData[countryId]['position'] = new google.maps.LatLng(lat+10, lng+10);
+          countriesData[countryId]['icon'] = iconBase + countryItems[i].dataset.value + '.png';
+          
+          countriesData[countryId]['label'] = {
+              text: countryItems[i].dataset.name,
+              color: lebleDefault.color,
+              fontWeight: lebleDefault.fontWeight,
+              fontSize: lebleDefault.fontSize
+          }
+        }
+        
+        let bounds = new google.maps.LatLngBounds();
+
+        let markers = {};
+        
+        // Create markers.
+        for (let key in countriesData) {
+            
+          let iconColor = countriesData[key].icon;
+          switch (countriesData[key].value) {
+            case 'high':
+            case 'low':
+            case 'medium': 
+            case 'present':
+                  iconColor = iconBase + 'medium' + '.png';
+              break;
+          }            
+
+          markers[key] = new google.maps.Marker({
+            position: countriesData[key].position,
+            icon: { 
+              url: iconColor,
+              scaledSize: new google.maps.Size(60, 60),
+              anchor: new google.maps.Point(30, 30),
+            },
+            map: map,
+            label: countriesData[key].label,
+            value: countriesData[key].value,
+            cid: key
+          });
+          
+          bounds.extend(markers[key].position);
+          
+          markers[key].addListener('mouseover', function() {
+                let marker = this;
+
+                document.getElementById(marker.cid + '-link').style.textDecoration = "underline";
+
+                let iconColor = marker.value;
+                switch (marker.value) {
+                  case 'high':
+                  case 'low':
+                  case 'medium': 
+                  case 'present':     
+                        iconColor = 'medium';
+                    break;
+                }
+                
+                marker.setIcon({
+                  url: iconBase + iconColor + '-stroke.png',
+                  scaledSize: new google.maps.Size(60, 60),
+                  anchor: new google.maps.Point(30, 30),
+                });
+                        
+                let label = this.getLabel();
+                label.fontSize="10px";
+                this.setLabel(label);
+                
+                marker.setZIndex(1000);
+          });
+          
+          markers[key].addListener('mouseout', function() {
+                let marker = this;
+                
+                document.getElementById(marker.cid + '-link').style.textDecoration = "none";
+                
+                let iconColor = marker.value;
+                switch (marker.value) {
+                  case 'high':
+                  case 'low':
+                  case 'medium':
+                  case 'present':      
+                        iconColor = 'medium';
+                    break;
+                }                
+                
+                marker.setIcon({
+                  url: iconBase + iconColor + '.png',
+                  scaledSize: new google.maps.Size(60, 60),
+                  anchor: new google.maps.Point(30, 30),
+                });
+            
+                let label = this.getLabel();
+                label.fontSize="0px";
+                this.setLabel(label);
+                
+                marker.setZIndex(0);
+          });
+          
+          markers[key].addListener('click', function() {
+                let marker = this;
+                
+                let iconColor = marker.value;
+                switch (marker.value) {
+                  case 'high':
+                  case 'low':
+                  case 'medium':
+                  case 'present':      
+                        iconColor = 'medium';
+                    break;
+                }                
+
+                let countryIndicator = document.querySelector('#country-' + marker.cid + '-id');
+                countryIndicator.click();
+                
+                if (marker.icon.url.indexOf('stroke') == -1){
+                    marker.setIcon({
+                      url: iconBase + iconColor + '-stroke.png',
+                      scaledSize: new google.maps.Size(60, 60),
+                      anchor: new google.maps.Point(30, 30),
+                    });
+                    
+                    let label = this.getLabel();
+                    label.fontSize="10px";
+                    this.setLabel(label);
+                } else {
+                    marker.setIcon({
+                      url: iconBase + iconColor + '.png',
+                      scaledSize: new google.maps.Size(60, 60),
+                      anchor: new google.maps.Point(30, 30),                  
+                    });
+
+                    let label = this.getLabel();
+                    label.fontSize="0px";
+                    this.setLabel(label);
+                }
+          });
+        };
+        
+        map.fitBounds(bounds);
+
+        for (var i = 0; i < countryItems.length; i++) {
+          let countryId = countryItems[i].dataset.country;
+          
+          countryItems[i].addEventListener('mouseover', function(event) {
+            if (markers[countryId] != 'undefined'){
+              
+              let marker = markers[countryId];
+              
+              let iconColor = marker.value;
+              switch (marker.value) {
+                case 'high':
+                case 'low':
+                case 'medium':
+                case 'present':      
+                      iconColor = 'medium';
+                  break;
+              }              
+              
+              marker.setIcon({
+                  url: iconBase + iconColor + '-stroke.png',
+                  scaledSize: new google.maps.Size(60, 60),
+                  anchor: new google.maps.Point(30, 30),
+                });
+              
+              let label = marker.getLabel();
+              label.fontSize="10px";
+              marker.setLabel(label);
+              marker.setZIndex(1000);
+            }
+
+          });
+        }     
+        
+        for (var i = 0; i < countryItems.length; i++) {
+          let countryId = countryItems[i].dataset.country;
+          
+          countryItems[i].addEventListener('mouseout', function(event) {
+            if (markers[countryId] != 'undefined'){
+              
+              let marker = markers[countryId];
+              
+              let iconColor = marker.value;
+              switch (marker.value) {
+                case 'high':
+                case 'low':
+                case 'medium':
+                case 'present':                      
+                      iconColor = 'medium';
+                  break;
+              }              
+              
+              marker.setIcon({
+                  url: iconBase + iconColor + '.png',
+                  scaledSize: new google.maps.Size(60, 60),
+                  anchor: new google.maps.Point(30, 30),                  
+                });
+              
+              let label = marker.getLabel();
+              label.fontSize="0px";
+              marker.setLabel(label);
+              marker.setZIndex(0);
+            }
+
+          });
+        }
+        
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy9EQCIbFOhOfh-PPqxesjbjirYC6WZ0&callback=initMap" async defer></script>
+    
+  </div>
+</div>   
+        
+<div class="categories-switcher indicator">
+    <p class="prev">
+      <span>{{ 'Previous indicator' }}</span>
+    </p>
+    <div class="list">
+      {% for key, indicator in data.indicators  %}  
+        {% if indicator['indicator-category'] == data.current_category %}   
+          <div class="category-item {% if key == data.current_indicator %} current {% endif %}">
+            <a href="/dashboard/health-dashboard/{{ data.current_category }}/{{ key }}">{{ indicator.title }}</a>
+          </div> 
+        {% endif %}
+      {% endfor %}
+    </div>    
+    <p class="next">
+      <span>{{ 'Next indicator' }}</span>
+    </p>
+</div>
+
+<div class="indicator-popup">
+    <div class="country-detales col-sm-5">
+        <img class="country-flag" src="" alt="">
+        <h4></h4>
+        <div class="content clearfix">
+            <p class="indicator-title"></p>
+            <div class="col-sm-4">
+              <p id="indicator-value"></p>
+            </div>
+            <div class="col-sm-8">
+              <p id="indicator-text" class="text"></p>
+            </div>
+        </div>
+        <div id="map" class="map"></div>
+    </div>
+    <div class="description-detales col-sm-7">
+       <h4>{{ 'Description' }}</h4>
+        <div class="content detales">
+
+            <div id="not-present" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength not-present"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="under-development" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength under-development"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="present" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength present"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="low" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength low"></p>
+                </div>  
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="medium" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength medium"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+
+            <div id="high" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength high"></p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+            <div id="not-applicable" class="clearfix">
+                <div class="col-sm-3">
+                  <p class="status-strength not-applicable">{{ 'N/A' }}</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text"></p>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>        
