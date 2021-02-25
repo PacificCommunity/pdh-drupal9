@@ -11,6 +11,7 @@ charts:
     - core/jquery.once
     - core/jquery.ui.autocomplete
     - spc_education_dashboard/switcher
+    - spc_education_dashboard/js-pdf
 
 search-autocomplete:
   js:
@@ -26,6 +27,10 @@ switcher:
   css:
     component:
       css/switcher.css: {}
+
+js-pdf:
+  js:
+    js/jspdf.js: {}
 
 # # Third-party library (self hosted).
 # jquery-labelauty:
