@@ -22,6 +22,19 @@
                             </div>
                         </div>
                     </div>
+                    {% if data.subterms %}
+                      <div class="delimiter">&gt;</div>
+                      <div class="inline dropdown">
+                          <a href="#" title="{{ data.subterm }}">{{ data.subterm }}</a>
+                          <div class="breadcrumb-subitems">
+                              <div class="subitems-wrapper">
+                                  {% for subterm in data.subterms %}
+                                      <a href="{{ subterm.url }}" title="{{ subterm.name }}">{{ subterm.name }}</a>
+                                  {% endfor %}
+                              </div>
+                          </div>
+                      </div>
+                    {% endif %}  
                 </div>
             </div>
         {% endif %}

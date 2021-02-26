@@ -26,8 +26,13 @@ class SpcHomeController  extends ControllerBase {
     $data['datasets'] = $this->get_home_datasets();
     
     return [
-        '#theme' => 'spc_home_page',
-        '#data' => $data,
+      '#theme' => 'spc_home_page',
+      '#data' => $data,
+      '#attached' => [
+        'library' => [
+          'spc/gmap',
+        ],
+      ],        
     ];
   }
   

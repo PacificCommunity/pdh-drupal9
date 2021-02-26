@@ -148,9 +148,6 @@ class SpcHdbController extends ControllerBase {
       $module_handler = \Drupal::service('module_handler');
       $module_path = $module_handler->getModule('spc_hdb')->getPath();
       $data['module']['path'] = $module_path;
-      
-      //dump($data);
-      $map = [];      
 
       return [
         '#theme' => 'spc_hdb_indicator',
@@ -162,7 +159,7 @@ class SpcHdbController extends ControllerBase {
           ],
           'drupalSettings' => [
             'spc_hdb' => [
-              'country_chart' => $map,
+              'indicator_detales' => $indicators,
             ],
           ],
         ],          
@@ -184,6 +181,8 @@ class SpcHdbController extends ControllerBase {
       if (!isset($countries, $countries[$country])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
       }
+      
+      //dump($health_dashboard_data['countries-data']);
       
       foreach($health_dashboard_data['countries-data'] as $country_data){
         if ($country_data['id'] == $country){
@@ -249,43 +248,28 @@ class SpcHdbController extends ControllerBase {
           $category_menu[$key] = $categories[$key];
         }
       }
-
+      
       return $category_menu;
     }    
     
     public function get_countries(){
         $countries = [];
         
-        $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
-        $theme = \Drupal::theme()->getActiveTheme();
-        $theme_path = $theme->getPath();
+        $data_values = $this->get_file_from_config('health_json_fid');
+        $data_values = json_decode($data_values, true);
+        $countries_data = $data_values['countries-data'];
+        
+        $module_handler = \Drupal::service('module_handler');
+        $module_path = $module_handler->getModule('spc_hdb')->getPath(); 
 
-        foreach($countries_tax as $country_term){
-            $country = Term::load($country_term->tid);
-            
-            $name = $country->getName();
-            $country_code = $country->get('field_country_code')->getValue()[0]['value'];
-            $country_id = str_replace(' ', '-', strtolower($name));
-            
-            $fid = @$country->get('field_flag')->getValue()[0]['target_id'];
-            $file = File::load($fid);
-            
-            if (is_object($file)){
-              $flag = file_create_url($file->getFileUri());
-            } else {
-                $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
-            }
-
-            $url = '/dashboard/health-dashboard/country/' . $country_id;
-
-            $countries[$country_id] = [
-              'id' => $country_id, 
-              'code' => $country_code,
-              'url' => $url,
-              'flag' => $flag,
-              'name' => $name,
-            ];
-          }
+        foreach($countries_data as $country_value){
+          $countries[$country_value['id']] = [
+            'id' => $country_value['id'], 
+            'url' => '/dashboard/health-dashboard/country/' . $country_value['id'],
+            'flag' =>  '/' . $module_path . '/img/flags/' . $country_value['id'] . '.svg',
+            'name' => $country_value['title'],
+          ];
+        }
         
         return $countries;
     }
