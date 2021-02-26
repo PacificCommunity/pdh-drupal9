@@ -39,7 +39,7 @@
                 <input id="group-{{ key }}" type="checkbox" hidden />
                 <label for="group-{{ key }}" class="first-level">
                     {% if key != 'wrapper' %}
-                      <a href="{{ item.url }}">{{ item.title }}</a>
+                      <a href="/dashboard/health-dashboard/{{ key }}">{{ item.title }}</a>
                     {% else %}
                         <span>{{ item.title }}</span>
                     {% endif %}    
@@ -53,7 +53,7 @@
                       <li>
                           <input id="sub-group-{{ key2 }}" type="checkbox" hidden />
                           <label for="sub-group-{{ key2 }}" class="indicator">
-                            <a class="subcategory" href="{{ item2.url }}">
+                            <a class="subcategory" href="/dashboard/health-dashboard/{{ key2 }}">
                                 {{ item2.title }}
                             </a>
                             <span class="fa fa-angle-down"></span>
@@ -61,7 +61,7 @@
                             <ul class="sub-group-list">
                             {% for key3, item3 in item2.indicators %}  
                                 <li>
-                                  <a href="{{ item3.url }}">
+                                  <a href="/dashboard/health-dashboard/{{ key2 }}/{{ key3 }}">
                                     {{ item3.code }}. {{ item3.title }}
                                   </a>
                                 </li>
@@ -72,13 +72,12 @@
                       <li>
                           <input id="sub-group-{{ key2 }}" type="checkbox" hidden />
                           <label for="sub-group-{{ key2 }}">
-                            <a href="{{ item2.url }}">
+                            <a href="/dashboard/health-dashboard/{{ key }}/{{ key2 }}">
                                 {{ item2.code }}. {{ item2.title }}
                             </a>
                           </label>
                       </li>
                      {% endif %} 
-                     
                     {% endfor %}
                 </ul>
             </li>

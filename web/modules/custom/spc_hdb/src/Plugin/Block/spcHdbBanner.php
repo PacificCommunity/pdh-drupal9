@@ -40,11 +40,8 @@ class spcHdbBanner extends BlockBase {
     $current_path = \Drupal::service('path.current')->getPath();
     if (strpos($current_path, '/dashboard/health-dashboard/country/') !== false){
       $countries = $this->get_search_countries();
-      //dump($countries);
       foreach (\Drupal::routeMatch()->getParameters() as $param) {
-        //dump($param);
         if (isset($countries, $countries[$param])){
-          //dump($countries[$param]);
           foreach ($countries as $key => $country){
               $term_data[] = [
                'id' => $key,
@@ -59,9 +56,15 @@ class spcHdbBanner extends BlockBase {
     } else {
       $categories = $this->get_file_from_config('health_categories_fid');
       $categories = json_decode($categories, true);
+      
+      $indicators = $this->get_file_from_config('health_indicators_fid');
+      $indicators = json_decode($indicators, true);
+      
       $route_name = \Drupal::routeMatch()->getRouteName();
       foreach (\Drupal::routeMatch()->getParameters() as $param) {
+        
         if (isset($categories, $categories[$param])) {
+          $current_category = $param;
           foreach ($categories as $key => $category){
               $term_data[] = [
                'id' => $key,
@@ -71,6 +74,20 @@ class spcHdbBanner extends BlockBase {
           }
           $data['terms'] = $term_data;
           $data['term'] = $categories[$param]['name'];
+        }
+        
+        if (isset($indicators, $indicators[$param])){
+          foreach ($indicators as $key => $indicator){
+            if ($indicator['indicator-category'] === $current_category){
+              $subterm_data[] = [
+               'id' => $key,
+               'name' => $indicator['title'],
+               'url' => '/dashboard/health-dashboard/' . $current_category . '/' . $key,
+              ];
+            }
+          }
+          $data['subterms'] = $subterm_data;
+          $data['subterm'] = $indicators[$param]['title'];   
         }
       }
     }    
@@ -95,21 +112,20 @@ class spcHdbBanner extends BlockBase {
 
   public function get_search_countries(){
     $countries = [];
+      
+    $data_values = $this->get_file_from_config('health_json_fid');
+    $data_values = json_decode($data_values, true);
+    $countries_data = $data_values['countries-data'];
 
-    $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
-    foreach($countries_tax as $country_term){
-        $country = Term::load($country_term->tid);
+    $module_handler = \Drupal::service('module_handler');
+    $module_path = $module_handler->getModule('spc_hdb')->getPath(); 
 
-        $name = $country->getName();
-        $country_code = $country->get('field_country_code')->getValue()[0]['value'];
-        
-        $key = str_replace(' ', '-', strtolower($name));
-
-        $countries[$key] = [
-          'title' => $name,
-          'code'  => $country_code
-        ];
-      }
+    foreach($countries_data as $country_value){
+      $countries[$country_value['id']] = [
+        'code' => $country_value['id'], 
+        'title' => $country_value['title'],
+      ];
+    }      
 
     return $countries;
   }

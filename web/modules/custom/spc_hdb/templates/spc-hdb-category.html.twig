@@ -36,6 +36,12 @@
       </div>
           
       <div class="country-indicators helth-indicators">
+        {% set indicators_count = 0 %}
+        {% for key, indicator in data.indicators %}
+          {% if indicator['indicator-category'] == data.category.id  %}
+            {% set indicators_count = indicators_count + 1 %}
+          {% endif %}
+        {% endfor %}                
         <div class="country-indicators-scroll ind-count-{{ indicators_count }}">
           <div class="category-header clearfix">  
             <div class="country-indicators">
