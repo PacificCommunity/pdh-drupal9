@@ -10,6 +10,7 @@ global:
     js/scripts.js: {}
   dependencies:
     - core/jquery
+    - core/jquery.ui.dialog
     - core/jquery.once
     - core/drupal
 ma5:
