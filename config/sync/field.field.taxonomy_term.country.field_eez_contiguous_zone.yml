@@ -1,0 +1,19 @@
+uuid: 4e8bb2f7-6ce5-40c5-b6fb-e09a67e7520f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_eez_contiguous_zone
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_eez_contiguous_zone
+field_name: field_eez_contiguous_zone
+entity_type: taxonomy_term
+bundle: country
+label: 'EEZ Contiguous Zone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
