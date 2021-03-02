@@ -9,7 +9,7 @@ id: taxonomy_term.country.field_eez_area
 field_name: field_eez_area
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Area'
+label: 'EEZ Area (sq. km)'
 description: ''
 required: false
 translatable: false
@@ -18,6 +18,6 @@ default_value_callback: ''
 settings:
   min: !!float 0
   max: null
-  prefix: ''
+  prefix: sq/km
   suffix: ''
 field_type: float

@@ -1,0 +1,19 @@
+uuid: 17914316-fafe-43a0-9ac8-6621d70be928
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_eez_marine_protected_areas
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_eez_marine_protected_areas
+field_name: field_eez_marine_protected_areas
+entity_type: taxonomy_term
+bundle: country
+label: 'EEZ Marine Protected Areas'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
