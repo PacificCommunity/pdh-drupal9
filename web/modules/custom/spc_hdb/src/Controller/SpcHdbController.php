@@ -181,9 +181,7 @@ class SpcHdbController extends ControllerBase {
       if (!isset($countries, $countries[$country])) {
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
       }
-      
-      //dump($health_dashboard_data['countries-data']);
-      
+
       foreach($health_dashboard_data['countries-data'] as $country_data){
         if ($country_data['id'] == $country){
           
@@ -197,7 +195,13 @@ class SpcHdbController extends ControllerBase {
           $data['map']['url'] = '/' . $module_path . '/img/maps/' . $data['country_id'] . '.svg';
           
           $summary_chart = $this->get_country_summary_chart_data($country_data['indicators']);
-
+          
+          $config = \Drupal::getContainer()->get('config.factory')->getEditable('spc_hdb.settings');
+          $export_fid = $config->get('pdf_' . $country_data['id'] . '_fid');
+          $file = File::load($export_fid);
+          if (is_object($file)){
+            $data['export'] = file_create_url($file->getFileUri());
+          }
         }
       }
 
