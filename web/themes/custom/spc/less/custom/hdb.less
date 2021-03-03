@@ -221,6 +221,9 @@
        float: left;
        border-radius: 5px;
        margin-right: 20px;
+       @media (max-width: 1000px) {
+         width: 32%;
+       }
     }
     .present:before {
         background: #92D050;
@@ -309,7 +312,7 @@
 @media (max-width: 1000px) {
     .health-dashboard-content {
         .chart-global-legend {
-            margin-top: 50px;
+            margin-top: 0px;
         }
         .legend {
             margin-bottom: 20px;
@@ -563,6 +566,9 @@
 .health-country-chart{
     width: 100%;
     margin-bottom: 40px;
+    h4 {
+      margin-bottom: 0;
+    }
 }
 .block-title{
     font-family: Montserrat;
@@ -674,8 +680,10 @@
     a:hover {
         color: #000;
     }
-    p{
-        font-size: 10px;
+    .title p,
+    .code p,
+    .who p{
+        font-size: 10px !important;
         line-height: 22px;
     }
     .status-strength {
@@ -1515,7 +1523,8 @@
         display: flex;
     }    
     .health-dashboard-content .legend {
-        margin-right: 5px;
+        width: auto;
+        margin: 5px;
     }
     .health-dashboard-content .legend:before {
         width: 20px;
@@ -1699,4 +1708,12 @@
             }
         }
     }
+}
+.highcharts-data-table * {
+    text-align: center;
+  }
+
+rect.tipbox {
+    stroke-width: 1;
+    stroke: rgba(0,0,0,0.3);
 }

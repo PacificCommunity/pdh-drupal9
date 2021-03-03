@@ -16,9 +16,9 @@
               <span>{{ 'Not Present' }}</span>
             </div>
           </div>
-          {% if data.chart_pdf_export %}  
+          {% if data.export %}  
             <div class="chart-pdf-export">
-                <a target="_blank"href="<?php print $data['chart-pdf-export']; ?>" aria-label="Download pdf"></a>
+                <a target="_blank"href="{{ data.export }}" aria-label="Download pdf"></a>
               <div class="chart-pdf-text">
                 <p><strong>{{ 'Download pdf file' }}</strong></p>
                 <p>{{ 'Summary of status of indicators across the categories (%)' }}</p>
