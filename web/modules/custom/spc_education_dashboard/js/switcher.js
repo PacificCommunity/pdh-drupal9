@@ -5,7 +5,6 @@
     if (filter !== undefined && filter.length) {
       $haul = $haul.filter(filter);
     }
-
     $haul.each(function () {
       var $checkbox = $(this).hide(),
         $switcher = $(document.createElement("div"))
