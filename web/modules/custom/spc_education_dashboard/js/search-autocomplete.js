@@ -1,6 +1,6 @@
 (function ($) {
   var initialized = false;
-  Drupal.behaviors.educationDashboard = {
+  Drupal.behaviors.educationDashboardSearchAutocomplete = {
     attach: function (context, settings) {
       const tags = settings.spc_education_dashboard_ac.tags;
       function getKeyByValue(object, value) {

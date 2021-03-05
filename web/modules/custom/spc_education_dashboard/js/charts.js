@@ -1,6 +1,6 @@
 (function ($) {
   var initialized = false;
-  Drupal.behaviors.educationDashboard = {
+  Drupal.behaviors.educationDashboardCharts = {
     attach: function (context, settings) {
       if (initialized) {
         return;
@@ -1061,7 +1061,6 @@
 
         //enable switcher
         $.switcher("input.slider");
-
         $(".swch-4 .ui-switcher").on("click", function (e) {
           e.preventDefault();
           let newData = [];
