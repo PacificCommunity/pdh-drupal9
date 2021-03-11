@@ -52,6 +52,9 @@ function spc_preprocess_html(&$variables) {
       $variables['attributes']['class'][] = 'topic-full';
     }
   }  
+  if ($route_name === 'user.login' || $route_name = 'user.pass' || $route_name === 'user.register'){
+    $variables['attributes']['class'][] = 'minimal user-page';
+  }  
 }
 
 /**
@@ -585,4 +588,10 @@ function _get_shelf_treaty($term){
         }
     }            
     return $output;
+}
+
+function spc_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'form' & !empty($variables['element']['#id'])) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#id']);
+  }
 }

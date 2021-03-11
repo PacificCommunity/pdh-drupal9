@@ -70,9 +70,15 @@ class spcBanner extends BlockBase {
           if ($header_type) {
             $data['maximum_header'] = boolval($header_type);
           }
-        }
+        }      
       }
     }
+    
+    $route_name = \Drupal::routeMatch()->getRouteName();
+    if ($route_name === 'user.login' || $route_name = 'user.pass' || $route_name === 'user.register'){
+      $data['maximum_header'] = false;
+    }
+  
 
     return array(
       '#theme' => 'main_banner_block',
