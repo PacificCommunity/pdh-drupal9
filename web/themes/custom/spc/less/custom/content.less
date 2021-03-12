@@ -636,6 +636,11 @@ main {
 }
 
 body.minimal.user-page {
+  .spc-region-subheader{
+    .banner-image {
+      height: 150px;
+    }
+  } 
   .breadcrumbs,
   .spc-home-banner-block {
     display: none;
@@ -656,6 +661,108 @@ form {
       h1 {
         color: #003977;
         margin: 0 0 30px;
+      }
+      
+      label {
+        font-size: 16px;
+        color: #003977;
+        
+        &.form-required:after {
+          content: '*';
+          color: #ff0000;
+          padding-left: 4px;
+        }
+      }
+      
+      input {
+        margin-bottom: 0 !important;
+        &::placeholder {
+          font-size: 16px;
+          color: #999999;
+          font-weight: 100;
+        }
+        &::-moz-placeholder {
+          font-size: 16px;
+          color: #999999;
+          font-weight: 100;
+        }
+        &::-ms-input-placeholder {
+          font-size: 16px;
+          color: #999999;
+          font-weight: 100;
+        }
+      }
+      
+      .description {
+        color: #2a2c2d;
+        display: block;
+        font-size: 85%;
+      }
+      
+      .password-parent {
+        position: relative;
+        
+        .password-strength {
+          position: absolute;
+          top: 10px;
+          right: 0;
+          
+          .password-strength__meter {
+              background-color: #c4c4c4;
+              height: .3em;
+              width: 17em;
+              margin-bottom: -25px;
+              
+              .password-strength__indicator {
+                background-color: #47c965;
+              }
+          }  
+          .password-strength__title {
+            color: #ff0000;
+            
+            .password-strength__text {
+              float: right;
+              font-weight: bold;
+            }
+          }          
+        }
+        &:after {
+          content : 'Enter a password';
+          display: block;
+          color: #2a2c2d;
+          display: block;
+          font-size: 85%;          
+        }
+      }
+      
+      .confirm-parent {
+        position: relative;
+        .password-confirm:not(.form-text) {
+          position: absolute;
+          top: 0;
+          right: 0;
+          color: #ff0000;
+          width: 17em;
+          visibility: hidden;
+        }
+        &:after {
+          content : 'Repeat the password';
+          display: block;
+          color: #2a2c2d;
+          display: block;
+          font-size: 85%;          
+        }
+      }
+      
+      .password-suggestions {
+        ul {
+          list-style: disc;
+          padding-left: 40px;          
+        }
+      }
+      
+      details summary {
+        display:none;
       }
       
       .login-register-tabs {
@@ -756,7 +863,7 @@ form {
     select {
         display: block;
         width: 100%;
-        height: 35px;
+        height: 45px;
         padding: .375rem .75rem;
         border: 1px solid #0056B3;
         border-radius: 5px;
@@ -766,8 +873,8 @@ form {
         color: #495057;
         background-color: #fff;
         background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
+        border: 1px solid #7d98a9;
+        border-radius: 5px;
         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         margin-bottom: 10px;
     }
