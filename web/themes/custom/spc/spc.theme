@@ -100,7 +100,6 @@ function spc_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state
     case 'user_login_form':
       $form['name']['#placeholder'] = t('Username');
       $form['pass']['#placeholder'] = t('Password');
-      //dump($form['loginurl']['#prefix']);
       $form['loginurl']['#prefix'] = '<p class="auth-link">';
       $form['loginurl']['#suffix'] = '</p>';
       break;
