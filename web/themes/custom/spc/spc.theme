@@ -104,10 +104,10 @@ function spc_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state
       $form['loginurl']['#suffix'] = '</p>';
       break;
     case 'user_register_form': 
-      $form['account']['name']['#weigh'] = -10;
+      $form['account']['name']['#weight'] = -10;
       $form['account']['name']['#placeholder'] = t('Username');
       $form['account']['name']['#description'] = t('Spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.');
-      $form['account']['mail']['#weigh'] = -9;
+      $form['account']['mail']['#weight'] = -5;
       $form['account']['mail']['#title'] = t('E-mail address');
       $form['account']['mail']['#placeholder'] = t('E-mail address');
       break;
