@@ -1322,4 +1322,83 @@
             }
         }
     }
-}    
+}  
+
+#spc_quote {
+    position: relative;
+    margin: 0 auto 30px auto;
+    max-width: 1034px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .field {
+        font-weight: 300;
+    }
+
+    .quote-icon {
+        background: url(../img/quote.svg);
+        width: 30px;
+        height: 30px;
+        margin: 30px auto;
+    }
+
+    img {
+        border-radius: 50%;
+        margin: 20px auto;
+        width: 100px;
+        height: 100px;
+    }
+
+    .field-type-text-long {
+        font-size: 34px;
+        margin: -10px 200px 0 200px;
+        text-align: center;
+        width: calc(100% - 400px);
+
+        &:last-of-type {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    }
+    .field-type-text {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 767px) {
+        margin-bottom: 0;
+
+        .quote-icon {
+            margin: 35px 0 20px 0;  
+        }
+
+        img {
+            margin-bottom: 10px;          
+        }
+
+        .field-type-text-long {
+            margin: 0 50px 0 50px;
+            font-size: 18px;
+            width: calc(100% - 100px);
+
+            &:last-of-type {
+                font-size: 16px;
+                margin-bottom: 0;
+            }
+        }
+
+        .field-type-text {
+            margin-bottom: 0;          
+        }
+    }
+
+    @media (max-width: 991px) {
+        .field-type-text-long {
+            font-size: 24px;
+        }
+    }
+}
