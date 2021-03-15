@@ -641,15 +641,30 @@
         z-index: 2;
         
         &:before {
-          font-size: 30px;
-          line-height: .5;
+          content: '';
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          top: 62px;
+          right: 35px;
+          background: 0 0;
+          border: solid #fff;
+          border-width: 0 2px 2px 0;
         }
         
         &.slick-prev {
           left: 300px;
+          
+          &:before {
+            transform: rotate(-225deg);
+          }
         }
         &.slick-next {
           right: 300px;
+          
+          &:before {
+            transform: rotate(-45deg);
+          }          
         }
         @media (max-width: 1024px){
           &.slick-prev {
