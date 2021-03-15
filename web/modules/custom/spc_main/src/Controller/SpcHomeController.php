@@ -24,6 +24,7 @@ class SpcHomeController  extends ControllerBase {
     $data['countries'] = $this->get_members_countries();
     $data['stories'] = $this->get_home_stories();
     $data['datasets'] = $this->get_home_datasets();
+    $data['quotes'] = $this->get_home_quotes();
     
     return [
       '#theme' => 'spc_home_page',
@@ -312,6 +313,33 @@ class SpcHomeController  extends ControllerBase {
       'title' => 'Organizations',
       'description' => $description,
     ];
+  }
+  
+  public function get_home_quotes(){
+    $quotes = [];
+    
+    $query = \Drupal::entityQuery('node')
+      ->condition('status', 1)
+      ->condition('type', 'quotes')
+      ->pager(1);
+    $nids = $query->execute();
+
+    foreach ($nids as $nid) {
+      $quote = [];
+      $node = \Drupal\node\Entity\Node::load($nid); 
+      $quote['name'] = $node->field_author_name->value;
+      $quote['about'] = $node->field_about_the_author->value;
+ 
+      $style = ImageStyle::load('256x256');
+      $styled_image_url = $style->buildUrl($node->field_image->entity->getFileUri());
+      $quote['img'] = $styled_image_url;
+      
+      $quote['body'] = strip_tags($node->body->value);
+      
+      $quotes[] = $quote;
+    }
+
+    return $quotes;
   }
 
 }

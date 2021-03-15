@@ -124,7 +124,30 @@
           </div>
       </div>           
   </div> 
-      
+                                  
+  {# Quotes block. #}
+  {% if data.quotes %}
+  <div class="pane-quotes-on-home-page clearfix">
+    <div class="node node-quotes node-promoted node-teaser contextual-links-region">
+       <div id="spc_quote" class="content">
+          <i class="quote-icon"></i>
+          <div class="field field-type-text-long">
+             {{ data.quotes[0].body }}        
+          </div>
+          <div class="field field-type-image">
+             <img src="{{ data.quotes[0].img }}" class="b-lazy b-loaded" width="200" height="200" alt="">        
+          </div>
+          <div class="field field-type-text">
+            {{ data.quotes[0].name }}
+          </div>
+          <div class="field field-type-text-long">
+            {{ data.quotes[0].about }}
+          </div>
+       </div>
+    </div>
+  </div>      
+  {% endif %}
+  
   {# latest Stories block. #} 
   {% if data.stories %}
   <div id="latest-stories-block" class="stories_on_the_hp">  
