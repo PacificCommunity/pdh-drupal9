@@ -32,6 +32,10 @@ main {
     }
 }
 
+.layout-container {
+    margin: 0;
+}
+
 .wa-status-messages {
   max-width: 1170px;
   margin: 0px auto;
@@ -702,10 +706,19 @@ form {
       .password-parent {
         position: relative;
         
+        @media(max-width: 768px){
+          margin-top: 30px;
+        }
+        
         .password-strength {
           position: absolute;
           top: 10px;
           right: 0;
+          
+          @media(max-width: 768px){
+            width: 100%;
+            top: -15px;
+          }
           
           .password-strength__meter {
               background-color: #c4c4c4;
@@ -714,7 +727,7 @@ form {
               margin-bottom: -25px;
               
               @media(max-width: 768px){
-                width: 10em;
+                width: 100%;
               }
               
               .password-strength__indicator {
@@ -741,6 +754,11 @@ form {
       
       .confirm-parent {
         position: relative;
+        
+        @media(max-width: 768px){
+          margin-top: 30px;
+        }
+          
         .password-confirm:not(.form-text) {
           position: absolute;
           top: 0;
@@ -748,6 +766,11 @@ form {
           color: #ff0000;
           width: 17em;
           visibility: hidden;
+          
+          @media(max-width: 768px){
+            width: 100%;
+            top: -25px;
+          }
         }
         &:after {
           content : 'Repeat the password';
@@ -850,7 +873,9 @@ form {
       }
       
       .auth-link {
-        float: right;
+        @media(min-width:768px){
+          float: right;
+        }
         a {
             font-size: 16px;
             color: #031f79; 
