@@ -51,7 +51,7 @@ class LayoutResource extends ResourceBase {
       $plugin_id,
       $plugin_definition,
       $container->getParameter('serializer.formats'),
-      $container->get('logger.factory')->get('dummy'),
+      $container->get('logger.factory')->get('articles_syndication'),
       $container->get('current_user')
     );
   }
