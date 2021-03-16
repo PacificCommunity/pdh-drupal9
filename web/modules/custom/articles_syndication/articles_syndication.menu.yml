@@ -1,6 +1,0 @@
-spc_main.sdg_chart_config:
-  title: 'SDG chart settings page'
-  description: 'SPC Dashboard sdg chart settings page'
-  parent: system.admin_config_services
-  route_name: spc_main.sdg_chart_settings
-  weight: 11    
