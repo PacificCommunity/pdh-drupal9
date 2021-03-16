@@ -87,3 +87,13 @@ function spc_main_preprocess_html(&$variables)
     }
   }
 }
+
+/**
+ * Implements hook_user_login().
+ */
+function spc_main_user_login($account) {
+  $url = "/";
+  $response = new Symfony\Component\HttpFoundation\RedirectResponse($url);
+  $response->send();
+  return;
+}
