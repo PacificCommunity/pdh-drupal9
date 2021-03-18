@@ -1,0 +1,19 @@
+uuid: a56d14ea-09e6-4838-8a19-d55c19aedfdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_about_the_author
+    - node.type.quotes
+id: node.quotes.field_about_the_author
+field_name: field_about_the_author
+entity_type: node
+bundle: quotes
+label: 'About the Author'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,31 @@
+contact:
+  technical:
+    name: LinkDigital
+    email: support@linkdigital.com.au
+  support:
+    name: LinkDigital
+    email: support@linkdigital.com.au
+organization:
+  name: SPC
+  display_name: SPC
+  url: 'https://dev.spc.links.com.au/'
+security:
+  nameIdEncrypted: true
+  authnRequestsSigned: false
+  logoutRequestSigned: false
+  logoutResponseSigned: false
+  wantMessagesSigned: false
+  wantAssertionsSigned: true
+  wantNameIdEncrypted: false
+  signMetaData: false
+  signatureAlgorithm: 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
+  lowercaseUrlencoding: false
+key_location: ''
+cert_location: ''
+strict: true
+entity_id: ''
+_core:
+  default_config_hash: gjB7015sYrrNUrP2pj9kWQoYqXGhwCOSXMdR3p34elk
+debug: true
+new_cert_location: ''
+assertion_urls: 'https://dev.spc.links.com.au/saml/consume'

@@ -1,0 +1,19 @@
+uuid: 69ae8d4d-2d2a-4124-b4db-5cc57b6b3fac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_syndicated_id
+    - node.type.article
+id: node.article.field_syndicated_id
+field_name: field_syndicated_id
+entity_type: node
+bundle: article
+label: 'Syndicated id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

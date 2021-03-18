@@ -1,0 +1,95 @@
+miniorange_oauth_client_idp_customer_admin_email: null
+miniorange_oauth_client_license_key: null
+miniorange_oauth_client_customer_id: ''
+miniorange_oauth_client_customer_admin_token: ''
+miniorange_oauth_client_customer_api_key: ''
+miniorange_oauth_client_force_auth: false
+miniorange_oauth_client_enable_backdoor: false
+miniorange_oauth_client_default_relaystate: ''
+miniorange_oauth_client_idp_name: ''
+miniorange_oauth_client_idp_issuer: ''
+miniorange_oauth_client_idp_login_url: ''
+miniorange_oauth_client_idp_logout_url: ''
+miniorange_oauth_client_idp_x509_certificate: ''
+miniorange_oauth_client_response_signed: false
+miniorange_oauth_client_assertion_signed: false
+miniorange_oauth_client_enable_login: false
+miniorange_oauth_client_username_attribute: NameID
+miniorange_oauth_client_email_attribute: NameID
+miniorange_oauth_client_email_attr_val: email
+miniorange_oauth_client_idp_attr1_name: ''
+miniorange_oauth_client_attr5_name: ''
+miniorange_oauth_client_idp_attr5_name: ''
+miniorange_oauth_client_attr2_name: ''
+miniorange_oauth_client_idp_attr2_name: ''
+miniorange_oauth_client_attr3_name: ''
+miniorange_oauth_client_idp_attr3_name: ''
+miniorange_oauth_client_attr4_name: ''
+miniorange_oauth_client_idp_attr4_name: ''
+miniorange_oauth_client_disable_autocreate_users: false
+miniorange_oauth_client_default_role: ''
+miniorange_oauth_client_role1_name: ''
+miniorange_oauth_client_idp_role1_name: ''
+miniorange_oauth_client_role2_name: ''
+miniorange_oauth_client_idp_role2_name: ''
+miniorange_oauth_client_role3_name: ''
+miniorange_oauth_client_idp_role3_name: ''
+miniorange_oauth_client_role4_name: ''
+miniorange_oauth_client_idp_role4_name: ''
+miniorange_oauth_client_status: ''
+miniorange_oauth_client_customer_admin_phone: null
+miniorange_oauth_client_tx_id: null
+miniorange_oauth_client_customer_admin_password: ''
+miniorange_oauth_client_auto_redirect_to_idp: false
+miniorange_oauth_client_sp_issuer: ''
+miniorange_oauth_client_login_by: false
+miniorange_oauth_send_with_header_oauth: true
+miniorange_oauth_send_with_body_oauth: false
+miniorange_auth_client_display_name: 'Log In using Google'
+miniorange_oauth_enable_login_with_oauth: true
+miniorange_oauth_client_attr1_name: ''
+miniorange_oauth_client_idp_entity_id: ''
+miniorange_oauth_client_base_url: 'https://dev.spc.links.com.au/'
+miniorange_oauth_client_idp_acs_url: ''
+miniorange_oauth_client_idp_nameid_attr_map: ''
+_core:
+  default_config_hash: JLXDL-Kr_NmiWVHz_M_oA72iD56lXrqC2Y_KOxUPp7A
+miniorange_oauth_client_feedback: '1'
+miniorange_auth_client_callback_uri: 'https://dev.spc.links.com.au/mo_login'
+miniorange_oauth_client_disabled: false
+mo_saml_tourTaken_config_clc: true
+miniorange_oauth_client_app: Google
+miniorange_oauth_client_appval:
+  client_id: 988044380904-1bg2r1s7s2b09tcjgc11ivq7c2rr9127.apps.googleusercontent.com
+  client_secret: ODqAv4gxEHk7rcwS1P6Lbm34
+  app_name: Google
+  display_name: 'Log In using Google'
+  scope: email+profile
+  authorize_endpoint: 'https://accounts.google.com/o/oauth2/auth'
+  access_token_ep: 'https://www.googleapis.com/oauth2/v4/token'
+  user_info_ep: 'https://www.googleapis.com/oauth2/v1/userinfo'
+  callback_uri: 'https://dev.spc.links.com.au/mo_login'
+  client_app: Google
+  miniorange_oauth_client_email_attr: email
+miniorange_auth_client_app_name: Google
+miniorange_auth_client_client_id: 988044380904-1bg2r1s7s2b09tcjgc11ivq7c2rr9127.apps.googleusercontent.com
+miniorange_auth_client_client_secret: ODqAv4gxEHk7rcwS1P6Lbm34
+miniorange_auth_client_scope: email+profile
+miniorange_auth_client_authorize_endpoint: 'https://accounts.google.com/o/oauth2/auth'
+miniorange_auth_client_access_token_ep: 'https://www.googleapis.com/oauth2/v4/token'
+miniorange_auth_client_user_info_ep: 'https://www.googleapis.com/oauth2/v1/userinfo'
+miniorange_auth_client_stat: 'Review Config'
+miniorange_oauth_redirect_url: 'https://dev.spc.links.com.au/user/login'
+mo_saml_tourTaken_mapping: true
+mo_saml_tourTaken_licensing: true
+miniorange_oauth_client_redi_upgrade: '1'
+miniorange_oauth_client_attr_list_from_server:
+  id: '107693751019999063299'
+  email: sergey.shchedrin@linkdigital.com.au
+  verified_email: true
+  name: 'Sergey Shchedrin'
+  given_name: Sergey
+  family_name: Shchedrin
+  picture: 'https://lh3.googleusercontent.com/a-/AOh14GhEzr3c88taCj7kEjAWvfYx5DGnJ8jjx5sj4uLj=s96-c'
+  locale: en-GB
+  hd: linkdigital.com.au
