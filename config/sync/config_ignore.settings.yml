@@ -8,5 +8,6 @@ ignored_config_entities:
   - spc_main.settings
   - spc_data_import.settings
   - spc_hdb.settings
+  - articles_syndication.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

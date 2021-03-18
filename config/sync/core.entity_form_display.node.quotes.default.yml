@@ -1,88 +1,66 @@
-uuid: bc5836c4-db3e-4d24-97f2-085c0f3ac29f
+uuid: 8c59fa6a-74ea-4bac-aed3-9af4e6c519fe
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.article.body
-    - field.field.node.article.comment
-    - field.field.node.article.field_image
-    - field.field.node.article.field_related_datasets
-    - field.field.node.article.field_related_topic
-    - field.field.node.article.field_syndicated_id
-    - field.field.node.article.field_tags
+    - field.field.node.quotes.body
+    - field.field.node.quotes.field_about_the_author
+    - field.field.node.quotes.field_author_name
+    - field.field.node.quotes.field_image
     - image.style.thumbnail
-    - node.type.article
+    - node.type.quotes
   module:
-    - comment
     - path
     - svg_image
     - text
-_core:
-  default_config_hash: 6VUXB1jTUjK5zjkfMa2Kd2WW4sFUlgfBlfJSx01qLpU
-id: node.article.default
+id: node.quotes.default
 targetEntityType: node
-bundle: article
+bundle: quotes
 mode: default
 content:
   body:
     type: text_textarea_with_summary
-    weight: 3
-    region: content
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
       show_summary: false
     third_party_settings: {  }
-  comment:
-    type: comment_default
-    weight: 10
     region: content
-    settings: {  }
-    third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_image:
-    type: image_image
+  field_about_the_author:
     weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
     region: content
+  field_author_name:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_image:
+    weight: 3
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_related_datasets:
-    weight: 4
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
-    region: content
-  field_related_topic:
-    weight: 1
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
-    region: content
-  field_syndicated_id:
-    weight: 5
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: string_textfield
+    type: image_image
     region: content
   path:
     type: path
-    weight: 11
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -90,21 +68,21 @@ content:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 8
+    weight: 7
     region: content
     third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 13
+    weight: 11
     region: content
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 9
+    weight: 8
     region: content
     third_party_settings: {  }
   title:
@@ -117,18 +95,17 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 6
-    region: content
+    weight: 5
     settings:
       match_operator: CONTAINS
-      match_limit: 10
       size: 60
       placeholder: ''
+      match_limit: 10
+    region: content
     third_party_settings: {  }
   url_redirects:
-    weight: 12
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  field_tags: true
+hidden: {  }
