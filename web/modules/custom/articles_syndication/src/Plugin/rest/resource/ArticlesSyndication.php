@@ -144,7 +144,6 @@ class ArticlesSyndication extends ResourceBase {
     $values['body'] = !empty($data['body']) ? $data['body'] : null;
     $values['body_summary'] = !empty($data['body_summary']) ? $data['body_summary'] : null;
     $values['image'] = !empty($data['image']) ? $data['image'] : null;
-    $values['tags']= !empty($data['tags']) ?  explode(', ', $data['tags']) : null;
     $values['uid'] = $this->syndication_article_author($data);
 
     $node = Node::create([
@@ -175,7 +174,6 @@ class ArticlesSyndication extends ResourceBase {
         'alt' => $fileName,
        'title' => $fileName
       ];
-
       $node->set("field_image", $field_image);
     }
 
@@ -206,14 +204,16 @@ class ArticlesSyndication extends ResourceBase {
     $values = [];
     $values['title'] = !empty($data['title']) ? $data['title'] : null;
     $values['body'] = !empty($data['body']) ? $data['body'] : null;
-    $values['body_summary'] = !empty($data['body_summary']) ? $data['body_summary'] : null;
+    $values['summary'] = !empty($data['body_summary']) ? $data['body_summary'] : null;
     $values['image'] = !empty($data['image']) ? $data['image'] : null;
-    $values['tags']= !empty($data['tags']) ?  explode(', ', $data['tags']) : null;
     $values['uid'] = $this->syndication_article_author($data);    
-    
-    $node->set('field_tags', $values['tags']);
+
     $node->set('title', $values['title']);  
-    
+    $node->set('body', [
+        'value' => $values['body'],
+        'summary' => $values['summary'],
+    ]);  
+
     // Create file object from remote URL.
     if (!empty($values['image'])){
       $exp = explode('/', $values['image']);
@@ -227,7 +227,6 @@ class ArticlesSyndication extends ResourceBase {
         'alt' => $fileName,
        'title' => $fileName
       ];
-      
       $node->set("field_image", $field_image);
     }    
     $node->save();
