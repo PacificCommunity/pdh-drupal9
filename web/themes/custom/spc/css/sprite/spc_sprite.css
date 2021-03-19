@@ -1,0 +1,54 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+.icon-book-icon {
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-position: -846px -404px;
+  width: 133px;
+  height: 111px;
+}
+.icon-datasets-icon {
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-position: -1102px -404px;
+  width: 55px;
+  height: 60px;
+}
+.icon-document-icon {
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-position: -1177px -404px;
+  width: 24px;
+  height: 31px;
+}
+.icon-member-country-bg-left {
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-position: 0px 0px;
+  width: 826px;
+  height: 952px;
+}
+.icon-stories-icon {
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-position: -999px -404px;
+  width: 83px;
+  height: 62px;
+}
+.icon-stories_slides_bg {
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-position: -846px 0px;
+  width: 628px;
+  height: 384px;
+}
