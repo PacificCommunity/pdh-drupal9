@@ -84,7 +84,7 @@
       {{ title_prefix }}
       {% if not page %}
         <h2{{ title_attributes.addClass('title') }}>
-          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          <a href="{% if syndicated.url %} {{ syndicated.url }} {% else %} {{ url }} {% endif %}" rel="bookmark">{{ label }}</a>
         </h2>
       {% endif %}
       {{ title_suffix }}
@@ -94,7 +94,7 @@
     </div>
     <div class="node-links-container field field-type-ds">
       <div class="read-more-link">
-        <a href="{{ url }}" title="{{ 'Read more' }}">{{ 'Read more' }}</a>
+        <a href="{% if syndicated.url %} {{ syndicated.url }} {% else %} {{ url }} {% endif %}" title="{{ 'Read more' }}">{{ 'Read more' }}</a>
       </div>
     </div>
   </div>
