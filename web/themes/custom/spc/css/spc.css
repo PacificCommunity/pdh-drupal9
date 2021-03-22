@@ -5072,6 +5072,9 @@ form.user-login-form ul {
   padding: 0px 50px;
   margin-top: 60px;
 }
+.spc-stories main .stories-list article {
+  float: none !important;
+}
 @media (max-width: 1024px) {
   .spc-stories main .stories-list {
     padding: 0px;

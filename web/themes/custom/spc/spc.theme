@@ -138,6 +138,15 @@ function spc_preprocess_node(&$variables){
           'icon' => $related_topic_entity->field_fa_icon->value
       ];
     }
+    
+    $syndicated_id = $node->field_syndicated_id->value;
+    if (!empty($syndicated_id)){
+      $config = \Drupal::getContainer()->get('config.factory')->getEditable('articles_syndication.settings');
+      $syndication_url = $config->get('syndication_url');
+      
+      $variables['syndicated']['id'] = $syndicated_id;
+      $variables['syndicated']['url'] = $syndication_url . '/node/'.$syndicated_id;
+    }
   }
   
   if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'thematic_group') {

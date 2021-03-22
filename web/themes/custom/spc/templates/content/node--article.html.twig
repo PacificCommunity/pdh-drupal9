@@ -101,6 +101,9 @@
             </div>
             </div>
         {% endif %}
+        {% if syndicated.url %} 
+          <a href="{{ syndicated.url }}" rel="bookmark">{{ 'Original Story'|t }}</a>
+        {% endif %}
       </div>
               
       <div class="field-type-image">
