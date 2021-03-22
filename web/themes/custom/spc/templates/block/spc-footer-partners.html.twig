@@ -6,7 +6,7 @@
           <div class="field-items">
           {% for partner in partners %}
             <div class="field-item">
-              <a class="partner-item" href="{{ partner.url }}" target="_blank" title="{{ partner.name }}">
+              <a class="partner-item" href="{% if  partner.url%}{{ partner.url }}{% else %}/{% endif %}" target="_blank" title="{{ partner.name }}" {% if partner.url %}rel="noreferrer"{% endif %}>
                 <img src="{{ partner.icon }}" alt="{{ partner.name }}">
               </a>
             </div>  

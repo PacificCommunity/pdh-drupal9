@@ -49,14 +49,14 @@
                     <div class="topics-list">
                     {% for topic in data.topics %}
                       <div class="topic-item">
-                        <a href="{{ topic.url }}">
+                        <a href="{{ topic.url }}" title="{{ topic.title }}">
                           <div class="field-fa-icon">
                             <i class="{{ topic.icon }}"></i>
                           </div>  
                         </a>
-                        <h4>
+                        <h2>
                           <a href="{{ topic.url }}">{{ topic.title }}</a>
-                        </h4>
+                        </h2>
                       </div>
                     {% endfor %}
                     </div>

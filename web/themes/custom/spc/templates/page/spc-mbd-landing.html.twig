@@ -16,7 +16,7 @@
         {% for key, zone_step in data.maritime_zones %}
             <div class="step">
                 <div class="step-icon {% if key == 5 %} step-six {% endif %}">
-                    <img src="{{ zone_step.icon }}">
+                    <img src="{{ zone_step.icon }}" alt="icon">
                     {% if key == 5 %}
                         <div class="tooltip-icon">
                             {{ 'i' }}  
@@ -68,7 +68,7 @@
         {% for key, treaty_step in data.boundaries_treaty %}
             <div class="step">
                 <div class="step-icon {% if key == 5 %} step-six {% endif %}">
-                    <img src="{{ treaty_step.icon }}">
+                    <img src="{{ treaty_step.icon }}" alt="icon">
                     {% if key == 5 %}
                         <div class="tooltip-icon">
                             {{ 'i' }}  
@@ -142,7 +142,7 @@
                 {% for step in data.shelf_treaty %}
                     <div class="step">
                         <div class="step-icon">
-                            <img src="{{ step.icon }}"> 
+                            <img src="{{ step.icon }}" alt="icon"> 
                         </div>
                         <div class="step-state ">
                             <div class="state group">
@@ -193,7 +193,7 @@
         <h3 class="block-title">{{ 'Partners'|t }}</h3>
         <div id="partners-list" class="block-shadow clearfix">
             {% for partner in data.partners %}
-                <a class="partner-item" href="{{ partner.url }}" target="_blank" title="{{ partner.name }}">
+                <a class="partner-item" href="{% if  partner.url%}{{ partner.url }}{% else %}/{% endif %}" target="_blank" title="{{ partner.name }}" {% if partner.url %}rel="noreferrer"{% endif %}>
                     <p class="img">
                         <img src="{{ partner.icon }}" alt="{{ partner.name }}">
                     </p>
