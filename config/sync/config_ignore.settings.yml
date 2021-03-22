@@ -10,5 +10,6 @@ ignored_config_entities:
   - spc_hdb.settings
   - articles_syndication.settings
   - saml_sp.idp.spc_okta
+  - tinypng.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
