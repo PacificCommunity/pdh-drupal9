@@ -17,37 +17,37 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 <i class="icon icon-home"></i>
 */
 .icon-book-icon {
-  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
-  background-position: -846px -404px;
-  width: 133px;
-  height: 111px;
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=3f7a6a);
+  background-position: -906px -404px;
+  width: 36px;
+  height: 30px;
 }
 .icon-datasets-icon {
-  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
-  background-position: -1102px -404px;
-  width: 55px;
-  height: 60px;
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=3f7a6a);
+  background-position: -962px -404px;
+  width: 28px;
+  height: 30px;
 }
 .icon-document-icon {
-  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
-  background-position: -1177px -404px;
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=3f7a6a);
+  background-position: -846px -454px;
   width: 24px;
   height: 31px;
 }
 .icon-member-country-bg-left {
-  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=3f7a6a);
   background-position: 0px 0px;
   width: 826px;
   height: 952px;
 }
 .icon-stories-icon {
-  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
-  background-position: -999px -404px;
-  width: 83px;
-  height: 62px;
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=3f7a6a);
+  background-position: -846px -404px;
+  width: 40px;
+  height: 30px;
 }
 .icon-stories_slides_bg {
-  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=137805);
+  background-image: url(/web/themes/custom/spc/img/sprite/spc_sprite.png?v=3f7a6a);
   background-position: -846px 0px;
   width: 628px;
   height: 384px;
