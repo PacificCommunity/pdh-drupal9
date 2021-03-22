@@ -720,6 +720,13 @@
 
   Drupal.behaviors.homePage = {
     attach: function (context, settings) {
+
+      window.setTimeout(function(){
+        $(".topics-list", context).css('visibility', 'visible');
+        $(".dashboard-list", context).css('visibility', 'visible');
+        $(".related-stories .stories-list", context).css('visibility', 'visible');
+      }, 1000);        
+      
       $(".topics-list", context).slick({
         slidesToShow: 4,
         slidesToScroll: 4,
@@ -735,7 +742,7 @@
           },
         ],
       });
-
+      
       // Home page datasets switcher.
       $("#nav-recent-datasets-tab", context).on("click", function (e) {
         e.preventDefault();
@@ -847,7 +854,7 @@
         } else {
           $(this).text("show more");
         }
-      });
+      });    
 
       //Home page Dashboards slider.
       $(".dashboard-list", context).slick({
@@ -950,7 +957,7 @@
           }
         );
       }
-
+      
       //Topic page Stories slider.
       $(".related-stories .stories-list", context).slick({
         slidesToShow: 3,
