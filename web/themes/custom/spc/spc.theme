@@ -146,6 +146,9 @@ function spc_preprocess_node(&$variables){
       
       $variables['syndicated']['id'] = $syndicated_id;
       $variables['syndicated']['url'] = $syndication_url . '/node/'.$syndicated_id;
+      
+      $body = $node->body->value;
+      $variables['syndicated']['body'] = substr($body, strpos($body, "<p"), strpos($body, "</p>")+4);
     }
   }
   
