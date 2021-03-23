@@ -58,11 +58,19 @@ function spc_main_cron() {
 /**
  * Implements form_alter().
  */
-function spc_main_form_alter(&$form, &$form_state, $form_id)
-{
+function spc_main_form_alter(&$form, &$form_state, $form_id) {
   // Delete N\A option in header_type field for basic page form
   if ($form_id === 'node_page_form' || $form_id === 'node_page_edit_form') {
     unset($form['field_header_type']['widget']['#options']['_none']);
+  }
+  
+  if ($form_id === 'user_login_form'){
+    $config = \Drupal::getContainer()->get('config.factory')->get('google_oauth_login.settings');
+    //Google client ID.
+    $google_api_client_id = $config->get('google_api_client_id');
+    $authUrl = Url::fromRoute('google_api_client.callback', array('id' => $google_api_client_id))->toString();
+    $output = '<div class="auth-link" ><a href="' . $authUrl . '">' . t('Login with Google') . '</a></div>';
+    $form['actions']['#prefix'] = $output;
   }
 }
 
