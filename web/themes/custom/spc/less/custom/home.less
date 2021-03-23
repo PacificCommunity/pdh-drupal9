@@ -27,6 +27,11 @@
       color: #007AD8;
   }  
 }
+.topics-list,
+.dashboard-list,
+.related-stories .stories-list {
+  visibility: hidden;
+}
 
 .topics-home {
   font-family: 'Roboto';    
@@ -239,6 +244,22 @@
             height: 30px;
             position: absolute;
             top: 5px;
+            
+            &.datasets {
+              object-fit: none;
+              object-position: -962px -404px;
+              width: 28px;
+            }
+            &.publications {
+              object-fit: none;
+              object-position: -906px -404px;
+              width: 36px;
+            }
+            &.organizations {
+              object-fit: none;
+              object-position: -846px -404px;
+              width: 40px;
+            }
         }
     }
 }

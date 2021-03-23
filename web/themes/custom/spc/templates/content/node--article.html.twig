@@ -101,9 +101,6 @@
             </div>
             </div>
         {% endif %}
-        {% if syndicated.url %} 
-          <a href="{{ syndicated.url }}" rel="bookmark">{{ 'Original Story'|t }}</a>
-        {% endif %}
       </div>
               
       <div class="field-type-image">
@@ -111,8 +108,15 @@
       </div>
 
       <div class="body-text">
-        {{ content.body }}
+        {% if syndicated.url %} 
+          {{ syndicated.body|raw }}
+        {% else %}  
+          {{ content.body }}
+        {% endif %}
       </div>
+      {% if syndicated.url %} 
+        <a href="{{ syndicated.url }}" rel="bookmark">{{ 'Read More'|t }}</a>
+      {% endif %}
     </article>
     <div class="related-datasets article-related-ds">
       <h2 class="pane-title">{{ 'Related Datasets' }}</h2>
