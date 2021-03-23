@@ -15,6 +15,7 @@ dependencies:
     - image.style.thumbnail
     - node.type.dashboards
   module:
+    - conditional_fields
     - paragraphs
     - path
     - svg_image
@@ -75,7 +76,23 @@ content:
       summary_rows: 3
       placeholder: ''
       show_summary: false
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        d0ee347f-3e52-4f3e-be70-da32b41f2e0f:
+          dependee: field_preview
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: dashboards
     type: text_textarea_with_summary
     region: content
   field_dsp_title_markup:
@@ -91,7 +108,23 @@ content:
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        c648e2c1-2765-46bf-99f5-58748c38f18e:
+          dependee: field_preview
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: dashboards
     type: image_image
     region: content
   field_preview:
@@ -106,7 +139,23 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings:
+      conditional_fields:
+        c5f143a4-207e-4c72-b6c1-b4ccd4c3e68a:
+          dependee: field_preview
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+          entity_type: node
+          bundle: dashboards
     type: string_textfield
     region: content
   path:
