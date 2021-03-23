@@ -3,6 +3,8 @@ global:
   css:
     theme:
       css/anno.css: {}
+      fonts/data-portal/css/external.css: {}
+      fonts/font-awesome/css/font-awesome.css: {}
       css/spc.css: {}
   js:
     js/jquery.scrollintoview.min.js: {minified: true}
