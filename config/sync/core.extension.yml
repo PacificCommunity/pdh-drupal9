@@ -1,7 +1,6 @@
 module:
   admin_toolbar: 0
   admin_toolbar_tools: 0
-  advagg: 0
   articles_syndication: 0
   automated_cron: 0
   backup_migrate: 0
@@ -16,10 +15,10 @@ module:
   color: 0
   color_field: 0
   comment: 0
-  conditional_fields: 0
   config: 0
   config_filter: 0
   config_ignore: 0
+  config_split: 0
   contact: 0
   contextual: 0
   ctools: 0
@@ -36,7 +35,10 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  gauth_user: 0
   google_analytics: 0
+  google_api_client: 0
+  googlelogin: 0
   help: 0
   history: 0
   hotjar: 0
@@ -50,7 +52,6 @@ module:
   menu_ui: 0
   metatag: 0
   metatag_page_manager: 0
-  miniorange_oauth_client: 0
   node: 0
   options: 0
   page_cache: 0
