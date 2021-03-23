@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c580cd9966c58423b0a0bbea4de0b59b",
+    "content-hash": "44fbaae0895bbe819327cc4e4c89725c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3324,6 +3324,52 @@
             }
         },
         {
+            "name": "drupal/gauth_user",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/gauth_user.git",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/gauth_user-8.x-1.0-beta1.zip",
+                "reference": "8.x-1.0-beta1",
+                "shasum": "d696c8e14abe463b1f8416bb61541a93110e7530"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9",
+                "drupal/google_api_client": "^3.0",
+                "php": ">=5.4.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1598679428",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "sadashiv",
+                    "homepage": "https://www.drupal.org/user/1773304"
+                }
+            ],
+            "description": "Google Authentication for Users",
+            "homepage": "https://www.drupal.org/project/gauth_user",
+            "support": {
+                "source": "https://git.drupalcode.org/project/gauth_user"
+            }
+        },
+        {
             "name": "drupal/google_analytics",
             "version": "2.5.0",
             "source": {
@@ -3442,6 +3488,53 @@
             "homepage": "https://www.drupal.org/project/google_api_client",
             "support": {
                 "source": "https://git.drupalcode.org/project/google_api_client"
+            }
+        },
+        {
+            "name": "drupal/googlelogin-googlelogin",
+            "version": "4.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/googlelogin.git",
+                "reference": "8.x-4.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/googlelogin-8.x-4.0-alpha1.zip",
+                "reference": "8.x-4.0-alpha1",
+                "shasum": "ff5cc2e9044c036d1062fb6a5b100b533a7966ba"
+            },
+            "require": {
+                "drupal/core": "^8.9.0 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-4.0-alpha1",
+                    "datestamp": "1607682746",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "sadashiv",
+                    "homepage": "https://www.drupal.org/user/1773304"
+                },
+                {
+                    "name": "suresh.senthatti",
+                    "homepage": "https://www.drupal.org/user/2668481"
+                }
+            ],
+            "homepage": "https://www.drupal.org/project/googlelogin",
+            "support": {
+                "source": "https://git.drupalcode.org/project/googlelogin"
             }
         },
         {
@@ -10442,7 +10535,9 @@
     "stability-flags": {
         "drupal/backup_migrate": 5,
         "drupal/conditional_fields": 15,
+        "drupal/gauth_user": 10,
         "drupal/google_api_client": 5,
+        "drupal/googlelogin-googlelogin": 15,
         "drupal/rate": 20,
         "drupal/rules": 20,
         "drupal/tinypng": 5,
