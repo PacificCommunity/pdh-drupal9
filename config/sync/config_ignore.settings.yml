@@ -11,5 +11,6 @@ ignored_config_entities:
   - articles_syndication.settings
   - saml_sp.idp.spc_okta
   - tinypng.settings
+  - google_oauth_login.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
