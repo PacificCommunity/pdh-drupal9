@@ -135,21 +135,8 @@ body.is-login header[role="banner"] #block-mainmenu {
 body.is-login header[role="banner"] #block-spc-account-menu {
   display: none;
 }
-@media (max-width: 1445px) {
-  body.is-login header[role="banner"] #block-spc-account-menu ul li a {
-    padding: 0px 10px;
-  }
-}
-@media (max-width: 1320px) {
-  body.is-login header[role="banner"] #block-spc-account-menu ul li a {
-    padding: 0px 10px;
-    font-size: 11px;
-  }
-}
-@media (max-width: 1445px) {
-  body.is-login header[role="banner"] #block-spc-account-menu ul li > i {
-    right: 0;
-  }
+body.is-login header[role="banner"] #block-spc-account-menu ul li:first-child {
+  display: none;
 }
 header[role="banner"] {
   position: absolute;

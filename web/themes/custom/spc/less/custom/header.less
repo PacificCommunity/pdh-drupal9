@@ -13,19 +13,8 @@ body {
         display: none;
         ul {
           li {
-            a {
-              @media(max-width: 1445px){
-                padding: 0px 10px;
-              }
-              @media(max-width: 1320px){
-                padding: 0px 10px;
-                font-size: 11px;
-              }
-            }
-            &>i {
-              @media(max-width: 1445px){
-                right: 0;
-              }
+            &:first-child {
+              display: none;
             }
           }
         }
