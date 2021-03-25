@@ -22,7 +22,7 @@
                     {% endfor %}
                 </div>
             </div>
-        {% endif %}      
+        {% endif %}
         <div class="spc-home-banner-block">
             <div class="banner-title">
                 <div class="field field-type-text-long">
@@ -44,7 +44,7 @@
                         {{ data.search_form }}
                     </div>
                 </div>
-                {% if data.topics %}    
+                {% if data.topics %}
                   <div class="topics-home">
                     <div class="topics-list">
                     {% for topic in data.topics %}
@@ -52,16 +52,16 @@
                         <a href="{{ topic.url }}" title="{{ topic.title }}">
                           <div class="field-fa-icon">
                             <i class="{{ topic.icon }}"></i>
-                          </div>  
+                          </div>
                         </a>
-                        <h2>
+                        <h4>
                           <a href="{{ topic.url }}">{{ topic.title }}</a>
-                        </h2>
+                        </h4>
                       </div>
                     {% endfor %}
                     </div>
-                  </div> 
-                {% endif %}  
+                  </div>
+                {% endif %}
             </div>
         </div>
     </div>

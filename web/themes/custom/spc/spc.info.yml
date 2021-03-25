@@ -4,6 +4,7 @@ type: theme
 version: VERSION
 core_version_requirement: ^8.8 || ^9
 package: 'SPC'
+logo: logo.png
 
 base theme: stable
 

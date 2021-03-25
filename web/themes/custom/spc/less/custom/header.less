@@ -7,26 +7,10 @@ body {
   &.is-login {
     header[role="banner"] {
       #block-mainmenu {
-        &>ul {
-          &>li {
-            &>a {
-              @media(max-width: 1445px){
-                padding: 0px 10px;
-              }
-              @media(max-width: 1320px){
-                padding: 0px 10px;
-                font-size: 11px;
-              }
-            }
-            &>i {
-              @media(max-width: 1445px){
-                right: 0;
-              }
-            }
-          }
-        }
+        padding-right: 15px;
       }
       #block-spc-account-menu {
+        display: none;
         ul {
           li {
             a {
@@ -59,7 +43,7 @@ header[role="banner"] {
 
     #block-spc-branding {
         float: left;
-        padding-left: 20px;
+        padding-left: 15px;
         position: relative;
         z-index: 1;
 
@@ -101,10 +85,14 @@ header[role="banner"] {
                     display: inline-block;
                     font-size: 13px;
                     color: #fff;
-                    padding: 0px 28px;
+                    padding: 0px;
+                    padding-left: 20px;
                     text-transform: uppercase;
                     transition: all 0.3s;
 
+                    &:only-child {
+                      padding-right: 24px;
+                    }
                     @media(max-width: 1320px){
                         padding: 0px 10px;
                     }
@@ -122,10 +110,11 @@ header[role="banner"] {
                 }
                 &>i {
                   color: #fff;
-                  position: absolute;
                   right: 12px;
                   top: 28px;
-
+                  margin-left: 4px;
+                  margin-right: 24px;
+                  font-size: 13px;
                   @media(max-width: 1320px){
                     right: 0;
                   }
@@ -235,7 +224,6 @@ header[role="banner"] {
         padding-right: 15px;
         position: relative;
         z-index: 1;
-
         @media(max-width: 991px){
             display: none;
         }
@@ -448,7 +436,8 @@ button.header-menu-btn {
         display: none;
     }
     #mobile-menu {
-        display: block;
+      display: block;
+      padding-right: 15px;
     }
 
     .banner-with-title {
