@@ -132,9 +132,6 @@ body {
 body.is-login header[role="banner"] #block-mainmenu {
   padding-right: 15px;
 }
-body.is-login header[role="banner"] #block-spc-account-menu {
-  display: none;
-}
 body.is-login header[role="banner"] #block-spc-account-menu ul li:first-child {
   display: none;
 }
