@@ -77,8 +77,8 @@ module:
   search: 0
   serialization: 0
   shortcut: 0
-  spc_dataset_suggestion: 0
   spc_data_import: 0
+  spc_dataset_suggestion: 0
   spc_dot_stat_chart: 0
   spc_dot_stat_data: 0
   spc_dot_stat_links: 0

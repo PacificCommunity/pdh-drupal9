@@ -1,6 +1,6 @@
-sdg_countries_fid: ''
-sdg_domains_fid: ''
-sdg_goals_fid: ''
+sdg_countries_fid: '111'
+sdg_domains_fid: '108'
+sdg_goals_fid: '109'
 search_facets:
   tags:
     title: tags
@@ -8,7 +8,7 @@ search_facets:
       -
         name: water
         display_name: water
-        count: 196
+        count: 198
       -
         name: tuna-fisheries
         display_name: tuna-fisheries
@@ -24,7 +24,7 @@ search_facets:
       -
         name: text
         display_name: text
-        count: 2071
+        count: 2087
       -
         name: technical-reports-tr
         display_name: technical-reports-tr
@@ -72,7 +72,7 @@ search_facets:
       -
         name: population
         display_name: population
-        count: 199
+        count: 203
       -
         name: png
         display_name: png
@@ -132,7 +132,7 @@ search_facets:
       -
         name: kiribati
         display_name: kiribati
-        count: 102
+        count: 103
       -
         name: internal-report
         display_name: internal-report
@@ -144,15 +144,15 @@ search_facets:
       -
         name: health
         display_name: health
-        count: 91
+        count: 99
       -
         name: fishery-management
         display_name: fishery-management
-        count: 219
+        count: 220
       -
         name: fisheries
         display_name: fisheries
-        count: 440
+        count: 442
       -
         name: eu-sopac-project-reports-er
         display_name: eu-sopac-project-reports-er
@@ -168,11 +168,11 @@ search_facets:
       -
         name: energy
         display_name: energy
-        count: 197
+        count: 201
       -
         name: education
         display_name: education
-        count: 170
+        count: 175
       -
         name: cruise-report-cr
         display_name: cruise-report-cr
@@ -202,9 +202,9 @@ search_facets:
         display_name: bathymetry
         count: 108
       -
-        name: Exposure
-        display_name: Exposure
-        count: 128
+        name: aquaculture
+        display_name: aquaculture
+        count: 82
   organization:
     title: organization
     items:
@@ -267,7 +267,7 @@ search_facets:
       -
         name: spc-sdd
         display_name: 'SPC Statistics for Development Division (SDD) '
-        count: 1201
+        count: 1224
       -
         name: spc-rrrt
         display_name: 'SPC Regional Rights Resource Team (RRRT)'
@@ -275,15 +275,15 @@ search_facets:
       -
         name: spc-phd
         display_name: 'SPC Public Health Division (PHD)'
-        count: 17
+        count: 16
       -
         name: spc-gem
         display_name: 'SPC Geoscience, Energy and Maritime Division (GEM)'
-        count: 5838
+        count: 5646
       -
         name: spc-fame
         display_name: 'SPC Fisheries, Aquaculture and Marine Ecosystems division (FAME)'
-        count: 1632
+        count: 1637
       -
         name: spc-eqap
         display_name: 'SPC Educational Quality and Assessment Programme (EQAP)'
@@ -317,9 +317,17 @@ search_facets:
         display_name: 'Niue Environment Data Portal'
         count: 104
       -
+        name: niue-department-of-justice-lands-survey-community-affairs
+        display_name: 'Niue Department of Justice, Lands, Survey & Community Affairs'
+        count: 1
+      -
         name: nauru-data
         display_name: 'Nauru Environment Data Portal'
         count: 53
+      -
+        name: livelihoods-and-landscapes-project
+        display_name: 'Livelihoods and Landscapes Project'
+        count: 2
       -
         name: kiribati-data
         display_name: 'Kiribati Environment Data Portal'
@@ -366,7 +374,7 @@ search_facets:
       -
         name: 'zipped jpeg'
         display_name: 'zipped jpeg'
-        count: 6
+        count: 8
       -
         name: to/download/171/mics-survey/4759/tonga-mics-2019-snapshot-of-key-findings
         display_name: to/download/171/mics-survey/4759/tonga-mics-2019-snapshot-of-key-findings
@@ -374,7 +382,7 @@ search_facets:
       -
         name: tif
         display_name: tif
-        count: 13
+        count: 16
       -
         name: php/catalog/106/download/1038
         display_name: php/catalog/106/download/1038
@@ -416,13 +424,17 @@ search_facets:
         display_name: dot
         count: 2
       -
+        name: application/x-troff-man
+        display_name: application/x-troff-man
+        count: 1
+      -
         name: ZIP
         display_name: ZIP
         count: 46
       -
         name: XLSX
         display_name: XLSX
-        count: 185
+        count: 189
       -
         name: XLS
         display_name: XLS
@@ -430,19 +442,15 @@ search_facets:
       -
         name: WMS
         display_name: WMS
-        count: 217
-      -
-        name: WFS
-        display_name: WFS
-        count: 168
+        count: 26
       -
         name: WCS
         display_name: WCS
-        count: 40
+        count: 17
       -
         name: TXT
         display_name: TXT
-        count: 35
+        count: 38
       -
         name: SHP
         display_name: SHP
@@ -458,11 +466,11 @@ search_facets:
       -
         name: PNG
         display_name: PNG
-        count: 236
+        count: 46
       -
         name: PDF
         display_name: PDF
-        count: 10676
+        count: 10701
       -
         name: KML
         display_name: KML
@@ -474,7 +482,7 @@ search_facets:
       -
         name: JPEG
         display_name: JPEG
-        count: 24
+        count: 25
       -
         name: HTML
         display_name: HTML
@@ -482,7 +490,7 @@ search_facets:
       -
         name: GeoJSON
         display_name: GeoJSON
-        count: 106
+        count: 105
       -
         name: DOCX
         display_name: DOCX
@@ -494,7 +502,7 @@ search_facets:
       -
         name: CSV
         display_name: CSV
-        count: 608
+        count: 612
   license_id:
     title: license_id
     items:
@@ -513,7 +521,11 @@ search_facets:
       -
         name: other-open
         display_name: 'Other (Open)'
-        count: 560
+        count: 565
+      -
+        name: other-closed
+        display_name: 'Other (Not Open)'
+        count: 2
       -
         name: other-nc
         display_name: 'Other (Non-Commercial)'
@@ -529,19 +541,15 @@ search_facets:
       -
         name: notspecified
         display_name: 'License not specified'
-        count: 7719
+        count: 7735
       -
         name: cc-nc-sa-4.0
         display_name: 'Creative Commons Attribution-NonCommercial-ShareAlike 4.0'
         count: 17
       -
-        name: cc-nc-4.0
-        display_name: 'Creative Commons Attribution-NonCommercial 4.0'
-        count: 1
-      -
         name: cc-by-sa
         display_name: 'Creative Commons Attribution Share-Alike'
-        count: 3
+        count: 2
       -
         name: 'Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License'
         display_name: 'Creative Commons Attribution Non Commercial (CC-BY-NC) 4.0 License'
@@ -553,77 +561,77 @@ search_facets:
       -
         name: cc-by
         display_name: 'Creative Commons Attribution'
-        count: 46
+        count: 49
   topic:
     title: topic
     items:
       -
         name: PCCOS
         display_name: PCCOS
-        count: 2558
+        count: 2562
       -
         name: 'Official Statistics'
         display_name: 'Official Statistics'
-        count: 1253
+        count: 1275
       -
         name: 'Land Resources'
         display_name: 'Land Resources'
-        count: 1041
+        count: 1040
       -
         name: 'Human Rights'
         display_name: 'Human Rights'
-        count: 66
+        count: 65
       -
         name: Health
         display_name: Health
-        count: 373
+        count: 371
       -
         name: Geoscience
         display_name: Geoscience
-        count: 3410
+        count: 3220
       -
         name: 'Gender and Youth'
         display_name: 'Gender and Youth'
-        count: 537
+        count: 536
       -
         name: Fisheries
         display_name: Fisheries
-        count: 2610
+        count: 2614
       -
         name: Environment
         display_name: Environment
-        count: 2138
+        count: 2139
       -
         name: Energy
         display_name: Energy
-        count: 2047
+        count: 2046
       -
         name: Education
         display_name: Education
-        count: 58
+        count: 57
       -
         name: 'Economic Development'
         display_name: 'Economic Development'
-        count: 817
+        count: 816
       -
         name: 'Climate Change'
         display_name: 'Climate Change'
-        count: 648
+        count: 647
   type:
     title: type
     items:
       -
         name: publications
         display_name: Publications
-        count: 7752
+        count: 7770
       -
         name: geographic_data
         display_name: 'Geographic data'
-        count: 264
+        count: 76
       -
         name: dataset
         display_name: Dataset
-        count: 4897
+        count: 4905
       -
         name: biodiversity_data
         display_name: 'Biodiversity data'
@@ -634,31 +642,31 @@ search_facets:
       -
         name: region
         display_name: region
-        count: 3112
+        count: 3110
       -
         name: polynesia
         display_name: polynesia
-        count: 9
+        count: 7
       -
         name: other
         display_name: other
-        count: 1769
+        count: 1770
       -
         name: micronesia
         display_name: micronesia
-        count: 15
+        count: 13
       -
         name: melanesia
         display_name: melanesia
-        count: 9
+        count: 7
       -
         name: wf
         display_name: 'Wallis and Futuna'
-        count: 74
+        count: 73
       -
         name: vu
         display_name: Vanuatu
-        count: 661
+        count: 662
       -
         name: tv
         display_name: Tuvalu
@@ -678,15 +686,15 @@ search_facets:
       -
         name: ws
         display_name: Samoa
-        count: 379
+        count: 377
       -
         name: pn
         display_name: 'Pitcairn Islands'
-        count: 33
+        count: 31
       -
         name: pg
         display_name: 'Papua New Guinea'
-        count: 656
+        count: 655
       -
         name: pw
         display_name: Palau
@@ -694,27 +702,27 @@ search_facets:
       -
         name: mp
         display_name: 'Northern Mariana Islands'
-        count: 76
+        count: 75
       -
         name: nu
         display_name: Niue
-        count: 342
+        count: 343
       -
         name: nc
         display_name: 'New Caledonia'
-        count: 120
+        count: 119
       -
         name: nr
         display_name: Nauru
-        count: 283
+        count: 284
       -
         name: mh
         display_name: 'Marshall Islands'
-        count: 409
+        count: 410
       -
         name: ki
         display_name: Kiribati
-        count: 651
+        count: 652
       -
         name: gu
         display_name: Guam
@@ -722,7 +730,7 @@ search_facets:
       -
         name: pf
         display_name: 'French Polynesia'
-        count: 101
+        count: 100
       -
         name: fj
         display_name: Fiji
@@ -738,4 +746,4 @@ search_facets:
       -
         name: as
         display_name: 'American Samoa'
-        count: 334
+        count: 333

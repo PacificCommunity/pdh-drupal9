@@ -29,6 +29,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  rate_vote_widget:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
 hidden:
   field_suggester_email: true
   field_suggester_name: true
