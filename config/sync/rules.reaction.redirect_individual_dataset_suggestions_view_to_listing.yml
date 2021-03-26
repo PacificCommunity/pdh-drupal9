@@ -1,0 +1,38 @@
+uuid: 905c4511-0b76-4d4e-bb5f-4bbbdabedaff
+langcode: en
+status: true
+dependencies: {  }
+id: redirect_individual_dataset_suggestions_view_to_listing
+label: 'Redirect individual dataset suggestions view to listing'
+events:
+  -
+    event_name: 'rules_entity_view:node--dataset_suggestion'
+description: ''
+tags: {  }
+config_version: '3'
+expression:
+  id: rules_rule
+  uuid: 39288487-385e-455b-8f24-07f012e1aacf
+  weight: 0
+  conditions:
+    id: rules_and
+    uuid: dbbefd2a-6c17-4409-9ebd-debd4d13b559
+    weight: 0
+    conditions: {  }
+  actions:
+    id: rules_action_set
+    uuid: 453e7ff3-3b10-4397-a5ed-a984f051cf55
+    weight: 0
+    actions:
+      -
+        id: rules_action
+        uuid: 193b0e8b-2c3b-4acd-8f01-94c468ffe266
+        weight: 0
+        context_values:
+          url: /dataset-suggestions
+        context_mapping: {  }
+        context_processors:
+          url:
+            rules_tokens: {  }
+        provides_mapping: {  }
+        action_id: rules_page_redirect

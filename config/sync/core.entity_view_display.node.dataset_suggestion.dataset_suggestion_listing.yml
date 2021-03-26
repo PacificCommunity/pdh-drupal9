@@ -1,0 +1,39 @@
+uuid: a6c2a96a-82fa-4e19-8e0d-272e980665f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.dataset_suggestion_listing
+    - field.field.node.dataset_suggestion.body
+    - field.field.node.dataset_suggestion.field_suggester_email
+    - field.field.node.dataset_suggestion.field_suggester_name
+    - node.type.dataset_suggestion
+  module:
+    - text
+    - user
+id: node.dataset_suggestion.dataset_suggestion_listing
+targetEntityType: node
+bundle: dataset_suggestion
+mode: dataset_suggestion_listing
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 2
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  rate_vote_widget:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_suggester_email: true
+  field_suggester_name: true

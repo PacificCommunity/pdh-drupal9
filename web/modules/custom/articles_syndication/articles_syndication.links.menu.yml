@@ -1,0 +1,6 @@
+articles_syndication.syndication_settings:
+  title: 'SPC Syndication settings'
+  description: 'Syndication settings page'
+  parent: system.admin_config_services
+  route_name: articles_syndication.syndication_settings
+  weight: 11  

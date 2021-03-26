@@ -1,0 +1,27 @@
+<div class="dataset-suggestion-form-page block-shadow container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="suggestion-form">
+        {{ form }}
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="suggestion-tip">
+        <h4 class="tip-heading">
+          <i class="fa fa-lightbulb-o"></i>
+          {{ 'Tip'|t }}
+        </h4>
+        {% trans %}
+          <p>
+            Use this form to let us know what the dataset you would like to
+            make available, but first search
+            the <a href="/dataset-suggestions">Dataset&nbspSuggestions</a>
+            to see if someone else has already requested the same
+            dataset. If you find it there, you can check on its status and
+            add your request by clicking on the upvote button.
+          </p>
+        {% endtrans %}
+      </div>
+    </div>
+  </div>
+</div>

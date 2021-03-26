@@ -1,0 +1,26 @@
+uuid: ef97c106-ed9d-4228-aac4-e28ae68a1e93
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+    - system
+  theme:
+    - spc
+id: spcbanner_3
+theme: spc
+region: subheader
+weight: -7
+provider: null
+plugin: spc_banner
+settings:
+  id: spc_banner
+  label: 'SPC Story Banner'
+  provider: spc_main
+  label_display: '0'
+  spc_banner_title: '<strong>All</strong> Stories'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/story\r\n/story/*"
+    negate: false

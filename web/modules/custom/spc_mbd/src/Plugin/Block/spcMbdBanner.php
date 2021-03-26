@@ -56,7 +56,7 @@ class spcMbdBanner extends BlockBase {
             $Taxonomy = Term::load($term->tid);
             $published_status = $Taxonomy->get('status')->getValue()[0]['value'];
             if ($published_status){
-              $aliasManager = \Drupal::service('path.alias_manager');
+              $aliasManager = \Drupal::service('path_alias.manager');
               $url = $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->tid);
 
               $term_data[] = array(

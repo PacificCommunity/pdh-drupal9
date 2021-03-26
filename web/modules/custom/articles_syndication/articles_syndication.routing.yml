@@ -1,0 +1,7 @@
+articles_syndication.syndication_settings:
+  path: '/admin/config/article-syndicate-settings'
+  defaults:
+    _title: 'Syndication settings'
+    _form: '\Drupal\articles_syndication\Form\SyndicationSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

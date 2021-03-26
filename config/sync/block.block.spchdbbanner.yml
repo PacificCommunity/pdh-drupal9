@@ -1,0 +1,25 @@
+uuid: 30988550-116f-448b-9c70-f1ea6ab362ed
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_hdb
+    - system
+  theme:
+    - spc
+id: spchdbbanner
+theme: spc
+region: subheader
+weight: -9
+provider: null
+plugin: spc_hdb_banner
+settings:
+  id: spc_hdb_banner
+  label: 'SPC HDB Banner'
+  provider: spc_hdb
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/dashboard/health-dashboard\r\n/dashboard/health-dashboard/*"
+    negate: false

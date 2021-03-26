@@ -1,0 +1,182 @@
+{
+   "leadership-and-governance":{
+      "title":"Leadership and governance",
+      "wrapper":false,
+      "weight":0,
+      "indicators":{
+         "multi-sectoral-ncd-taskforce":{
+            "code":"L1",
+            "title":"Multi-sectoral NCD taskforce"
+         },
+         "national-strategy-addressing-ncds-and-risk-factors":{
+            "code":"L2",
+            "title":"National strategy addressing NCDs and risk factors"
+         },
+         "explicit-ncd-indicators-and-targets":{
+            "code":"L3",
+            "title":"Explicit NCD indicators and targets"
+         }
+      }
+   },
+   "tobacco":{
+      "title":"Tobacco",
+      "wrapper":"Preventive policies",
+      "weight":1,
+      "indicators":{
+         "tobacco-excise-taxes":{
+            "code":"T1",
+            "title":"Tobacco excise taxes"
+         },
+         "smoke-free-environments":{
+            "code":"T2",
+            "title":"Smoke-free environments"
+         },
+         "tobacco-health-warnings":{
+            "code":"T3",
+            "title":"Tobacco health warnings"
+         },
+         "tobacco-advertising-promotion-sponsorship":{
+            "code":"T4",
+            "title":"Tobacco advertising, promotion and sponsorship"
+         },
+         "tobacco-sales-and-licencing":{
+            "code":"T5",
+            "title":"Tobacco sales and licencing"
+         },
+         "tobacco-industry-interference":{
+            "code":"T6",
+            "title":"Tobacco industry interference"
+         }
+      }
+   },
+   "alcohol":{
+      "title":"Alcohol",
+      "wrapper":"Preventive policies",
+      "weight":2,
+      "indicators":{
+         "alcohol-licencing-to-restrict-sales":{
+            "code":"A1",
+            "title":"Alcohol licencing to restrict sales"
+         },
+         "alcohol-advertising":{
+            "code":"A2",
+            "title":"Alcohol advertising"
+         },
+         "alcohol-taxation":{
+            "code":"A3",
+            "title":"Alcohol taxation"
+         },
+         "drink-driving":{
+            "code":"A4",
+            "title":"Drink driving"
+         }
+      }
+   },
+   "food":{
+      "title":"Food",
+      "wrapper":"Preventive policies",
+      "weight":3,
+      "indicators":{
+         "reducing-salt-consumption":{
+            "code":"F1",
+            "title":"Reducing salt consumption"
+         },
+         "trans-fats":{
+            "code":"F2",
+            "title":"Trans-fats"
+         },
+         "unhealthy-food-marketing-to-children":{
+            "code":"F3",
+            "title":"Unhealthy food marketing to children"
+         },
+         "food-fiscal-policies":{
+            "code":"F4",
+            "title":"Food fiscal policies"
+         },
+         "healthy-food-policies-in-schools":{
+            "code":"F5",
+            "title":"Healthy food policies in schools"
+         },
+         "food-based-dietary-guidelines":{
+            "code":"F6",
+            "title":"Food-based dietary guidelines"
+         }
+      }
+   },
+   "physical-activity":{
+      "title":"Physical activity",
+      "wrapper":"Preventive policies",
+      "weight":4,
+      "indicators":{
+         "compulsory-physical-education-in-school-curriculum":{
+            "code":"P1",
+            "title":"Compulsory physical education in school curriculum"
+         }
+      }
+   },
+   "enforcement":{
+      "title":"Enforcement",
+      "wrapper":"Preventive policies",
+      "weight":5,
+      "indicators":{
+         "enforcement-of-laws-and-regulations-related-to-ncd-risk-factors":{
+            "code":"E1",
+            "title":"Enforcement of laws and regulations related to NCD risk factors"
+         }
+      }
+   },
+   "health-system":{
+      "title":"Health system response programmes",
+      "wrapper":false,
+      "weight":5,
+      "indicators":{
+         "national-guidelines-for-care-of-main-ncds":{
+            "code":"H1",
+            "title":"National guidelines for care of main NCDs"
+         },
+         "essential-drugs":{
+            "code":"H2",
+            "title":"Essential drugs"
+         },
+         "smoking-cessation":{
+            "code":"H3",
+            "title":"Smoking cessation"
+         },
+         "marketing-of-breast-milk-substitutes":{
+            "code":"H4",
+            "title":"Marketing of breast milk substitutes"
+         },
+         "baby-friendly-hospitals":{
+            "code":"H5",
+            "title":"Baby friendly hospitals"
+         },
+         "maternity-leave-and-breastfeeding":{
+            "code":"H6",
+            "title":"Maternity leave and breastfeeding"
+         }
+      }
+   },
+   "monitoring":{
+      "title":"Monitoring",
+      "wrapper":false,
+      "weight":10,
+      "indicators":{
+         "population-risk-factor-prevalence-surveys-adults":{
+            "code":"M1",
+            "title":"Population risk factor prevalence surveys - adults"
+         },
+         "population-risk-factor-prevalence-surveys-youth":{
+            "code":"M2",
+            "title":"Population risk factor prevalence surveys - youth"
+         },
+         "child-growth-monitoring":{
+            "code":"M3",
+            "title":"Child growth monitoring"
+         },
+         "routine-cause-specific-mortality":{
+            "code":"M4",
+            "title":"Routine cause-specific mortality"
+         }
+      }
+   }
+}

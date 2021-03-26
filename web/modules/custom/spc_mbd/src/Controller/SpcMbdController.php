@@ -95,19 +95,19 @@ class SpcMbdController extends ControllerBase {
         $data['maritime_zones'] = @$this->get_maritime_zones();
         if ($mbd_zones_fid = $config->get('mbd_zones_fid')){
             $mbd_zones_file = File::load($mbd_zones_fid);
-            $data['maritime_zones_file'] =  file_create_url($mbd_zones_file->uri->value);           
+            $data['maritime_zones_file'] =  @file_create_url($mbd_zones_file->uri->value);           
         }
 
         $data['boundaries_treaty'] = @$this->get_boundaries_treaty();
         if ($mbd_boundary_treaty_fid = $config->get('mbd_boundary_treaty_fid')){
             $mbd_boundary_treaty_file = File::load($mbd_boundary_treaty_fid);
-            $data['boundary_treaty_file'] =  file_create_url($mbd_boundary_treaty_file->uri->value);           
+            $data['boundary_treaty_file'] =  @file_create_url($mbd_boundary_treaty_file->uri->value);           
         }        
         
         $data['shelf_treaty'] = @$this->get_shelf_treaty();
         if ($mbd_shelf_treaty_fid = $config->get('mbd_shelf_treaty_fid')){
             $mbd_shelf_treat_file = File::load($mbd_shelf_treaty_fid);
-            $data['shelf_treaty_file'] =  file_create_url($mbd_shelf_treat_file->uri->value);           
+            $data['shelf_treaty_file'] =  @file_create_url($mbd_shelf_treat_file->uri->value);           
         }
         
         $data['partners'] = @$this->get_mbd_partners();
@@ -148,12 +148,12 @@ class SpcMbdController extends ControllerBase {
                 $file = File::load($fid);
 
                 if (is_object($file)){
-                  $flag = $file->url();
+                  $flag = file_create_url($file->getFileUri());
                 } else {
                     $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
                 }
 
-                $aliasManager = \Drupal::service('path.alias_manager');
+                $aliasManager = \Drupal::service('path_alias.manager');
                 $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
 
                 $countries[] = [
@@ -184,7 +184,7 @@ class SpcMbdController extends ControllerBase {
                         
             $icon = '';
             if (is_object($file)){
-              $icon = $file->url();
+              $icon = file_create_url($file->getFileUri());
             }     
             
             $state = $this->get_combine_maritime_zones($name);
@@ -259,7 +259,7 @@ class SpcMbdController extends ControllerBase {
                         
             $icon = '';
             if (is_object($file)){
-              $icon = $file->url();
+              $icon = file_create_url($file->getFileUri());
             }     
             
             $state = $this->get_combine_boundaries_treaty($name);
@@ -277,7 +277,7 @@ class SpcMbdController extends ControllerBase {
     public function get_combine_boundaries_treaty($treaty_name){
         $combine_states = [];
 
-        $q = db_select('node','n')
+        $q = \Drupal::database()->select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'boundary_treaty');
         
@@ -336,7 +336,7 @@ class SpcMbdController extends ControllerBase {
                         
             $icon = '';
             if (is_object($file)){
-              $icon = $file->url();
+              $icon = file_create_url($file->getFileUri());
             }     
             
             $state = '';
@@ -354,8 +354,7 @@ class SpcMbdController extends ControllerBase {
     
     public function get_combine_shelf_treaty_states($treaty_name){
         $combine_states = [];
-        
-        $q = db_select('node','n')
+        $q = \Drupal::database()->select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'continental_shelf');
         $results = $q->execute()->fetchAll();
@@ -406,24 +405,27 @@ class SpcMbdController extends ControllerBase {
         
         foreach($partners_tax as $partner_term){
             $partner = Term::load($partner_term->tid);
-            
-            $name = $partner->getName();
-            
-            $url = $partner->get('field_url')->getValue()[0]['value'];
-            
-            $fid = $partner->get('field_image')->getValue()[0]['target_id'];
-            $file = File::load($fid);
-                        
-            $icon = '';
-            if (is_object($file)){
-              $icon = $file->url();
-            }     
+            $display_in = @$partner->get('field_display_in')->getValue();
+            if (array_search('mbd', array_column($display_in, 'value')) !== false){
+              $name = $partner->getName();
 
-            $output[] = [
-              'icon' => $icon,  
-              'name' => $name,
-              'url' => $url, 
-            ];
+              $url = $partner->get('field_url')->getValue()[0]['value'];
+
+              $fid = $partner->get('field_image')->getValue()[0]['target_id'];
+              $file = File::load($fid);
+
+              $icon = '';
+              if (is_object($file)){
+                $icon = file_create_url($file->getFileUri());
+              }     
+
+              $output[] = [
+                'icon' => $icon,  
+                'name' => $name,
+                'url' => $url, 
+              ];              
+            }
+
         }
 
         return $output;
@@ -459,12 +461,12 @@ class SpcMbdController extends ControllerBase {
             $file = File::load($fid);
             
             if (is_object($file)){
-              $flag = $file->url();
+              $flag = file_create_url($file->getFileUri());
             } else {
                 $flag = '/' . $theme_path . '/img/flags/' . $country_code . '.svg';
             }
 
-            $aliasManager = \Drupal::service('path.alias_manager');
+            $aliasManager = \Drupal::service('path_alias.manager');
             $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
             
             $country['country'] = [
@@ -576,7 +578,7 @@ class SpcMbdController extends ControllerBase {
         $theme = \Drupal::theme()->getActiveTheme();
         $theme_path = $theme->getPath();        
         
-        $q = db_select('node','n')
+        $q = \Drupal::database()->select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'continental_shelf');
         $results = $q->execute()->fetchAll();
@@ -591,13 +593,13 @@ class SpcMbdController extends ControllerBase {
                   $limit['country']['code'] = $term->get('field_country_code')->value;
                   $limit['country']['status'] = $term->get('status')->getValue()[0]['value'];
                   
-                  $aliasManager = \Drupal::service('path.alias_manager');
+                  $aliasManager = \Drupal::service('path_alias.manager');
                   $limit['country']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
                   
                   $fid = @$term->get('field_flag')->getValue()[0]['target_id'];
                   $file = File::load($fid);
                   if (is_object($file)){
-                    $limit['country']['flag'] = $file->url();
+                    $limit['country']['flag'] = file_create_url($file->getFileUri());
                   } else {
                     $limit['country']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country']['code'] . '.svg';
                   }
@@ -684,7 +686,7 @@ class SpcMbdController extends ControllerBase {
         $theme = \Drupal::theme()->getActiveTheme();
         $theme_path = $theme->getPath();        
         
-        $q = db_select('node','n')
+        $q = \Drupal::database()->select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'high_seas_limit');
         $results = $q->execute()->fetchAll();
@@ -699,13 +701,13 @@ class SpcMbdController extends ControllerBase {
                   $limit['country']['code'] = $term->get('field_country_code')->value;
                   $limit['country']['status'] = $term->get('status')->getValue()[0]['value'];
                   
-                  $aliasManager = \Drupal::service('path.alias_manager');
+                  $aliasManager = \Drupal::service('path_alias.manager');
                   $limit['country']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->id());
                   
                   $fid = $term->get('field_flag')->getValue()[0]['target_id'];
                   $file = File::load($fid);
                   if (is_object($file)){
-                    $limit['country']['flag'] = $file->url();
+                    $limit['country']['flag'] = file_create_url($file->getFileUri());
                   } else {
                     $limit['country']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country']['code'] . '.svg';
                   }
@@ -784,7 +786,7 @@ class SpcMbdController extends ControllerBase {
         $theme = \Drupal::theme()->getActiveTheme();
         $theme_path = $theme->getPath();         
         
-        $q = db_select('node','n')
+        $q = \Drupal::database()->select('node','n')
             ->fields('n', ['nid'])
             ->condition('n.type', 'boundary_treaty');
         $results = $q->execute()->fetchAll();
@@ -800,13 +802,13 @@ class SpcMbdController extends ControllerBase {
                   $limit['country_one']['code'] = $term_one->get('field_country_code')->value;
                   $limit['country_one']['status'] = $term_one->get('status')->getValue()[0]['value'];
                   
-                  $aliasManager = \Drupal::service('path.alias_manager');
+                  $aliasManager = \Drupal::service('path_alias.manager');
                   $limit['country_one']['url'] = $aliasManager->getAliasByPath('/taxonomy/term/' . $term_one->id());                  
                   
                   $fid_one = $term_one->get('field_flag')->getValue()[0]['target_id'];
                   $file_one = File::load($fid_one);
                   if (is_object($file_one)){
-                    $limit['country_one']['flag'] = $file_one->url();
+                    $limit['country_one']['flag'] = file_create_url($file_one->getFileUri());
                   } else {
                     $limit['country_one']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country_one']['code'] . '.svg';
                   }
@@ -822,7 +824,7 @@ class SpcMbdController extends ControllerBase {
                   $fid_two = @$term_two->get('field_flag')->getValue()[0]['target_id'];
                   $file_two = File::load($fid_two);
                   if (is_object($file_two)){
-                    $limit['country_two']['flag'] = $file_two->url();
+                    $limit['country_two']['flag'] = file_create_url($file_two->getFileUri());
                   } else {
                     $limit['country_two']['flag'] = '/' . $theme_path . '/img/flags/' . $limit['country_two']['code'] . '.svg';
                   }
@@ -901,7 +903,7 @@ class SpcMbdController extends ControllerBase {
     public function eez_treaties_count($tid){
       $count = 0;
       
-      $q = db_select('node','n')
+      $q = \Drupal::database()->select('node','n')
           ->fields('n', ['nid'])
           ->condition('n.type', 'boundary_treaty');
       $results = $q->execute()->fetchAll();
@@ -924,7 +926,7 @@ class SpcMbdController extends ControllerBase {
     public function eez_pockets_count($tid){
       $count = 0;
       
-      $q = db_select('node','n')
+      $q = \Drupal::database()->select('node','n')
           ->fields('n', ['nid'])
           ->condition('n.type', 'high_seas_limit');
       $results = $q->execute()->fetchAll();
@@ -946,7 +948,7 @@ class SpcMbdController extends ControllerBase {
     public function eez_ecs_areas($tid){
       $areas = [];
       
-      $q = db_select('node','n')
+      $q = \Drupal::database()->select('node','n')
           ->fields('n', ['nid'])
           ->condition('n.type', 'continental_shelf');
       $results = $q->execute()->fetchAll();

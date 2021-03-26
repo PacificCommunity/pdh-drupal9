@@ -1,0 +1,40 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\user\Entity\User;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Impelements hook_theme().
+ */
+function spc_hdb_theme($existing, $type, $theme, $path){
+  return [
+    'hdb_banner_block' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
+    'spc_hdb_landing' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],      
+    'spc_hdb_category' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],    
+    'spc_hdb_country' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],      
+    'spc_hdb_indicator' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
+  ];
+}

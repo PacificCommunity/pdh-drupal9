@@ -6,6 +6,7 @@ dependencies:
     - field.field.taxonomy_term.country.field_boundary_countries
     - field.field.taxonomy_term.country.field_continental_shelf_file
     - field.field.taxonomy_term.country.field_country_code
+    - field.field.taxonomy_term.country.field_datasets_count
     - field.field.taxonomy_term.country.field_date_deposited
     - field.field.taxonomy_term.country.field_eez_area
     - field.field.taxonomy_term.country.field_eez_contiguous_zone
@@ -60,6 +61,13 @@ content:
       placeholder: 'Country eez code'
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_datasets_count:
+    weight: 12
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_date_deposited:
     type: datetime_default
@@ -158,7 +166,7 @@ content:
     region: content
   field_related_datasets:
     type: string_textfield
-    weight: 12
+    weight: 13
     region: content
     settings:
       size: 60
@@ -166,7 +174,7 @@ content:
     third_party_settings: {  }
   field_url:
     type: string_textfield
-    weight: 13
+    weight: 14
     region: content
     settings:
       size: 60

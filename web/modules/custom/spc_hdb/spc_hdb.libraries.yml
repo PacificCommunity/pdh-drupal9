@@ -1,0 +1,4 @@
+hdb:
+  version: 1.x
+  js:
+    js/spc_health_dashboard.js: {}      

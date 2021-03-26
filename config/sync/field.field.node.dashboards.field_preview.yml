@@ -1,0 +1,23 @@
+uuid: ce1763bb-56b1-4485-a0d5-e6a2e9e463a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_preview
+    - node.type.dashboards
+id: node.dashboards.field_preview
+field_name: field_preview
+entity_type: node
+bundle: dashboards
+label: 'Preview on Home  page'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

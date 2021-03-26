@@ -12,5 +12,8 @@ permissions:
   - 'access comments'
   - 'access content'
   - 'access site-wide contact form'
+  - 'cast rate vote on node of dataset_suggestion'
+  - 'restful get get_layout_resource'
+  - 'restful post articles_syndication'
   - 'search content'
   - 'use text format restricted_html'

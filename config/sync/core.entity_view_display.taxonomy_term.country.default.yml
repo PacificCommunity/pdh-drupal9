@@ -6,6 +6,7 @@ dependencies:
     - field.field.taxonomy_term.country.field_boundary_countries
     - field.field.taxonomy_term.country.field_continental_shelf_file
     - field.field.taxonomy_term.country.field_country_code
+    - field.field.taxonomy_term.country.field_datasets_count
     - field.field.taxonomy_term.country.field_date_deposited
     - field.field.taxonomy_term.country.field_eez_area
     - field.field.taxonomy_term.country.field_eez_contiguous_zone
@@ -64,6 +65,15 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_datasets_count:
+    weight: 15
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   field_date_deposited:
     type: datetime_default

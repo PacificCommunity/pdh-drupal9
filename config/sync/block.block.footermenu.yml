@@ -1,0 +1,25 @@
+uuid: 55b5a92f-31e5-4cbc-9150-f4e147ba2a03
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-menu
+  module:
+    - system
+  theme:
+    - spc
+id: footermenu
+theme: spc
+region: footer
+weight: -11
+provider: null
+plugin: 'system_menu_block:footer-menu'
+settings:
+  id: 'system_menu_block:footer-menu'
+  label: 'Footer Menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }
