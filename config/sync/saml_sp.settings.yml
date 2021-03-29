@@ -28,4 +28,4 @@ _core:
   default_config_hash: gjB7015sYrrNUrP2pj9kWQoYqXGhwCOSXMdR3p34elk
 debug: false
 new_cert_location: ''
-assertion_urls: 'https://dev.spc.links.com.au/saml/consume'
+assertion_urls: 'https://uatweb.spc.links.com.au/saml/consume'
