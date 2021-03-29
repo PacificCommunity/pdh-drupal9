@@ -154,5 +154,13 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
-    }
+    },
+	"scripts": {
+   		"post-install-cmd": [
+      		"test -e web/robots.txt && rm web/robots.txt || echo robots is setup"
+   		],
+   		"post-update-cmd": [
+      		"test -e web/robots.txt && rm web/robots.txt || echo robots is setup"
+   		]
+	}
 }
