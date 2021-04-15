@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.dashboards.field_dashboard_notes
     - field.field.node.dashboards.field_data_insights_preview
     - field.field.node.dashboards.field_dsp_title_markup
+    - field.field.node.dashboards.field_dsp_view_weight
     - field.field.node.dashboards.field_image
     - field.field.node.dashboards.field_preview
     - field.field.node.dashboards.field_url
@@ -41,6 +42,7 @@ hidden:
   field_dashboard_notes: true
   field_data_insights_preview: true
   field_dsp_title_markup: true
+  field_dsp_view_weight: true
   field_image: true
   field_preview: true
   field_url: true

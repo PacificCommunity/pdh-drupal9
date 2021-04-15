@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.dashboards.field_dashboard_notes
     - field.field.node.dashboards.field_data_insights_preview
     - field.field.node.dashboards.field_dsp_title_markup
+    - field.field.node.dashboards.field_dsp_view_weight
     - field.field.node.dashboards.field_image
     - field.field.node.dashboards.field_preview
     - field.field.node.dashboards.field_url
@@ -60,6 +61,15 @@ content:
       field_formatter_class:
         class: dashboard-notes
     type: text_default
+    region: content
+  field_dsp_view_weight:
+    weight: 5
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
     region: content
   links:
     weight: 0
