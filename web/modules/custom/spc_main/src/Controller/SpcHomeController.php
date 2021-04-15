@@ -124,6 +124,7 @@ class SpcHomeController  extends ControllerBase {
     $query = \Drupal::entityQuery('node')
       ->condition('status', 1)
       ->condition('type', 'article')
+      ->sort('created' , 'DESC')
       ->pager(10);
     $nids = $query->execute();
 
