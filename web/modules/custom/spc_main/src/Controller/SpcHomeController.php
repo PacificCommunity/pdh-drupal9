@@ -63,6 +63,7 @@ class SpcHomeController  extends ControllerBase {
         $dashboard['url'] = $node->field_url->value;
         $dashboard['title'] = $node->field_dsp_title_markup->value;
         $dashboard['body'] = $node->field_data_insights_preview->value;
+        $dashboard['weight'] = $node->field_dsp_view_weight->value;
 
         if (is_object($node->field_image->entity)){
           $style = ImageStyle::load('medium');
@@ -70,10 +71,11 @@ class SpcHomeController  extends ControllerBase {
           $dashboard['img'] = $styled_image_url;
         }
         
-        $dashboards[] = $dashboard;        
+        $dashboards[$dashboard['weight']] = $dashboard;        
       }
     }  
-
+    ksort($dashboards);
+    
     return $dashboards;
   }
   
