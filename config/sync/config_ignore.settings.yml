@@ -12,5 +12,7 @@ ignored_config_entities:
   - saml_sp.idp.spc_okta
   - tinypng.settings
   - google_oauth_login.settings
+  - spc_mbd.settings
+  - spc_publication_import.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
