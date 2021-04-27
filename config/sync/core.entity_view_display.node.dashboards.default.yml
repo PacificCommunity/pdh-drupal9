@@ -62,15 +62,6 @@ content:
         class: dashboard-notes
     type: text_default
     region: content
-  field_dsp_view_weight:
-    weight: 5
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
   links:
     weight: 0
     region: content
@@ -79,6 +70,7 @@ content:
 hidden:
   field_data_insights_preview: true
   field_dsp_title_markup: true
+  field_dsp_view_weight: true
   field_image: true
   field_preview: true
   field_url: true
