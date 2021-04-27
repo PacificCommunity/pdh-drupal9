@@ -193,7 +193,7 @@
             pdf.text(60, strHeight, rationaleBodyTosize);
           }
 
-          pdf.save("chart-" + chartId + ".pdf");
+          pdf.save("" + title + ".pdf");
         });
       });
 
