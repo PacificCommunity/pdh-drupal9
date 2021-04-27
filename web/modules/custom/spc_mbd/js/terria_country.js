@@ -216,9 +216,11 @@
             clickedZoneId = e.data.ids[0];
           } else if (e.data.ids.length > 1){
             for (let i = 0; i < e.data.ids.length; i++){
-              if (e.data.ids[i].includes('limit-') || e.data.ids[i].includes('shelf-') || e.data.ids[i].includes('boundary-')){
+              if (e.data.ids[i].includes('limit-') || e.data.ids[i].includes('boundary-')){
                 clickedZoneId = e.data.ids[i];
                 break;
+              } else if (e.data.ids[i].includes('shelf-')){
+                clickedZoneId = e.data.ids[i];
               } else if (e.data.ids[i].includes('eez-')){
                 clickedZoneId = e.data.ids[i];
               }
@@ -269,7 +271,7 @@
             limitPopup.find('.date .value').text(target.date);
             
             let url = target.url;
-            if (target.url.length > 30){
+            if (target.url && target.url.length > 30){
               url = target.url.substring(0, 30) + '...';
             }            
             
