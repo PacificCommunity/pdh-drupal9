@@ -1,7 +1,12 @@
 uuid: dc69eec7-2dee-4fa7-826c-7b7a9cce13a9
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - tinypng
+third_party_settings:
+  tinypng:
+    tinypng_compress: 1
 name: stories_slides
 label: 'Stories slides'
 effects:

@@ -10,10 +10,11 @@ dependencies:
     - field.field.node.article.field_related_topic
     - field.field.node.article.field_syndicated_id
     - field.field.node.article.field_tags
-    - image.style.stories_slides
+    - image.style.large
     - node.type.article
   module:
     - field_formatter_class
+    - lazy
     - svg_image
     - text
     - user
@@ -36,7 +37,7 @@ content:
     weight: 0
     region: content
     settings:
-      image_style: stories_slides
+      image_style: large
       image_link: ''
       svg_render_as_image: true
       svg_attributes:
@@ -45,6 +46,10 @@ content:
     third_party_settings:
       field_formatter_class:
         class: ''
+      lazy:
+        placeholder_style: ''
+        lazy_image: '0'
+        data_uri: false
     label: hidden
   field_related_datasets:
     weight: 3
