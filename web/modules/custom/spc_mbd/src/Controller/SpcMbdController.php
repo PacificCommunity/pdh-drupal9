@@ -14,7 +14,7 @@ class SpcMbdController extends ControllerBase {
   
     public $states_colors = [
       'na' => '#F2F2F2',
-      'not_started' => '#F6999A',
+      'not_started' => '#F20116',
       'in_progress' => '#FBCD6A',
       'completed' => '#05F904',
     ];
@@ -199,7 +199,7 @@ class SpcMbdController extends ControllerBase {
         array_splice( $zones, 5, 0, '6' );
         $zones[5] = [
             'icon' => '/' . $theme_path . '/img/zone_steps/6.svg',  
-            'name' => '6. Shared Boundary? Refer to <a href="#">Treaty Pathway</a>',
+            'name' => '6. Shared Boundary? Refer to Treaty Pathway',
             'state' => 'na', 
         ];
 
