@@ -1022,8 +1022,11 @@ function set_additional_json_data($term, $country_code, $SpcMbdController, $key,
       'deposited' => $paragraph->field_deposited->value ? 'Yes' : 'No',
       'depositedDate' => $paragraph->field_date_deposited->value,
       'url' => $paragraph->field_url->value, 
-      'datasets' => _get_additional_zones_datasets($paragraph->get('field_related_datasets')->getValue()),
     ];
+  
+    if ($related_datasets = _get_additional_zones_datasets($paragraph->get('field_related_datasets')->getValue())){
+      $popup_data['datasets'] = $related_datasets;
+    }
   }  
   
   return $popup_data;
@@ -1032,9 +1035,7 @@ function set_additional_json_data($term, $country_code, $SpcMbdController, $key,
 function _get_additional_zones_datasets($dataset_ids){
   $spc_base_url = 'https://pacificdata.org/data/';
 
-  $country_detales = [];
-  $country_detales['datasetsCount'] = 0;
-
+  $related_datasets = [];
   if (!empty($dataset_ids)){
       foreach ($dataset_ids as $dataset_id){
           $id = $dataset_id['value'];
@@ -1044,8 +1045,6 @@ function _get_additional_zones_datasets($dataset_ids){
               $publication = $responce->result;
 
               if (is_object($publication)){
-                  $country_detales['datasetsCount'] += 1;
-
                   $dataset = [];
                   $dataset['name'] = $publication->name;
                   $dataset['title'] = $publication->title;
@@ -1094,13 +1093,13 @@ function _get_additional_zones_datasets($dataset_ids){
                       }
                   }
 
-                  $country_detales['datasets'][] =  $dataset;
+                  $related_datasets[] =  $dataset;
               }
           }
       }
+      
+      return $related_datasets;
   }
-
-  return $country_detales['datasets'];
 }
 
 function spc_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
