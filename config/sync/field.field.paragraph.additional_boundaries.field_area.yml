@@ -1,0 +1,23 @@
+uuid: 946566ff-ec65-40c0-ac02-ed91c31bcc5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_area
+    - paragraphs.paragraphs_type.additional_boundaries
+id: paragraph.additional_boundaries.field_area
+field_name: field_area
+entity_type: paragraph
+bundle: additional_boundaries
+label: Area
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float
