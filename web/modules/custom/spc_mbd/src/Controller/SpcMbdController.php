@@ -75,6 +75,13 @@ class SpcMbdController extends ControllerBase {
         "stroke-opacity" => 1,            
         "fill" => "#8f056a",
         "fill-opacity" => 0.5,
+      ],
+      'archipelagic' => [
+        'stroke' => '#F20116',
+        "stroke-width" => 2,
+        "stroke-opacity" => 1,            
+        "fill" => "#F20116",
+        "fill-opacity" => 0.5,
       ],        
     ];
 

@@ -321,7 +321,7 @@ function spc_preprocess_taxonomy_term(&$variables){
         $variables['terri_map_url'] = $terriaMapUrl . '#spc&hideWorkbench=1&start='. urlencode($initCamera);
         $variables['#attached']['library'][] =  'spc_mbd/terria_country';
         $variables['#attached']['drupalSettings']['spcMbd']['map'] = _get_country_map_data($term);
-        $variables['#attached']['drupalSettings']['spcMbd']['countryCode'] = $country_code;        
+        $variables['#attached']['drupalSettings']['spcMbd']['countryCode'] = $country_code;    
         
     }
     
@@ -651,7 +651,7 @@ function _get_country_map_data($term){
     $SpcMbdController = new SpcMbdController();
     $map_data = $SpcMbdController->get_map_data();    
 
-    set_country_eez_json($country_code, $SpcMbdController);
+    $additional_data = set_country_eez_json($country_code, $SpcMbdController);
     set_country_boundaries_json($country_code, $SpcMbdController);
     set_country_limits_json($country_code, $SpcMbdController);       
     set_country_shelf_json($country_code, $SpcMbdController);
@@ -660,6 +660,18 @@ function _get_country_map_data($term){
     $map['limits'] = $map_data['limits'];
     $map['shelf'] = $map_data['shelf'];
     $map['boundary'] = $map_data['boundary'];
+    $map['additional'] = $additional_data;
+    
+    $file = File::load($term->get('field_flag')->getValue()[0]['target_id']);
+    if (is_object($file)){
+      $flag = file_create_url($file->getFileUri());
+    }  
+
+    $map['country'] = [
+        'name' => $term->getName(),
+        'flag' => $flag, 
+        'code' => $country_code
+    ];
 
     return $map;
 }
@@ -915,20 +927,38 @@ function set_country_eez_json($country_code, $SpcMbdController){
       }
       
       $additional_data_list = [
-          'baseline' => 'field_eez_sea_baseline',
-          'seelim' => 'field_eez_sea_limit',
-          'marine' => 'field_eez_marine_protected_areas',
-          'contiguous' => 'field_eez_contiguous_zone',
+        'baseline' => [
+            'json' => 'field_eez_sea_baseline',
+            'popup' => 'field_eez_sea_baseline_popup',
+        ],
+        'seelim' => [
+            'json' => 'field_eez_sea_limit',
+            'popup' => 'field_eez_sea_limit_popup',
+        ],
+        'marine' => [
+            'json' => 'field_eez_marine_protected_areas',
+            'popup' => 'field_eez_marine_areas_popup',
+        ],
+        'contiguous' => [
+            'json' => 'field_eez_contiguous_zone',
+            'popup' => 'field_eez_contiguous_zone_popup',
+        ],
+        'archipelagic' => [
+            'json' => 'field_eez_archipelagic_baseline',
+            'popup' => 'field_eez_archipelagic_popup',
+        ]          
       ];
       
       foreach ($additional_data_list as $key => $field){
         if ($term->get('field_country_code')->value == $country_code){
-          set_additional_json_data($term, $country_code, $SpcMbdController, $key, $field);
+          $additional_data[$key] = set_additional_json_data($term, $country_code, $SpcMbdController, $key, $field);
         }
       }
     }
     $geojson =  substr($geojson, 0, -1) . ']';
     create_json_file('eez-'. $country_code.'.json', $geojson ); 
+    
+    return $additional_data;
 }
 
 function create_json_file($filename, $json){
@@ -951,8 +981,7 @@ function create_json_file($filename, $json){
 
 function set_additional_json_data($term, $country_code, $SpcMbdController, $key, $field){
   
-  $json = @$term->get($field)->getValue()[0]['value'];
-  
+  $json = @$term->get($field['json'])->getValue()[0]['value'];
   if ($SpcMbdController->is_json($json)){
       $geoarray = json_decode($json, true);
       $geo_item = [];
@@ -978,7 +1007,100 @@ function set_additional_json_data($term, $country_code, $SpcMbdController, $key,
         $geojson =  '[' . substr($geojson, 0, -1) . ']';
         create_json_file($key . '-'. $country_code.'.json', $geojson );
       }
+  } else {
+    create_json_file($key . '-'. $country_code.'.json', '' );
   }
+  
+  $popup_id = @$term->get($field['popup'])->getValue()[0]['target_id'];
+  if ($popup_id){
+    $paragraph = Paragraph::load($popup_id);
+      
+    $popup_data = [
+      'area' => $paragraph->field_area->value,
+      'legislated' => $paragraph->field_legislated->value ? 'Yes' : 'No' ,
+      'legislatedDate' => $paragraph->field_date_legislated->value,
+      'deposited' => $paragraph->field_deposited->value ? 'Yes' : 'No',
+      'depositedDate' => $paragraph->field_date_deposited->value,
+      'url' => $paragraph->field_url->value, 
+      'datasets' => _get_additional_zones_datasets($paragraph->get('field_related_datasets')->getValue()),
+    ];
+  }  
+  
+  return $popup_data;
+}
+
+function _get_additional_zones_datasets($dataset_ids){
+  $spc_base_url = 'https://pacificdata.org/data/';
+
+  $country_detales = [];
+  $country_detales['datasetsCount'] = 0;
+
+  if (!empty($dataset_ids)){
+      foreach ($dataset_ids as $dataset_id){
+          $id = $dataset_id['value'];
+          $api = $spc_base_url . 'api/3/action/package_show';
+
+          if ($responce = json_decode(file_get_contents($api . '?id=' . $id))){
+              $publication = $responce->result;
+
+              if (is_object($publication)){
+                  $country_detales['datasetsCount'] += 1;
+
+                  $dataset = [];
+                  $dataset['name'] = $publication->name;
+                  $dataset['title'] = $publication->title;
+                  $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
+
+                  //creation date.
+                  $originalDate = $publication->metadata_created;
+                  $dataset['date'] = date("M, d, Y", strtotime($originalDate));
+
+                  //Organisation data.
+                  $dataset['organization']['img'] = 'https://pacificdata.org/data/uploads/group/' . $publication->organization->image_url;
+                  $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
+                  $dataset['organization']['title'] = $publication->organization->title;
+
+                  //Category mapper.
+                  $tags = $publication->tags;
+                  $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
+
+                  foreach ($categories as $category_term) {
+                    $category = Term::load($category_term->tid);
+                    $term_code = $category->get('field_c_code')->getValue()[0]['value'];
+
+                    foreach ($tags as $tag){
+                      $tag_name = $tag->name;
+
+                      if ($term_code == $tag_name){
+                        $aliasManager = \Drupal::service('path_alias.manager');
+                        $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
+
+                        $dataset['tags'][] = [
+                          'url' => $url,
+                          'name' => $category->getName(),
+                        ];
+                      }
+
+                    }
+                  }
+
+                  //Resources data.
+                  if ($resources = $publication->resources){
+                      $dataset['resources'] = [];
+                      foreach ($resources as $resource){
+                          $data_resource['url'] = $resource->url;
+                          $data_resource['format'] = $resource->format;
+                          $dataset['resources'][] = $data_resource;
+                      }
+                  }
+
+                  $country_detales['datasets'][] =  $dataset;
+              }
+          }
+      }
+  }
+
+  return $country_detales['datasets'];
 }
 
 function spc_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
