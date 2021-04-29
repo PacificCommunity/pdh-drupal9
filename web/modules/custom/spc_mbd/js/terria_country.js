@@ -3,7 +3,7 @@
     attach: function(context, settings) {
       window.addEventListener('message', e => {
         
-        console.log(drupalSettings.spcMbd);
+        //console.log(drupalSettings.spcMbd);
         
         let map = {};
         let iframe = {};
@@ -18,6 +18,7 @@
         let seelimGeoJson = {};
         let marineGeoJson = {};
         let contiguousGeoJson = {};
+        let archipelagicGeoJson = {};
 
         const mapData = drupalSettings.spcMbd.map;
         const countryCode = drupalSettings.spcMbd.countryCode;
@@ -156,6 +157,24 @@
             }, 23000);
             }
           });
+         
+          fetch('/sites/default/files/mbd/archipelagic-' + countryCode + '.json')
+          .then(res => res.json())
+          .then((data) => {
+            if (data) {
+            archipelagicGeoJson = data;
+            window.setTimeout(function(){
+              iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: archipelagicGeoJson}, origin);
+
+              archipelagicGeoJson.forEach(function(item){
+                //console.log(item.id)
+                iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
+              });
+
+              iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
+            }, 24000);
+            }
+          });          
           
           fetch('/sites/default/files/mbd/marine-' + countryCode + '.json')
           .then(res => res.json())
@@ -171,10 +190,9 @@
               });
 
               iframe.postMessage({interactiveLayer: true, type: 'layer.enable'}, origin);
-            }, 24000);
+            }, 25000);
             }
           });
-          
  
         }  
 
@@ -182,6 +200,7 @@
         let limitPopup = $('#limit-popup');
         let shelfPopup = $('#shelf-popup');
         let boundaryPopup = $('#boundary-popup');
+        let additionalPopup = $('#additional-popup');
         
         const dialogConfig = {
           modal: true,
@@ -191,10 +210,11 @@
           width: 560,
           open: function(event, ui){ 
             $('.ui-widget-overlay').bind('click', function(){ 
-                eezPopup.dialog('close'); 
+                eezPopup.dialog('close');
                 limitPopup.dialog('close'); 
-                shelfPopup.dialog('close'); 
-                boundaryPopup.dialog('close'); 
+                shelfPopup.dialog('close');
+                boundaryPopup.dialog('close');
+                additionalPopup.dialog('close');
             }); 
           }
         };
@@ -203,6 +223,7 @@
         limitPopup.dialog(dialogConfig);
         shelfPopup.dialog(dialogConfig);
         boundaryPopup.dialog(dialogConfig);
+        additionalPopup.dialog(dialogConfig);
         
         if (e.data.type === 'click') {
           map = document.getElementById('terria-map');
@@ -219,6 +240,27 @@
               if (e.data.ids[i].includes('limit-') || e.data.ids[i].includes('boundary-')){
                 clickedZoneId = e.data.ids[i];
                 break;
+              } else if (e.data.ids[i].includes('archipelagic-') || e.data.ids[i].includes('marine-') || e.data.ids[i].includes('contiguous-') || e.data.ids[i].includes('baseline-') || e.data.ids[i].includes('seelim-')){
+
+                switch (true) {
+                  case e.data.ids.includes('baseline-' + countryCode):
+                      clickedZoneId = 'baseline-' + countryCode;
+                      break;
+                  case e.data.ids.includes('archipelagic-' + countryCode):
+                      clickedZoneId = 'archipelagic-' + countryCode;
+                      break;                      
+                  case e.data.ids.includes('seelim-' + countryCode):
+                      clickedZoneId = 'seelim-' + countryCode;   
+                      break;
+                  case e.data.ids.includes('contiguous-' + countryCode):
+                      clickedZoneId = 'contiguous-' + countryCode;
+                      break;
+                  case e.data.ids.includes('marine-' + countryCode):
+                      clickedZoneId = 'marine-' + countryCode;
+                      break;                  
+                } 
+                
+                break;
               } else if (e.data.ids[i].includes('shelf-')){
                 clickedZoneId = e.data.ids[i];
               } else if (e.data.ids[i].includes('eez-')){
@@ -227,8 +269,8 @@
             }
           }
           
-          //console.log(e.data.ids);
-          //console.log(clickedZoneId);
+          console.log(e.data.ids);
+          console.log(clickedZoneId);
 
           if (clickedZoneId && clickedZoneId.includes('eez-') && clickedZoneId.includes(countryCode)){
             
@@ -252,7 +294,7 @@
             eezPopup.find('.date .value').text(target.date);
             
             let url = target.url;
-            if (target.url.length > 30){
+            if (target.url && target.url.length > 30){
               let url = target.url.substring(0, 30) + '...';
             }            
             
@@ -335,20 +377,75 @@
             boundaryPopup.find('.date .value').text(target.date);
             
             let url = target.url;
-            if (target.url.length > 30){
+            if (target.url && target.url.length > 30){
               url = target.url.substring(0, 30) + '...';
             }
             
             boundaryPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');
             boundaryPopup.find('.related-datasets').html(datasets_html(target));          
             boundaryPopup.dialog( 'open' );
-          }     
+            
+          } else if (
+            clickedZoneId && (
+            clickedZoneId.includes('archipelagic-') || 
+            clickedZoneId.includes('marine-') || 
+            clickedZoneId.includes('seelim-') || 
+            clickedZoneId.includes('baseline-') || 
+            clickedZoneId.includes('contiguous-'))
+          ){
+
+            switch (true) {
+                case clickedZoneId.includes('marine-'):
+                    target = mapData.additional.marine;
+                    additionalPopup.find('.title').not('.data').text('Marine Protected Area (MPA)');
+                    break;
+                case clickedZoneId.includes('seelim-'):
+                    target = mapData.additional.seelim;
+                    additionalPopup.find('.title').not('.data').text('Territorial Seas Limit (12M)');
+                    break;
+                case clickedZoneId.includes('baseline-'):
+                    target = mapData.additional.baseline;                  
+                    additionalPopup.find('.title').not('.data').text('Territorial Seas Baseline (Normal/Straight)');
+                    break;
+                case clickedZoneId.includes('contiguous-'):
+                    target = mapData.additional.contiguous;                  
+                    additionalPopup.find('.title').not('.data').text('Contiguous Zone (24M)');
+                    break;
+                case clickedZoneId.includes('archipelagic-'):
+                    target = mapData.additional.archipelagic;                  
+                    additionalPopup.find('.title').not('.data').text(' Archipelagic Baseline');
+                    break;                  
+            }
+
+            let country = mapData.country;
+            
+            additionalPopup.find('.country .value').html('<img src="'+country.flag+'"><span>' + country.name +' ('+country.code +')</span>' );
+            additionalPopup.find('.area .value').text(target.area);
+            
+            additionalPopup.find('.legislated .value').text(target.legislated);
+            additionalPopup.find('.legislated-date .value').text(target.legislatedDate); 
+            
+            additionalPopup.find('.deposited .value').text(target.deposited);
+            additionalPopup.find('.deposited-date .value').text(target.depositedDate);
+            
+            if (target.url !== null && target.url.length > 30){
+              let url = target.url;
+              url = target.url.substring(0, 30) + '...';
+              additionalPopup.find('.url .value').html('<a href="'+target.url+'" target="_blank">'+ url +'</a>');              
+            } else {
+              additionalPopup.find('.url .value').html('-'); 
+            }
+
+            additionalPopup.find('.related-datasets').html(datasets_html(target));          
+            additionalPopup.dialog( 'open' );
+          }
           
           //console.log(target);
           //iframe.postMessage({interactiveLayer: true, type: 'zone.hide', id: clickedZoneId}, origin);
         }
         
         function datasets_html(target){
+          console.log(target);
           let html = '';
           if (target.hasOwnProperty('datasets')){
 
