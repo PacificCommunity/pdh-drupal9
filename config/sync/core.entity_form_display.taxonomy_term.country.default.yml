@@ -49,12 +49,12 @@ third_party_settings:
       format_type: details
       region: content
       format_settings:
+        description: ''
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
         open: false
-        required_fields: true
-      label: 'EEZ Contiguous Zone'
+      label: 'Contiguous Zone'
     group_eez_marine_protected_areas:
       children:
         - field_eez_marine_protected_areas
@@ -64,12 +64,12 @@ third_party_settings:
       format_type: details
       region: content
       format_settings:
+        description: ''
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
         open: false
-        required_fields: true
-      label: 'EEZ Marine Protected Areas'
+      label: 'Marine Protected Areas'
     group_eez_sea_baseline:
       children:
         - field_eez_sea_baseline
@@ -79,12 +79,12 @@ third_party_settings:
       format_type: details
       region: content
       format_settings:
+        description: ''
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
         open: false
-        required_fields: true
-      label: 'EEZ Sea Baseline'
+      label: 'Sea Baseline'
     group_eez_sea_limit:
       children:
         - field_eez_sea_limit
@@ -94,12 +94,12 @@ third_party_settings:
       format_type: details
       region: content
       format_settings:
+        description: ''
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
         open: false
-        required_fields: true
-      label: 'EEZ Sea Limit'
+      label: 'Sea Limit'
     group_eez_archipelagic_baseline:
       children:
         - field_eez_archipelagic_baseline
@@ -109,12 +109,12 @@ third_party_settings:
       format_type: details
       region: content
       format_settings:
+        description: ''
+        required_fields: true
         id: ''
         classes: ''
-        description: ''
         open: false
-        required_fields: true
-      label: 'EEZ Archipelagic Baseline'
+      label: 'Archipelagic Baseline'
 id: taxonomy_term.country.default
 targetEntityType: taxonomy_term
 bundle: country

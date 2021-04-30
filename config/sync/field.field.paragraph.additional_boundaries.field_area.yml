@@ -9,7 +9,7 @@ id: paragraph.additional_boundaries.field_area
 field_name: field_area
 entity_type: paragraph
 bundle: additional_boundaries
-label: Area
+label: 'Area (sq. km)'
 description: ''
 required: false
 translatable: false

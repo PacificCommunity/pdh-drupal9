@@ -12,7 +12,7 @@ id: taxonomy_term.country.field_eez_contiguous_zone_popup
 field_name: field_eez_contiguous_zone_popup
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Contiguous Zone popup'
+label: 'Contiguous Zone popup'
 description: ''
 required: false
 translatable: false

@@ -12,7 +12,7 @@ id: taxonomy_term.country.field_eez_marine_areas_popup
 field_name: field_eez_marine_areas_popup
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Marine Areas popup'
+label: 'Marine Areas popup'
 description: ''
 required: false
 translatable: false

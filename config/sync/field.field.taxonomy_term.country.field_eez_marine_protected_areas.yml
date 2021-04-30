@@ -9,7 +9,7 @@ id: taxonomy_term.country.field_eez_marine_protected_areas
 field_name: field_eez_marine_protected_areas
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Marine Protected Areas'
+label: 'Marine Protected Areas'
 description: ''
 required: false
 translatable: false

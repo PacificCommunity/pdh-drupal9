@@ -9,7 +9,7 @@ id: taxonomy_term.country.field_eez_contiguous_zone
 field_name: field_eez_contiguous_zone
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Contiguous Zone'
+label: 'Contiguous Zone'
 description: ''
 required: false
 translatable: false

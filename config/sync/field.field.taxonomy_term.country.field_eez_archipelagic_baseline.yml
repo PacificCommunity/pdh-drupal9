@@ -9,7 +9,7 @@ id: taxonomy_term.country.field_eez_archipelagic_baseline
 field_name: field_eez_archipelagic_baseline
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Archipelagic Baseline'
+label: 'Archipelagic Baseline'
 description: ''
 required: false
 translatable: false
