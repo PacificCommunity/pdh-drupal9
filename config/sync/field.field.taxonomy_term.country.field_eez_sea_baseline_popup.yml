@@ -12,7 +12,7 @@ id: taxonomy_term.country.field_eez_sea_baseline_popup
 field_name: field_eez_sea_baseline_popup
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Sea Baseline popup'
+label: 'Sea Baseline popup'
 description: ''
 required: false
 translatable: false

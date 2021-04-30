@@ -12,7 +12,7 @@ id: taxonomy_term.country.field_eez_archipelagic_popup
 field_name: field_eez_archipelagic_popup
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Archipelagic popup'
+label: 'Archipelagic popup'
 description: ''
 required: false
 translatable: false

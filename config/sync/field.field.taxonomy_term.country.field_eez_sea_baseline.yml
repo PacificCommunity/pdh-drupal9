@@ -9,7 +9,7 @@ id: taxonomy_term.country.field_eez_sea_baseline
 field_name: field_eez_sea_baseline
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Sea Baseline'
+label: 'Sea Baseline'
 description: ''
 required: false
 translatable: false

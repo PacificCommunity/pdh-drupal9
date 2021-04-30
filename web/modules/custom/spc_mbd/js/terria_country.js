@@ -2,9 +2,7 @@
   Drupal.behaviors.spcMbd = {
     attach: function(context, settings) {
       window.addEventListener('message', e => {
-        
-        //console.log(drupalSettings.spcMbd);
-        
+
         let map = {};
         let iframe = {};
         let origin = {};
@@ -41,7 +39,6 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: zonesGeoJson}, origin);
 
               zonesGeoJson.forEach(function(item){
-                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -59,7 +56,6 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: shelfGeoJson}, origin);
 
               shelfGeoJson.forEach(function(item){
-                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -77,7 +73,6 @@
                   iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: borersGeoJson}, origin);
 
                   borersGeoJson.forEach(function(item){
-                    //console.log(item.id)
                     iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
                   });
 
@@ -95,7 +90,6 @@
                 iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: limitsGeoJson}, origin);
       
                 limitsGeoJson.forEach(function(item){
-                  //console.log(item.id)
                   iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
                 });
       
@@ -113,7 +107,6 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: contiguousGeoJson}, origin);
 
               contiguousGeoJson.forEach(function(item){
-                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -131,7 +124,6 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: seelimGeoJson}, origin);
 
               seelimGeoJson.forEach(function(item){
-                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -149,7 +141,6 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: baselineGeoJson}, origin);
 
               baselineGeoJson.forEach(function(item){
-                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -167,7 +158,6 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: archipelagicGeoJson}, origin);
 
               archipelagicGeoJson.forEach(function(item){
-                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -185,7 +175,6 @@
               iframe.postMessage({interactiveLayer: true, type: 'zone.add', items: marineGeoJson}, origin);
 
               marineGeoJson.forEach(function(item){
-                //console.log(item.id)
                 iframe.postMessage({interactiveLayer: true, type: 'zone.show', id: item.id}, origin);
               });
 
@@ -268,9 +257,6 @@
               }
             }
           }
-          
-          console.log(e.data.ids);
-          console.log(clickedZoneId);
 
           if (clickedZoneId && clickedZoneId.includes('eez-') && clickedZoneId.includes(countryCode)){
             
@@ -440,12 +426,11 @@
             additionalPopup.dialog( 'open' );
           }
           
-          //console.log(target);
+          // hide event example.
           //iframe.postMessage({interactiveLayer: true, type: 'zone.hide', id: clickedZoneId}, origin);
         }
         
         function datasets_html(target){
-          console.log(target);
           let html = '';
           if (target.hasOwnProperty('datasets')){
 

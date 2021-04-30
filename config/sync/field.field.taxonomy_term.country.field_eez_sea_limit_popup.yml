@@ -12,7 +12,7 @@ id: taxonomy_term.country.field_eez_sea_limit_popup
 field_name: field_eez_sea_limit_popup
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ Sea Limit popup'
+label: 'Sea Limit popup'
 description: ''
 required: false
 translatable: false
