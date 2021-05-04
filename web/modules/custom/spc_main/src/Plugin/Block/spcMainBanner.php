@@ -69,13 +69,12 @@ class spcMainBanner extends BlockBase {
   public function get_home_topics(){
     $topics = [];
     
-    $query = \Drupal::entityQuery('node')
-      ->condition('status', 1)   
-      ->condition('type', 'thematic_group')
-      ->pager(10);
-    $nids = $query->execute();
-
-    foreach ($nids as $nid) {
+    $entity_subqueue = \Drupal::EntityTypeManager()->getStorage('entity_subqueue')->load('homepage_topics');
+    $items = $entity_subqueue->get('items')->getValue();
+    
+    foreach ($items as $item) {
+      $nid = $item['target_id'];
+      
       $topic = [];
       $node = \Drupal\node\Entity\Node::load($nid);
       
