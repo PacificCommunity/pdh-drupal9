@@ -44,7 +44,10 @@ class spcBanner extends BlockBase {
     ];
 
     $node = \Drupal::routeMatch()->getParameter('node');
-    if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'data_insights' || $node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
+    if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'data_insights' 
+        || $node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article'
+        || $node instanceof \Drupal\node\NodeInterface && $node->getType() == 'page') {
+      
       $data['breads'][] = ['name' => $node->getTitle()];
 
       if ($node->getType() === 'page') {
@@ -55,7 +58,7 @@ class spcBanner extends BlockBase {
         $title = implode(' ', $title_parts);
   
         $data['base_page_title'] = $title;
-  
+        
         if ($node->hasField('field_banner_image')) {
           $banner_image_entity = $node->field_banner_image->entity;
   
@@ -70,15 +73,16 @@ class spcBanner extends BlockBase {
           if ($header_type) {
             $data['maximum_header'] = boolval($header_type);
           }
-        }      
+        } 
+        // unset breadcrumbs on basic pages.
+        $data['breads'] = [];
       }
     }
     
     $route_name = \Drupal::routeMatch()->getRouteName();
-    if ($route_name === 'user.login' || $route_name = 'user.pass' || $route_name === 'user.register'){
+    if ($route_name === 'user.login' || $route_name === 'user.pass' || $route_name === 'user.register'){
       $data['maximum_header'] = false;
     }
-  
 
     return array(
       '#theme' => 'main_banner_block',
