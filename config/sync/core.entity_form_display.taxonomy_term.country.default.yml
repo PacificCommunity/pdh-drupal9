@@ -54,7 +54,7 @@ third_party_settings:
         id: ''
         classes: ''
         open: false
-      label: 'Contiguous Zone'
+      label: 'Contiguous Zone (24M)'
     group_eez_marine_protected_areas:
       children:
         - field_eez_marine_protected_areas
@@ -69,7 +69,7 @@ third_party_settings:
         id: ''
         classes: ''
         open: false
-      label: 'Marine Protected Areas'
+      label: 'Marine Protected Area (MPA)'
     group_eez_sea_baseline:
       children:
         - field_eez_sea_baseline
@@ -84,7 +84,7 @@ third_party_settings:
         id: ''
         classes: ''
         open: false
-      label: 'Sea Baseline'
+      label: 'Territorial Seas Baseline (Normal/Straight) '
     group_eez_sea_limit:
       children:
         - field_eez_sea_limit
@@ -99,7 +99,7 @@ third_party_settings:
         id: ''
         classes: ''
         open: false
-      label: 'Sea Limit'
+      label: 'Territorial Seas Limit (12M)'
     group_eez_archipelagic_baseline:
       children:
         - field_eez_archipelagic_baseline

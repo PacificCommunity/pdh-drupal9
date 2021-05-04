@@ -2,8 +2,6 @@ uuid: 394af707-d19a-4f71-9e40-7ae43107c70c
 langcode: en
 status: true
 dependencies:
-  module:
-    - spc_dot_stat_chart
   theme:
     - spc
 id: pdh.statchartoverview
