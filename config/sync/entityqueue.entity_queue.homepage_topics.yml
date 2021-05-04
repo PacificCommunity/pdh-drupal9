@@ -1,0 +1,53 @@
+uuid: 20bd044f-ac88-4211-a96b-c00104a5560e
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_redirect
+    - node
+third_party_settings:
+  entity_redirect:
+    redirect:
+      add:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+        personalizable: 1
+      edit:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+        personalizable: 1
+      delete:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+        personalizable: 1
+      anonymous:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+id: homepage_topics
+label: 'Homepage Topics'
+handler: simple
+handler_configuration: {  }
+entity_settings:
+  target_type: node
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      thematic_group: thematic_group
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+queue_settings:
+  min_size: 0
+  max_size: 0
+  act_as_queue: false
+  reverse: false
