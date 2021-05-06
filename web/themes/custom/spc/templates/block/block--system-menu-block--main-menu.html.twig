@@ -72,7 +72,7 @@
             </li>
           {% for subitem in item.below %}
             <li class="ma5-li-{{ key }}{{ '-' }}{{ loop.index }}">
-              <a class="{{ subitem.url.getOption('attributes').class }}" href="{{ subitem.url }}">{{ subitem.title }}</a>
+              <a class="" href="{{ subitem.url }}">{{ subitem.title }}</a>
             </li>
           {% endfor %}  
           </ul>

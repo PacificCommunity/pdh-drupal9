@@ -159,7 +159,7 @@ function spc_preprocess_node(&$variables){
   
   if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'thematic_group') {
     $variables['spc_base_url'] = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
-    $variables['data_insights'] = _get_related_data_insights($node);
+    $variables['data_insights'] = [];
     $variables['datasets'] = _get_related_datasets($node);
     $variables['stories'] = _get_related_stories($node);
   }  
