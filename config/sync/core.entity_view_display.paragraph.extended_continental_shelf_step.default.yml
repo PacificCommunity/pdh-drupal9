@@ -1,0 +1,31 @@
+uuid: ed3309e6-bd0c-4c55-986e-b6ce128664fd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.extended_continental_shelf_step.field_progress_type
+    - field.field.paragraph.extended_continental_shelf_step.field_shelf_step_term
+    - paragraphs.paragraphs_type.extended_continental_shelf_step
+  module:
+    - options
+id: paragraph.extended_continental_shelf_step.default
+targetEntityType: paragraph
+bundle: extended_continental_shelf_step
+mode: default
+content:
+  field_progress_type:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_shelf_step_term:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

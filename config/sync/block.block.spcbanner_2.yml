@@ -1,0 +1,27 @@
+uuid: 224d5460-ee60-4c70-ba86-b828b04074a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+    - system
+  theme:
+    - spc
+id: spcbanner_2
+theme: spc
+region: subheader
+weight: -13
+provider: null
+plugin: spc_banner
+settings:
+  id: spc_banner
+  label: 'SPC Default Banner'
+  provider: spc_main
+  label_display: '0'
+  spc_banner_title: 'Pacific <strong>Data</strong> Hub'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/\r\n/home\r\n/topic/*\r\n/story\r\n/story/*\r\n/dashboard/*\r\n/data-insights\r\n/data-insights/*"
+    negate: true
+    context_mapping: {  }

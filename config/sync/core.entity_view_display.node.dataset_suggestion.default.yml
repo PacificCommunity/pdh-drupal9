@@ -1,0 +1,50 @@
+uuid: 4d2c7945-2d78-4e8b-99cd-9babc9045104
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.dataset_suggestion.body
+    - field.field.node.dataset_suggestion.field_suggester_email
+    - field.field.node.dataset_suggestion.field_suggester_name
+    - node.type.dataset_suggestion
+  module:
+    - text
+    - user
+id: node.dataset_suggestion.default
+targetEntityType: node
+bundle: dataset_suggestion
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_suggester_email:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_suggester_name:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  rate_vote_widget:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

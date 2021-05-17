@@ -1,0 +1,10 @@
+uuid: dd35d810-80c5-4a3b-a01d-09bd15d139bd
+langcode: en
+status: true
+dependencies: {  }
+id: extended_continental_shelf_step
+label: 'Extended Continental Shelf step'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

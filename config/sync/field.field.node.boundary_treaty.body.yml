@@ -1,0 +1,23 @@
+uuid: f042cc75-a630-4968-9b25-515aa906f5ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.boundary_treaty
+  module:
+    - text
+id: node.boundary_treaty.body
+field_name: body
+entity_type: node
+bundle: boundary_treaty
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

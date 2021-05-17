@@ -1,0 +1,21 @@
+uuid: 66489036-c25b-4f4f-bc46-3d7922e2ac3c
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+    - taxonomy
+id: taxonomy_term.field_eez_sea_baseline_popup
+field_name: field_eez_sea_baseline_popup
+entity_type: taxonomy_term
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

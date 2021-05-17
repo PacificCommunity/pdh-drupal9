@@ -1,0 +1,272 @@
+uuid: 72caab61-b140-47c7-b990-72ad9c912bca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.country.field_boundary_countries
+    - field.field.taxonomy_term.country.field_continental_shelf_file
+    - field.field.taxonomy_term.country.field_country_code
+    - field.field.taxonomy_term.country.field_datasets_count
+    - field.field.taxonomy_term.country.field_date_deposited
+    - field.field.taxonomy_term.country.field_eez_archipelagic_baseline
+    - field.field.taxonomy_term.country.field_eez_archipelagic_popup
+    - field.field.taxonomy_term.country.field_eez_area
+    - field.field.taxonomy_term.country.field_eez_contiguous_zone
+    - field.field.taxonomy_term.country.field_eez_contiguous_zone_popup
+    - field.field.taxonomy_term.country.field_eez_deposited
+    - field.field.taxonomy_term.country.field_eez_marine_areas_popup
+    - field.field.taxonomy_term.country.field_eez_marine_protected_areas
+    - field.field.taxonomy_term.country.field_eez_plygon
+    - field.field.taxonomy_term.country.field_eez_sea_baseline
+    - field.field.taxonomy_term.country.field_eez_sea_baseline_popup
+    - field.field.taxonomy_term.country.field_eez_sea_limit
+    - field.field.taxonomy_term.country.field_eez_sea_limit_popup
+    - field.field.taxonomy_term.country.field_extended_continental_shelf
+    - field.field.taxonomy_term.country.field_flag
+    - field.field.taxonomy_term.country.field_image
+    - field.field.taxonomy_term.country.field_maritime_zone
+    - field.field.taxonomy_term.country.field_maritime_zones_file
+    - field.field.taxonomy_term.country.field_related_datasets
+    - field.field.taxonomy_term.country.field_url
+    - taxonomy.vocabulary.country
+  module:
+    - datetime
+    - entity_reference_revisions
+    - field_formatter_class
+    - file
+    - svg_image
+    - text
+id: taxonomy_term.country.default
+targetEntityType: taxonomy_term
+bundle: country
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_boundary_countries:
+    weight: 4
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_continental_shelf_file:
+    weight: 8
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_country_code:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_datasets_count:
+    weight: 15
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_date_deposited:
+    type: datetime_default
+    weight: 10
+    region: content
+    label: hidden
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+  field_eez_archipelagic_baseline:
+    weight: 19
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_archipelagic_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 20
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_eez_area:
+    type: number_decimal
+    weight: 11
+    region: content
+    label: hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+  field_eez_contiguous_zone:
+    weight: 15
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_contiguous_zone_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 21
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_eez_deposited:
+    type: boolean
+    weight: 12
+    region: content
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+  field_eez_marine_areas_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 22
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_eez_marine_protected_areas:
+    weight: 16
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_plygon:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_sea_baseline:
+    weight: 17
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_sea_baseline_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 23
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_eez_sea_limit:
+    weight: 18
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_sea_limit_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 24
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_extended_continental_shelf:
+    type: entity_reference_revisions_entity_view
+    weight: 5
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_flag:
+    weight: 9
+    label: hidden
+    settings:
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_image:
+    weight: 1
+    label: hidden
+    settings:
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_maritime_zone:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    region: content
+  field_maritime_zones_file:
+    weight: 7
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_related_datasets:
+    type: string
+    weight: 13
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_url:
+    type: string
+    weight: 14
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  ield_related_datasets: true

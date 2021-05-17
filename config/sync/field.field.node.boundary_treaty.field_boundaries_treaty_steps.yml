@@ -1,0 +1,49 @@
+uuid: 84218da5-2dd5-4bb1-8207-50bd26c75d36
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_boundaries_treaty_steps
+    - node.type.boundary_treaty
+    - paragraphs.paragraphs_type.maritime_boundaries_pathway
+  module:
+    - entity_reference_revisions
+id: node.boundary_treaty.field_boundaries_treaty_steps
+field_name: field_boundaries_treaty_steps
+entity_type: node
+bundle: boundary_treaty
+label: 'Maritime Boundaries Treaty Pathway Steps'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      maritime_boundaries_pathway: maritime_boundaries_pathway
+    target_bundles_drag_drop:
+      block_and_bottom_text:
+        weight: 8
+        enabled: false
+      block_reference:
+        weight: 9
+        enabled: false
+      extended_continental_shelf:
+        weight: 10
+        enabled: false
+      extended_continental_shelf_step:
+        weight: 11
+        enabled: false
+      field_dsp_targets:
+        weight: 12
+        enabled: false
+      maritime_boundaries_pathway:
+        enabled: true
+        weight: 13
+      maritime_zone_pathway:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

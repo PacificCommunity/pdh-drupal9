@@ -1,0 +1,4 @@
+administer spc hdb:
+  title: 'Administer SPC HDB'
+  description: 'Allow to access the administration form to configure SPC HDB.'
+  restrict access: true

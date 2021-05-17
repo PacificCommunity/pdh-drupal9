@@ -1,0 +1,8 @@
+uuid: c95a0c74-67a7-41ea-a33a-cc87cd346a28
+langcode: en
+status: true
+dependencies: {  }
+name: 'Maritime Boundary Treaty Pathway Steps'
+vid: boundary_treaty
+description: ''
+weight: -8

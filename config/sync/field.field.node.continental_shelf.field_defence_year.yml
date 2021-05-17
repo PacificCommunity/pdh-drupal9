@@ -1,0 +1,23 @@
+uuid: b3677f2a-e081-4399-92a5-e441065d12a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_defence_year
+    - node.type.continental_shelf
+  module:
+    - yearonly
+id: node.continental_shelf.field_defence_year
+field_name: field_defence_year
+entity_type: node
+bundle: continental_shelf
+label: 'Submission defence – Year'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  yearonly_from: '1900'
+  yearonly_to: now
+field_type: yearonly

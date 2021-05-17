@@ -5,6 +5,11 @@ dependencies:
   enforced:
     module:
       - responsive_image
+  module:
+    - tinypng
+third_party_settings:
+  tinypng:
+    tinypng_compress: 1
 _core:
   default_config_hash: xW1ApqbWjK7oCBCl8jVHA42u2MekQDq4gry3xfZzdWY
 name: max_1300x1300

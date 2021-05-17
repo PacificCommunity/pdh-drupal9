@@ -1,0 +1,23 @@
+uuid: 800d27b9-282d-4b49-acb4-743a41450397
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_deposited
+    - paragraphs.paragraphs_type.additional_boundaries
+id: paragraph.additional_boundaries.field_deposited
+field_name: field_deposited
+entity_type: paragraph
+bundle: additional_boundaries
+label: Deposited
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

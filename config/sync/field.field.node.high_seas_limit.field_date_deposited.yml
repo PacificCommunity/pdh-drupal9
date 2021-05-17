@@ -1,0 +1,21 @@
+uuid: 15b84d09-b972-4cb0-b5c7-e8ab0d9bccb5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date_deposited
+    - node.type.high_seas_limit
+  module:
+    - datetime
+id: node.high_seas_limit.field_date_deposited
+field_name: field_date_deposited
+entity_type: node
+bundle: high_seas_limit
+label: 'Date Deposited'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

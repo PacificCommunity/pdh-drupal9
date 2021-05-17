@@ -1,0 +1,19 @@
+uuid: 6dec3903-79c3-4219-9689-13994c8bce74
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_related_datasets
+    - paragraphs.paragraphs_type.additional_boundaries
+id: paragraph.additional_boundaries.field_related_datasets
+field_name: field_related_datasets
+entity_type: paragraph
+bundle: additional_boundaries
+label: 'Related Datasets'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

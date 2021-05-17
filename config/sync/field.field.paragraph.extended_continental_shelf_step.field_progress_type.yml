@@ -1,0 +1,23 @@
+uuid: fa698d3a-ec40-461e-ace0-7e3fc7ffc29c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_progress_type
+    - paragraphs.paragraphs_type.extended_continental_shelf_step
+  module:
+    - options
+id: paragraph.extended_continental_shelf_step.field_progress_type
+field_name: field_progress_type
+entity_type: paragraph
+bundle: extended_continental_shelf_step
+label: 'Step state'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: na
+default_value_callback: ''
+settings: {  }
+field_type: list_string

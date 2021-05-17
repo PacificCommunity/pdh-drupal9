@@ -1,0 +1,22 @@
+uuid: c5f58bea-7275-480e-9cc3-08feacd5844c
+langcode: en
+status: true
+dependencies: {  }
+id: spc_okta
+label: 'SPC Okta'
+entity_id: 'http://www.okta.com/exk1int2lb03De4l91d8'
+app_name: 'http://www.okta.com/exk1int2lb03De4l91d8'
+nameid_field: mail
+login_url: 'https://spc1.okta.com/app/spc1_pdhdrupal9uat_1/exk1int2lb03De4l91d8/sso/saml'
+logout_url: 'https://spc1.okta.com/app/spc1_pdhdrupal9uat_1/exk1int2lb03De4l91d8/sso/saml'
+x509_cert:
+  0: 'MIIDmDCCAoCgAwIBAgIGAV2m1hEFMA0GCSqGSIb3DQEBCwUAMIGMMQswCQYDVQQGEwJVUzETMBEG A1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU MBIGA1UECwwLU1NPUHJvdmlkZXIxDTALBgNVBAMMBHNwYzExHDAaBgkqhkiG9w0BCQEWDWluZm9A b2t0YS5jb20wHhcNMTcwODAzMDY0MjUzWhcNMjcwODAzMDY0MzUyWjCBjDELMAkGA1UEBhMCVVMx EzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9r dGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMQ0wCwYDVQQDDARzcGMxMRwwGgYJKoZIhvcNAQkBFg1p bmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoAU3n48+/dhsZKUA d04cTlCbdXTfXgfUxfFdMUMtZjuduXh02a7wyKK6Bhr585aNiCW0tAGMc7k5Mbw/Q8PFq+5rhSkT lWchiwFhoyPC9ZRr3koCX2j5Oa9MHGISEbKnq7ntMLjvQ5jl7X7LiDGscNSODSZSIfm6X62LRbus emEtZIv4eDMe9E3C+W6hZIwMrMcjcni7arB44jvRyL1D/6xp0qGXw34I3bggmUbRCpG/i0ZR7aK4 oGSjxnDBiZwK8PoBXjz2wNJPuhKvj7o4OVAjSRDzgocqSMxOVRApgqSd49HDi1HKx7Qgy9aIGX+l 6O9zPmvXkVMPjq8lHClm2wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBLVmXV+Yg2JlqyeOqXTjZm eCwkZ4pbT2vV3ZPP5kWo8dNaRAKYujbpbG5Ro2KyXlXXMOSwiIqSf1r7yxJBmH0GF1DQCVRzNKd4 A4S4W2DuTF/k4XB+RUA83Az2nYegXtNR1AF2TwiMAuxP3Mmsyo2wXHgM2w6XM9kUae+GEtNSPwYD KcJxrDzmQmyjaqIn1dbSxpRc8L6NLWDnqVxOdoT9LW039vlcw5urgZXh4R4c+eHcuyqatYFGywpB oFzy83xVidk6mULKn9RgFusvpuXt2lZJpbIYayoQAWgo68woZuD7CFztnbe2eOsIfxPpfzK9KLIN z9cytwT79i/I2Jq5'
+  1: ''
+  actions: {  }
+authn_context_class_ref:
+  user_name_and_password: user_name_and_password
+  password_protected_transport: password_protected_transport
+  x509_certificate: x509_certificate
+  tls_client: '0'
+  integrated_windows_authentication: '0'
+  kerberos: '0'

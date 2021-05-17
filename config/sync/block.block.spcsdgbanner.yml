@@ -11,7 +11,7 @@ dependencies:
 id: spcsdgbanner
 theme: spc
 region: subheader
-weight: 0
+weight: -11
 provider: null
 plugin: spc_sdg_banner
 settings:

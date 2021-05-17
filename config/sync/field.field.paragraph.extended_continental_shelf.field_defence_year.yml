@@ -1,0 +1,23 @@
+uuid: a3762a84-7811-4b6f-833a-9484ea0804e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_defence_year
+    - paragraphs.paragraphs_type.extended_continental_shelf
+  module:
+    - yearonly
+id: paragraph.extended_continental_shelf.field_defence_year
+field_name: field_defence_year
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: 'Submission defence – Year'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  yearonly_from: '1900'
+  yearonly_to: now
+field_type: yearonly

@@ -1,0 +1,28 @@
+uuid: 4575ef40-45a9-4d66-a106-983794b90e51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.maritime_zone_pathway.field_maritime_zone
+    - field.field.paragraph.maritime_zone_pathway.field_progress_type
+    - paragraphs.paragraphs_type.maritime_zone_pathway
+id: paragraph.maritime_zone_pathway.default
+targetEntityType: paragraph
+bundle: maritime_zone_pathway
+mode: default
+content:
+  field_maritime_zone:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_progress_type:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

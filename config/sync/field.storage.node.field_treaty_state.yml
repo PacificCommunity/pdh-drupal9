@@ -1,0 +1,33 @@
+uuid: 70a638cb-bfcd-4405-803f-1a2f86e083fc
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_treaty_state
+field_name: field_treaty_state
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: na
+      label: NA
+    -
+      value: not_started
+      label: 'Not Started'
+    -
+      value: in_progress
+      label: 'Work in Progress'
+    -
+      value: completed
+      label: Completed
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

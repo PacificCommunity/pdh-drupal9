@@ -1,0 +1,29 @@
+uuid: f1df0cae-6fda-4a19-9f7b-9fcd36ceecff
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_limit_countries
+    - node.type.high_seas_limit
+    - taxonomy.vocabulary.country
+id: node.high_seas_limit.field_limit_countries
+field_name: field_limit_countries
+entity_type: node
+bundle: high_seas_limit
+label: 'Limit Countries'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      country: country
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

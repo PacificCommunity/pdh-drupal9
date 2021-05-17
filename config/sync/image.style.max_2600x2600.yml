@@ -5,6 +5,11 @@ dependencies:
   enforced:
     module:
       - responsive_image
+  module:
+    - tinypng
+third_party_settings:
+  tinypng:
+    tinypng_compress: 1
 _core:
   default_config_hash: M-7xzqSFQjuAiL0BP9rHC3DbUi2HnaoD538wlFWsoc4
 name: max_2600x2600

@@ -1,0 +1,6 @@
+spc_mbd.landing_config:
+  title: 'SPC MBD settings'
+  description: 'SPC MBD settings page'
+  parent: system.admin_config_services
+  route_name: spc_mbd.settings
+  weight: 11 

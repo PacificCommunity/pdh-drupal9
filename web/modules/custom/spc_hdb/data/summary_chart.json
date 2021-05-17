@@ -1,0 +1,50 @@
+[
+  {
+    "indicator": "Leadership and governance",
+    "present": 49.2063492063492,
+    "under-development": 36.507936507936506,
+    "not-present": 14.285714285714285
+  },
+  {
+    "indicator": "Tobacco",
+    "present": 67.2,
+    "under-development": 14.399999999999999,
+    "not-present": 18.4
+  },
+  {
+    "indicator": "Alcohol",
+    "present": 76.5432098765432,
+    "under-development": 7.4074074074074066,
+    "not-present": 16.049382716049383
+  },
+  {
+    "indicator": "Food",
+    "present": 42.4,
+    "under-development": 25.6,
+    "not-present": 32
+  },
+  {
+    "indicator": "Physical activity",
+    "present": 66.66666666666666,
+    "under-development": 28.57142857142857,
+    "not-present": 4.761904761904762
+  },
+  {
+    "indicator": "Enforcement",
+    "present": 70,
+    "under-development": 20,
+    "not-present": 10
+  },
+  {
+    "indicator": "Health system",
+    "present": 56.451612903225815,
+    "under-development": 20.967741935483872,
+    "not-present": 22.58064516129032
+  },
+  {
+    "indicator": "Monitoring",
+    "present": 69.04761904761905,
+    "under-development": 23.809523809523807,
+    "not-present": 7.142857142857142
+  }
+]

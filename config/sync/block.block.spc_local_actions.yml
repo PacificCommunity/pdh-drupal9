@@ -9,7 +9,7 @@ _core:
 id: spc_local_actions
 theme: spc
 region: content
-weight: -5
+weight: -10
 provider: null
 plugin: local_actions_block
 settings:

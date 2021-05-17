@@ -1,0 +1,41 @@
+uuid: 6eac3703-b8b6-480b-b30b-47ebbb617dcc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.extended_continental_shelf.field_shelf_steps
+    - field.field.paragraph.extended_continental_shelf.field_shelf_title
+    - paragraphs.paragraphs_type.extended_continental_shelf
+  module:
+    - entity_reference_revisions
+id: paragraph.extended_continental_shelf.default
+targetEntityType: paragraph
+bundle: extended_continental_shelf
+mode: default
+content:
+  field_shelf_steps:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_shelf_title:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_datasets: true
+  field_date_submission: true
+  field_defence_year: true
+  field_established_year: true
+  field_full_submission_complied: true
+  field_joint_submission: true
+  field_recommendation: true
+  field_submission_done: true

@@ -1,0 +1,27 @@
+uuid: 2293acd5-415e-40fe-9490-985f7d14e1a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_maritime_zones_file
+    - taxonomy.vocabulary.country
+  module:
+    - file
+id: taxonomy_term.country.field_maritime_zones_file
+field_name: field_maritime_zones_file
+entity_type: taxonomy_term
+bundle: country
+label: 'Maritime zones file'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf doc'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

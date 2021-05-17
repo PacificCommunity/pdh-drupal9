@@ -1,0 +1,23 @@
+uuid: 247d3b06-439b-4149-bbbe-8de1d949fd01
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_eez_area
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_eez_area
+field_name: field_eez_area
+entity_type: taxonomy_term
+bundle: country
+label: 'Area (sq. km)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: null
+  prefix: sq/km
+  suffix: ''
+field_type: float

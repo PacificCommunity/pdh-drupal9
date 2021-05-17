@@ -7,7 +7,12 @@ dependencies:
     - field.field.node.dashboards.field_dashboard_block_references
     - field.field.node.dashboards.field_dashboard_bottom_text
     - field.field.node.dashboards.field_dashboard_notes
+    - field.field.node.dashboards.field_data_insights_preview
     - field.field.node.dashboards.field_dsp_title_markup
+    - field.field.node.dashboards.field_dsp_view_weight
+    - field.field.node.dashboards.field_image
+    - field.field.node.dashboards.field_preview
+    - field.field.node.dashboards.field_url
     - node.type.dashboards
   module:
     - entity_reference_revisions
@@ -30,7 +35,7 @@ content:
     region: content
   field_dashboard_block_references:
     type: entity_reference_revisions_entity_view
-    weight: 4
+    weight: 3
     label: hidden
     settings:
       view_mode: default
@@ -40,7 +45,7 @@ content:
         class: block-reference-block
     region: content
   field_dashboard_bottom_text:
-    weight: 5
+    weight: 4
     label: hidden
     settings: {  }
     third_party_settings:
@@ -63,4 +68,9 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_data_insights_preview: true
   field_dsp_title_markup: true
+  field_dsp_view_weight: true
+  field_image: true
+  field_preview: true
+  field_url: true

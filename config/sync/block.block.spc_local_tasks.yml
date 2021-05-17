@@ -2,6 +2,8 @@ uuid: 753511c3-1103-4e72-acde-f521b100fd6b
 langcode: en
 status: true
 dependencies:
+  module:
+    - system
   theme:
     - spc
 _core:
@@ -9,7 +11,7 @@ _core:
 id: spc_local_tasks
 theme: spc
 region: content
-weight: -7
+weight: -12
 provider: null
 plugin: local_tasks_block
 settings:
@@ -19,4 +21,8 @@ settings:
   label_display: '0'
   primary: true
   secondary: true
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: "/user/login\r\n/user/register\r\n/user/password"
+    negate: true

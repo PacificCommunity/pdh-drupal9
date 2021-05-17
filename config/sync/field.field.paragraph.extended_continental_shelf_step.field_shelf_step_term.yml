@@ -1,0 +1,29 @@
+uuid: 567fbf55-6586-4b7f-b547-30c856018042
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_shelf_step_term
+    - paragraphs.paragraphs_type.extended_continental_shelf_step
+    - taxonomy.vocabulary.continental_shelf
+id: paragraph.extended_continental_shelf_step.field_shelf_step_term
+field_name: field_shelf_step_term
+entity_type: paragraph
+bundle: extended_continental_shelf_step
+label: 'Step Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      continental_shelf: continental_shelf
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,18 @@
+uuid: bb33a287-d7f9-4a23-b31e-e46df0686f83
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'High Seas Limit'
+type: high_seas_limit
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

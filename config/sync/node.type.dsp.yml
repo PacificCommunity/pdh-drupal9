@@ -3,11 +3,38 @@ langcode: en
 status: true
 dependencies:
   module:
+    - entity_redirect
     - menu_ui
 third_party_settings:
   menu_ui:
-    available_menus: {  }
-    parent: ''
+    available_menus:
+      - main-menu
+    parent: 'main-menu:'
+  entity_redirect:
+    redirect:
+      add:
+        active: false
+        destination: default
+        url: ''
+        external: ''
+        personalizable: true
+      edit:
+        active: false
+        destination: default
+        url: ''
+        external: ''
+        personalizable: true
+      delete:
+        active: false
+        destination: default
+        url: ''
+        external: ''
+        personalizable: true
+      anonymous:
+        active: false
+        destination: default
+        url: ''
+        external: ''
 name: 'Dashboard Secondary Page'
 type: dsp
 description: 'Provides content type for dashboard secondary pages'

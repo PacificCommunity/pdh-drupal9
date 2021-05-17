@@ -1,0 +1,21 @@
+uuid: e83355ce-2336-4dbd-8014-b02e388bd72b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date
+    - node.type.boundary_treaty
+  module:
+    - datetime
+id: node.boundary_treaty.field_date
+field_name: field_date
+entity_type: node
+bundle: boundary_treaty
+label: Date
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,23 @@
+uuid: d741eae5-9a44-4e29-b34e-aa5a17615ed5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.high_seas_limit
+  module:
+    - text
+id: node.high_seas_limit.body
+field_name: body
+entity_type: node
+bundle: high_seas_limit
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

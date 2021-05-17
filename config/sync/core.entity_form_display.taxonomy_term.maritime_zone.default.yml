@@ -1,0 +1,47 @@
+uuid: 2148552b-4d29-4a18-b91f-e526763ab4a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.maritime_zone.field_image
+    - image.style.thumbnail
+    - taxonomy.vocabulary.maritime_zone
+  module:
+    - path
+    - svg_image
+id: taxonomy_term.maritime_zone.default
+targetEntityType: taxonomy_term
+bundle: maritime_zone
+mode: default
+content:
+  field_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 3
+    region: content
+    third_party_settings: {  }
+hidden:
+  description: true

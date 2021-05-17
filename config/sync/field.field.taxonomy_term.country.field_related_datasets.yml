@@ -1,0 +1,19 @@
+uuid: 19b7426e-45b8-4878-a204-fe5132ee6a4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_related_datasets
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_related_datasets
+field_name: field_related_datasets
+entity_type: taxonomy_term
+bundle: country
+label: 'Related Datasets'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

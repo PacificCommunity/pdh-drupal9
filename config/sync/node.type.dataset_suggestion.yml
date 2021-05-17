@@ -1,0 +1,43 @@
+uuid: 3b38e623-5081-4d94-a8ed-2da54bd55c02
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_redirect
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  entity_redirect:
+    redirect:
+      add:
+        active: true
+        destination: url
+        url: /dataset-suggestions
+        external: ''
+        personalizable: false
+      edit:
+        active: true
+        destination: url
+        url: /dataset-suggestions
+        external: ''
+        personalizable: false
+      delete:
+        active: false
+        destination: default
+        url: ''
+        external: ''
+        personalizable: true
+      anonymous:
+        active: false
+        destination: default
+        url: ''
+        external: ''
+name: 'Dataset Suggestion'
+type: dataset_suggestion
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: true

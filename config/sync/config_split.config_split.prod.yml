@@ -1,0 +1,19 @@
+uuid: 6e5d1c99-41c9-4bd4-a6cb-ff1695d09904
+langcode: en
+status: false
+dependencies: {  }
+id: prod
+label: Prod
+description: ''
+folder: ../config/prod
+module:
+  advagg: 0
+  advagg_bundler: 0
+  advagg_css_minify: 0
+  advagg_js_minify: 0
+theme: {  }
+blacklist: {  }
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 0

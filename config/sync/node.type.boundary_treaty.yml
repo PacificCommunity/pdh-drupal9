@@ -1,0 +1,18 @@
+uuid: 936f5523-7f90-4d6b-956e-3d7eccb26280
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Maritime Boundary Treaty'
+type: boundary_treaty
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

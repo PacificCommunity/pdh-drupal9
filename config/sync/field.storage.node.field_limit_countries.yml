@@ -1,0 +1,20 @@
+uuid: 063ebb11-6c53-4f96-83bc-d3a222ae9ae2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_limit_countries
+field_name: field_limit_countries
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

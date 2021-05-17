@@ -1,0 +1,21 @@
+uuid: 323723ba-0330-473e-8fc0-0caa06325458
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_date
+    - node.type.continental_shelf
+  module:
+    - datetime
+id: node.continental_shelf.field_date
+field_name: field_date
+entity_type: node
+bundle: continental_shelf
+label: 'Date of Preliminary submission'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
