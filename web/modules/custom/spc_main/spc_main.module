@@ -65,7 +65,7 @@ function spc_main_form_alter(&$form, &$form_state, $form_id) {
   }
   
   if ($form_id === 'user_login_form'){
-    $config = \Drupal::getContainer()->get('config.factory')->get('google_oauth_login.settings');
+    $config = \Drupal::getContainer()->get('config.factory')->get('googlelogin.settings');
     //Google client ID.
     $google_api_client_id = $config->get('google_api_client_id');
     $authUrl = Url::fromRoute('google_api_client.callback', array('id' => $google_api_client_id))->toString();
