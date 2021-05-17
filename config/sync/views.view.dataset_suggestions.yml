@@ -1489,6 +1489,20 @@ display:
         type: tag
         options: {  }
       sorts:
+        value:
+          id: value
+          table: votingapi_result
+          field: value
+          relationship: node_vote_result_vote_count
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: true
+          expose:
+            label: Value
+          entity_type: vote_result
+          entity_field: value
+          plugin_id: standard
         created:
           id: created
           table: node_field_data
@@ -1504,20 +1518,6 @@ display:
           entity_type: node
           entity_field: created
           plugin_id: date
-        value:
-          id: value
-          table: votingapi_result
-          field: value
-          relationship: node_vote_result_vote_count
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: true
-          expose:
-            label: Value
-          entity_type: vote_result
-          entity_field: value
-          plugin_id: standard
     cache_metadata:
       max-age: -1
       contexts:
