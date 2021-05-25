@@ -6805,12 +6805,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary.git",
-                "reference": "862ee8c8fddc9b42a730017b2afc0a5597318ebb"
+                "reference": "3ad2bb4ff705cdcd39ec4acd2f6a18a277609c27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_sdg_summary/repository/archive.zip?sha=862ee8c8fddc9b42a730017b2afc0a5597318ebb",
-                "reference": "862ee8c8fddc9b42a730017b2afc0a5597318ebb",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_sdg_summary/repository/archive.zip?sha=3ad2bb4ff705cdcd39ec4acd2f6a18a277609c27",
+                "reference": "3ad2bb4ff705cdcd39ec4acd2f6a18a277609c27",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -6830,7 +6830,7 @@
                 "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary/-/issues",
                 "source": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary"
             },
-            "time": "2020-10-28T15:48:49+11:00"
+            "time": "2021-05-25T15:30:23+11:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
