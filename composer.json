@@ -98,10 +98,7 @@
             },
             "drupal/core": {
                 "route serialization incompatibilities": "https://www.drupal.org/files/issues/2020-06-04/3145563-23.patch"
-            },
-            "pacific_community/spc_sdg_summary": {
-                "route serialization incompatibilities": "patches/block_context_definitions.patch"
-            }            
+            }         
         },
         "drupal-scaffold": {
             "locations": {
@@ -144,7 +141,7 @@
             ],
             "post-create-project-cmd-message": [
                 "<bg=blue;fg=white>                                                         </>",
-                "<bg=blue;fg=white>  Congratulations, youâ€™ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
                 "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
                 "<bg=blue;fg=white>                                                         </>",
                 "",
