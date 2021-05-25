@@ -4672,7 +4672,7 @@
         },
         {
             "name": "pacific_community/spc_sdg_summary",
-            "version": "1.0.4",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary.git",
@@ -4685,6 +4685,11 @@
                 "shasum": ""
             },
             "type": "drupal-module",
+            "extra": {
+                "patches_applied": {
+                    "route serialization incompatibilities": "patches/block_context_definitions.patch"
+                }
+            },
             "license": [
                 "proprietary"
             ],
