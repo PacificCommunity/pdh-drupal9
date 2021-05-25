@@ -1,7 +1,12 @@
 uuid: 68fbd5d7-2120-4c50-9fce-9abfa3781882
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - tinypng
+third_party_settings:
+  tinypng:
+    tinypng_compress: 1
 _core:
   default_config_hash: Y9NmnZHQq20ASSyTNA6JnwtWrJJiSajOehGDtmUFdM0
 name: medium

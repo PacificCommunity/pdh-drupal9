@@ -1,0 +1,23 @@
+uuid: d441e247-6864-4fb1-b8a7-82b0a0c50e86
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_joint_submission
+    - node.type.continental_shelf
+id: node.continental_shelf.field_joint_submission
+field_name: field_joint_submission
+entity_type: node
+bundle: continental_shelf
+label: 'Joint submission'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

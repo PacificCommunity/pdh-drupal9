@@ -1,0 +1,25 @@
+uuid: df7fde3e-7f6d-45c0-92f0-474f1aecf1b6
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_education_dashboard
+    - system
+  theme:
+    - spc
+id: spceducationdashboardbanner
+theme: spc
+region: subheader
+weight: 0
+provider: null
+plugin: spc_education_dashboard_banner
+settings:
+  id: spc_education_dashboard_banner
+  label: 'SPC Education Dashboard Banner'
+  provider: spc_education_dashboard
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /dashboard/education-dashboard
+    negate: false

@@ -1,7 +1,12 @@
 uuid: b1296240-ead9-4690-bd23-f00c303d0d1c
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - tinypng
+third_party_settings:
+  tinypng:
+    tinypng_compress: 1
 _core:
   default_config_hash: J2n0RpFzS0-bgSyxjs6rSdgxB1rb-bTAgqywNx_964M
 name: large

@@ -1,0 +1,181 @@
+<div class="health-dashboard-content">
+  <div class="health-country-chart clearfix">
+    <h4 class="block-title">{{ data.title }} {{ '- summary of status of indicators across the categories&nbsp(%)' }}</h4>
+        <div class="col-sm-9">
+        <div id="stacked-chart-global" class="stacked-chart-global"></div>
+      </div> 
+      <div class="col-sm-3">
+          <div class="chart-global-legend">
+            <div class="legend present">
+              <span>{{ 'Present' }}</span>
+            </div>
+            <div class="legend development">
+              <span>{{ 'Under Development' }}</span>
+            </div>
+            <div class="legend not-present">
+              <span>{{ 'Not Present' }}</span>
+            </div>
+          </div>
+          {% if data.export %}  
+            <div class="chart-pdf-export">
+                <a target="_blank"href="{{ data.export }}" aria-label="Download pdf"></a>
+              <div class="chart-pdf-text">
+                <p><strong>{{ 'Download pdf file' }}</strong></p>
+                <p>{{ 'Summary of status of indicators across the categories (%)' }}</p>
+              </div>
+            </div>
+          {% endif %}
+      </div>
+  </div> 
+      
+  <div class="health-country-categories">
+    <h4 class="block-title">{{ 'NCD Response Measures' }}</h4>
+
+    {% for key, category in data.categories %}
+      <div class="block-indicator-group">
+        {% if category['wrapper'] %}
+          <h4 class="toggle-lbl category-title {{ key }}">{{ category['title'] }} - {{ category['wrapper'] }}</h4>
+        {% else %}
+          <h4 class="toggle-lbl category-title {{ key }}">{{ category['title'] }}</h4>
+        {% endif %}    
+        <div class="toggle">
+          <span class="arrow"></span>
+        </div>
+
+        <div class="helth-indicators">
+          <div class="row"> 
+              <div class="col-sm-2 code">
+                <h6>{{ 'Code' }}</h6>
+                {% for ikey, indicator in data.indicators %}
+                  {% if key == indicator['indicator-category'] %}
+                      <a href="/dashboard/health-dashboard/{{ indicator['indicator-category'] }}/{{ ikey }}">
+                          <p>{{ indicator.code }}</p>
+                      </a>
+                    {% endif %}
+                  {% endfor %}  
+              </div>
+              <div class="col-sm-5 title">
+                <h6>{{ 'Description' }}</h6>
+                {% for ikey, indicator in data.indicators %}
+                  {% if key == indicator['indicator-category'] %}
+                      <a href="/dashboard/health-dashboard/{{ indicator['indicator-category'] }}/{{ ikey }}">
+                        <p>{{ indicator.title }}</p>
+                      </a>  
+                    {% endif %}
+                  {% endfor %}  
+              </div>
+              <div class="scroll-wrapp">
+                <div class="scroll-row">
+                  <div class="col-sm-3 strength">
+                    <h6>{{ 'Status and strength' }}</h6>
+                    {% for id, indicator in data.indicators %}
+                      {% if key == indicator['indicator-category'] %}
+                          <p class="status-strength {{ indicator.value }}"
+                             data-value="{{ indicator.value }}"
+                             data-category="{{ indicator['indicator-category'] }}"
+                             data-indicator="{{ id }}"></p>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="col-sm-2 who">
+                    <h6>{{ 'WHO Equivalent indicator #' }}</h6>
+                    {% for indicator in data.indicators %}
+                      {% if key == indicator['indicator-category'] %}
+                          <p>{{ indicator.who }}</p>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>    
+              </div>    
+          </div>       
+        </div>
+
+      </div>
+    {% endfor %}
+  
+    <div class="indicator-popup">
+        <div class="country-detales col-sm-5">
+            <img class="country-flag" src="{{ data.flag.src }}" alt="{{ data.country }}">
+            <h4>{{ data.country }}</h4>
+            <div class="content clearfix">
+                <p class="indicator-title"></p>
+                <div class="col-sm-4">
+                  <p id="indicator-value"></p>
+                </div>
+                <div class="col-sm-8">
+                  <p id="indicator-text" class="text"></p>
+                </div>
+            </div>
+            <div id="map" class="map {{ data.country_id }}" style="background-image: url({{ data.map.url }})"></div>
+        </div>
+        <div class="description-detales col-sm-7">
+          <h4>{{ 'Description' }}</h4>
+            <div class="content detales">
+
+                <div id="not-present" class="clearfix">
+                    <div class="col-sm-3">
+                      <p class="status-strength not-present"></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text"></p>
+                    </div>
+                </div>
+
+                <div id="under-development" class="clearfix">
+                    <div class="col-sm-3">
+                      <p class="status-strength under-development"></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text"></p>
+                    </div>
+                </div>
+
+                <div id="present" class="clearfix">
+                    <div class="col-sm-3">
+                      <p class="status-strength present"></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text"></p>
+                    </div>
+                </div>
+
+                <div id="low" class="clearfix">
+                    <div class="col-sm-3">
+                      <p class="status-strength low"></p>
+                    </div>  
+                    <div class="col-sm-9">
+                      <p class="text"></p>
+                    </div>
+                </div>
+
+                <div id="medium" class="clearfix">
+                    <div class="col-sm-3">
+                      <p class="status-strength medium"></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text"></p>
+                    </div>
+                </div>
+
+                <div id="high" class="clearfix">
+                    <div class="col-sm-3">
+                      <p class="status-strength high"></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text"></p>
+                    </div>
+                </div>
+                <div id="not-applicable" class="clearfix">
+                    <div class="col-sm-3">
+                      <p class="status-strength not-applicable"><?php print t('N/A'); ?></p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text"></p>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>  
+  </div>
+      
+</div>      

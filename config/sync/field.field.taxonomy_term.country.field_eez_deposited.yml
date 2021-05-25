@@ -1,0 +1,23 @@
+uuid: c8c8586e-4925-491f-a73d-dad8486f0680
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_eez_deposited
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_eez_deposited
+field_name: field_eez_deposited
+entity_type: taxonomy_term
+bundle: country
+label: 'EEZ Deposited'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

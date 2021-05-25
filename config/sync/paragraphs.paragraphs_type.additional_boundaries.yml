@@ -1,0 +1,38 @@
+uuid: 8c175dc3-29f9-4cf2-bbfd-81f75a633b21
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_redirect
+third_party_settings:
+  entity_redirect:
+    redirect:
+      add:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+        personalizable: 1
+      edit:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+        personalizable: 1
+      delete:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+        personalizable: 1
+      anonymous:
+        active: 0
+        destination: default
+        url: ''
+        external: ''
+id: additional_boundaries
+label: 'Popup Details'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

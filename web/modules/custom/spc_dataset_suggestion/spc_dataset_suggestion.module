@@ -1,0 +1,82 @@
+<?php
+
+/**
+* Implements hook_mail().
+*/
+function spc_dataset_suggestion_mail($key, &$message, $params) {
+
+  switch ($key) {
+    case 'dataset_suggestion_created':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['message'];
+      break;
+  }
+  // dump($key, $message, $params);
+  // die();
+}
+
+/**
+ * Implements hook_theme()
+ *
+ *
+ */
+
+function spc_dataset_suggestion_theme($existing, $type, $theme, $path) {
+  return [
+    'dataset_suggestion_form' => [
+      'variables' => [
+        'form' => NULL,
+      ]
+    ]
+  ];
+}
+
+function spc_dataset_suggestion_form_alter(&$form, &$form_state, $form_id){
+  $node = \Drupal::entityTypeManager()->getStorage('node')->load(103);
+  $current_path = \Drupal::service('path.current')->getPath();
+  if ($form_id === 'node_dataset_suggestion_form' && $current_path == '/dataset-suggestions/add'){
+    $form['actions']['submit']['#submit'][] = 'spc_dataset_suggestion_form_submit';
+  }
+}
+
+function spc_dataset_suggestion_form_submit($form, &$form_state){
+
+  $node = $form_state->getFormObject()->getEntity();
+  if ($node->isPublished()) {
+    return;
+  }
+  $nid = $node->id();
+  $title = $node->getTitle();
+  $body = $node->body->view('full')[0]['#text'];
+  $name = $node->field_suggester_name->value;
+  $email = $node->field_suggester_email->value;
+
+  $editUrl = \Drupal\Core\Url::fromRoute('entity.node.edit_form', ['node' => $nid], ['absolute' => TRUE]);
+
+   $message = ''
+        . 'New Dataset suggestion has been added. '
+        . '<p>Title: ' . $title . '</p>'
+        . '<p>Body: ' . $body  . '</p>'
+        . '<p>Name: ' . $name  . '</p>'
+        . '<p>Email: ' . $email . '</p>'
+            . '<p>This Datasets Suggestion will remain invisible for public users until it is published. Please visit ' . $editUrl->toString() . ' to publish. </p>';
+
+
+   $mailManager = \Drupal::service('plugin.manager.mail');
+   $module = 'spc_dataset_suggestion';
+    $params = array(
+      'subject' => 'New Dataset suggestion',
+      'message' => $message,
+    );
+
+   $result = $mailManager->mail(
+     $module, 'dataset_suggestion_created',
+     'data-portal@spc.int', \Drupal::currentUser()->getPreferredLangcode(),
+     $params, NULL, TRUE);
+   if ($result['result'] !== true) {
+     \Drupal::logger($module)->error('There was a problem sending your message and it was not sent.');
+   } else {
+     \Drupal::logger($module)->info('Your message has been sent.');
+   }
+}

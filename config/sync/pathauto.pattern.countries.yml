@@ -1,0 +1,23 @@
+uuid: 1c7c5234-6f0a-47b0-a03c-d6e299f6ab47
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: countries
+label: Countries
+type: 'canonical_entities:taxonomy_term'
+pattern: 'dashboard/maritime-boundaries/[term:name]'
+selection_criteria:
+  a6a9a88f-4bf2-4734-ac1d-a6014e77c058:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      country: country
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: a6a9a88f-4bf2-4734-ac1d-a6014e77c058
+selection_logic: and
+weight: -4
+relationships: {  }

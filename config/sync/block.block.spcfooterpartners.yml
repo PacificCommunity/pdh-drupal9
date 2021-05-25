@@ -1,0 +1,20 @@
+uuid: fa7564ee-c8da-4ef8-b167-8fa9398e21d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+  theme:
+    - spc
+id: spcfooterpartners
+theme: spc
+region: footer
+weight: -12
+provider: null
+plugin: spc_footer_partners
+settings:
+  id: spc_footer_partners
+  label: 'SPC Footer Partners'
+  provider: spc_main
+  label_display: '0'
+visibility: {  }

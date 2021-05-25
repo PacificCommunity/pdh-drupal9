@@ -1,0 +1,6 @@
+mbd_landing_title: 'Regional Status map showing declared maritime boundaries in the Pacific as at January 2020'
+mbd_landing_description: "<p>The purpose of this Report is to provide the current status of the project countries that the Pacific Islands Maritime Boundaries Project (PIMB) serves in the region. These project countries are Cook Islands, Federated States of Micronesia, Fiji, Kiribati, Marshall Islands, <a href=\"http://google.com\">Nauru</a>, Niue, Palau, Papua New Guinea, Samoa, Solomon Islands, Tonga, Tuvalu and Vanuatu.</p>\r\n\r\n<h3>Regional Status</h3>\r\n\r\n<p>For each of these countries in the report, there will be an introductory text that gives some background information on the current legal and/or maritime/marine national policies, as well as a current information on the technical work that SPC has done in-country. These are categorised as - <em>National Legislations, Territorial Sea Baselines and Maritime Zones</em> (as well as the Extended Continental Shelf Claims where applicable).</p>\r\n"
+mbd_zones_fid: '3853'
+mbd_boundary_treaty_fid: '3854'
+mbd_shelf_treaty_fid: '3855'
+mbd_terria_url: 'https://terriajs.uat.spc.links.com.au/'

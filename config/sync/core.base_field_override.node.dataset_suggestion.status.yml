@@ -1,0 +1,22 @@
+uuid: 71c330e9-ceb3-410e-a903-ba656767fe20
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.dataset_suggestion
+id: node.dataset_suggestion.status
+field_name: status
+entity_type: node
+bundle: dataset_suggestion
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

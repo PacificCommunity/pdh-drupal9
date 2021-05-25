@@ -1,0 +1,19 @@
+uuid: 4debf4b8-5f79-410a-95bc-46e7c6672d29
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_geojson_coordinates
+    - node.type.continental_shelf
+id: node.continental_shelf.field_geojson_coordinates
+field_name: field_geojson_coordinates
+entity_type: node
+bundle: continental_shelf
+label: 'JSON coordinates'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

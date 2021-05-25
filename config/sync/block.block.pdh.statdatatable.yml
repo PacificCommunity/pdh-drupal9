@@ -1,0 +1,29 @@
+uuid: 7cdb515d-4370-471d-80d4-d65ae69385ac
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_dot_stat_data
+  theme:
+    - spc
+id: pdh.statdatatable
+theme: spc
+region: blocks
+weight: -9
+provider: null
+plugin: dot_stat_data_table
+settings:
+  id: dot_stat_data_table
+  label: 'PDH.stat Data Table'
+  provider: spc_dot_stat_data
+  label_display: visible
+  dot_stat_table_css: 'table table-bordered table-striped table-hover table-xs'
+  dot_stat_table_header_css: thead-dark
+  dot_stat_table_title: ''
+  dot_stat_table_node: '5'
+  dot_stat_table_format: '0'
+  dot_stat_table_link: ''
+  dot_stat_table_column_name: ''
+  context_mapping:
+    node: '@node.node_route_context:node'
+visibility: {  }

@@ -1,0 +1,23 @@
+uuid: 68f089f7-a698-4855-8ff5-4f80140b53d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_signed
+    - node.type.boundary_treaty
+id: node.boundary_treaty.field_signed
+field_name: field_signed
+entity_type: node
+bundle: boundary_treaty
+label: Signed
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

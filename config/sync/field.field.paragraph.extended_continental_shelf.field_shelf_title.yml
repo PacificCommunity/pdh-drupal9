@@ -1,0 +1,19 @@
+uuid: b76927d5-09cb-402d-8856-c8b55f140a6d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_shelf_title
+    - paragraphs.paragraphs_type.extended_continental_shelf
+id: paragraph.extended_continental_shelf.field_shelf_title
+field_name: field_shelf_title
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: 'Shelf Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

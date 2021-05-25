@@ -9,7 +9,7 @@ dependencies:
 id: spcdashboardtransformchart
 theme: spc
 region: blocks
-weight: 0
+weight: -6
 provider: null
 plugin: spc_dashboard_transform_chart_block
 settings:

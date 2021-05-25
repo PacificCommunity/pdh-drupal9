@@ -1,0 +1,20 @@
+uuid: 1a7df467-924f-410d-b2b0-3585975c9398
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - taxonomy
+id: paragraph.field_maritime_zone
+field_name: field_maritime_zone
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

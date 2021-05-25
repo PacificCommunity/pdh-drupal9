@@ -1,0 +1,20 @@
+uuid: 13343534-2092-4d4e-b723-1d8c7f6f301d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_stats_datasets_count
+field_name: field_stats_datasets_count
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

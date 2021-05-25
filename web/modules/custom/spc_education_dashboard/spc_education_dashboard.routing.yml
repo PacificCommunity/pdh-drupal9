@@ -1,0 +1,15 @@
+spc_education_dashboard.index:
+  path: '/dashboard/education-dashboard'
+  defaults:
+    _title: 'Education Dashboard'
+    _controller: '\Drupal\spc_education_dashboard\Controller\SpcEducationDashboardController::index'
+  requirements:
+    _permission: 'access content'
+
+spc_education_dashboard.settings:
+  path: '/admin/config/education-dashboard/settings'
+  defaults:
+    _title: 'SPC Education dashboard Settings'
+    _form: 'Drupal\spc_education_dashboard\Form\SettingsForm'
+  requirements:
+    _permission: 'administer spc education dashboard'

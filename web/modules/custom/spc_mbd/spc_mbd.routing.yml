@@ -1,0 +1,14 @@
+spc_mbd.landing:
+  path: '/dashboard/maritime-boundaries'
+  defaults:
+    _title: 'SPC Maritime boundaries Landing'
+    _controller: '\Drupal\spc_mbd\Controller\SpcMbdController::MbdLanding'
+  requirements:
+    _permission: 'access content'
+spc_mbd.settings:
+  path: '/admin/config/maritime-boundaries-settings'
+  defaults:
+    _title: 'SPC Maritime Boundaries Dashboard Settings'
+    _form: '\Drupal\spc_mbd\Form\SpcMbdSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'    

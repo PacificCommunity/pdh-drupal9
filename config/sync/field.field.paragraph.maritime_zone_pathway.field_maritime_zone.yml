@@ -1,0 +1,29 @@
+uuid: b91dc667-c865-4736-bacd-b5a546985369
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_maritime_zone
+    - paragraphs.paragraphs_type.maritime_zone_pathway
+    - taxonomy.vocabulary.maritime_zone
+id: paragraph.maritime_zone_pathway.field_maritime_zone
+field_name: field_maritime_zone
+entity_type: paragraph
+bundle: maritime_zone_pathway
+label: 'Step Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      maritime_zone: maritime_zone
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

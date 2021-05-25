@@ -1,0 +1,19 @@
+uuid: 53d7beb3-2fb5-4d1e-a396-cde388afffb3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_datasets
+    - node.type.thematic_group
+id: node.thematic_group.field_related_datasets
+field_name: field_related_datasets
+entity_type: node
+bundle: thematic_group
+label: 'Related Datasets'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: 35882749-1f86-4fa1-9edb-3f8047a8ca53
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_submission_done
+    - paragraphs.paragraphs_type.extended_continental_shelf
+id: paragraph.extended_continental_shelf.field_submission_done
+field_name: field_submission_done
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: 'Preliminary submission done '
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

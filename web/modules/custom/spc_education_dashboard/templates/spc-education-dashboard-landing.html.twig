@@ -1,0 +1,94 @@
+<section class="education-block-content">
+
+  {% for item in data.items %}
+    <div class="container-fluid block-shadow relative-position education-chart-block" data-id="{{item.id}}">
+      <div id="pdf-{{item.id}}">
+        <div class="title">
+          <h4 id="{{item.id}}" class="title-text">{{ item.name }}</h4>
+          <p class="subtitle">{{ item.title }}</p>
+        </div>
+        <div class="info clearfix" >
+          {% set ch_cols = item.charts.0.data|length >= 10 and item.type == 'gender' ? 7 : 5 %}
+          <div class="chart col-sm-{{ ch_cols }}">
+            {% if item.type == 'gender' %}
+              <div class="gender-wrapp">
+                <div class="male">{{ item.marker.0 }}</div>
+                <div class="female">{{ item.marker.1 }}</div>
+              </div>
+            {% endif %}
+            <div class="chart-{{item.id}}"></div>
+            <p class="sample {{ item.type }}"> {{ '*Sample of countries from the pacific region.'|t }}</p>
+          </div>
+
+          {% set ds_cols = item.charts.0.data|length >= 10 and item.type == 'gender' ? 5 : 7 %}
+          <div class="description col-sm-{{ ds_cols }}">
+
+            {% if item.switchers|length %}
+              <div class="switchers clearfix">
+
+                {% if item.switchers.horizontal|length %}
+                  {% for key, switcher in item.switchers.horizontal %}
+                    <div class="switch-wrapper horizontal">
+                      <div class="switcher sw-{{item.id}}">
+                        <a href="" key="{{key}}" id="{{ switcher.id }}" class="{% if switcher.default %} checked{% endif %}">{{ switcher.name }}</a>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+
+
+                    {% if item.switchers.vertical|length %}
+                    <div class="switch-wrapper vertical swch-{{item.id}}">
+                      <div class="labels">
+                        <span class="checked">{{ item.switchers.vertical.0.name }}</span>
+                        <span>{{ item.switchers.vertical.1.name }}</span>
+                      </div>
+                      <div class="switcher">
+                        <input class="form-check-input slider" type="checkbox" id="years{{item.id}}" value="four">
+                      </div>
+                    </div>
+                    {% endif %}
+
+              </div>
+              {% endif %}
+
+              {% if item.definition %}
+              <div class="definition ">
+                <h5>{{ 'Definition'|t }}</h5>
+                <div class="toggle">
+                  <span class="arrow down"></span>
+                </div>
+                <p class="active">{{ item.definition }}</p>
+              </div>
+              {% endif %}
+
+              {% if item.threshold.description or item.threshold.value %}
+              <div class="threshold">
+                <h5>{{ 'Threshold'|t }}</h5>
+                <div class="toggle">
+                  <span class="arrow"></span>
+                </div>
+                <p class="hidden values">{{ item.threshold.value }}</p>
+                <p class="hidden description">{{ item.threshold.description }}</p>
+              </div>
+              {% endif %}
+
+              {% if item.rationale %}
+              <div class="rationale">
+                <h5>{{ 'Rationale'|t }}</h5>
+                <div class="toggle">
+                  <span class="arrow"></span>
+                </div>
+                <p class="hidden">{{ item.rationale }}</p>
+              </div>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+      <a href="#" id="export-chart-{{item.id}}" data-chart-id="{{item.id}}" data-chart-mode="{{ chart_mode }}" class="education-pdf">{{ 'Export PDF' | t }}</a>
+      <div id="chart-clone-{{item.id}}"></div>
+    </div>
+{% endfor %}
+
+
+</section>

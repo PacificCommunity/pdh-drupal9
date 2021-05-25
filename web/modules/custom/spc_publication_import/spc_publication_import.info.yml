@@ -1,5 +1,6 @@
 name: SPC Publication import
 description: SPC publication import settings (dummy module for now)
 type: module
-core: 8.x
-package: SPC
+version: 1.0.0
+core_version_requirement: ^8.8 || ^9
+package: 'SPC'

@@ -1,0 +1,8 @@
+uuid: 2f8bef5b-dc17-4696-9105-104315fea10b
+langcode: en
+status: true
+dependencies: {  }
+name: 'Maritime Zones Treaty Pathway Steps'
+vid: maritime_zone
+description: ''
+weight: -9

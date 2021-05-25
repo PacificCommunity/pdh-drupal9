@@ -1,0 +1,28 @@
+uuid: d2a50a98-2193-4b19-8730-b0777ec3f89e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.maritime_boundaries_pathway.field_boundary_treaty
+    - field.field.paragraph.maritime_boundaries_pathway.field_progress_type
+    - paragraphs.paragraphs_type.maritime_boundaries_pathway
+id: paragraph.maritime_boundaries_pathway.default
+targetEntityType: paragraph
+bundle: maritime_boundaries_pathway
+mode: default
+content:
+  field_boundary_treaty:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_progress_type:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

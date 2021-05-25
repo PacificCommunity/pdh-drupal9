@@ -1,0 +1,10 @@
+uuid: 03681a2d-6cee-4d9e-83a2-799b980d095f
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.step
+label: Step
+targetEntityType: taxonomy_term
+cache: true

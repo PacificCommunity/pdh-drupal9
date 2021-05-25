@@ -1,0 +1,23 @@
+uuid: 91d6137c-a0d3-45cb-b1f5-fe384c875f6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_established_year
+    - paragraphs.paragraphs_type.extended_continental_shelf
+  module:
+    - yearonly
+id: paragraph.extended_continental_shelf.field_established_year
+field_name: field_established_year
+entity_type: paragraph
+bundle: extended_continental_shelf
+label: 'Sub-commission established - Year '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  yearonly_from: '1900'
+  yearonly_to: now
+field_type: yearonly

@@ -1,0 +1,42 @@
+uuid: af4f6ab4-d8ff-4ead-be57-1890ddb1126f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.high_seas_limit.body
+    - field.field.node.high_seas_limit.field_date_deposited
+    - field.field.node.high_seas_limit.field_deposited
+    - field.field.node.high_seas_limit.field_geojson_coordinates
+    - field.field.node.high_seas_limit.field_limit_countries
+    - field.field.node.high_seas_limit.field_related_datasets
+    - field.field.node.high_seas_limit.field_url
+    - node.type.high_seas_limit
+  module:
+    - text
+    - user
+id: node.high_seas_limit.teaser
+targetEntityType: node
+bundle: high_seas_limit
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_date_deposited: true
+  field_deposited: true
+  field_geojson_coordinates: true
+  field_limit_countries: true
+  field_related_datasets: true
+  field_url: true

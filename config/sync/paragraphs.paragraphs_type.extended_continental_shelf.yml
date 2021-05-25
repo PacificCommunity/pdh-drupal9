@@ -1,0 +1,10 @@
+uuid: b1f81e99-1b01-4425-9afa-07b1f21aaed2
+langcode: en
+status: true
+dependencies: {  }
+id: extended_continental_shelf
+label: 'Extended Continental Shelf'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

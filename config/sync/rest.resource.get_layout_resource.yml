@@ -1,0 +1,18 @@
+uuid: db56cfb5-fbe8-49d0-b20e-a2bc6c4e7e38
+langcode: en
+status: true
+dependencies:
+  module:
+    - serialization
+    - spc_main
+    - user
+id: get_layout_resource
+plugin_id: get_layout_resource
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+  authentication:
+    - cookie

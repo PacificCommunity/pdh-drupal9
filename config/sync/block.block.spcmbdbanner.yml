@@ -1,0 +1,26 @@
+uuid: 0a03011b-e346-4402-bd3c-66b60c6e7361
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_mbd
+    - system
+  theme:
+    - spc
+id: spcmbdbanner
+theme: spc
+region: subheader
+weight: -10
+provider: null
+plugin: sps_mbd_banner
+settings:
+  id: sps_mbd_banner
+  label: 'SPC MBD Banner'
+  provider: spc_mbd
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "/dashboard/maritime-boundaries\r\n/dashboard/maritime-boundaries/*"
+    negate: false
+    context_mapping: {  }

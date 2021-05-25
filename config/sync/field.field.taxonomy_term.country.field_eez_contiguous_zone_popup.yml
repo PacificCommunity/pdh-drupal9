@@ -1,0 +1,52 @@
+uuid: 0db568af-09a7-4e8a-9595-248226cbf7dd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_eez_contiguous_zone_popup
+    - paragraphs.paragraphs_type.additional_boundaries
+    - taxonomy.vocabulary.country
+  module:
+    - entity_reference_revisions
+id: taxonomy_term.country.field_eez_contiguous_zone_popup
+field_name: field_eez_contiguous_zone_popup
+entity_type: taxonomy_term
+bundle: country
+label: 'Contiguous Zone popup'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      additional_boundaries: additional_boundaries
+    target_bundles_drag_drop:
+      additional_boundaries:
+        enabled: true
+        weight: 9
+      block_and_bottom_text:
+        weight: 10
+        enabled: false
+      block_reference:
+        weight: 11
+        enabled: false
+      extended_continental_shelf:
+        weight: 12
+        enabled: false
+      extended_continental_shelf_step:
+        weight: 13
+        enabled: false
+      field_dsp_targets:
+        weight: 14
+        enabled: false
+      maritime_boundaries_pathway:
+        weight: 15
+        enabled: false
+      maritime_zone_pathway:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

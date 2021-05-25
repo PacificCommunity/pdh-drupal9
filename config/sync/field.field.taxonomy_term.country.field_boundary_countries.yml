@@ -1,0 +1,28 @@
+uuid: 3b432333-81ec-4a2a-945a-af24c0fadac3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_boundary_countries
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_boundary_countries
+field_name: field_boundary_countries
+entity_type: taxonomy_term
+bundle: country
+label: 'Boundary countries‎'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      country: country
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

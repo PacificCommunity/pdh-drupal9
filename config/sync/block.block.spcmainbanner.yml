@@ -3,8 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - ctools
-    - node
     - spc_main
     - system
   theme:
@@ -12,33 +10,17 @@ dependencies:
 id: spcmainbanner
 theme: spc
 region: subheader
-weight: -6
+weight: -12
 provider: null
 plugin: sps_main_banner
 settings:
   id: sps_main_banner
-  label: 'SPC Main Banner'
+  label: 'SPC Home Banner'
   provider: spc_main
   label_display: '0'
 visibility:
   request_path:
     id: request_path
-    pages: "/data-insights\r\n/data-insights/*"
-    negate: true
-    context_mapping: {  }
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    bundles:
-      data_insights: data_insights
-    negate: true
-    context_mapping:
-      node: '@node.node_route_context:node'
-  node_type:
-    id: node_type
-    bundles:
-      article: article
-      page: page
-      thematic_group: thematic_group
+    pages: "/\r\n/home"
     negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
+    context_mapping: {  }

@@ -10,12 +10,12 @@ dependencies:
 id: spcbanner
 theme: spc
 region: subheader
-weight: -5
+weight: -8
 provider: null
 plugin: spc_banner
 settings:
   id: spc_banner
-  label: 'SPC Banner'
+  label: 'SPC Data Insights Banner'
   provider: spc_main
   label_display: '0'
   spc_banner_title: '<strong>Data</strong> Insights'
