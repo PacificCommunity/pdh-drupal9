@@ -55,6 +55,20 @@
                         </div>
                       {% endif %}  
                     </div>
+                    <div class="spc-search-suggestions">
+                        <ul id="search-suggestion-box" class="suggestion-box">
+                            {% set suggestion_groups = [
+                                {'section': 'datasets','label': 'Relevant datasets'},
+                                {'section': 'categories', 'label': 'Browse categories'}
+                                ]
+                            %}
+                            {% for group in suggestion_groups %}
+                                <li data-section="{{group.section}}" class="suggestion-section">
+                                    <ul class="suggestions" data-label="{{ group.label | t }}"></ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
                 {% if data.topics %}
                   <div class="topics-home">

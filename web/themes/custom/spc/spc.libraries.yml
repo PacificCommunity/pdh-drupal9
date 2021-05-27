@@ -91,3 +91,10 @@ gmap:
     - spc/member_countries
   js:
     https://maps.googleapis.com/maps/api/js?key=AIzaSyDEy9EQCIbFOhOfh-PPqxesjbjirYC6WZ0&callback=initMap: { type: external}
+
+search-autocomplete:
+  js:
+    js/search-autocomplete.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
