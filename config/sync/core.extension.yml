@@ -83,7 +83,6 @@ module:
   spc_dataset_suggestion: 0
   spc_dot_stat_chart: 0
   spc_dot_stat_data: 0
-  spc_dot_stat_links: 0
   spc_education_dashboard: 0
   spc_hdb: 0
   spc_main: 0
