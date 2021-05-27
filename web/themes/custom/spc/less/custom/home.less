@@ -1425,3 +1425,46 @@
         }
     }
 }
+
+.search {
+    .suggestion-box {
+        display: none;
+    }
+    .pending-request {
+        position: absolute;
+        top: 31%;
+        left: 12px;
+        display: none;
+        color: @black;
+        transform: translateY(-50%);
+        transform-origin: 50%;
+
+        z-index: 100;
+
+        .fa {
+            animation: rotate 1s infinite linear;
+        }
+    }
+
+    &.active-suggestions {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        .suggestion-box {
+            display: block;
+        }
+    }
+
+    &.pending-suggestions {
+        .pending-request {
+            display: block;
+        }
+    }
+}
+@keyframes rotate{
+    from {
+        transform: rotate(0turn)
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}

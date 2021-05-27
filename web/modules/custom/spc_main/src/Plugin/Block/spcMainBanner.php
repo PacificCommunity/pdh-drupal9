@@ -51,19 +51,27 @@ class spcMainBanner extends BlockBase {
     $module_path = drupal_get_path('module', 'spc_main');
     $mapping_config = json_decode(file_get_contents($module_path . '/data/mapping.json'), true);    
     $spc_home_banner['mappingConfig'] = $mapping_config;
-    
-    return array(
+
+    return [
       '#theme' => 'main_banner_block',
       '#attached' => [
-          'drupalSettings' => [
-              'spc_home_banner' => $spc_home_banner
-            ]
+        'library' => [
+          'spc/search-autocomplete',
+        ],
+        'drupalSettings' => [
+          'spc_home_banner' => $spc_home_banner,
+          'search_autocomplete' => [
+            'suggestionBox' => "#search-suggestion-box",
+            'autocompleteInput' => "#ckan-search-form input",
+            'baseUrl' => \Drupal::request()->getSchemeAndHttpHost()
           ],
+        ],
+      ],
       '#cache' => [
-          'max-age'=> 0
-          ],
+        'max-age' => 0
+      ],
       '#data' => $data,
-    );
+    ];
   }
   
   public function get_home_topics(){

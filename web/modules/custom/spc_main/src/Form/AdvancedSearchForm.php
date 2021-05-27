@@ -39,6 +39,15 @@ class AdvancedSearchForm extends FormBase {
         'placeholder' => 'Search'
       ]
     ];
+  
+    $form['pending_request_icon'] = [
+      '#type' => 'html_tag',
+      '#tag' => 'span',
+      '#attributes' => [
+        'class'=> ['pending-request']  
+      ],
+      '#value' => '<i class="fa fa-spinner"></i>',
+    ];
 
     $config = \Drupal::configFactory()->getEditable('spc_main.settings');    
     $search_facets = $config->get('search_facets');
