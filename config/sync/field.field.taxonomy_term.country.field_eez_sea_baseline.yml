@@ -1,0 +1,19 @@
+uuid: 4c09c7d8-1384-41cc-8f72-6937f98154a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_eez_sea_baseline
+    - taxonomy.vocabulary.country
+id: taxonomy_term.country.field_eez_sea_baseline
+field_name: field_eez_sea_baseline
+entity_type: taxonomy_term
+bundle: country
+label: 'Sea Baseline'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,19 @@
+uuid: edbd6ac2-cb11-41a1-b13f-4a584a159a7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_related_datasets
+    - node.type.article
+id: node.article.field_related_datasets
+field_name: field_related_datasets
+entity_type: node
+bundle: article
+label: 'Related Datasets'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

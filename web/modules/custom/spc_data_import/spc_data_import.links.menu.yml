@@ -1,0 +1,6 @@
+spc_data_import.spc_html_import_config:
+  title: 'SPC HTML Import settings'
+  description: 'SPC HTML Import settings page'
+  parent: system.admin_config_services
+  route_name: spc_data_import.spc_html_import
+  weight: 11   

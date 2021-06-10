@@ -1,0 +1,47 @@
+spc_hdb.landing:
+  path: '/dashboard/health-dashboard'
+  defaults:
+    _title: 'Health dashboard home page'
+    _controller: '\Drupal\spc_hdb\Controller\SpcHdbController::hdbLanding'
+  requirements:
+    _permission: 'access content'
+    
+spc_hdb.category:
+  path: '/dashboard/health-dashboard/{category}'
+  defaults:
+    _title: 'Health dashboard home page'
+    _controller: '\Drupal\spc_hdb\Controller\SpcHdbController::hdbCategory'
+  requirements:
+    _permission: 'access content'     
+    
+spc_hdb.indicator:
+  path: '/dashboard/health-dashboard/{category}/{indicator}'
+  defaults:
+    _title: 'Health dashboard home page'
+    _controller: '\Drupal\spc_hdb\Controller\SpcHdbController::hdbIndicator'
+  requirements:
+    _permission: 'access content'    
+    
+spc_hdb.country:
+  path: '/dashboard/health-dashboard/country/{country}'
+  defaults:
+    _title: 'Health dashboard home page'
+    _controller: '\Drupal\spc_hdb\Controller\SpcHdbController::hdbCountry'
+  requirements:
+    _permission: 'access content'  
+    
+spc_hdb.settings:
+  path: '/admin/config/health-dashboard/settings'
+  defaults:
+    _title: 'SPC Health dashboard Settings'
+    _form: '\Drupal\spc_hdb\Form\SpcHdbSettingsForm'
+  requirements:
+    _permission: 'administer spc hdb'    
+    
+spc_hdb.countries_settings:
+  path: '/admin/config/health-dashboard/countries'
+  defaults:
+    _title: 'SPC Health dashboard Settings'
+    _form: '\Drupal\spc_hdb\Form\SpcHdbCountriesSettingsForm'
+  requirements:
+    _permission: 'administer spc hdb'    

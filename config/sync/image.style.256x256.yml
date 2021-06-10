@@ -1,7 +1,12 @@
 uuid: 8b8f06b7-24d9-4172-b50a-ce14d54376c4
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - tinypng
+third_party_settings:
+  tinypng:
+    tinypng_compress: 1
 name: 256x256
 label: 256x256
 effects:

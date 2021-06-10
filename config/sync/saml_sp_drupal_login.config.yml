@@ -1,0 +1,16 @@
+logout: false
+update_email: true
+update_language: true
+no_account_authenticated_user_role: false
+no_account_authenticated_user_account: null
+force_saml_only: false
+account_request_request_account: true
+account_request_site_mail: false
+logged_in_redirect: '<front>'
+_core:
+  default_config_hash: 8oABheEUzBJHqBFlyqJu4xpsMmyyZtk-Ll5Ch0k51_A
+idp:
+  spc_okta: spc_okta
+account_request_site_administrators:
+  1: 0
+  4: 0

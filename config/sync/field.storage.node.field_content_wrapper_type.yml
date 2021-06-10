@@ -1,0 +1,27 @@
+uuid: a04a7657-7fdf-4000-bd8e-f7fd77da78a0
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_content_wrapper_type
+field_name: field_content_wrapper_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: container
+      label: Container
+    -
+      value: container-fluid
+      label: 'Container fluid'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

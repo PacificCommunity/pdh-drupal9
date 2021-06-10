@@ -1,0 +1,60 @@
+# # Custom module library for general purposes.
+charts:
+  js:
+    js/charts.js: {}
+#   css:
+#     component:
+#       css/spc-education-dashboard.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery.ui.autocomplete
+    - spc_education_dashboard/switcher
+    - spc_education_dashboard/js-pdf
+
+search-autocomplete:
+  js:
+    js/search-autocomplete.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+
+
+switcher:
+  js:
+    js/switcher.js: {}
+  css:
+    component:
+      css/switcher.css: {}
+
+js-pdf:
+  js:
+    js/jspdf.js: {}
+
+# # Third-party library (self hosted).
+# jquery-labelauty:
+#   remote: https://github.com/fntneves/jquery-labelauty
+#   version: 1.1.0
+#   license:
+#     name: MIT
+#     url: https://github.com/fntneves/jquery-labelauty/blob/v1.1.0/LICENSE
+#     gpl-compatible: true
+#   js:
+#     /libraries/jquery-labelauty/source/jquery-labelauty.js: {}
+#   css:
+#     component:
+#       /libraries/jquery-labelauty/source/jquery-labelauty.css: {}
+#   dependencies:
+#     - core/jquery
+
+# # Third-party library (CDN).
+# vuejs:
+#   remote: https://vuejs.org
+#   version: 2.0.5
+#   license:
+#     name: MIT
+#     url: https://github.com/vuejs/vue/blob/dev/LICENSE
+#     gpl-compatible: true
+#   js:
+#     https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js: {type: external, minified: true}

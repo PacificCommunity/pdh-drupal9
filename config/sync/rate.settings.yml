@@ -1,0 +1,9 @@
+enabled_types_widgets:
+  node:
+    dataset_suggestion:
+      widget_type: thumbs_up
+      use_ajax: true
+bot_minute_threshold: '0'
+bot_hour_threshold: '0'
+botscout_key: ''
+use_ajax: true

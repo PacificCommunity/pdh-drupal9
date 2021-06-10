@@ -16,66 +16,95 @@ function spc_main_theme($existing, $type, $theme, $path){
         'data' => null
       ]
     ],
+    'topic_banner_block' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
     'spc_dashboard_transform_chart_block' => [
       'variables' => [
         'data' => null
       ],
-    ],       
-    'spc_main_menu' => [
+    ],
+    'spc_footer_partners' => [
       'variables' => [
-        'menu' => null
+        'partners' => null
       ]
-    ],     
+    ],
+    'spc_home_page' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
   ];
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function spc_main_preprocess_html(&$variables) {
-    
 }
 
 /**
  * Implements hook_cron().
  */
 function spc_main_cron() {
+  // Getting Dataset Publications count for placing in country EEZ entity.
+  $spcPublicationImport = \Drupal::service('spc_publication_import.spcPublicationImport');
+  $countries_tax =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
+  foreach($countries_tax as $country_term){
+    $country = Term::load($country_term->tid);
+    $country_code = $country->get('field_country_code')->getValue()[0]['value'];
+    $datasets_count = $spcPublicationImport->get_ckan_country_datasets_count($country_code);
+    $country->set('field_datasets_count', $datasets_count);
+    $country->save();
+  }
+}
+
+/**
+ * Implements form_alter().
+ */
+function spc_main_form_alter(&$form, &$form_state, $form_id) {
+  // Delete N\A option in header_type field for basic page form
+  if ($form_id === 'node_page_form' || $form_id === 'node_page_edit_form') {
+    unset($form['field_header_type']['widget']['#options']['_none']);
+  }
   
-    //Get latest cached header.
-    $cached_header = \Drupal::config('spc_data_import.settings')->get('header_markup');
-    $spc_base_url = \Drupal::config('spc_data_import.settings')->get('spc_base_url');
-    //Update header from API.
-    \Drupal::configFactory()->getEditable('spc_data_import.settings')
-      ->set('header_markup_revision', $cached_header)
-      ->save();
-  
-    $spcDataImport = \Drupal::service('spc_main.spcDataImport');
-    
-    $header = $spcDataImport->getHeaderMenu();
-    if (is_object($header)){
-      $main = $header->main[0];
-      $mobile = $header->mobile[0];
-      $header_markup = $main . $mobile;
-      
-      \Drupal::configFactory()->getEditable('spc_data_import.settings')
-        ->set('header_markup', str_replace('href="/', 'href="' . $spc_base_url , $header_markup))
-        ->save();
-    }
-    
-    //Get latest cached header.
-    $cached_footer = \Drupal::config('spc_data_import.settings')->get('footer_markup');
-    //Update header from API.
-    \Drupal::configFactory()->getEditable('spc_data_import.settings')
-      ->set('footer_markup_revision', $cached_footer)
-      ->save();
-    
-    $footer = $spcDataImport->getFooterMenu();
-    if (is_object($footer)){
-      $footer_markup = $footer->main[0];
-      
-      \Drupal::configFactory()->getEditable('spc_data_import.settings')
-        ->set('footer_markup', $footer_markup)
-        ->save();
+  if ($form_id === 'user_login_form'){
+    $config = \Drupal::getContainer()->get('config.factory')->get('googlelogin.settings');
+    //Google client ID.
+    $google_api_client_id = $config->get('google_api_client_id');
+    $authUrl = Url::fromRoute('google_api_client.callback', array('id' => $google_api_client_id))->toString();
+    $output = '<div class="auth-link" ><a href="' . $authUrl . '">' . t('Login with Google') . '</a></div>';
+    $form['actions']['#prefix'] = $output;
+  }
+}
+
+/**
+ * Implements preprocess_html().
+ */
+function spc_main_preprocess_html(&$variables)
+{
+  // Add class to body based on .header_type field of basic page node
+  if (array_key_exists('node_type', $variables) && $variables['node_type'] === 'page') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node->hasField('field_header_type')) {
+      $header_type = ($node->get('field_header_type')->getValue()[0]['value'] ?? null) ? 'maximal' : 'minimal';
+      $variables['attributes']['class'][] = $header_type;
     }
 
+    if ($node->hasField('field_content_wrapper_type')) {
+      $page_wrapper_type = $node->get('field_content_wrapper_type')->getValue()[0]['value'] ?? null;
+      if ($page_wrapper_type === 'container-fluid') {
+        $variables['attributes']['class'][] = 'page-fluid';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_user_login().
+ */
+function spc_main_user_login($account) {
+  $destination = \Drupal::request()->query->get('destination');
+  if (empty($destination)){
+    $url = "/";
+    $response = new Symfony\Component\HttpFoundation\RedirectResponse($url);
+    $response->send();
+    return;
+  }
 }

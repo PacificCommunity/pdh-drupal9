@@ -1,0 +1,30 @@
+uuid: 249ee4c8-693d-4aff-84a0-12661224cfdb
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - image
+    - node
+id: node.field_banner_image
+field_name: field_banner_image
+entity_type: node
+type: image
+settings:
+  uri_scheme: public
+  default_image:
+    uuid: 0ea03e10-1549-4d30-8cbe-5f576732e0d1
+    alt: 'page subheader banner'
+    title: 'page subheader banner'
+    width: 1366
+    height: 649
+  target_type: file
+  display_field: false
+  display_default: false
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

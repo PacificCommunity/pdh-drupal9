@@ -1,0 +1,27 @@
+uuid: e952246a-700c-4058-acf0-37990007cf1f
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.field_display_in
+field_name: field_display_in
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: footer
+      label: footer
+    -
+      value: mbd
+      label: MBD
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,18 @@
+uuid: 65290ec5-268e-4cd0-98f9-e3c1211fbbbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.dataset_suggestion
+id: node.dataset_suggestion.title
+field_name: title
+entity_type: node
+bundle: dataset_suggestion
+label: 'Dataset Title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,7 @@
+spc_data_import.spc_html_import:
+  path: '/admin/config/spc-import-settings'
+  defaults:
+    _title: 'SPC Data Import Settings'
+    _form: '\Drupal\spc_data_import\Form\SpcImportSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'  

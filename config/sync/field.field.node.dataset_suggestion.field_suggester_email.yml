@@ -1,0 +1,19 @@
+uuid: b28ef6a8-f033-49c1-9c49-cc7349987014
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_suggester_email
+    - node.type.dataset_suggestion
+id: node.dataset_suggestion.field_suggester_email
+field_name: field_suggester_email
+entity_type: node
+bundle: dataset_suggestion
+label: 'Email Address'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

@@ -6,7 +6,8 @@
  */
 namespace Drupal\spc_mbd\Plugin\Block;
 
-use Drupal\Core\Block\BlockBase;    
+use Drupal\Core\Block\BlockBase;   
+use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 /**
@@ -25,7 +26,7 @@ class spcMbdBanner extends BlockBase {
    */
   public function build() {
     
-    $title = 'Pacific <strong>Maritime Boundaries</strong> Dashabord';
+    $title = 'Pacific <strong>Maritime Boundaries</strong> Dashboard';
     $subtitle = '';
       
     $data = [];
@@ -52,14 +53,18 @@ class spcMbdBanner extends BlockBase {
           //Breadcrumbs.
           $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($data['vocabulary']);
           foreach ($terms as $term) {
-            $aliasManager = \Drupal::service('path.alias_manager');
-            $url = $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->tid);
-            
-            $term_data[] = array(
-             'id' => $term->tid,
-             'name' => $term->name,
-             'url' => $url
-            );
+            $Taxonomy = Term::load($term->tid);
+            $published_status = $Taxonomy->get('status')->getValue()[0]['value'];
+            if ($published_status){
+              $aliasManager = \Drupal::service('path_alias.manager');
+              $url = $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $term->tid);
+
+              $term_data[] = array(
+               'id' => $term->tid,
+               'name' => $term->name,
+               'url' => $url
+              );
+            }
           }
           $data['terms'] = $term_data;
         }

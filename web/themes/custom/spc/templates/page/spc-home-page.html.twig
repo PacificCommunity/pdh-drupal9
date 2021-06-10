@@ -1,0 +1,323 @@
+<div id="spc-home">
+  {# Statistiks Block. #}
+  <div id="homepage-stats-block">
+      <div class="homepage-stat-item">
+          <a href="{{ data.stats.datasets.url }}" data-id="datasets-count">
+              <img class="homepage-stat-icon datasets" src="/themes/custom/spc/img/sprite/spc_sprite.png" alt="homepage stat icon">
+              <div class="homepage-stat-info">
+                  <div class="homepage-stat-count">{{ data.stats.datasets.count }}</div>
+                  <div class="homepage-stat-type">{{ data.stats.datasets.title }}</div>
+              </div>
+          </a>
+          <div id="datasets-count" class="tooltip">
+              {{ data.stats.datasets.description }}
+          </div>
+      </div>
+      <div class="homepage-stat-item">
+          <a href="{{ data.stats.publications.url }}" data-id="publications-count">
+              <img class="homepage-stat-icon publications" src="/themes/custom/spc/img/sprite/spc_sprite.png" alt="homepage stat icon">
+              <div class="homepage-stat-info">
+                  <div class="homepage-stat-count" >{{ data.stats.publications.count }}</div>
+                  <div class="homepage-stat-type">{{ data.stats.publications.title }}</div>
+              </div>
+          </a>
+          <div id="publications-count" class="tooltip">
+              {{ data.stats.publications.description }}
+          </div>
+      </div>
+      <div class="homepage-stat-item">
+          <a href="{{ data.stats.organizations.url }}" data-id="organizations-count">
+              <img class="homepage-stat-icon organizations" src="/themes/custom/spc/img/sprite/spc_sprite.png" alt="homepage stat icon">
+              <div class="homepage-stat-info">
+                  <div class="homepage-stat-count">{{ data.stats.organizations.count }}</div>
+                  <div class="homepage-stat-type">{{ data.stats.organizations.title }}</div>
+              </div>
+          </a>
+          <div id="organizations-count" class="tooltip">
+              {{ data.stats.organizations.description }}
+          </div>
+      </div>            
+  </div>
+          
+  {# Dashboards Block. #}
+  <div class="dashboards-home">
+     <div class="container">
+        <h2 class="pane-title">{{ 'Dashboards and Tools' }}</h2>
+        <div class="pane-subtitle">{{ 'Check out our featured dashboards and tools' }}</div>
+        
+        {% if data.dashboards %}
+        <div class="dashboard-list">
+          {% for dashboard in data.dashboards %}
+            <div class="dashboard-item node-dashboards view-mode-dashboard_highlight clearfix">
+                <div class="group-content">
+                    <div class="group-content-left">
+                      <a href="{{ dashboard.url }}" title="View Dashboard">
+                        {% if dashboard.img %}
+                          <img src="{{ dashboard.img }}" alt="{{ dashboard.title|striptags }}">
+                        {% else %}  
+                          {{ dashboard.title|striptags }}
+                        {% endif %}
+                      </a>
+                    </div>
+                    <div class="group-content-right">
+                        <h3 class="title">{{ dashboard.title|raw }}</h3>
+                        <div class="dashboard-description">
+                          {{ dashboard.body|raw }}
+                        </div>
+                        <a href="{{ dashboard.url }}" class="banner-button btn">
+                           {{ 'View DASHBOARD' }}
+                        </a>
+                    </div>
+                </div>
+            </div>                      
+          {% endfor %}            
+        </div>
+        {% endif %}
+     </div>    
+ </div>         
+          
+  {# Members countries block. #}
+  <div class="member-countries contextual-links-region clearfix">
+      <div id="member-countries-block">
+          <div class="block-content">
+              <div class="left-column column">
+                  <div class="column-inner">
+                      <div class="column-header">
+                          <h2>{{ 'Country data' }}</h2>
+                          <p>{{ 'View data and knowledge by Pacific Island country' }}</p>
+                          <div class="dropdown">
+                              <div class="btn btn-default dropdown-toggle" id="memberCountries" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              {% if data.countries %}
+                                <select id="members-countries-list">
+                                  <option id="all" class="default">{{ 'Member Countries' }}</option>
+                                    {% for  country in data.countries.list %}
+                                      <option data-url="{{ country.url }}" title="{{ country.datasets }}" data-amount="{{ country.datasets }}" value="{{ country.code }}">{{ country.name }}</option>
+                                    {% endfor %}    
+                                </select>
+                              {% endif %}
+                              </div>
+                          </div>
+                      </div>
+                      <div class="column-footer">
+                          <div class="datasets-count">
+                              <span class="datasets-icon"></span>
+                              <div class="count">
+                                  <div class="amount">{{ data.countries.total_datasets }}</div>
+                                  <div class="description">
+                                    {{ 'Datasets'|t }}
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="datasets-link">
+                              <a href="/" target="_blank">
+                                <span class="arrow-right-icon"></span>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="right-column column">
+                  <div class="column-inner">
+                      <div id="members-countries-map" class="gmap"></div>
+                  </div>
+              </div>
+          </div>
+      </div>           
+  </div> 
+                                  
+  {# Quotes block. #}
+  {% if data.quotes %}
+  <div class="pane-quotes-on-home-page clearfix">
+    <div class="node node-quotes node-promoted node-teaser contextual-links-region">
+       <div id="spc_quote" class="content">
+          <i class="quote-icon"></i>
+          <div class="field field-type-text-long">
+             {{ data.quotes[0].body }}        
+          </div>
+          <div class="field field-type-image">
+             <img src="{{ data.quotes[0].img }}" class="b-lazy b-loaded" width="200" height="200" alt="">        
+          </div>
+          <div class="field field-type-text">
+            {{ data.quotes[0].name }}
+          </div>
+          <div class="field field-type-text-long">
+            {{ data.quotes[0].about }}
+          </div>
+       </div>
+    </div>
+  </div>      
+  {% endif %}
+  
+  {# latest Stories block. #} 
+  {% if data.stories %}
+  <div id="latest-stories-block" class="stories_on_the_hp">  
+    <div  class="latest-stories-slider">
+      <h2 class="pane-title">{{ 'Latest Stories' }}</h2>
+         <div class="stories-list field-items">
+           {% for key, story in data.stories %}
+              <div class="field-item">
+                 <div class="views-field views-field-field-image">
+                    <div class="field-content">
+                       <div class="field field-type-image">
+                          <a href="{{ story.url }}" aria-label="{{ story.title }}" tabindex="{{ key }}">
+                          <img typeof="foaf:Image" data-src="{{ story.img }}" src="{{ story.img }}" class="lazy-load" width="320" height="224" alt="" style="background: none;">
+                          </a>
+                       </div>
+                    </div>
+                 </div>
+                 <div class="views-field views-field-title">
+                    <span class="field-content">
+                       <a href="{{ story.url }}" tabindex="0">
+                          <h3>{{ story.title }}</h3>
+                       </a>
+                    </span>
+                 </div>
+              </div>
+            {% endfor %}
+         </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>          
+  {% endif %}
+          
+  {# Dataset block. #}
+  <div id="ckan-dataset-tabs-block">
+      <div class="container ckan-dataset-tabs-content">
+          <div class="ckan-dataset-tabs-heading">
+              <h2>{{ 'Datasets' }}</h2>
+              <div class="ckan-dataset-tabs-intro">{{ 'Discover our latest and popular datasets' }}</div>
+              <div class="ckan-dataset-tabs-section">
+                  <ul class="nav" role="tablist">
+                      <li class="ckan-dataset-tabs-tab nav-item active" role="tab" aria-selected="true">
+                          <a class="nav-link" id="nav-recent-datasets-tab" data-toggle="pill" href="#nav-recent-datasets">{{ 'Latest' }}</a>
+                      </li>
+                      <li class="ckan-dataset-tabs-tab nav-item" role="tab" aria-selected="false">
+                          <a class="nav-link" id="nav-popular-datasets-tab" data-toggle="pill" href="#nav-popular-datasets">{{ 'Popular' }}</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="tab-content ckan-dataset-tabs-items" id="pills-tabContent">
+              <div class="tab-pane fade active in ckan-dataset-tabs-item" id="nav-recent-datasets" role="tabpanel" aria-labelledby="nav-recent-datasets-tab">
+                  <div class="ckan-dataset-tab-container">
+                      <div class="list-of-items">
+                          {% for dataset in data.datasets.latest %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>
+                      <div class="carusel-of-items">
+                          {% for dataset in data.datasets.latest %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>                      
+                  </div>
+              </div>
+              <div class="tab-pane fade ckan-dataset-tabs-item" id="nav-popular-datasets" role="tabpanel" aria-labelledby="nav-popular-datasets-tab">
+                  <div class="ckan-dataset-tab-container">
+                      <div class="list-of-items">
+                          {% for dataset in data.datasets.popular %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>
+                      <div class="carusel-of-items">
+                          {% for dataset in data.datasets.popular %}
+                              <div class="tab-data">
+                                  <div class="dataset-org">
+                                      <a href="{{ dataset.organization.url }}">
+                                          <img class="media-object lazy-load" src="{{ dataset.organization.image_url }}" alt="..." title="{{ dataset.organisation.title }}">
+                                      </a>
+                                  </div>
+                                  <div class="dataset-title">
+                                      <a href="{{ dataset.url }}">{{ dataset.title }}</a>
+                                  </div>
+                                  <div class="dataset-date">
+                                    <span>{{ 'Release date' }}:</span> 
+                                    <span class="dataset-date-green">{{ dataset.date }}</span>
+                                  </div>						
+
+                                  <div class="dataset-formats">
+                                      <span>{{ 'File Format' }}:</span>
+                                      {% for resource in dataset.resources %}
+                                        <a href="{{ resource.url }}" aria-label="{{ resource.format }}">
+                                            <div class="res-formats res-format-{{ resource.format }}"></div>
+                                        </a>
+                                      {% endfor %}
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      </div>                      
+                  </div>
+              </div>
+          </div>
+          <div class="ckan-dataset-tabs-view-all">
+              <a href="{{ data.datasets.url }}" target="__blank">{{ 'View all' }}</a>
+          </div>
+      </div>	
+  </div>          
+</div>
