@@ -11,7 +11,6 @@ ignored_config_entities:
   - articles_syndication.settings
   - saml_sp.idp.spc_okta
   - tinypng.settings
-  - google_oauth_login.settings
   - spc_mbd.settings
   - spc_publication_import.settings
   - lazy.settings
