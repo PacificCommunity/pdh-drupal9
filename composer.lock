@@ -63,13 +63,14 @@
             "version": "5.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/aFarkas/lazysizes.git",
+                "url": "git@github.com:aFarkas/lazysizes.git",
                 "reference": "916afff5de0a3ffd2ab6b65c57b8336442f04500"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/aFarkas/lazysizes/zipball/916afff5de0a3ffd2ab6b65c57b8336442f04500",
-                "reference": "916afff5de0a3ffd2ab6b65c57b8336442f04500"
+                "reference": "916afff5de0a3ffd2ab6b65c57b8336442f04500",
+                "shasum": null
             },
             "type": "bower-asset",
             "license": [
@@ -6768,16 +6769,16 @@
         },
         {
             "name": "pacific_community/spc_dot_stat_data",
-            "version": "1.4.0",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data.git",
-                "reference": "edea108479e38260775660f368fb2fa8a7068d66"
+                "reference": "74cd08e3a022ee5503d5ddf7d2af8c4c85d2864b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=edea108479e38260775660f368fb2fa8a7068d66",
-                "reference": "edea108479e38260775660f368fb2fa8a7068d66",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_dot_stat_data/repository/archive.zip?sha=74cd08e3a022ee5503d5ddf7d2af8c4c85d2864b",
+                "reference": "74cd08e3a022ee5503d5ddf7d2af8c4c85d2864b",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -6797,20 +6798,20 @@
                 "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data/-/issues",
                 "source": "https://gitlab.com/pacific-community/drupal-modules/spc_dot_stat_data"
             },
-            "time": "2021-05-19T11:11:56+11:00"
+            "time": "2021-06-10T13:02:55+11:00"
         },
         {
             "name": "pacific_community/spc_sdg_summary",
-            "version": "1.0.4",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary.git",
-                "reference": "3ad2bb4ff705cdcd39ec4acd2f6a18a277609c27"
+                "reference": "4076cfabfe7456c2ce04f252c655d2cfe5a82410"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_sdg_summary/repository/archive.zip?sha=3ad2bb4ff705cdcd39ec4acd2f6a18a277609c27",
-                "reference": "3ad2bb4ff705cdcd39ec4acd2f6a18a277609c27",
+                "url": "https://gitlab.com/api/v4/projects/pacific-community%2Fdrupal-modules%2Fspc_sdg_summary/repository/archive.zip?sha=4076cfabfe7456c2ce04f252c655d2cfe5a82410",
+                "reference": "4076cfabfe7456c2ce04f252c655d2cfe5a82410",
                 "shasum": ""
             },
             "type": "drupal-module",
@@ -6830,7 +6831,7 @@
                 "issues": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary/-/issues",
                 "source": "https://gitlab.com/pacific-community/drupal-modules/spc_sdg_summary"
             },
-            "time": "2021-05-25T15:30:23+11:00"
+            "time": "2021-06-09T09:10:42+11:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
