@@ -7,5 +7,20 @@ ignored_config_entities:
   - system.performance
   - spc_main.settings
   - spc_data_import.settings
+  - spc_hdb.settings
+  - articles_syndication.settings
+  - saml_sp.idp.spc_okta
+  - tinypng.settings
+  - google_oauth_login.settings
+  - spc_mbd.settings
+  - spc_publication_import.settings
+  - lazy.settings
+  - spc_education_dashboard.settings
+  - config_split.config_split.prod
+  - googlelogin.settings
+  - mailsystem.settings
+  - mail_safety.settings
+  - swiftmailer.transport
+  - update.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

@@ -1,0 +1,7 @@
+spc_dataset_suggestion.suggest_form:
+  path: '/dataset-suggestions/add'
+  defaults:
+    _controller: '\Drupal\spc_dataset_suggestion\Controller\SpcDatasetSuggestionController::content'
+    _title: 'Dataset Suggestions'
+  requirements:
+    _permission: 'access content'

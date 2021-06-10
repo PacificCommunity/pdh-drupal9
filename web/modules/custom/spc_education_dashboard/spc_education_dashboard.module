@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for SPC Education Dashboard module.
+ *
+ * @DCG
+ * This file is no longer required in Drupal 8.
+ * @see https://www.drupal.org/node/2217931
+ */
+
+
+function spc_education_dashboard_theme($existing, $type, $theme, $path){
+    return [
+    'spc_education_dashboard_banner_block' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
+    'spc_education_dashboard_landing' => [
+      'variables' => [
+        'data' => null
+      ]
+    ],
+  ];
+}

@@ -1,0 +1,17 @@
+uuid: 26fdc3c4-213b-47f8-8fa5-46ce3196879f
+langcode: en
+status: true
+dependencies:
+  module:
+    - articles_syndication
+    - serialization
+    - user
+id: articles_syndication
+plugin_id: articles_syndication
+granularity: method
+configuration:
+  POST:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie

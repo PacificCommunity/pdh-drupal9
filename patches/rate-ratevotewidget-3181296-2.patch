@@ -1,0 +1,13 @@
+diff --git a/rate.module b/rate.module
+index f60f1db..104e7fd 100644
+--- a/rate.module
++++ b/rate.module
+@@ -40,7 +40,7 @@ function rate_entity_extra_field_info() {
+  * Implements hook_entity_view().
+  */
+ function rate_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+-  if (($widget_config = $display->getComponent('rate_vote_widget')) && $view_mode == 'full') {
++  if (($widget_config = $display->getComponent('rate_vote_widget'))) {
+     $vote_widget_service = \Drupal::service('rate.entity.vote_widget');
+     $vote_widget = $vote_widget_service->buildRateVotingWidget(
+       $entity->id(),

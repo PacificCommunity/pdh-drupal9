@@ -1,0 +1,3 @@
+services:
+  spc_publication_import.spcPublicationImport:
+    class: Drupal\spc_publication_import\spcPublicationImport

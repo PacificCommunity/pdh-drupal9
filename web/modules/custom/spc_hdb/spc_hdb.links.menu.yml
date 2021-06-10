@@ -1,0 +1,6 @@
+spc_hdb.settings_config:
+  title: 'SPC HDB settings'
+  description: 'SPC HDB settings page'
+  parent: system.admin_config_services
+  route_name: spc_hdb.settings
+  weight: 11 

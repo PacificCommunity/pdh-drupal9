@@ -11,7 +11,7 @@ _core:
 id: spc_page_title
 theme: spc
 region: content
-weight: -6
+weight: -11
 provider: null
 plugin: page_title_block
 settings:
@@ -24,6 +24,7 @@ visibility:
     id: 'entity_bundle:node'
     bundles:
       dsp: dsp
+      page: page
     negate: true
     context_mapping:
       node: '@node.node_route_context:node'

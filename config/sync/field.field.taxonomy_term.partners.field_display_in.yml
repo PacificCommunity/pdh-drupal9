@@ -1,0 +1,21 @@
+uuid: 012fc4bb-240e-40b5-bafc-dd4a58c8d2f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_display_in
+    - taxonomy.vocabulary.partners
+  module:
+    - options
+id: taxonomy_term.partners.field_display_in
+field_name: field_display_in
+entity_type: taxonomy_term
+bundle: partners
+label: 'Display in'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

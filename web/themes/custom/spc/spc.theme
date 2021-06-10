@@ -5,8 +5,12 @@ use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\spc_mbd\Controller\SpcMbdController;
+
+include_once __DIR__ . '/includes/mbd_helper.php';
 
 /**
  * Implementation of hook_preprocess_menu().
@@ -28,44 +32,49 @@ function spc_preprocess_menu(array &$variables) {
  */
 function spc_preprocess_html(&$variables) {
   $route_name = \Drupal::routeMatch()->getRouteName();
+  $is_login = \Drupal::currentUser()->isAuthenticated();
+  
+  if ($is_login){
+    $variables['attributes']['class'][] = 'is-login';
+  }
   if($route_name == 'spc_mbd.landing') {
     $variables['attributes']['class'][] = 'mbd-landing';
   }
-}
-        
-/**
- * Implementation of hook_preprocess_views_view_field().
- */
-function spc_preprocess_views_view_field(&$variables){
-
-}
-
-/**
- * Implementation of hook_preprocess_views_view().
- */
-function spc_preprocess_views_view(&$variables){
-
-}
-
-/**
- * Implements theme_preprocess_breadcrumb().
- */
-function spc_preprocess_breadcrumb(&$variables){
-
+  if($route_name == 'spc_main.landing') {
+    $variables['attributes']['class'][] = 'spc-landing';
+  }
+  if($route_name == 'view.stories_list.page') {
+    $variables['attributes']['class'][] = 'spc-stories';
+  }
+  if($route_name == 'entity.node.canonical') {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
+      $variables['attributes']['class'][] = 'story-full';
+    }
+    if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'thematic_group') {
+      $variables['attributes']['class'][] = 'topic-full';
+    }
+  }  
+  if ($route_name === 'user.login' || $route_name === 'user.pass' || $route_name === 'user.register'){
+    $variables['attributes']['class'][] = 'minimal user-page';
+  }  
 }
 
 /**
- * Implements theme_preprocess_user().
+ * Implements hook_preprocess_HOOK().
  */
-function spc_preprocess_user(&$variables){
+function spc_preprocess_block(&$variables) {
+  if ($variables['derivative_plugin_id'] == 'main-menu'){   
+    
+    $menu_tree = \Drupal::menuTree();
+    $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
+    $tree = $menu_tree->load('main-menu', $parameters);
+    $manipulators = [['callable' => 'menu.default_tree_manipulators:generateIndexAndSort']];
+    $tree = $menu_tree->transform($tree, $manipulators);    
+    $menu = $menu_tree->build($tree);
 
-}
-
-/**
- * Implements theme_preprocess_node().
- */
-function spc_preprocess_node(&$variables){
-
+    $variables['menu_mobile'] = $menu['#items'];
+  }
 }
 
 /**
@@ -89,18 +98,86 @@ function spc_preprocess_field(&$variables){
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function spc_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+  switch ($form_id) {
+    case 'user_login_form':
+      $form['name']['#placeholder'] = t('Username');
+      $form['pass']['#placeholder'] = t('Password');
+      $form['loginurl']['#prefix'] = '<p class="auth-link">';
+      $form['loginurl']['#suffix'] = '</p>';
+      break;
+    case 'user_register_form': 
+      $form['account']['name']['#weight'] = -10;
+      $form['account']['name']['#placeholder'] = t('Username');
+      $form['account']['name']['#description'] = t('Spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.');
+      $form['account']['mail']['#weight'] = -5;
+      $form['account']['mail']['#title'] = t('E-mail address');
+      $form['account']['mail']['#placeholder'] = t('E-mail address');
+      break;
+    case 'user_pass':
+      $form['name']['#title'] = t('Username or e-mail address');
+      $form['name']['#placeholder'] = t('Username or e-mail address');
+      $form['mail'] = [];
+      $form['actions']['submit']['#value'] = t('Send new password');
+      break;
+  }
+}
+
+/**
  * Implements theme_preprocess_node().
  */
+function spc_preprocess_node(&$variables){
+  $node = $variables['node'];
+  if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'article') {
+    $variables['datasets'] = _get_related_datasets($node);
+    
+    $related_topic_entity = $node->field_related_topic->entity;
+    if ($related_topic_entity instanceof \Drupal\node\NodeInterface && $related_topic_entity->getType() == 'thematic_group') {
+      $tid = $related_topic_entity->id();
+      $variables['related_topic'] = [
+          'id' => $tid,
+          'url' => \Drupal::service('path_alias.manager')->getAliasByPath('/node/'. $tid),
+          'title' => $related_topic_entity->title->value,
+          'icon' => $related_topic_entity->field_fa_icon->value
+      ];
+    }
+    
+    $syndicated_id = $node->field_syndicated_id->value;
+    if (!empty($syndicated_id)){
+      $config = \Drupal::getContainer()->get('config.factory')->getEditable('articles_syndication.settings');
+      $syndication_url = $config->get('syndication_url');
+      
+      $variables['syndicated']['id'] = $syndicated_id;
+      $variables['syndicated']['url'] = $syndication_url . '/node/'.$syndicated_id;
+      
+      $body = $node->body->value;
+      $variables['syndicated']['body'] = substr($body, strpos($body, "<p"), strpos($body, "</p>")+4);
+    }
+  }
+  
+  if ($node instanceof \Drupal\node\NodeInterface && $node->getType() == 'thematic_group') {
+    $variables['spc_base_url'] = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+    $variables['data_insights'] = [];
+    $variables['datasets'] = _get_related_datasets($node);
+    $variables['stories'] = _get_related_stories($node);
+  }  
+}
+
+/**
+ * Implements theme_preprocess_term().
+ */
 function spc_preprocess_taxonomy_term(&$variables){
-    $vocabulary = $variables['elements']['#taxonomy_term']->getVocabularyId();
+    $vocabulary = $variables['elements']['#taxonomy_term']->bundle();
     $term = $variables['term'];
 
     if ($variables['view_mode'] == 'full' && $vocabulary == 'country'){
+        $country_code = $term->get('field_country_code')->getValue()[0]['value'];
+        @$variables['country_code'] = $country_code;
         
         @$variables['treaty'] = _get_country_treaty($term);
-        
         @$variables['shelf_treaty'] = _get_shelf_treaty($term);
-        
         @$country_detales = _get_country_related_datasets($variables);
         
         $variables['datasets']['count'] = $country_detales['datasetsCount'];
@@ -125,6 +202,19 @@ function spc_preprocess_taxonomy_term(&$variables){
         if (!$term->get('field_maritime_zone')->getValue()){
             $variables['empty_zone'] = true;
         }
+        
+        $config = \Drupal::config('spc_mbd.settings');
+        $terriaMapUrl = $config->get('mbd_terria_url'); 
+        $module_handler = \Drupal::service('module_handler');
+        $module_path = $module_handler->getModule('spc_mbd')->getPath();
+        $cameras = json_decode(file_get_contents($module_path . '/data/camera.json'), true);
+        $initCamera = json_encode($cameras[$country_code]);
+        
+        $variables['terri_map_url'] = $terriaMapUrl . '#spc&hideWorkbench=1&start='. urlencode($initCamera);
+        $variables['#attached']['library'][] =  'spc_mbd/terria_country';
+        $variables['#attached']['drupalSettings']['spcMbd']['map'] = _get_country_map_data($term);
+        $variables['#attached']['drupalSettings']['spcMbd']['countryCode'] = $country_code;    
+        
     }
     
     if ($variables['view_mode'] == 'step' && $vocabulary == 'maritime_zone'){
@@ -166,283 +256,11 @@ function spc_preprocess_paragraph(&$variables){
   }
 }
 
-function _get_country_related_datasets($variables){
-    $country = $variables['elements']['#taxonomy_term'];
-    $c_code = $country->get('field_country_code')->getValue()[0]['value'];
-    $dataset_ids = $country->get('field_related_datasets')->getValue();
-
-    $spc_base_url = 'https://pacificdata.org/data/';
-
-    $country_detales = [];
-    $country_detales['datasetsCount'] = 0;
-
-    if (!empty($dataset_ids)){
-        foreach ($dataset_ids as $dataset_id){
-            $id = $dataset_id['value'];
-            $api = $spc_base_url . 'api/3/action/package_show';
-            
-            if ($responce = json_decode(file_get_contents($api . '?id=' . $id))){
-                $publication = $responce->result;
-
-                if (is_object($publication)){
-                    $country_detales['datasetsCount'] += 1;
-
-                    $dataset = [];
-                    $dataset['name'] = $publication->name;
-                    $dataset['title'] = $publication->title;
-                    $dataset['url'] = $spc_base_url . 'dataset/' . $publication->id;
-
-                    //creation date.
-                    $originalDate = $publication->metadata_created;
-                    $dataset['date'] = date("M, d, Y", strtotime($originalDate));
-
-                    //Organisation data.
-                    $dataset['organization']['image_url'] = 'https://pacificdata.org/data/uploads/group/' . $publication->organization->image_url;
-                    $dataset['organization']['spc_base_url'] = $spc_base_url . 'organization/' . $publication->organization->name;
-                    $dataset['organization']['title'] = $publication->organization->title;
-
-                    //Category mapper.
-                    $tags = $publication->tags;
-                    $categories =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('categories');
-
-                    foreach ($categories as $category_term) {
-                      $category = Term::load($category_term->tid);
-                      $term_code = $category->get('field_c_code')->getValue()[0]['value'];
-
-                      foreach ($tags as $tag){
-                        $tag_name = $tag->name;
-
-                        if ($term_code == $tag_name){
-                          $aliasManager = \Drupal::service('path.alias_manager');
-                          $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $category->id());
-
-                          $dataset['tags'][] = [
-                            'url' => $url,
-                            'name' => $category->getName(),
-                          ];
-                        }
-
-                      }
-                    }
-
-                    //Resources data.
-                    if ($resources = $publication->resources){
-                        foreach ($resources as $resource){
-                            $data_resource['url'] = $resource->url;
-                            $data_resource['format'] = $resource->format;
-                            $dataset['resources'][$resource->format] = $data_resource;
-                        }
-                    }
-
-                    $country_detales['datasets'][] =  $dataset;
-                }
-            }
-        }
-    }
-
-    return $country_detales;
-}
-
-function _get_countries_list($current_country){
-    $countries = [];
-    
-    $current_code = $current_country->get('field_country_code')->getValue()[0]['value'];
-
-    $countries_terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('country');
-    $theme = \Drupal::theme()->getActiveTheme();
-    $theme_path = $theme->getPath();
-
-    $active_key = 0;
-    foreach($countries_terms as $key => $country_term){
-        $country = Term::load($country_term->tid);
-
-        $name = $country->getName();
-        $country_code = $country->get('field_country_code')->getValue()[0]['value'];
-
-        $aliasManager = \Drupal::service('path.alias_manager');
-        $url = $aliasManager->getAliasByPath('/taxonomy/term/' . $country->id());
-        
-        $class_name = '';
-        if ($current_code == $country_code){
-            $class_name = 'active';
-            $active_key = $key;
-        }
-
-        $countries['list'][] = [
-          'url' => $url,
-          'name' => $name,
-          'class' => $class_name,  
-        ];
-      }
-      
-      $countries['current'] = $countries['list'][$active_key];
-      if ($active_key == count($countries_terms) -1){
-          $countries['prev'] = $countries['list'][count($countries_terms) -2];
-          $countries['next'] = $countries['list'][0];
-      } else if ($active_key == 0){
-          $countries['prev'] = $countries['list'][count($countries_terms) -1];
-          $countries['next'] = $countries['list'][1];
-      } else {
-          $countries['prev'] = $countries['list'][$active_key -1];
-          $countries['next'] = $countries['list'][$active_key +1];
-      }
-
-    return $countries;
-}
-
-function _get_country_treaty($term){
-    $output = [
-        'completed' => [],
-        'in_progress' => [],
-        'not_started' => [],
-        'na' => []
-    ];
-    
-    $country_id = intval($term->id());
-    $condition_or = new \Drupal\Core\Database\Query\Condition('OR');
-    $condition_or->condition('bco.field_boundary_country_one_target_id', $country_id);
-    $condition_or->condition('bct.field_boundary_country_two_target_id', $country_id);
-    
-    $q = db_select('node','n')
-        ->fields('n', ['nid'])
-        ->condition('n.type', 'boundary_treaty')
-        ->condition($condition_or);
-    $q->join('node__field_boundary_country_one', 'bco',  'bco.entity_id = n.nid');
-    $q->join('node__field_boundary_country_two', 'bct',  'bct.entity_id = n.nid');
-    $results = $q->execute()->fetchAll();
-    
-    $theme = \Drupal::theme()->getActiveTheme();
-    $theme_path = $theme->getPath();
-    
-    if (!empty($results)){
-        foreach($results as $key => $value){
-            $treaty = Node::load($value->nid);
-            
-            $treaty_state = $treaty->get('field_treaty_state')->getValue()[0]['value'];
-            $output[$treaty_state][$key]['state'] = $treaty_state;
-
-            $country_one_id = $treaty->get('field_boundary_country_one')->getValue()[0]['target_id'];
-            $country_one = Term::load($country_one_id);
-            $output[$treaty_state][$key]['country_one'] = $country_one->getName();
-            $country_one_url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $country_one_id);
-            $output[$treaty_state][$key]['country_one_url'] = $country_one_url;
-
-            $country_one_file = File::load($country_one->get('field_flag')->getValue()[0]['target_id']);
-            if (is_object($country_one_file)){
-              $output[$treaty_state][$key]['country_one_flag'] = $country_one_file->url();
-            } else {
-                $country_one_flag = '/' . $theme_path . '/img/flags/' . $country_one->get('field_country_code')->getValue()[0]['value'] . '.svg';
-                $output[$treaty_state][$key]['country_one_flag'] = $country_one_flag;
-            }
-            
-            $country_two_id = $treaty->get('field_boundary_country_two')->getValue()[0]['target_id'];
-            $country_two = Term::load($country_two_id);
-            $output[$treaty_state][$key]['country_two'] = $country_two->getName();
-            $country_two_url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $country_two_id);
-            $output[$treaty_state][$key]['country_two_url'] = $country_two_url;            
-            
-            $country_two_file = File::load($country_two->get('field_flag')->getValue()[0]['target_id']);
-            if (is_object($country_two_file)){
-                $output[$treaty_state][$key]['country_two_flag'] = $country_two_file->url();
-            } else {
-                $country_two_flag = '/' . $theme_path . '/img/flags/' . $country_two->get('field_country_code')->getValue()[0]['value'] . '.svg';
-                $output[$treaty_state][$key]['country_two_flag'] = $country_two_flag;
-            }
-
-            $download = File::load($treaty->get('field_boundaries_treaty_file')->getValue()[0]['target_id']);
-            if (is_object($download)){
-              $output[$treaty_state][$key]['download'] = $download->url();
-            }
-            
-            switch ($treaty_state) {
-                case 'completed': 
-                    $completed_date = $treaty->get('field_year_only')->getValue()[0]['value'];
-                    $output[$treaty_state][$key]['completed_date'] = $completed_date;
-                    
-                    break;
-                case 'in_progress': 
-                    $steps = $treaty->get('field_boundaries_treaty_steps')->getValue();
-                    $treaty_steps = [];
-                    foreach($steps as $step){
-                        $paragraph_step = Paragraph::load($step['target_id']);
-                        $state = $paragraph_step->field_progress_type->value;
-
-                        $step_term_id = $paragraph_step->field_boundary_treaty->getValue()[0]['target_id'];
-                        $paragraph_treaty = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($step_term_id);
-                        $name = $paragraph_treaty->label();
-                        
-                        $icon = '';
-                        $file = File::load($paragraph_treaty->get('field_image')->getValue()[0]['target_id']);
-                        if (is_object($file)){
-                          $icon = $file->url();
-                        }
-
-                        $treaty_steps[] = [
-                            'state' => $state,
-                            'name' => $name,
-                            'icon' => $icon,
-                            'tooltip' => ucfirst(str_replace('_', ' ', $state)),
-                        ];
-                    }
-                    
-                    $output[$treaty_state][$key]['treaty_steps'] = $treaty_steps;
-                    break;                
-            }
-        }
-    }
-    
-    return $output;
-}
-
-function _get_shelf_treaty($term){
-    $output = [];
-    
-    $country_id = intval($term->id());
-    $q = db_select('node','n')
-        ->fields('n', ['nid'])
-        ->condition('n.type', 'continental_shelf')
-        ->condition('lc.field_limit_countries_target_id', $country_id);
-    $q->join('node__field_limit_countries', 'lc',  'lc.entity_id = n.nid');
-    $results = $q->execute()->fetchAll();
-    
-    $theme = \Drupal::theme()->getActiveTheme();
-    $theme_path = $theme->getPath(); 
-    
-    if (!empty($results)){
-        foreach($results as $key => $value){
-            $shelf = [];
-            
-            $shelf_node = Node::load($value->nid);             
-            $shelf['name'] = $shelf_node->get('title')->getValue()[0]['value'];
-            
-            $steps = $shelf_node->get('field_shelf_steps')->getValue();
-            $treaty_steps = [];
-            foreach($steps as $step){
-                $paragraph_step = Paragraph::load($step['target_id']);
-                $state = $paragraph_step->field_progress_type->value;
-
-                $step_term_id = $paragraph_step->field_shelf_step_term->getValue()[0]['target_id'];
-                $paragraph_treaty = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($step_term_id);
-                $name = $paragraph_treaty->label();
-
-                $icon = '';
-                $file = File::load($paragraph_treaty->get('field_image')->getValue()[0]['target_id']);
-                if (is_object($file)){
-                  $icon = $file->url();
-                }
-
-                $treaty_steps[] = [
-                    'state' => $state,
-                    'name' => $name,
-                    'icon' => $icon,
-                    'tooltip' => ucfirst(str_replace('_', ' ', $state)),
-                ];
-            }
-            $shelf['steps'] = $treaty_steps;
-            
-            $output[] = $shelf;
-        }
-    }            
-    //dump($output); die;
-    return $output;
+/**
+ * Implements theme_suggestions_alter().
+ */
+function spc_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'form' & !empty($variables['element']['#id'])) {
+    $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#id']);
+  }
 }

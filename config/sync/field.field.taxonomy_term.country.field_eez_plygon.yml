@@ -9,7 +9,7 @@ id: taxonomy_term.country.field_eez_plygon
 field_name: field_eez_plygon
 entity_type: taxonomy_term
 bundle: country
-label: 'EEZ plygon'
+label: 'Exclusive Economic Zone polygon'
 description: ''
 required: false
 translatable: false

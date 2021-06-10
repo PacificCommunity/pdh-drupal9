@@ -42,6 +42,252 @@
         {% endif %}
     </div>
     
+    <h3 class="globe-title">{{ 'Maritime Boundaries of '|t }}{{ name }}</h3>
+    <div class="globe loader">
+      <iframe id="terria-map" src="{{ terri_map_url }}" width="100%" height="880px"></iframe>
+      <div id='legend-button'>{{ 'Legend' }}</div>
+      <div id="legend-popup">
+        <h3 class="title legend">{{ 'Legend' }}</h3>
+        <div class="metadata">
+          <div class="legend line">
+            <div class="value completed"></div>
+            <div class="name">{{ 'Maritime boundary delimitation treaty in force and desposited with DOALOS' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value boundary"></div>
+            <div class="name">{{ 'Exclusive Economic Zone limit (200M) - adjacent to the high seas deposited to DOALOS' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value in_progress"></div>
+            <div class="name">{{ 'Maritime boundary delimitation treaty signed but not yet in force' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value not_started"></div>
+            <div class="name">{{ 'Maritime boundary to be negotiated' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value na"></div>
+            <div class="name">{{ 'Exclusive Economic Zone limit (200M) - adjacent to the high seas to be deposited to DOALOS' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value eez"></div>
+            <div class="name">{{ 'Pacific Island Country and Territories Exclusive Economic Zone (EEZ)' }}</div>
+          </div>
+          <div class="legend line">
+            <div class="value ecs"></div>
+            <div class="name">{{ 'Pacific Island Country and Territories Exclusive Continental Shelf (ECS)' }}</div>
+          </div>
+          
+          <div class="legend line">
+            <div class="value contiguous"></div>
+            <div class="name">{{ 'Contiguous Zone (24M)' }}</div>
+          </div>  
+          <div class="legend line">
+            <div class="value seelim"></div>
+            <div class="name">{{ 'Territorial Sea Limit (12M)' }}</div>
+          </div>          
+          <div class="legend line">
+            <div class="value baseline"></div>
+            <div class="name">{{ 'Territorial Sea Baseline' }}</div>
+          </div>
+
+          <div class="legend line">
+            <div class="value marine"></div>
+            <div class="name">{{ 'Marine Protected Areas (MPA’s)' }}</div>
+          </div>
+        
+        </div>
+      </div>
+      
+      <div id="eez-popup">
+        <h3 class="title">{{ 'Exclusive Economic Zone' }}</h3>
+        <div class="metadata">
+          <div class="country line">
+            <div class="name">{{ 'Country' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="area line">
+            <div class="name">{{ 'EEZ Area (sq. km)' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="treaties line">
+            <div class="name">{{ 'No. of Treaties' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="pockets line">
+            <div class="name">{{ 'No. of High Seas pockets' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="deposited line">
+            <div class="name">{{ 'EEZ Deposited' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="date line">
+            <div class="name">{{ 'Date deposited' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="shelf line">
+            <div class="name">{{ 'Extended Continental Shelf Claims' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="ecs line">
+            <div class="name">{{ 'Name of ECS Area/s' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="url line">
+            <div class="name">{{ 'URL Link' }}</div>
+            <div class="value"></div>
+          </div>            
+        </div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
+      </div>
+            
+      <div id="boundary-popup">
+        <h3 class="title">{{ 'Treaty Line' }}</h3>
+        <div class="metadata">
+          <div class="country line">
+            <div class="name">{{ 'Countries' }}</div>
+            <div class="value">
+              <div class="one"></div>
+              <div class="two"></div>
+            </div>
+          </div>
+          <div class="signed line">
+            <div class="name">{{ 'Signed' }}</div>
+            <div class="value"></div>
+          </div>  
+          <div class="year-signed line">
+            <div class="name">{{ 'Year signed' }}</div>
+            <div class="value"></div>
+          </div>   
+          <div class="force line">
+            <div class="name">{{ 'Enter into Force (EIF)' }}</div>
+            <div class="value"></div>
+          </div>              
+          <div class="date line">
+            <div class="name">{{ 'Date of EIF' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="url line">
+            <div class="name">{{ 'URL Link' }}</div>
+            <div class="value"></div>
+          </div>             
+        </div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
+      </div>              
+            
+      <div id="shelf-popup">
+        <h3 class="title">{{ 'Extended Continental Shelf' }}</h3>
+        <div class="metadata">
+          <div class="name line">
+            <div class="name">{{ 'ECS Area Name' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="joint-submission line">
+            <div class="name">{{ 'Joint submission' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="country line">
+            <div class="name">{{ 'Country(s) submitting claim' }}</div>
+            <div class="value"></div>
+          </div>            
+          <div class="submission-done line">
+            <div class="name">{{ 'Preliminary submission done' }}</div>
+            <div class="value"></div>
+          </div>  
+          <div class="date line">
+            <div class="name">{{ 'Date of Preliminary submission' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="submission-complied line">
+            <div class="name">{{ 'Full submission complied and lodged' }}</div>
+            <div class="value"></div>
+          </div>   
+          <div class="established-year line">
+            <div class="name">{{ 'Sub-commission established - Year' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="defence-year line">
+            <div class="name">{{ 'Submission defence – Year' }}</div>
+            <div class="value"></div>
+          </div>             
+          <div class="established-year line">
+            <div class="name">{{ 'Deposited to DOALOS' }}</div>
+            <div class="value"></div>
+          </div> 
+            
+          <div class="recommendation line">
+            <div class="name">{{ 'Recommendation' }}</div>
+            <div class="value"></div>
+          </div>           
+        </div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
+      </div>            
+            
+      <div id="limit-popup">
+        <h3 class="title">{{ 'High Seas Limit' }}</h3>
+        <div class="metadata">
+          <div class="country line">
+            <div class="name">{{ 'Countries' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="deposited line">
+            <div class="name">{{ 'Deposited to DOALOS' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="date line">
+            <div class="name">{{ 'Date Deposited' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="url line">
+            <div class="name">{{ 'URL Link' }}</div>
+            <div class="value"></div>
+          </div>             
+        </div>
+        <h3 class="title">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
+      </div>  
+        
+      <div id="additional-popup">
+        <h3 class="title">{{ '' }}</h3>
+        <div class="metadata">
+          <div class="country line">
+            <div class="name">{{ 'Country Name' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="area line">
+            <div class="name">{{ 'Area (sq. km)' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="legislated line">
+            <div class="name">{{ 'Legislated' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="legislated-date line">
+            <div class="name">{{ 'Date legislated' }}</div>
+            <div class="value"></div>
+          </div>
+          <div class="deposited line">
+            <div class="name">{{ 'Deposited with UNDOALOS' }}</div>
+            <div class="value"></div>
+          </div>    
+          <div class="deposited-date line">
+            <div class="name">{{ 'Date deposited' }}</div>
+            <div class="value"></div>
+          </div> 
+          <div class="url line">
+            <div class="name">{{ 'URL Link' }}</div>
+            <div class="value"></div>
+          </div>            
+        </div>
+        <h3 class="title data">{{ 'Datasets' }}</h3>    
+        <div class="related-datasets"></div>
+      </div>
+    </div>
+    
     <h3 class="collapsed" data-id="maritime-zones">1.&nbsp{{ 'Pathway to maritime zones'|t }}</h3>
     <div id="maritime-zones" class="pathway-maritime-zones">
         <div class="maritime-zones-file">
@@ -62,19 +308,35 @@
                 {% for item in treaty.completed %}
                 <div class="treaty-item">
                     <div class="flags">
-                        <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
-                            <div class="img">
-                                <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
-                            </div>
-                            <span>{{ item.country_one }}</span>
-                        </a>
-                        <span class="union">&nbsp{{ '&' }}&nbsp</span>
-                        <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
-                            <div class="img">
-                                <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
-                            </div>    
-                            <span>{{ item.country_two }}</span>
-                        </a>
+                      {% if item.country_one_code == country_code %}
+                          <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                              <div class="img">
+                                  <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                              </div>
+                              <span>{{ item.country_one }}</span>
+                          </a>
+                          <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                          <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                              <div class="img">
+                                  <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                              </div>    
+                              <span>{{ item.country_two }}</span>
+                          </a>
+                      {% else %}
+                          <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                              <div class="img">
+                                  <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                              </div>    
+                              <span>{{ item.country_two }}</span>
+                          </a>
+                          <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                          <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                              <div class="img">
+                                  <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                              </div>
+                              <span>{{ item.country_one }}</span>
+                          </a>                        
+                      {% endif %}
                     </div>
                     <div class="state {{ item.state }}"></div>
                     <div class="date">{{ 'Published' }}&nbsp{{ item.completed_date }}</div>
@@ -101,6 +363,7 @@
                             </div>
                         {% endif %}                        
                         <div class="flags">
+                          {% if item.country_one_code == country_code %}
                             <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
                                 <div class="img">
                                     <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
@@ -114,12 +377,27 @@
                                 </div>    
                                 <span>{{ item.country_two }}</span>
                             </a>
+                            {% else %}
+                            <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                                <div class="img">
+                                    <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                                </div>    
+                                <span>{{ item.country_two }}</span>
+                            </a>
+                            <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                            <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                                <div class="img">
+                                    <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                                </div>
+                                <span>{{ item.country_one }}</span>
+                            </a>
+                            {% endif %}  
                         </div>
                         <div class="treaty-steps">
                             {% for step in item.treaty_steps %}
                                 <div class="step">
                                     <div class="step-icon">
-                                        <img src="{{ step.icon }}"> 
+                                        <img src="{{ step.icon }}" alt="{{ step.name }}"> 
                                     </div>
                                     <div class="step-state ">
                                         <div class="state">
@@ -144,6 +422,7 @@
                 {% for item in treaty.not_started %}
                 <div class="treaty-item">
                     <div class="flags">
+                      {% if item.country_one_code == country_code %}
                         <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
                             <div class="img">
                                 <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
@@ -157,6 +436,21 @@
                             </div>    
                             <span>{{ item.country_two }}</span>
                         </a>
+                        {% else %}
+                        <a href="{{ item.country_two_url }}" title="{{ item.country_two }}">
+                            <div class="img">
+                                <img src="{{ item.country_two_flag }}" alt="{{ item.country_two }}">
+                            </div>    
+                            <span>{{ item.country_two }}</span>
+                        </a>
+                        <span class="union">&nbsp{{ '&' }}&nbsp</span>
+                        <a href="{{ item.country_one_url }}" title="{{ item.country_one }}">
+                            <div class="img">
+                                <img src="{{ item.country_one_flag }}" alt="{{ item.country_one }}">
+                            </div>
+                            <span>{{ item.country_one }}</span>
+                        </a>                        
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -176,7 +470,7 @@
                         {% for step in shelf.steps %}
                             <div class="step">
                                 <div class="step-icon">
-                                    <img src="{{ step.icon }}"> 
+                                    <img src="{{ step.icon }}" alt="{{ step.name }}"> 
                                 </div>
                                 <div class="step-state ">
                                     <div class="state">

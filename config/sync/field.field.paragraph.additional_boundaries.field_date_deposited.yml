@@ -1,0 +1,21 @@
+uuid: b551fd99-0990-4012-a053-a6b5ccab5ffb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_date_deposited
+    - paragraphs.paragraphs_type.additional_boundaries
+  module:
+    - datetime
+id: paragraph.additional_boundaries.field_date_deposited
+field_name: field_date_deposited
+entity_type: paragraph
+bundle: additional_boundaries
+label: 'Date Deposited'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

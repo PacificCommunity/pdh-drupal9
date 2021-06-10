@@ -1,0 +1,55 @@
+{
+    "portals": [
+        {
+            "url": "https://pacificdata.org/data",
+            "endpoint": "/api/action/package_search",
+            "portal": "ckan"
+        },
+	{
+            "url": "https://pacificdata.org",
+            "endpoint": "/api/action/articles_list",
+            "portal": "drupal"
+        }
+    ],
+    "results_per_page": 10,
+    "mapping": {
+        "member_countries": {
+            "as": "American Samoa",
+            "ck": "Cook Islands",
+            "fj": "Fiji",
+            "pf": "French Polynesia",
+            "gu": "Guam",
+            "ki": "Kiribati",
+            "mh": "Marshall Islands",
+            "fm": "Federated States of Micronesia",
+            "nr": "Nauru",
+            "nc": "New Caledonia",
+            "nu": "Niue",
+            "mp": "Northern Mariana Islands",
+            "pw": "Palau",
+            "pg": "Papua New Guinea",
+            "pn": "Pitcairn Islands",
+            "ws": "Samoa",
+            "sb": "Solomon Islands",
+            "tk": "Tokelau",
+            "to": "Tonga",
+            "tv": "Tuvalu",
+            "vu": "Vanuatu",
+            "wf": "Wallis and Futuna",
+            "melanesia": "Melanesia",
+            "micronesia": "Micronesia",
+            "polynesia": "Polynesia",
+            "regional": "Regional",
+            "region": "Region",
+            "other": "Other"
+        },
+		"type": {
+            "publications": "Publications",
+            "geographic_data": "Geographic data",
+            "dataset": "Dataset",
+            "biodiversity_data": "Biodiversity data",
+            "article": "Stories"
+        }
+    }
+}
+

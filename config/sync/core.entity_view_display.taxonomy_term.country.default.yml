@@ -6,10 +6,21 @@ dependencies:
     - field.field.taxonomy_term.country.field_boundary_countries
     - field.field.taxonomy_term.country.field_continental_shelf_file
     - field.field.taxonomy_term.country.field_country_code
+    - field.field.taxonomy_term.country.field_datasets_count
     - field.field.taxonomy_term.country.field_date_deposited
+    - field.field.taxonomy_term.country.field_eez_archipelagic_baseline
+    - field.field.taxonomy_term.country.field_eez_archipelagic_popup
     - field.field.taxonomy_term.country.field_eez_area
+    - field.field.taxonomy_term.country.field_eez_contiguous_zone
+    - field.field.taxonomy_term.country.field_eez_contiguous_zone_popup
     - field.field.taxonomy_term.country.field_eez_deposited
+    - field.field.taxonomy_term.country.field_eez_marine_areas_popup
+    - field.field.taxonomy_term.country.field_eez_marine_protected_areas
     - field.field.taxonomy_term.country.field_eez_plygon
+    - field.field.taxonomy_term.country.field_eez_sea_baseline
+    - field.field.taxonomy_term.country.field_eez_sea_baseline_popup
+    - field.field.taxonomy_term.country.field_eez_sea_limit
+    - field.field.taxonomy_term.country.field_eez_sea_limit_popup
     - field.field.taxonomy_term.country.field_extended_continental_shelf
     - field.field.taxonomy_term.country.field_flag
     - field.field.taxonomy_term.country.field_image
@@ -61,6 +72,15 @@ content:
     third_party_settings: {  }
     type: string
     region: content
+  field_datasets_count:
+    weight: 15
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
   field_date_deposited:
     type: datetime_default
     weight: 10
@@ -70,6 +90,22 @@ content:
       format_type: medium
       timezone_override: ''
     third_party_settings: {  }
+  field_eez_archipelagic_baseline:
+    weight: 19
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_archipelagic_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 20
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_eez_area:
     type: number_decimal
     weight: 11
@@ -81,6 +117,22 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
+  field_eez_contiguous_zone:
+    weight: 15
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_contiguous_zone_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 21
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
   field_eez_deposited:
     type: boolean
     weight: 12
@@ -91,12 +143,60 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
+  field_eez_marine_areas_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 22
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_eez_marine_protected_areas:
+    weight: 16
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
   field_eez_plygon:
     weight: 6
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: basic_string
+    region: content
+  field_eez_sea_baseline:
+    weight: 17
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_sea_baseline_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 23
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_eez_sea_limit:
+    weight: 18
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_eez_sea_limit_popup:
+    type: entity_reference_revisions_entity_view
+    weight: 24
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
     region: content
   field_extended_continental_shelf:
     type: entity_reference_revisions_entity_view

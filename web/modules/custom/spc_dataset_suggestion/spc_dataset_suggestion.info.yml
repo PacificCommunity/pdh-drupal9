@@ -1,0 +1,6 @@
+name: SPC Dataset Suggestion
+description: Creates a dataset suggestion form
+package: SPC
+type: module
+version: 1.0
+core_version_requirement: ^9.1

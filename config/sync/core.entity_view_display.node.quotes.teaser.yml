@@ -1,0 +1,36 @@
+uuid: e0afff05-49be-4416-9a01-a1dcf7c5d089
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.quotes.body
+    - field.field.node.quotes.field_about_the_author
+    - field.field.node.quotes.field_author_name
+    - field.field.node.quotes.field_image
+    - node.type.quotes
+  module:
+    - text
+    - user
+id: node.quotes.teaser
+targetEntityType: node
+bundle: quotes
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_about_the_author: true
+  field_author_name: true
+  field_image: true

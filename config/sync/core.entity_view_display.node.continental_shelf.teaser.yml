@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.continental_shelf.field_defence_year
     - field.field.node.continental_shelf.field_established_year
     - field.field.node.continental_shelf.field_full_submission_complied
+    - field.field.node.continental_shelf.field_geojson_coordinates
     - field.field.node.continental_shelf.field_joint_submission
     - field.field.node.continental_shelf.field_limit_countries
     - field.field.node.continental_shelf.field_recommendation
@@ -42,6 +43,7 @@ hidden:
   field_defence_year: true
   field_established_year: true
   field_full_submission_complied: true
+  field_geojson_coordinates: true
   field_joint_submission: true
   field_limit_countries: true
   field_recommendation: true

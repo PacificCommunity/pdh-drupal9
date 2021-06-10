@@ -1,0 +1,6 @@
+name: SPC Education Dashboard
+type: module
+description: Education Dashboard page content
+package: SPC
+core: 8.x
+core_version_requirement: ^8 || ^9

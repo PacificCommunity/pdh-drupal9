@@ -1,0 +1,94 @@
+<div class="entity entity-bean bean-home-banner clearfix" about="/block/home-banner" typeof="">
+    <div class="banner-image">
+      
+        {% if data.topics %}    
+          <div class="topics-dropdown">
+            <a href="#" class="dropdown-button">
+              <i class="{{ data.current_topic.icon }}"></i>
+              <span>{{ data.current_topic.title }}</span>
+              <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-list">  
+              {% for topic in data.topics %}
+                <li class="topic-item"> 
+                    <a href="{{ topic.url }}">{{ topic.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div> 
+        {% endif %} 
+      
+        {% if data.breads %}
+            <div class="breadcrumbs bread">
+                <div class="breadcrumb">
+                    <div class="inline first">
+                        <a href="/" title="{{ 'Home'|t }}">{{ 'Home'|t }}</a>
+                    </div>
+                    {% for breadcrumb in data.breads %}
+                        <div class="delimiter">&gt;</div>
+                        <div class="inline last">
+                            {% if breadcrumb.url %}
+                                <a href="{{ breadcrumb.url }}" title="{{ breadcrumb.name }}">{{ breadcrumb.name }}</a>
+                            {% else %}
+                                <span>{{ breadcrumb.name }}</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %} 
+        
+        <div class="spc-home-banner-block">
+            <div class="banner-title">
+                <div class="field field-type-text-long">
+                    <h1>{{ data.title|raw }}</h1>
+                    {% if data.term %}
+                        <h2>{{ data.term }}</h2>
+                    {% endif %}
+                </div>
+                <div class="field field-type-text-long">
+                    <p>{{ data.subtitle}}</p>
+                </div>
+                <div class="search">
+                    <div id="spc-home-banner-search">
+                        {{ data.search_form }}
+                    </div>
+                </div> 
+            </div>
+        </div>
+                    
+        <div class="banner-links topic-stats">
+          <div class="link-block">
+            <div class="icon-wrapper dataset-icon"></div>
+            <a href="{{ data.stats.datasets.url }}" target="_blank">
+              {{ 'Datasets' }}            
+              <div class="count">{{ data.stats.datasets.count }}</div>
+            </a>            
+            <div id="datasets-count" class="tooltip">
+              {{ 'Structured data files and links to data services' }}          
+            </div>
+          </div>
+          <div class="link-block">
+            <div class="icon-wrapper publication-icon"></div>
+            <a href="{{ data.stats.publications.url }}" target="_blank">
+              {{ 'Publications' }}            
+              <div class="count">{{ data.stats.publications.count }}</div>
+            </a>            
+            <div id="datasets-count" class="tooltip">
+              {{ ' Scientific papers, publications, reports, policy briefs, policies documents, manuals, handbooks' }}          
+            </div>
+          </div>
+          <div class="link-block">
+            <div class="icon-wrapper organisations-icon"></div>
+            <a href="{{ data.stats.organisations.url }}" target="_blank">
+              {{ 'Organisations' }}            
+              <div class="count">{{ data.stats.organisations.count }}</div>
+            </a>            
+            <div id="datasets-count" class="tooltip">
+              {{ 'Organisations (including subsidiary agencies, business units, departments, divisions, programmes or projects) that have published datasets and publications in the PDH catalogue' }}          
+            </div>
+          </div>            
+        </div>  
+                    
+    </div>
+</div>

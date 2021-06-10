@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes }}>
+  <div class="login-register-tabs">
+      <div class="login tab">
+          <a href="/user/login">{{ 'Login'|t }}</a>
+      </div>
+      <div class="register tab active">
+        <a href="/user/register">{{ 'Create account'|t }}</a>
+      </div>
+  </div>  
+  <div class="spc-user-register-form-wrapper">    
+    {{ children }}
+  </div>
+</form>

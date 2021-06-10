@@ -44,6 +44,7 @@ body.data_insights main {
 
 #block-spcbanner,
 #block-spcsdgbanner,
+#block-spctopicbanner,
 div[id^="block-spcbanner"] {
   position: relative;
 
@@ -301,7 +302,6 @@ div[id^="block-spcbanner"] {
 
     }
   }
-
   .breadcrumbs.bread {
     margin-top: -70px;
   }
@@ -724,6 +724,15 @@ body.dsp .dsp-datasets .dataset-preview .dataset-formats a span {
 .dsp-block-view {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  
+  @media(max-width: 767px){
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0px !important;
+  }
+  
   .views-row {
     width: 175px;
     min-height: 141px;
@@ -737,6 +746,12 @@ body.dsp .dsp-datasets .dataset-preview .dataset-formats a span {
     font-weight: 500;
     line-height: 16px;
     text-transform: uppercase;
+
+    @media(max-width: 450px){
+      width: 140px;
+      margin-right: 10px;
+      margin-bottom: 10px;        
+    }      
   }
   .views-field-field-dsp-small-icon img{
     width: 45px;
@@ -757,6 +772,13 @@ body.dashboards p {
   font-size: 12px;
   font-family: 'Roboto';
   line-height: 20px;
+}
+
+body.dashboards .dashboard-bottom li {
+  font-size: 14px;
+  font-family: 'Roboto';
+  line-height: 20px;
+  font-weight: 400;
 }
 
 body.dashboards #block-spc-page-title {
@@ -851,6 +873,10 @@ main .chart-block-bottom p{
   text-align: justify;
 }
 
+.dashboards main .dashboard-bottom img{
+  max-width: 100%;
+}
+
 body.dashboards #block-spcsdgbanner h1 {
    font-size: 38px;
   text-transform: none;
@@ -883,4 +909,8 @@ body.dashboards #block-spcsdgbanner .search {
     font-family: 'Roboto';
     margin-top: 0px;
   }
+}
+
+.sdg-summary {
+    margin-bottom: 6rem;
 }

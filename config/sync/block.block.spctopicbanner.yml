@@ -1,0 +1,25 @@
+uuid: bac065c5-77d1-41e8-bfc2-38e76b167559
+langcode: en
+status: true
+dependencies:
+  module:
+    - spc_main
+    - system
+  theme:
+    - spc
+id: spctopicbanner
+theme: spc
+region: subheader
+weight: -6
+provider: null
+plugin: sps_topic_banner
+settings:
+  id: sps_topic_banner
+  label: 'SPC Topic Banner'
+  provider: spc_main
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/topic/*'
+    negate: false

@@ -1,25 +1,9 @@
 <div class="entity entity-bean bean-home-banner clearfix" about="/block/home-banner" typeof="">
-    <div class="banner-image">
-        {% if data.terms %}
-            <div class="breadcrumbs">
-                <div class="breadcrumb">
-                    <div class="inline first">
-                        <a href="/education" title="{{ 'Education Policy Bank'|t }}">{{ 'Education Policy Bank'|t }}</a>
-                    </div>
-                    <div class="delimiter">&gt;</div>
-                    <div class="inline dropdown">
-                        <a href="#" title="{{ data.term }}">{{ data.term }}</a>
-                        <div class="breadcrumb-subitems">
-                            <div class="subitems-wrapper">
-                                {% for term in data.terms %}
-                                    <a href="{{ term.url }}" title="{{ term.name }}">{{ term.name }}</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endif %}
+    <div class="banner-image"
+    {% if data.banner_image_url and data.maximum_header %}
+        style="background-image: linear-gradient(135deg, rgba(0, 198, 236, 0.85) 0%, rgba(0, 3, 102, 0.95) 80%), url({{ data.banner_image_url }});"
+    {% endif %}
+    >
         {% if data.breads %}
             <div class="breadcrumbs bread">
                 <div class="breadcrumb">
@@ -42,7 +26,12 @@
         <div class="spc-home-banner-block">
             <div class="banner-title">
                 <div class="field field-type-text-long">
-                    <h1>{{ data.title|raw }}</h1>
+                    {% if data.base_page_title %}
+                        <h1>{{ data.base_page_title|raw }}</h1>
+                    {% else %}
+                        <h1>{{ data.title|raw }}</h1>
+                    {% endif %}
+
                     {% if data.term %}
                         <h2>{{ data.term }}</h2>
                     {% endif %}
@@ -50,45 +39,73 @@
                 <div class="field field-type-text-long">
                     <p>{{ data.subtitle}}</p>
                 </div>
-                {% if data.vocabulary == 'countries' or data.vocabulary == 'categories' %}
-                    <div class="search">
-                        <div id="spc-home-banner-search">
-                            <form action="/" method="post" id="ckan-search-form" class="health-dashboard-search-form" accept-charset="UTF-8" _lpchecked="1">
-                              <div>
-                                <input placeholder="Search by policy" type="text" id="dataset-search" name="term" size="30" maxlength="128">
-                              </div>
-                            </form>          
+                <div class="search">
+                    <div id="spc-home-banner-search">
+                      {% if data.search_form %}
+                        {{ data.search_form }}
+                      {% elseif data.dsps %}  
+                        <div class="search">
+                            <div id="spc-home-banner-search">
+                                <form action="/" method="post" id="ckan-search-form" class="global-search-form" accept-charset="UTF-8" _lpchecked="1">
+                                    <div role="application">
+                                        <input placeholder="Search" type="text" id="ckan-search" size="30" maxlength="128">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+                      {% endif %}  
                     </div>
-                {% else %}
-                    <div class="search">
-                        <div id="spc-home-banner-search">
-                            <form action="/" method="post" id="ckan-search-form" class="global-search-form" accept-charset="UTF-8" _lpchecked="1">
-                                <div role="application">
-                                    <input placeholder="Search" type="text" id="ckan-search" size="30" maxlength="128">
-                                </div>
-                            </form>
-                        </div>
+                    <div class="spc-search-suggestions">
+                        <ul id="search-suggestion-box" class="suggestion-box">
+                            {% set suggestion_groups = [
+                                {'section': 'datasets','label': 'Relevant datasets'},
+                                {'section': 'categories', 'label': 'Browse categories'}
+                                ]
+                            %}
+                            {% for group in suggestion_groups %}
+                                <li data-section="{{group.section}}" class="suggestion-section">
+                                    <ul class="suggestions" data-label="{{ group.label | t }}"></ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
+                </div>
+                {% if data.topics %}
+                  <div class="topics-home">
+                    <div class="topics-list">
+                    {% for topic in data.topics %}
+                      <div class="topic-item">
+                        <a href="{{ topic.url }}" title="{{ topic.title }}">
+                          <div class="field-fa-icon">
+                            <i class="{{ topic.icon }}"></i>
+                          </div>
+                        </a>
+                        <h4>
+                          <a href="{{ topic.url }}">{{ topic.title }}</a>
+                        </h4>
+                      </div>
+                    {% endfor %}
+                    </div>
+                  </div>
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
-
+            
 {% if data.dsps %}
-<div class="panel-pane pane-views pane-dashboard-for-sdp {{ data.isdsp }}">
-    <div class="goals-navigation">
-        <div class="dropdown">
-            <div class="button">
-                <img class="goals-logo" src="https://pacificdata.org/sites/default/files/SDGs%20in%20the%20Pacific%20230x230.png">
-            </div>
-            <ul class="dropdown-menu hidden" aria-labelledby="goals-navigation">
-                {% for dsp in data.dsps %}
-                    <li><a href="{{ dsp.url }}">{{ dsp.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-</div>
+  <div class="panel-pane pane-views pane-dashboard-for-sdp {{ data.isdsp }}">
+      <div class="goals-navigation">
+          <div class="dropdown">
+              <div class="button">
+                  <img class="goals-logo" src="https://pacificdata.org/sites/default/files/SDGs%20in%20the%20Pacific%20230x230.png">
+              </div>
+              <ul class="dropdown-menu hidden" aria-labelledby="goals-navigation">
+                  {% for dsp in data.dsps %}
+                      <li><a href="{{ dsp.url }}">{{ dsp.title }}</a></li>
+                  {% endfor %}
+              </ul>
+          </div>
+      </div>
+  </div>
 {% endif %}

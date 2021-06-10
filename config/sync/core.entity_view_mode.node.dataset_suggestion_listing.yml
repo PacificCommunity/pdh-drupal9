@@ -1,0 +1,10 @@
+uuid: c12dd530-ff27-427d-8603-2b6cbe485a51
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.dataset_suggestion_listing
+label: 'Dataset suggestion listing'
+targetEntityType: node
+cache: true

@@ -82,7 +82,14 @@ class SpcMbdSettingsForm extends ConfigFormBase {
       ],
       '#default_value' => [$config->get('mbd_shelf_treaty_fid')], 
       '#required' => false
-    ];    
+    ];  
+    
+    $form['field_mbd_terria_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Terria map url'),
+      '#default_value' => $config->get('mbd_terria_url'),
+      '#required' => true
+    ];
 
     return parent::buildForm($form, $form_state);
   }
@@ -132,7 +139,9 @@ class SpcMbdSettingsForm extends ConfigFormBase {
       $config->set('mbd_shelf_treaty_fid', $shelf_treaty_file->id());
     } else {
         $config->set('mbd_shelf_treaty_fid', '');
-    }    
+    }
+
+    $config->set('mbd_terria_url', $form_state->getValue('field_mbd_terria_url'));    
     
     $config->save(); 
   }

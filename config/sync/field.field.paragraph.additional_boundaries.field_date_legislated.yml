@@ -1,0 +1,21 @@
+uuid: 5591e657-d87b-4759-aa90-9ae1779dda0e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_date_legislated
+    - paragraphs.paragraphs_type.additional_boundaries
+  module:
+    - datetime
+id: paragraph.additional_boundaries.field_date_legislated
+field_name: field_date_legislated
+entity_type: paragraph
+bundle: additional_boundaries
+label: 'Date legislated'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
