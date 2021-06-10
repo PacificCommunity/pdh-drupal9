@@ -212,8 +212,8 @@ class SpcHomeController  extends ControllerBase {
   }
   
   public function _ckan_dataset_count() {
-    $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
-    
+    $base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+
     $res_formats = [
         'CSV','XML', 'XLS', 'XLSX', 'ODS', 'MDB', 'MDE', 'DBF',
         'SQL', 'SQLITE', 'DB', 'DBF', 'DBS', 'ODB', 'JSON', 
@@ -242,18 +242,18 @@ class SpcHomeController  extends ControllerBase {
 
     $description = 'Structured data files and links to data services';
     $solorq = '&ext_advanced_type=solr&ext_advanced_operator=or';
-    
+
     return [
       'count' => $count,
-      'url' =>  $base_url . '/data/dataset?ext_advanced_value=' . $params . $solorq,
+      'url' =>  $base_url . 'dataset?general_type=Structured Data',
       'title' => 'Datasets',
       'description' => $description,
     ];
   }  
   
   public function _ckan_publications_count() {
-    $base_url = self::DATA_BASE_PROTOCOL . '://' . self::DATA_BASE_DOMAIN;
-    
+    $base_url = \Drupal::config('spc_publication_import.settings')->get('spc_base_url');
+
     $res_formats = ['PDF','DOC', 'DOCX', 'ODF', 'ODT', 'EPUB', 'MOBI'];
     $attr = ['text'];
     $type = ['publications'];
@@ -279,10 +279,10 @@ class SpcHomeController  extends ControllerBase {
     
     $description = 'Scientific papers, publications, reports, policy briefs, policies documents, manuals, handbooks';
     $solorq = '&ext_advanced_type=solr&ext_advanced_operator=or';
-    
+
     return [
       'count' => $count,
-      'url' =>  $base_url . '/data/dataset?ext_advanced_value=' . $params . $solorq,
+      'url' =>  $base_url . 'dataset?general_type=Publications',
       'title' => 'Publications',
       'description' => $description,
     ];
