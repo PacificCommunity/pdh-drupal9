@@ -99,12 +99,12 @@ class SpcPublicationImportSettingsForm extends ConfigFormBase {
     \Drupal::configFactory()->getEditable('spc_publication_import.settings')
       ->set('spc_base_url', $form_state->getValue('field_spc_base_url'))   
             
-      ->set('spc_datasets_count', @$form_state->getValue('field_spc_datasets_count')['value'])
-      ->set('spc_publications_count', @$form_state->getValue('field_spc_publications_count')['value'])
-      ->set('spc_organisations_count', @$form_state->getValue('field_spc_organisations_count')['value'])            
+      ->set('spc_datasets_count', @$form_state->getValue('field_spc_datasets_count'))
+      ->set('spc_publications_count', @$form_state->getValue('field_spc_publications_count'))
+      ->set('spc_organisations_count', @$form_state->getValue('field_spc_organisations_count'))
             
       ->set('spc_publications_latest', @$form_state->getValue('field_spc_publications_latest')['value'])
-      ->set('spc_publications_popular', @$form_state->getValue('field_spc_publications_popular')['value'])            
+      ->set('spc_publications_popular', @$form_state->getValue('field_spc_publications_popular')['value'])
       ->save();
   }
 }
