@@ -245,7 +245,7 @@ class SpcHomeController  extends ControllerBase {
 
     return [
       'count' => $count,
-      'url' =>  $base_url . 'dataset?general_type=Structured Data',
+      'url' =>  $base_url . 'dataset?general_type=Datasets',
       'title' => 'Datasets',
       'description' => $description,
     ];
