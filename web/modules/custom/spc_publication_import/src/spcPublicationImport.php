@@ -187,8 +187,8 @@ class spcPublicationImport {
         'CSV','XML', 'XLS', 'XLSX', 'ODS', 'MDB', 'MDE', 'DBF',
         'SQL', 'SQLITE', 'DB', 'DBF', 'DBS', 'ODB', 'JSON', 
         'GEOJSON', 'KML', 'KMZ', 'SHP', 'SHX', 'WMS', 'WFS', 'WCS', 'CSW'];
-    $attr = ['dataset', 'service'];
-    $type = ['dataset', 'biodiversity_data'];
+    $attr = ['service'];
+    $type = ['biodiversity_data'];
 
     $data_url = $this->base_url . $this->requested_path;
 

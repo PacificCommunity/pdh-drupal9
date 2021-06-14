@@ -240,7 +240,7 @@ class SpcHomeController  extends ControllerBase {
       }
     }
 
-    $description = 'Structured data files and links to data services';
+    $description = 'Structured and semi-structured data, spatial data, links to online databases and web services';
     $solorq = '&ext_advanced_type=solr&ext_advanced_operator=or';
 
     return [
