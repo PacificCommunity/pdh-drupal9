@@ -1,0 +1,81 @@
+.spc-search-suggestions {
+    width     : 750px;
+    position  : relative;
+    top       : -60px;
+    margin    : 0 auto;
+    z-index   : 1;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+    @media(max-width:880px){
+        width: 100%;
+    }
+
+    .suggestion-box {
+        position                  : absolute;
+        z-index                   : 10;
+        right                     : 0;
+        bottom                    : 0;
+        left                      : 0;
+        padding                   : 15px 0 0 0;
+        background                : white;
+        border-bottom-left-radius : 5px;
+        border-bottom-right-radius: 5px;
+        list-style                : none;
+        transform                 : translate(0, 100%);
+        text-align                : left;
+
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
+        border-radius: 20px;
+        margin       : 0 15px;
+
+        .suggestion-section {
+            .suggestions {
+                padding    : 0px;
+                margin     : 20px 24px;
+                font-size  : 14px;
+                font-weight: normal;
+                line-height: 19px;
+                list-style : none;
+
+                &:empty {
+                    display: none;
+                }
+
+                &:before {
+                    display    : block;
+                    color      : @dark-blue;
+                    content    : attr(data-label);
+                    font-size  : 16px;
+                    font-weight: 700;
+                    line-height: 22px;
+                }
+
+                li {
+                    margin-top: 8px;
+
+                    a {
+                        color: @black;
+
+                        &.selected {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    &:first-child {
+                        margin-top: 12px;
+                    }
+
+                    .muted {
+                        margin-left: 6px;
+                        color      : @light-gray;
+                    }
+
+                    strong {
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+}
