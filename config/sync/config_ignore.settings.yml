@@ -11,6 +11,7 @@ ignored_config_entities:
   - articles_syndication.settings
   - saml_sp.idp.spc_okta
   - tinypng.settings
+  - google_oauth_login.settings
   - spc_mbd.settings
   - spc_publication_import.settings
   - lazy.settings
@@ -21,5 +22,9 @@ ignored_config_entities:
   - mail_safety.settings
   - swiftmailer.transport
   - update.settings
+  - google_api_client.google_api_classes
+  - google_api_client.google_api_services
+  - gauth_user.settings
+  - recaptcha.settings
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
